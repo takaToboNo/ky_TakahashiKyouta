@@ -14,6 +14,9 @@
     <Filter Include="src\Utility">
       <UniqueIdentifier>{f7bc55d4-759c-4e4a-bd31-d489b987acdc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Object\GameObject">
+      <UniqueIdentifier>{3a74a3df-fcfa-4878-bfa5-a60e7781be2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -28,6 +31,9 @@
     <ClInclude Include="src\Utility\Vector2.h">
       <Filter>src\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object\GameObject\GameObject.h">
+      <Filter>src\Object\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -35,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\Object.cpp">
       <Filter>src\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\GameObject.cpp">
+      <Filter>src\Object\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

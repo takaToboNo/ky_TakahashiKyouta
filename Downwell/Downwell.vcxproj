@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Main.h" />
+    <ClInclude Include="src\Object\GameObject\GameObject.h" />
     <ClInclude Include="src\Object\Object.h" />
     <ClInclude Include="src\Object\Tag.h" />
     <ClInclude Include="src\Utility\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Object\GameObject\GameObject.cpp" />
     <ClCompile Include="src\Object\Object.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
