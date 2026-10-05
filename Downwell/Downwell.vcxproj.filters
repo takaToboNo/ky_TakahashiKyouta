@@ -34,6 +34,7 @@
     <ClInclude Include="src\Object\GameObject\GameObject.h">
       <Filter>src\Object\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Character.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -45,5 +46,6 @@
     <ClCompile Include="src\Object\GameObject\GameObject.cpp">
       <Filter>src\Object\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Character.cpp" />
   </ItemGroup>
 </Project>
