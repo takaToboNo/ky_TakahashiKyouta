@@ -1,0 +1,17 @@
+*.vsidx
+*.ipch
+*.txt
+*.db
+*.suo
+*.json
+*.obj
+*.recipe
+*.ilk
+*.log
+*.idb
+*.pdb
+*.tlog
+*.lastbuildstate
+*.iobj
+*.ipdb
+*.exe
