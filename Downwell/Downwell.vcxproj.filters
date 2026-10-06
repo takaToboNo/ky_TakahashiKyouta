@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{476bc34c-1edd-491a-9514-e0573c23f3c9}</UniqueIdentifier>
     </Filter>
@@ -43,7 +39,6 @@
     <ClInclude Include="src\Object\GameObject\Character\Character.h">
       <Filter>src\Object\GameObject\Character</Filter>
     </ClInclude>
-    <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\Scene\SceneManager.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
@@ -62,7 +57,15 @@
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerState.h">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\GameObject\Bullet.h" />
+    <ClInclude Include="src\Object\GameObject\Bullet.h">
+      <Filter>src\Object\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\GunBoots.h">
+      <Filter>src\Object\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -74,7 +77,6 @@
     <ClCompile Include="src\Object\GameObject\Character\Character.cpp">
       <Filter>src\Object\GameObject\Character</Filter>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Scene\SceneManager.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
@@ -90,6 +92,14 @@
     <ClCompile Include="src\Object\GameObject\Character\Player\PlayerMove.cpp">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\GameObject\Bullet.cpp" />
+    <ClCompile Include="src\Object\GameObject\Bullet.cpp">
+      <Filter>src\Object\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\GunBoots.cpp">
+      <Filter>src\Object\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

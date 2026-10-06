@@ -28,6 +28,7 @@
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerMove.h" />
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerState.h" />
     <ClInclude Include="src\Object\GameObject\GameObject.h" />
+    <ClInclude Include="src\Object\GameObject\GunBoots.h" />
     <ClInclude Include="src\Object\Object.h" />
     <ClInclude Include="src\Object\Tag.h" />
     <ClInclude Include="src\Scene\SceneManager.h" />
@@ -42,6 +43,7 @@
     <ClCompile Include="src\Object\GameObject\Character\Player\PlayerJump.cpp" />
     <ClCompile Include="src\Object\GameObject\Character\Player\PlayerMove.cpp" />
     <ClCompile Include="src\Object\GameObject\GameObject.cpp" />
+    <ClCompile Include="src\Object\GameObject\GunBoots.cpp" />
     <ClCompile Include="src\Object\Object.cpp" />
     <ClCompile Include="src\Scene\SceneManager.cpp" />
   </ItemGroup>
