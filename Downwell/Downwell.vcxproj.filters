@@ -22,6 +22,9 @@
     <Filter Include="src\Object\GameObject\Character\Player">
       <UniqueIdentifier>{c56374d2-9c10-43d3-8184-cc3721e28f8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Object\GameObject\Character\Enemy">
+      <UniqueIdentifier>{e9cd2510-7c04-4887-aeed-dde4ca153cb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -66,6 +69,15 @@
     <ClInclude Include="src\Main.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Enemy\Enemy.h">
+      <Filter>src\Object\GameObject\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Enemy\FloatingEnemy.h">
+      <Filter>src\Object\GameObject\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Enemy\WalkerEnemy.h">
+      <Filter>src\Object\GameObject\Character\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -100,6 +112,15 @@
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Enemy\Enemy.cpp">
+      <Filter>src\Object\GameObject\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Enemy\FloatingEnemy.cpp">
+      <Filter>src\Object\GameObject\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Enemy\WalkerEnemy.cpp">
+      <Filter>src\Object\GameObject\Character\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
