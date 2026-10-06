@@ -12,6 +12,7 @@ void Bullet::Initialize()
 	m_Damage = 0;
 	m_Position = { 200.0f,200.0f };
 	m_Scale = { 20.0f,20.0f };
+	m_IsActive = true;
 }
 
 void Bullet::Finalize()
@@ -28,9 +29,9 @@ void Bullet::Update()
 	//座標更新
 	m_Position += m_Velocity * dt;
 
-	//ループ
-	if (m_Position.x < 0.0f) m_Position.x = 1280.0f;
-	if (m_Position.x > 1280.0f) m_Position.x = 0.0f;
+	//返却予約
+	if (m_Position.x < 0.0f) m_IsActive = false;
+	if (m_Position.x > 1200.0f) m_IsActive = false;
 }
 
 void Bullet::Draw()

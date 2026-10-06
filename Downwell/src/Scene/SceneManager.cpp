@@ -10,12 +10,10 @@ void SceneManager::Initialize()
 
 	m_pPlayer->Initialize();//‰¼
 	m_pGunBoots->Initialize();//‰¼
-	m_pBullet->Initialize();//‰¼
 }
 
 void SceneManager::Finalize()
 {
-	m_pBullet->Finalize();//‰¼
 	m_pGunBoots->Finalize();//‰¼
 	m_pPlayer->Finalize();//‰¼
 
@@ -26,12 +24,10 @@ void SceneManager::Update()
 {
 	m_pPlayer->Update();//‰¼
 	m_pGunBoots->Update();//‰¼
-	m_pBullet->Update();//‰¼
 }
 
 void SceneManager::Draw()
 {
 	m_pPlayer->Draw();//‰¼
 	m_pGunBoots->Draw();//‰¼
-	m_pBullet->Draw();//‰¼
 }
