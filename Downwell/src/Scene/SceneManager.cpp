@@ -9,10 +9,12 @@ void SceneManager::Initialize()
 	assert(SetDrawScreen(DX_SCREEN_BACK) == 0);
 
 	m_pPlayer->Initialize();//‰¼
+	m_pBullet->Initialize();//‰¼
 }
 
 void SceneManager::Finalize()
 {
+	m_pBullet->Finalize();//‰¼
 	m_pPlayer->Finalize();//‰¼
 
 	DxLib_End();
@@ -21,9 +23,11 @@ void SceneManager::Finalize()
 void SceneManager::Update()
 {
 	m_pPlayer->Update();//‰¼
+	m_pBullet->Update();//‰¼
 }
 
 void SceneManager::Draw()
 {
 	m_pPlayer->Draw();//‰¼
+	m_pBullet->Draw();//‰¼
 }

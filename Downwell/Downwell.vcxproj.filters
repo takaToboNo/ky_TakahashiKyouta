@@ -62,6 +62,7 @@
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerState.h">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -89,5 +90,6 @@
     <ClCompile Include="src\Object\GameObject\Character\Player\PlayerMove.cpp">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Bullet.cpp" />
   </ItemGroup>
 </Project>
