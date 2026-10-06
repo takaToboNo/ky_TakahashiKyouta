@@ -5,9 +5,9 @@
 class Object
 {
 protected:
-	Tag m_Tag;
-	Vector2 m_Position;
-	bool m_IsActive;
+	Tag m_Tag = Tag::None;
+	Vector2 m_Position = { 0.0f,0.0f };
+	bool m_IsActive = false;
 
 public:
 	Object() = default;

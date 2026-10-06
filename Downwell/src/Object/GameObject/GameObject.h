@@ -4,7 +4,7 @@
 class GameObject : public Object
 {
 protected:
-	Vector2 m_Scale;
+	Vector2 m_Scale = { 1.0f,1.0f };
 
 public:
 	GameObject() = default;

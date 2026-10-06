@@ -5,7 +5,7 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	SceneManager* pSceneManager = new SceneManager();
+	std::unique_ptr<SceneManager> pSceneManager = std::make_unique<SceneManager>();
 
 	pSceneManager->Initialize();
 	

@@ -1,6 +1,4 @@
 #include "Player.h"
-#include "PlayerState.h"
-#include "PlayerIdle.h"
 
 //‰¼
 #include <cassert>

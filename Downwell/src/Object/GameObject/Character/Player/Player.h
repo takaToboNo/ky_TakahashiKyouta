@@ -2,15 +2,17 @@
 #include <memory>
 #include "Character.h"
 #include "PlayerState.h"
+#include "PlayerIdle.h"
 
 class Player : public Character
 {
 private:
-	std::unique_ptr<IPlayerState> m_State;
+	std::unique_ptr<IPlayerState> m_State = std::make_unique<PlayerIdle>();
 
 	static constexpr float kJumpForce = 2000.0f;
 	static constexpr float kGravity = 10000.0f;
-	bool m_IsGround;
+
+	bool m_IsGround = false;
 
 
 public:

@@ -50,10 +50,18 @@
     <ClInclude Include="src\Object\GameObject\Character\Player\Player.h">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerState.h" />
-    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerMove.h" />
-    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerJump.h" />
-    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerIdle.h" />
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerIdle.h">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerJump.h">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerMove.h">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerState.h">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -72,8 +80,14 @@
     <ClCompile Include="src\Object\GameObject\Character\Player\Player.cpp">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerMove.cpp" />
-    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerJump.cpp" />
-    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerIdle.cpp" />
+    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerIdle.cpp">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerJump.cpp">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerMove.cpp">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,8 +1,6 @@
 #include "SceneManager.h"
 
-//‰¼
-#include "Main.h"
-#include "Player.h"
+#include "Main.h"//‰¼
 
 void SceneManager::Initialize()
 {
@@ -10,9 +8,6 @@ void SceneManager::Initialize()
 	assert(DxLib_Init() == 0);
 	assert(SetDrawScreen(DX_SCREEN_BACK) == 0);
 
-	
-
-	m_pPlayer = new Player();//‰¼
 	m_pPlayer->Initialize();//‰¼
 }
 

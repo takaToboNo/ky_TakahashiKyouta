@@ -4,12 +4,12 @@
 class Character : public GameObject
 {
 protected:
-	int m_Hp;
-	int m_MaxHp;
-	float m_MoveSpeed;
-	Vector2 m_Velocity;
-	Vector2 m_Accel;
-	bool m_IsFacingRight;
+	int m_Hp = 1;
+	int m_MaxHp = 1;
+	float m_MoveSpeed = 1.0f;
+	Vector2 m_Velocity = { 0.0f,0.0f };
+	Vector2 m_Accel = { 0.0f,0.0f };
+	bool m_IsFacingRight = true;
 
 public:
 	Character() = default;
