@@ -17,13 +17,13 @@
     <Filter Include="src\Object\GameObject">
       <UniqueIdentifier>{3a74a3df-fcfa-4878-bfa5-a60e7781be2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Object\GameObject\Character">
+      <UniqueIdentifier>{360859d4-aac8-4096-8cc2-e170ff9f69c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
       <Filter>src\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Main.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\Tag.h">
       <Filter>src\Object</Filter>
@@ -34,18 +34,25 @@
     <ClInclude Include="src\Object\GameObject\GameObject.h">
       <Filter>src\Object\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\GameObject\Character\Character.h" />
+    <ClInclude Include="src\Object\GameObject\Character\Character.h">
+      <Filter>src\Object\GameObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Player.h" />
+    <ClInclude Include="src\Scene\SceneManager.h" />
+    <ClInclude Include="src\Main.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\Object.cpp">
       <Filter>src\Object</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\GameObject.cpp">
       <Filter>src\Object\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\GameObject\Character\Character.cpp" />
+    <ClCompile Include="src\Object\GameObject\Character\Character.cpp">
+      <Filter>src\Object\GameObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Player.cpp" />
+    <ClCompile Include="src\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
 </Project>
