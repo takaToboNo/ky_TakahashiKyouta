@@ -19,7 +19,7 @@ public:
 	virtual void Draw() = 0;
 	virtual void Destroy();
 
-	virtual void SetPosition(Vector2& position) { m_Position = position; }
+	virtual void SetPosition(const Vector2& position) { m_Position = position; }
 	virtual const Vector2& GetPosition() const { return m_Position; }
 	virtual void SetActive(bool isActive) { m_IsActive = isActive; }
 	virtual bool IsActive() const { return m_IsActive; }

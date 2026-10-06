@@ -13,7 +13,7 @@ public:
 	virtual void Finalize() override;
 	virtual void Destroy() override;
 
-	virtual void SetScale(Vector2& scale) { m_Scale = scale; }
+	virtual void SetScale(const Vector2& scale) { m_Scale = scale; }
 	virtual const Vector2& GetScale() const { return m_Scale; }
 
 };

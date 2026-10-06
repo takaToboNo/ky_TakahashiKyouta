@@ -1,12 +1,22 @@
 #pragma once
 #include <memory>
 #include "Character.h"
+#include "PlayerState.h"
 
 class Player : public Character
 {
 private:
+	std::unique_ptr<IPlayerState> m_State;
+
+	static constexpr float kJumpForce = 2000.0f;
 	static constexpr float kGravity = 10000.0f;
 	bool m_IsGround;
+
+
+public:
+	int m_R = 0;
+	int m_G = 0;
+	int m_B = 0;
 
 public:
 	Player() = default;
@@ -17,7 +27,9 @@ public:
 	void Draw() override;
 	void Destroy() override;
 
-	bool SetGround(bool isGround) { m_IsGround = isGround; }
+	void SetState(std::unique_ptr<IPlayerState> next);
+
+	void SetGround(bool isGround) { m_IsGround = isGround; }
 	bool IsGround() { return m_IsGround; }
 
 	void Move(Vector2& direction) override;

@@ -18,7 +18,9 @@ public:
 	virtual void Finalize() override;
 	virtual void Destroy() override;
 
-	virtual void SetVelocity(Vector2& velocity) { m_Velocity = velocity; }
+	virtual void SetVelocity(const Vector2& velocity) { m_Velocity = velocity; }
+	virtual const Vector2& GetVelocity() const { return m_Velocity; }
+	virtual void SetAccel(const Vector2& accel) { m_Accel = accel; }
 	virtual void Move(Vector2& direction) = 0;
 	virtual void Damage(int damage) = 0;
 	virtual void Died() = 0;

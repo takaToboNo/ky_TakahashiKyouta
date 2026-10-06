@@ -20,6 +20,12 @@
     <Filter Include="src\Object\GameObject\Character">
       <UniqueIdentifier>{360859d4-aac8-4096-8cc2-e170ff9f69c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{06405e30-489a-49ee-a75c-4a848b55bac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Object\GameObject\Character\Player">
+      <UniqueIdentifier>{c56374d2-9c10-43d3-8184-cc3721e28f8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -37,9 +43,17 @@
     <ClInclude Include="src\Object\GameObject\Character\Character.h">
       <Filter>src\Object\GameObject\Character</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\GameObject\Character\Player.h" />
-    <ClInclude Include="src\Scene\SceneManager.h" />
     <ClInclude Include="src\Main.h" />
+    <ClInclude Include="src\Scene\SceneManager.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Player\Player.h">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerState.h" />
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerMove.h" />
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerJump.h" />
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerIdle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -51,8 +65,15 @@
     <ClCompile Include="src\Object\GameObject\Character\Character.cpp">
       <Filter>src\Object\GameObject\Character</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\GameObject\Character\Player.cpp" />
-    <ClCompile Include="src\Scene\SceneManager.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Scene\SceneManager.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Player\Player.cpp">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerMove.cpp" />
+    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerJump.cpp" />
+    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerIdle.cpp" />
   </ItemGroup>
 </Project>

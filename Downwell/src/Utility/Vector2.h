@@ -11,6 +11,16 @@ public:
 	Vector2(float nx, float ny) : x(nx), y(ny) {}
 	Vector2(const Vector2& other) :x(other.x), y(other.y) {}
 
+	float LengthSquared() const
+	{
+		return x * x + y * y;
+	}
+
+	bool IsNearlyZero(float epsilon = 0.01f) const
+	{
+		return LengthSquared() <= epsilon * epsilon;
+	}
+
 	Vector2& operator=(const Vector2& other)
 	{
 		x = other.x;
