@@ -8,7 +8,7 @@ class Player : public Character
 {
 private:
 	std::unique_ptr<IPlayerState> m_State = std::make_unique<PlayerIdle>();
-	std::unique_ptr<IPlayerState> m_NextState = std::make_unique<PlayerIdle>();
+	std::unique_ptr<IPlayerState> m_NextState = {};
 
 	static constexpr float kMoveSpeed = 200.0f;
 	static constexpr float kMaxMoveSpeed = 500.0f;

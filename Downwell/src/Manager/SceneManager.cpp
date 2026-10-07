@@ -14,6 +14,8 @@ void SceneManager::Finalize()
 void SceneManager::Update()
 {
 	m_Scene->Update();
+
+	ChangeScene();
 }
 
 void SceneManager::Draw()
@@ -21,16 +23,29 @@ void SceneManager::Draw()
 	m_Scene->Draw();
 }
 
-void SceneManager::RequestScene(std::unique_ptr<Scene> next)
+void SceneManager::ChangeScene()
 {
-	m_NextScene = std::move(next);
-}
-
-void SceneManager::SetScene()
-{
-	if (m_Scene == m_NextScene) return;
+	if (m_Scene->GetSceneRequest() == SceneType::None) return;
 
 	if (m_Scene) m_Scene->Finalize();
-	m_Scene = std::move(m_NextScene);
+
+	switch (m_Scene->GetSceneRequest())
+	{
+	case SceneType::Title:
+		m_Scene = std::make_unique<TitleScene>();
+		break;
+
+	case SceneType::Game:
+		m_Scene = std::make_unique<GameScene>();
+		break;
+
+	case SceneType::Result:
+		m_Scene = std::make_unique<ResultScene>();
+		break;
+
+	default:
+		break;
+	}
+
 	if (m_Scene) m_Scene->Initialize();
 }
