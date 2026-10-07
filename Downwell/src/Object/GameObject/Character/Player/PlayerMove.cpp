@@ -2,7 +2,7 @@
 #include "PlayerIdle.h"
 #include "PlayerJump.h"
 #include "Player.h"
-#include "Main.h"
+#include "DxLib.h"
 
 void PlayerMove::Enter(Player& player)
 {

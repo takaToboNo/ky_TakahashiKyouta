@@ -42,7 +42,7 @@
     <ClInclude Include="src\Object\GameObject\Character\Character.h">
       <Filter>src\Object\GameObject\Character</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\SceneManager.h">
+    <ClInclude Include="src\Manager\SceneManager.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\GameObject\Character\Player\Player.h">
@@ -81,6 +81,7 @@
     <ClInclude Include="src\Utility\GameHelper.h">
       <Filter>src\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="src\Manager\GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -92,7 +93,7 @@
     <ClCompile Include="src\Object\GameObject\Character\Character.cpp">
       <Filter>src\Object\GameObject\Character</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\SceneManager.cpp">
+    <ClCompile Include="src\Manager\SceneManager.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Player\Player.cpp">
@@ -125,5 +126,6 @@
     <ClCompile Include="src\Object\GameObject\Character\Enemy\WalkerEnemy.cpp">
       <Filter>src\Object\GameObject\Character\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="src\Manager\GameManager.cpp" />
   </ItemGroup>
 </Project>

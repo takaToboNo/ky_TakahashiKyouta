@@ -2,7 +2,7 @@
 
 //‰¼
 #include <cassert>
-#include "Main.h"
+#include "DxLib.h"
 
 void Player::Initialize()
 {

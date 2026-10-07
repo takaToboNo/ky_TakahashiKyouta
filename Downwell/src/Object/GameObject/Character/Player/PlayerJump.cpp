@@ -1,7 +1,7 @@
 #include "PlayerJump.h"
 #include "PlayerMove.h"
 #include "Player.h"
-#include "Main.h"
+#include "DxLib.h"
 
 void PlayerJump::Enter(Player& player)
 {
