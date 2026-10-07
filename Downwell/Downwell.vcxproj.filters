@@ -25,6 +25,9 @@
     <Filter Include="src\Object\GameObject\Character\Enemy">
       <UniqueIdentifier>{e9cd2510-7c04-4887-aeed-dde4ca153cb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Manager">
+      <UniqueIdentifier>{db4788be-57bd-4f40-920b-e01556a4bde3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -41,9 +44,6 @@
     </ClInclude>
     <ClInclude Include="src\Object\GameObject\Character\Character.h">
       <Filter>src\Object\GameObject\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Manager\SceneManager.h">
-      <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\GameObject\Character\Player\Player.h">
       <Filter>src\Object\GameObject\Character\Player</Filter>
@@ -81,7 +81,24 @@
     <ClInclude Include="src\Utility\GameHelper.h">
       <Filter>src\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="src\Manager\GameManager.h" />
+    <ClInclude Include="src\Manager\GameManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\SceneManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\TitleScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\GameScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\ResultScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -92,9 +109,6 @@
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Character.cpp">
       <Filter>src\Object\GameObject\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\SceneManager.cpp">
-      <Filter>src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Player\Player.cpp">
       <Filter>src\Object\GameObject\Character\Player</Filter>
@@ -126,6 +140,23 @@
     <ClCompile Include="src\Object\GameObject\Character\Enemy\WalkerEnemy.cpp">
       <Filter>src\Object\GameObject\Character\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="src\Manager\GameManager.cpp" />
+    <ClCompile Include="src\Manager\GameManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\SceneManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Scene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\TitleScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\GameScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\ResultScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

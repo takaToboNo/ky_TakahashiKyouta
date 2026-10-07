@@ -2,32 +2,35 @@
 
 void SceneManager::Initialize()
 {
-	m_pPlayer->Initialize();//‰¼
-	m_pGunBoots->Initialize();//‰¼
-	m_pWalkerEnemy->Initialize();//‰¼
-	m_pFloatingEnemy->Initialize();//‰¼
+	m_Scene = std::make_unique<GameScene>();
+	m_Scene->Initialize();
 }
 
 void SceneManager::Finalize()
 {
-	m_pFloatingEnemy->Finalize();//‰¼
-	m_pWalkerEnemy->Finalize();//‰¼
-	m_pGunBoots->Finalize();//‰¼
-	m_pPlayer->Finalize();//‰¼
+	m_Scene->Finalize();
 }
 
 void SceneManager::Update()
 {
-	m_pPlayer->Update();//‰¼
-	m_pGunBoots->Update();//‰¼
-	m_pWalkerEnemy->Update();//‰¼
-	m_pFloatingEnemy->Update();//‰¼
+	m_Scene->Update();
 }
 
 void SceneManager::Draw()
 {
-	m_pPlayer->Draw();//‰¼
-	m_pGunBoots->Draw();//‰¼
-	m_pWalkerEnemy->Draw();//‰¼
-	m_pFloatingEnemy->Draw();//‰¼
+	m_Scene->Draw();
+}
+
+void SceneManager::RequestScene(std::unique_ptr<Scene> next)
+{
+	m_NextScene = std::move(next);
+}
+
+void SceneManager::SetScene()
+{
+	if (m_Scene == m_NextScene) return;
+
+	if (m_Scene) m_Scene->Finalize();
+	m_Scene = std::move(m_NextScene);
+	if (m_Scene) m_Scene->Initialize();
 }

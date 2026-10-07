@@ -84,9 +84,8 @@ void Player::SetState()
 	if (m_State == m_NextState) return;
 
 	if (m_State) m_State->Exit(*this);
-
 	m_State = std::move(m_NextState);
-	m_State->Enter(*this);
+	if (m_State) m_State->Enter(*this);
 }
 
 void Player::Move(Vector2& direction)
