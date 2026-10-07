@@ -7,7 +7,6 @@ void Character::Initialize()
 	m_MaxHp = 1;
 	m_MoveSpeed = 1.0f;
 	m_Velocity = { 0.0f,0.0f };
-	m_Accel = { 0.0f,0.0f };
 	m_IsFacingRight = true;
 }
 

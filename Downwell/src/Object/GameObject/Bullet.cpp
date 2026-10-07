@@ -10,6 +10,7 @@ void Bullet::Initialize()
 	m_Velocity = { 0.0f,0.0f };
 	m_Life = 0.0f;
 	m_Damage = 0;
+
 	m_Position = { 200.0f,200.0f };
 	m_Scale = { 20.0f,20.0f };
 	m_IsActive = true;
@@ -24,14 +25,14 @@ void Bullet::Update()
 {
 	float dt = 1.0f / 60.0f;
 
-	m_Velocity.x = 1000.0f;
+	m_Velocity.y = kBulletSpeed;
 
 	//ç¿ïWçXêV
 	m_Position += m_Velocity * dt;
 
 	//ï‘ãpó\ñÒ
-	if (m_Position.x < 0.0f) m_IsActive = false;
-	if (m_Position.x > 1200.0f) m_IsActive = false;
+	if (m_Position.y < kStageTop) m_IsActive = false;
+	if (m_Position.y > kStageBottom) m_IsActive = false;
 }
 
 void Bullet::Draw()
@@ -43,7 +44,7 @@ void Bullet::Draw()
 	x2 = m_Position.x + (m_Scale.x * 0.5f);
 	y2 = m_Position.y + (m_Scale.y * 0.5f);
 
-	int result = DrawBox(x1, y1, x2, y2, GetColor(255, 255, 255), TRUE);
+	int result = DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 
 	assert(result == 0);
 }

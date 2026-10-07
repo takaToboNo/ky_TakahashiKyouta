@@ -7,6 +7,7 @@ void WalkerEnemy::Initialize()
 	Enemy::Initialize();
 	m_Position = { 500.0f,650.0f };
 	m_Scale = { 50.0f,25.0f };
+	m_Color = { 100, 0, 0 };
 }
 
 void WalkerEnemy::Finalize()
@@ -27,7 +28,7 @@ void WalkerEnemy::Draw()
 	x2 = m_Position.x + (m_Scale.x * 0.5f);
 	y2 = m_Position.y + (m_Scale.y * 0.5f);
 
-	int result = DrawBox(x1, y1, x2, y2, GetColor(100, 0, 0), TRUE);
+	int result = DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 
 	assert(result == 0);
 }

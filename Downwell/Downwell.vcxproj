@@ -35,6 +35,7 @@
     <ClInclude Include="src\Object\Object.h" />
     <ClInclude Include="src\Object\Tag.h" />
     <ClInclude Include="src\Scene\SceneManager.h" />
+    <ClInclude Include="src\Utility\GameHelper.h" />
     <ClInclude Include="src\Utility\Vector2.h" />
   </ItemGroup>
   <ItemGroup>

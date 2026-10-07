@@ -5,26 +5,30 @@
 
 void PlayerJump::Enter(Player& player)
 {
+	//ジャンプ
 	player.Jump();
 }
 
 void PlayerJump::Update(Player& player)
 {
-	player.m_R = 0;
-	player.m_G = 0;
-	player.m_B = 255;
+	player.SetColor(kBlue);
+
+	//抵抗
+	player.AirDrag();
 
 	//移動
-	if (CheckHitKey(KEY_INPUT_A)) player.SetAccel({ -50000.0f, 0.0f });
-	if (CheckHitKey(KEY_INPUT_D)) player.SetAccel({ 50000.0f, 0.0f });
+	if (CheckHitKey(KEY_INPUT_A)) player.MoveLeftRight(-1.0f);
+	if (CheckHitKey(KEY_INPUT_D)) player.MoveLeftRight(1.0f);
 
+	//着地
 	if (player.IsGround())
 	{
-		player.SetState(std::make_unique<PlayerMove>());
+		player.RequestState(std::make_unique<PlayerMove>());
 	}
 }
 
 void PlayerJump::Exit(Player& player)
 {
+	//着地
 	player.SetGround(true);
 }

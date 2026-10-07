@@ -10,23 +10,26 @@ void PlayerMove::Enter(Player& player)
 
 void PlayerMove::Update(Player& player)
 {
-	player.m_R = 255;
-	player.m_G = 0;
-	player.m_B = 0;
+	player.SetColor(kRed);
 
 	//移動
-	if (CheckHitKey(KEY_INPUT_A)) player.SetAccel({ -50000.0f, 0.0f });
-	if (CheckHitKey(KEY_INPUT_D)) player.SetAccel({ 50000.0f, 0.0f });
-
-
-	if (player.GetVelocity().IsNearlyZero(1.0f))
+	if (CheckHitKey(KEY_INPUT_A))
 	{
-		player.SetState(std::make_unique<PlayerIdle>());
+		player.MoveLeftRight(-1.0f);
+	}
+	else if (CheckHitKey(KEY_INPUT_D))
+	{
+		player.MoveLeftRight(1.0f);
+	}
+	else
+	{	//ADキーどちらも押していない
+		player.RequestState(std::make_unique<PlayerIdle>());
 	}
 
+	//ジャンプ
 	if (CheckHitKey(KEY_INPUT_SPACE) && player.IsGround())
 	{
-		player.SetState(std::make_unique<PlayerJump>());
+		player.RequestState(std::make_unique<PlayerJump>());
 	}
 }
 

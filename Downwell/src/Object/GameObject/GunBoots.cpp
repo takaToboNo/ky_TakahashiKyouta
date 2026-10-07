@@ -9,6 +9,7 @@ void GunBoots::Initialize()
 	GameObject::Initialize();
 	m_Position = { 200.0f,400.0f };
 	m_Scale = { 25.0f,20.0f };
+	m_Color = kYellow;
 
 	for (auto& bullet : m_pBullets)
 	{
@@ -72,7 +73,7 @@ void GunBoots::Draw()
 	x2 = m_Position.x + (m_Scale.x * 0.5f);
 	y2 = m_Position.y + (m_Scale.y * 0.5f);
 
-	int result = DrawBox(x1, y1, x2, y2, GetColor(255, 255, 0), TRUE);
+	int result = DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 
 	assert(result == 0);
 }

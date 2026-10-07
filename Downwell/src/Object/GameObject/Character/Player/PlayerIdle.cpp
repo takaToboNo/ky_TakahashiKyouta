@@ -6,22 +6,24 @@
 
 void PlayerIdle::Enter(Player& player)
 {
+	//’âŽ~
+	player.SetVelocity(Vector2::Zero());
 }
 
 void PlayerIdle::Update(Player& player)
 {
-	player.m_R = 0;
-	player.m_G = 255;
-	player.m_B = 0;
+	player.SetColor(kGreen);
 
-	if (CheckHitKey(KEY_INPUT_SPACE) && player.IsGround())
-	{
-		player.SetState(std::make_unique<PlayerJump>());
-	}
-
+	//ˆÚ“®
 	if (CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D))
 	{
-		player.SetState(std::make_unique<PlayerMove>());
+		player.RequestState(std::make_unique<PlayerMove>());
+	}
+
+	//ƒWƒƒƒ“ƒv
+	if (CheckHitKey(KEY_INPUT_SPACE) && player.IsGround())
+	{
+		player.RequestState(std::make_unique<PlayerJump>());
 	}
 }
 

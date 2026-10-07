@@ -7,15 +7,14 @@
 void Player::Initialize()
 {
 	Character::Initialize();
-	m_Position = { 200.0f,0.0f };
-	m_Scale = { 25.0f,50.0f };
+	m_Position = { 600.0f,200.0f };
+	m_Scale = { 20.0f,20.0f };
 	m_IsGround = false;
 
 	m_State = std::make_unique<PlayerIdle>();
+	m_NextState = std::make_unique<PlayerIdle>();
 
-	m_R = 255;
-	m_G = 255;
-	m_B = 255;
+	m_Color = kGreen;
 }
 
 void Player::Finalize()
@@ -28,23 +27,21 @@ void Player::Update()
 	float dt = 1.0f / 60.0f;
 
 	if (m_State) m_State->Update(*this);
-
-	//抵抗
-	m_Accel *= 0.1f;
-	m_Velocity *= 0.92f;
+	if (m_NextState) SetState();
 
 	//重力
-	m_Accel.y = kGravity;
+	m_Velocity.y += kGravity;
+
+	//速度制限
+	m_Velocity.x = min(max(m_Velocity.x, -kMaxMoveSpeed), kMaxMoveSpeed);
 	
-	//速度更新
-	m_Velocity += m_Accel * dt;
 	//座標更新
 	m_Position += m_Velocity * dt;
 
 	//床接地
-	if (m_Position.y >= 600.0f)
+	if (m_Position.y >= kStageBottom)
 	{
-		m_Position.y = 600.0f;
+		m_Position.y = kStageBottom;
 		m_Velocity.y = 0.0f;
 		m_IsGround = true;
 	}
@@ -53,9 +50,9 @@ void Player::Update()
 		m_IsGround = false;
 	}
 
-	//ループ
-	if (m_Position.x < 0.0f) m_Position.x = 1280.0f;
-	if (m_Position.x > 1280.0f) m_Position.x = 0.0f;
+	//壁
+	m_Position.x = max(m_Position.x, kStageLeft);
+	m_Position.x = min(m_Position.x, kStageRight);
 }
 
 void Player::Draw()
@@ -67,7 +64,7 @@ void Player::Draw()
 	x2 = m_Position.x + (m_Scale.x * 0.5f);
 	y2 = m_Position.y + (m_Scale.y * 0.5f);
 
-	int result = DrawBox(x1, y1, x2, y2, GetColor(m_R, m_G, m_B), TRUE);
+	int result = DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 
 	assert(result == 0);
 }
@@ -77,11 +74,18 @@ void Player::Destroy()
 	Character::Destroy();
 }
 
-void Player::SetState(std::unique_ptr<IPlayerState> next)
+void Player::RequestState(std::unique_ptr<IPlayerState> next)
 {
+	m_NextState = std::move(next);
+}
+
+void Player::SetState()
+{
+	if (m_State == m_NextState) return;
+
 	if (m_State) m_State->Exit(*this);
 
-	m_State = std::move(next);
+	m_State = std::move(m_NextState);
 	m_State->Enter(*this);
 }
 
@@ -100,13 +104,4 @@ void Player::Died()
 bool Player::CheckGround()
 {
 	return false;
-}
-
-void Player::Jump()
-{
-	m_Velocity.y = -kJumpForce;
-}
-
-void Player::MoveLeftRight(float)
-{
 }

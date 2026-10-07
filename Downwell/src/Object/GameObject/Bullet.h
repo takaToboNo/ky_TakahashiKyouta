@@ -4,6 +4,8 @@
 class Bullet : public GameObject
 {
 private:
+	static constexpr float kBulletSpeed = 1000.0f;
+
 	Vector2 m_Velocity = { 0.0f,0.0f };
 	float m_Life = 0.0f;
 	int m_Damage = 0;

@@ -12,6 +12,11 @@ public:
 	Vector2(float nx, float ny) : x(nx), y(ny) {}
 	Vector2(const Vector2& other) :x(other.x), y(other.y) {}
 
+	static Vector2 Zero()
+	{
+		return { 0.0f, 0.0f };
+	}
+
 	float Length() const
 	{
 		return sqrtf(LengthSquared());

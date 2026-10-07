@@ -7,6 +7,7 @@ void FloatingEnemy::Initialize()
 	Enemy::Initialize();
 	m_Position = { 500.0f,300.0f };
 	m_Scale = { 40.0f,40.0f };
+	m_Color = { 200, 0, 200 };
 }
 
 void FloatingEnemy::Finalize()
@@ -27,7 +28,7 @@ void FloatingEnemy::Draw()
 	x2 = m_Position.x + (m_Scale.x * 0.5f);
 	y2 = m_Position.y + (m_Scale.y * 0.5f);
 
-	int result = DrawBox(x1, y1, x2, y2, GetColor(200, 0, 200), TRUE);
+	int result = DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 
 	assert(result == 0);
 }
