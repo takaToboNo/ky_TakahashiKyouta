@@ -22,16 +22,14 @@ void WalkerEnemy::Update()
 
 void WalkerEnemy::Draw()
 {
-	float x1, y1;
-	x1 = m_Position.x - (m_Scale.x * 0.5f);
-	y1 = m_Position.y - (m_Scale.y * 0.5f);
-	float x2, y2;
-	x2 = m_Position.x + (m_Scale.x * 0.5f);
-	y2 = m_Position.y + (m_Scale.y * 0.5f);
+	int x1, y1;
+	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
+	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
+	int x2, y2;
+	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
+	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
 
-	int result = DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
-
-	assert(result == 0);
+	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 }
 
 void WalkerEnemy::Destroy()
@@ -41,10 +39,12 @@ void WalkerEnemy::Destroy()
 
 void WalkerEnemy::Move(Vector2& direction)
 {
+	(void)direction;
 }
 
 void WalkerEnemy::Damage(int damage)
 {
+	(void)damage;
 }
 
 void WalkerEnemy::Died()

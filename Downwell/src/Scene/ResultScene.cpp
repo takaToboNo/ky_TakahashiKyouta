@@ -24,5 +24,5 @@ void ResultScene::Update()
 
 void ResultScene::Draw()
 {
-	DrawBox(0.0f, 0.0f, kScreenWidth, kScreenHeight, GetColor(0, 30, 0), TRUE);
+	DrawBox(0, 0, kScreenWidth, kScreenHeight, GetColor(0, 30, 0), TRUE);
 }

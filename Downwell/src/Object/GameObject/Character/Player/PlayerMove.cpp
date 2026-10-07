@@ -6,6 +6,7 @@
 
 void PlayerMove::Enter(Player& player)
 {
+	(void)player;
 }
 
 void PlayerMove::Update(Player& player)
@@ -35,4 +36,5 @@ void PlayerMove::Update(Player& player)
 
 void PlayerMove::Exit(Player& player)
 {
+	(void)player;
 }

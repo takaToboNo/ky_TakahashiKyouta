@@ -29,4 +29,5 @@ void PlayerIdle::Update(Player& player)
 
 void PlayerIdle::Exit(Player& player)
 {
+	(void)player;
 }

@@ -24,5 +24,5 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	DrawBox(0.0f, 0.0f, kScreenWidth, kScreenHeight, GetColor(30,0,0), TRUE);
+	DrawBox(0, 0, kScreenWidth, kScreenHeight, GetColor(30,0,0), TRUE);
 }
