@@ -40,7 +40,7 @@ void Player::Update()
 
 	//速度制限
 	m_Velocity.x = math_helper::clamp(m_Velocity.x, -MAX_MOVE_SPEED, MAX_MOVE_SPEED);
-	
+
 	//座標更新
 	m_Position += m_Velocity * dt;
 
@@ -71,6 +71,14 @@ void Player::Draw()
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+
+#ifdef _DEBUG
+	//デバッグ表示
+	DrawFormatString(10, 10, GetColor(WHITE.r, WHITE.g, WHITE.b), "PosX : %.2f", m_Position.x);
+	DrawFormatString(10, 30, GetColor(WHITE.r, WHITE.g, WHITE.b), "PosY : %.2f", m_Position.y);
+	DrawFormatString(10, 50, GetColor(WHITE.r, WHITE.g, WHITE.b), "isGround : %s", m_IsGround ? "true" : "false");
+	DrawFormatString(10, 70, GetColor(WHITE.r, WHITE.g, WHITE.b), "State : %s", m_State->GetStateName());
+#endif
 }
 
 void Player::Destroy()

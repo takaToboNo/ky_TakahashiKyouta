@@ -11,4 +11,5 @@ public:
 	virtual void Enter(Player&) = 0;
 	virtual void Update(Player&) = 0;
 	virtual void Exit(Player&) = 0;
+	virtual const char* GetStateName() const = 0;
 };
