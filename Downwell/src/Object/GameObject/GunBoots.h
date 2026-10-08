@@ -7,7 +7,7 @@
 class GunBoots : public GameObject
 {
 private:
-	static constexpr int kMaxAmmo = 10;
+	static constexpr int MAX_AMMO = 10;
 	int m_Ammo = 0;
 	int m_ShotInterval = 0;
 
@@ -44,6 +44,6 @@ public:
 	void Destroy() override;
 
 	bool CreateBullet();
-	void Reload() { m_Ammo = kMaxAmmo; }
+	void Reload() { m_Ammo = MAX_AMMO; }
 	int GetAmmo() { return m_Ammo; }
 };

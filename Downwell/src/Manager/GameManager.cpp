@@ -1,15 +1,23 @@
 #include "GameManager.h"
 #include "GameHelper.h"
 #include "DxLib.h"
-#include <cassert>
 
-void GameManager::Initialize()
+bool GameManager::Initialize()
 {
-	SetGraphMode(kScreenWidth, kScreenHeight, 32);
-	assert(DxLib_Init() == 0);
-	assert(SetDrawScreen(DX_SCREEN_BACK) == 0);
+	int result;
+	result = ChangeWindowMode(TRUE);
+	if (result != 0) return false;
+	result = SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+	if (result != 0) return false;
+	
+	result = DxLib_Init();
+	if (result != 0) return false;
+	result = SetDrawScreen(DX_SCREEN_BACK);
+	if (result != 0) return false;
 
 	m_SceneManager.Initialize();
+
+	return true;
 }
 
 void GameManager::Finalize()
@@ -19,13 +27,22 @@ void GameManager::Finalize()
 	DxLib_End();
 }
 
-void GameManager::Run()
+int GameManager::Run()
 {
-	while (!CheckHitKey(KEY_INPUT_ESCAPE))
+	if (!Initialize()) return -1;
+
+	while (ProcessMessage() == 0 && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
-		assert(ClearDrawScreen() == 0);
+		int result;
+		result = ClearDrawScreen();
+		if (result != 0) return -1;
 		m_SceneManager.Update();
 		m_SceneManager.Draw();
-		assert(ScreenFlip() == 0);
+		result = ScreenFlip();
+		if (result != 0) return -1;
 	}
+
+	Finalize();
+
+	return 0;
 }

@@ -9,7 +9,7 @@ void GunBoots::Initialize()
 	GameObject::Initialize();
 	m_Position = { 200.0f,400.0f };
 	m_Scale = { 25.0f,20.0f };
-	m_Color = kYellow;
+	m_Color = YELLOW;
 
 	for (auto& bullet : m_pBullets)
 	{

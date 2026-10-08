@@ -1,3 +1,5 @@
+#define NOMINMAX
+#include <algorithm>
 #include "TitleScene.h"
 #include "DxLib.h"
 #include "GameHelper.h"
@@ -15,7 +17,7 @@ void TitleScene::Finalize()
 void TitleScene::Update()
 {
 	m_KeyInterval--;
-	m_KeyInterval = max(m_KeyInterval, 0);
+	m_KeyInterval = std::max(m_KeyInterval, 0);
 	if (CheckHitKey(KEY_INPUT_RETURN) && m_KeyInterval == 0)
 	{
 		m_RequestScene = SceneType::Game;
@@ -24,5 +26,5 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	DrawBox(0, 0, kScreenWidth, kScreenHeight, GetColor(30,0,0), TRUE);
+	DrawBox(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GetColor(30,0,0), TRUE);
 }

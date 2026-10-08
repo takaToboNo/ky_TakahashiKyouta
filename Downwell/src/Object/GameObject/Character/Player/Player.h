@@ -10,13 +10,14 @@ private:
 	std::unique_ptr<IPlayerState> m_State = std::make_unique<PlayerIdle>();
 	std::unique_ptr<IPlayerState> m_NextState = {};
 
-	static constexpr float kMoveSpeed = 200.0f;
-	static constexpr float kMaxMoveSpeed = 500.0f;
-	static constexpr float kJumpForce = 1200.0f;
-	static constexpr float kGravity = 60.0f;
-	static constexpr float kAirDrag = 0.9f;
+	static constexpr float MOVE_ACCEL = 10000.0f;
+	static constexpr float MAX_MOVE_SPEED = 500.0f;
+	static constexpr float JUMP_FORCE = 1200.0f;
+	static constexpr float GRAVITY = 50.0f;
+	static constexpr float AIR_DRAG = 0.9f;
 
 	bool m_IsGround = false;
+	float m_DirectionX = 0.0f;
 
 public:
 	Player() = default;
@@ -40,11 +41,11 @@ public:
 
 	void Jump()
 	{
-		m_Velocity.y = -kJumpForce;
+		m_Velocity.y = -JUMP_FORCE;
 		m_IsGround = false;
 	}
-	void MoveLeftRight(float dir) { m_Velocity.x += kMoveSpeed * dir; }
-	void AirDrag() { m_Velocity.x *= kAirDrag; }
+	void SetDirectionX(float dir = 0.0f) { m_DirectionX = dir; }
+	void AirDrag() { m_Velocity.x *= AIR_DRAG; }
 	void StopEnemy(class Enemy);
 	void Shoot();
 

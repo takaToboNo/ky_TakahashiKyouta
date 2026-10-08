@@ -11,7 +11,7 @@ public:
 	GameManager() = default;
 	~GameManager() = default;
 
-	void Initialize();
+	bool Initialize();
 	void Finalize();
-	void Run();
+	int Run();
 };

@@ -6,7 +6,7 @@ class GameObject : public Object
 {
 protected:
 	Vector2 m_Scale = { 1.0f,1.0f };
-	Color m_Color = kWhite;
+	Color m_Color = WHITE;
 
 public:
 	GameObject() = default;

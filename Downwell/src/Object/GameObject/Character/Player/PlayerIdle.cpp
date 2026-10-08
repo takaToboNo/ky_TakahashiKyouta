@@ -8,11 +8,12 @@ void PlayerIdle::Enter(Player& player)
 {
 	//’âŽ~
 	player.SetVelocity(Vector2::Zero());
+	player.SetDirectionX();
 }
 
 void PlayerIdle::Update(Player& player)
 {
-	player.SetColor(kGreen);
+	player.SetColor(GREEN);
 
 	//ˆÚ“®
 	if (CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D))

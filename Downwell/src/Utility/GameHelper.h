@@ -6,16 +6,16 @@ struct Color
 	int g;
 	int b;
 };
-constexpr Color kWhite{ 255, 255, 255 };
-constexpr Color kRed{ 255, 0, 0 };
-constexpr Color kGreen{ 0, 255, 0 };
-constexpr Color kBlue{ 0, 0, 255 };
-constexpr Color kYellow{ 255, 255, 0 };
+constexpr Color WHITE{ 255, 255, 255 };
+constexpr Color RED{ 255, 0, 0 };
+constexpr Color GREEN{ 0, 255, 0 };
+constexpr Color BLUE{ 0, 0, 255 };
+constexpr Color YELLOW{ 255, 255, 0 };
 
-constexpr int kScreenWidth = 1280;
-constexpr int kScreenHeight = 720;
+constexpr int WINDOW_WIDTH = 1280;
+constexpr int WINDOW_HEIGHT = 720;
 
-constexpr float kStageTop = 0;
-constexpr float kStageBottom = 700;//‰¼
-constexpr float kStageLeft = 400;
-constexpr float kStageRight = 880;
+constexpr float STAGE_TOP = 0;
+constexpr float STAGE_BOTTOM = 700;//‰¼
+constexpr float STAGE_LEFT = 400;
+constexpr float STAGE_RIGHT = 880;

@@ -11,16 +11,16 @@ void PlayerMove::Enter(Player& player)
 
 void PlayerMove::Update(Player& player)
 {
-	player.SetColor(kRed);
+	player.SetColor(RED);
 
 	//ˆÚ“®
 	if (CheckHitKey(KEY_INPUT_A))
 	{
-		player.MoveLeftRight(-1.0f);
+		player.SetDirectionX(-1.0f);
 	}
 	else if (CheckHitKey(KEY_INPUT_D))
 	{
-		player.MoveLeftRight(1.0f);
+		player.SetDirectionX(1.0f);
 	}
 	else
 	{	//ADƒL[‚Ç‚¿‚ç‚à‰Ÿ‚µ‚Ä‚¢‚È‚¢

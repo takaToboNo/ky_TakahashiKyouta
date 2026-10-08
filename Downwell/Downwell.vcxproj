@@ -41,6 +41,7 @@
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\TitleScene.h" />
     <ClInclude Include="src\Utility\GameHelper.h" />
+    <ClInclude Include="src\Utility\MathHelper.h" />
     <ClInclude Include="src\Utility\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +125,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,6 +143,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -156,6 +159,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -173,6 +177,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

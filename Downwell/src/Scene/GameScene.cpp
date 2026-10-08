@@ -1,3 +1,5 @@
+#define NOMINMAX
+#include <algorithm>
 #include "GameScene.h"
 #include "DxLib.h"
 
@@ -29,7 +31,7 @@ void GameScene::Update()
 	if (m_pFloatingEnemy) m_pFloatingEnemy->Update();//‰¼
 
 	m_KeyInterval--;
-	m_KeyInterval = max(m_KeyInterval, 0);
+	m_KeyInterval = std::max(m_KeyInterval, 0);
 	if (CheckHitKey(KEY_INPUT_RETURN) && m_KeyInterval == 0)
 	{
 		m_RequestScene = SceneType::Result;

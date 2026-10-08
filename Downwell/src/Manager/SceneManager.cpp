@@ -25,11 +25,13 @@ void SceneManager::Draw()
 
 void SceneManager::ChangeScene()
 {
+	if (!m_Scene) return;
+
 	if (m_Scene->GetSceneRequest() == SceneType::None) return;
+	SceneType sceneType = m_Scene->GetSceneRequest();
 
-	if (m_Scene) m_Scene->Finalize();
-
-	switch (m_Scene->GetSceneRequest())
+	m_Scene->Finalize();
+	switch (sceneType)
 	{
 	case SceneType::Title:
 		m_Scene = std::make_unique<TitleScene>();
@@ -44,8 +46,7 @@ void SceneManager::ChangeScene()
 		break;
 
 	default:
-		break;
+		return;
 	}
-
-	if (m_Scene) m_Scene->Initialize();
+	m_Scene->Initialize();
 }

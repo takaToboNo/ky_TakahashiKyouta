@@ -99,6 +99,9 @@
     <ClInclude Include="src\Scene\ResultScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Utility\MathHelper.h">
+      <Filter>src\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">

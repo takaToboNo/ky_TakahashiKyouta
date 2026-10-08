@@ -1,20 +1,24 @@
 #include "Player.h"
 
 //仮
+#define NOMINMAX
 #include <cassert>
 #include "DxLib.h"
+#include <algorithm>
+#include "MathHelper.h"
 
 void Player::Initialize()
 {
 	Character::Initialize();
 	m_Position = { 600.0f,200.0f };
-	m_Scale = { 20.0f,20.0f };
+	m_Scale = { 25.0f,25.0f };
 	m_IsGround = false;
+	m_DirectionX = 0.0f;
 
 	m_State = std::make_unique<PlayerIdle>();
 	m_NextState = std::make_unique<PlayerIdle>();
 
-	m_Color = kGreen;
+	m_Color = GREEN;
 }
 
 void Player::Finalize()
@@ -30,18 +34,21 @@ void Player::Update()
 	if (m_NextState) SetState();
 
 	//重力
-	m_Velocity.y += kGravity;
+	m_Velocity.y += GRAVITY;
+
+	//移動方向
+	m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;
 
 	//速度制限
-	m_Velocity.x = min(max(m_Velocity.x, -kMaxMoveSpeed), kMaxMoveSpeed);
+	m_Velocity.x = math_helper::clamp(m_Velocity.x, -MAX_MOVE_SPEED, MAX_MOVE_SPEED);
 	
 	//座標更新
 	m_Position += m_Velocity * dt;
 
 	//床接地
-	if (m_Position.y >= kStageBottom)
+	if (m_Position.y >= STAGE_BOTTOM)
 	{
-		m_Position.y = kStageBottom;
+		m_Position.y = STAGE_BOTTOM;
 		m_Velocity.y = 0.0f;
 		m_IsGround = true;
 	}
@@ -51,8 +58,8 @@ void Player::Update()
 	}
 
 	//壁
-	m_Position.x = max(m_Position.x, kStageLeft);
-	m_Position.x = min(m_Position.x, kStageRight);
+	m_Position.x = std::max(m_Position.x, STAGE_LEFT);
+	m_Position.x = std::min(m_Position.x, STAGE_RIGHT);
 }
 
 void Player::Draw()

@@ -11,14 +11,24 @@ void PlayerJump::Enter(Player& player)
 
 void PlayerJump::Update(Player& player)
 {
-	player.SetColor(kBlue);
+	player.SetColor(BLUE);
 
 	//’ïR
 	player.AirDrag();
 
 	//ˆÚ“®
-	if (CheckHitKey(KEY_INPUT_A)) player.MoveLeftRight(-1.0f);
-	if (CheckHitKey(KEY_INPUT_D)) player.MoveLeftRight(1.0f);
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		player.SetDirectionX(-1.0f);
+	}
+	else if (CheckHitKey(KEY_INPUT_D))
+	{
+		player.SetDirectionX(1.0f);
+	}
+	else
+	{	//ADƒL[‚Ç‚¿‚ç‚à‰Ÿ‚µ‚Ä‚¢‚È‚¢
+		player.SetDirectionX();
+	}
 
 	//’…’n
 	if (player.IsGround())

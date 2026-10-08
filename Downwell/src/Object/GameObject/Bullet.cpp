@@ -25,14 +25,14 @@ void Bullet::Update()
 {
 	float dt = 1.0f / 60.0f;
 
-	m_Velocity.y = kBulletSpeed;
+	m_Velocity.y = BULLET_SPEED;
 
 	//ç¿ïWçXêV
 	m_Position += m_Velocity * dt;
 
 	//ï‘ãpó\ñÒ
-	if (m_Position.y < kStageTop) m_IsActive = false;
-	if (m_Position.y > kStageBottom) m_IsActive = false;
+	if (m_Position.y < STAGE_TOP) m_IsActive = false;
+	if (m_Position.y > STAGE_BOTTOM) m_IsActive = false;
 }
 
 void Bullet::Draw()
