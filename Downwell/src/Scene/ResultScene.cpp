@@ -11,6 +11,7 @@ void ResultScene::Initialize()
 
 void ResultScene::Finalize()
 {
+	m_ObjectManager.Finalize();
 	m_GameObjectManager.Finalize();
 
 	Scene::Finalize();
@@ -18,6 +19,7 @@ void ResultScene::Finalize()
 
 void ResultScene::Update()
 {
+	m_ObjectManager.Update();
 	m_GameObjectManager.Update();
 
 	m_KeyInterval--;
@@ -30,6 +32,7 @@ void ResultScene::Update()
 
 void ResultScene::Draw()
 {
+	m_ObjectManager.Draw();
 	m_GameObjectManager.Draw();
 
 	DrawBox(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GetColor(0, 30, 0), TRUE);

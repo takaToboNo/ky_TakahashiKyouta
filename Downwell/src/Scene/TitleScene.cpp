@@ -11,6 +11,7 @@ void TitleScene::Initialize()
 
 void TitleScene::Finalize()
 {
+	m_ObjectManager.Finalize();
 	m_GameObjectManager.Finalize();
 
 	Scene::Finalize();
@@ -18,6 +19,7 @@ void TitleScene::Finalize()
 
 void TitleScene::Update()
 {
+	m_ObjectManager.Update();
 	m_GameObjectManager.Update();
 
 	m_KeyInterval--;
@@ -30,6 +32,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
+	m_ObjectManager.Draw();
 	m_GameObjectManager.Draw();
 
 	DrawBox(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GetColor(30,0,0), TRUE);
