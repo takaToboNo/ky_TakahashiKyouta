@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\Manager\GameManager.h" />
+    <ClInclude Include="src\Manager\GameObjectManager.h" />
     <ClInclude Include="src\Object\GameObject\Bullet.h" />
     <ClInclude Include="src\Object\GameObject\Character\Character.h" />
     <ClInclude Include="src\Object\GameObject\Character\Enemy\Enemy.h" />
@@ -47,6 +48,7 @@
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Manager\GameManager.cpp" />
+    <ClCompile Include="src\Manager\GameObjectManager.cpp" />
     <ClCompile Include="src\Object\GameObject\Bullet.cpp" />
     <ClCompile Include="src\Object\GameObject\Character\Character.cpp" />
     <ClCompile Include="src\Object\GameObject\Character\Enemy\Enemy.cpp" />

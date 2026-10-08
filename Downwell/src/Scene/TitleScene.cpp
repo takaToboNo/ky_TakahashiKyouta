@@ -11,11 +11,15 @@ void TitleScene::Initialize()
 
 void TitleScene::Finalize()
 {
+	m_GameObjectManager.Finalize();
+
 	Scene::Finalize();
 }
 
 void TitleScene::Update()
 {
+	m_GameObjectManager.Update();
+
 	m_KeyInterval--;
 	m_KeyInterval = std::max(m_KeyInterval, 0);
 	if (CheckHitKey(KEY_INPUT_RETURN) && m_KeyInterval == 0)
@@ -26,5 +30,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
+	m_GameObjectManager.Draw();
+
 	DrawBox(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GetColor(30,0,0), TRUE);
 }

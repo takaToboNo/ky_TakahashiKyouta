@@ -1,7 +1,6 @@
 #include "Bullet.h"
 
 //‰¼
-#include <cassert>
 #include "DxLib.h"
 
 void Bullet::Initialize()

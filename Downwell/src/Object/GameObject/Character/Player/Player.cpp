@@ -2,7 +2,6 @@
 
 //‰¼
 #define NOMINMAX
-#include <cassert>
 #include "DxLib.h"
 #include <algorithm>
 #include "MathHelper.h"

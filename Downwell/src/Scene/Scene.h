@@ -1,4 +1,5 @@
 #pragma once
+#include "GameObjectManager.h"
 
 enum class SceneType
 {
@@ -11,7 +12,9 @@ enum class SceneType
 class Scene
 {
 protected:
+	GameObjectManager m_GameObjectManager;
 	SceneType m_RequestScene = SceneType::None;
+	
 
 	int m_KeyInterval = 30;
 

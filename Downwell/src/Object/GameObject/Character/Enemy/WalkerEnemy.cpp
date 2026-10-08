@@ -1,7 +1,6 @@
 #include "WalkerEnemy.h"
 
 #include "DxLib.h"
-#include <cassert>
 
 void WalkerEnemy::Initialize()
 {

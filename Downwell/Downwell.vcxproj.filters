@@ -102,6 +102,9 @@
     <ClInclude Include="src\Utility\MathHelper.h">
       <Filter>src\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="src\Manager\GameObjectManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -160,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="src\Scene\ResultScene.cpp">
       <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\GameObjectManager.cpp">
+      <Filter>src\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

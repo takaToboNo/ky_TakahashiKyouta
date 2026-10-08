@@ -1,7 +1,6 @@
 #include "FloatingEnemy.h"
 
 #include "DxLib.h"
-#include <cassert>
 
 void FloatingEnemy::Initialize()
 {

@@ -1,34 +1,34 @@
 #define NOMINMAX
 #include <algorithm>
+#include <memory>
 #include "GameScene.h"
 #include "DxLib.h"
+
+#include "Player.h"
+#include "GunBoots.h"
+#include "WalkerEnemy.h"
+#include "FloatingEnemy.h"
 
 void GameScene::Initialize()
 {
 	Scene::Initialize();
 
-	if (m_pPlayer) m_pPlayer->Initialize();//‰¼
-	if (m_pGunBoots) m_pGunBoots->Initialize();//‰¼
-	if (m_pWalkerEnemy) m_pWalkerEnemy->Initialize();//‰¼
-	if (m_pFloatingEnemy) m_pFloatingEnemy->Initialize();//‰¼
+	m_GameObjectManager.AddGameObject(std::make_unique<Player>());
+	m_GameObjectManager.AddGameObject(std::make_unique<GunBoots>());
+	m_GameObjectManager.AddGameObject(std::make_unique<WalkerEnemy>());
+	m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
 }
 
 void GameScene::Finalize()
 {
-	if (m_pFloatingEnemy) m_pFloatingEnemy->Finalize();//‰¼
-	if (m_pWalkerEnemy) m_pWalkerEnemy->Finalize();//‰¼
-	if (m_pGunBoots) m_pGunBoots->Finalize();//‰¼
-	if (m_pPlayer) m_pPlayer->Finalize();//‰¼
+	m_GameObjectManager.Finalize();
 
 	Scene::Finalize();
 }
 
 void GameScene::Update()
 {
-	if (m_pPlayer) m_pPlayer->Update();//‰¼
-	if (m_pGunBoots) m_pGunBoots->Update();//‰¼
-	if (m_pWalkerEnemy) m_pWalkerEnemy->Update();//‰¼
-	if (m_pFloatingEnemy) m_pFloatingEnemy->Update();//‰¼
+	m_GameObjectManager.Update();
 
 	m_KeyInterval--;
 	m_KeyInterval = std::max(m_KeyInterval, 0);
@@ -40,8 +40,5 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	if (m_pPlayer) m_pPlayer->Draw();//‰¼
-	if (m_pGunBoots) m_pGunBoots->Draw();//‰¼
-	if (m_pWalkerEnemy) m_pWalkerEnemy->Draw();//‰¼
-	if (m_pFloatingEnemy) m_pFloatingEnemy->Draw();//‰¼
+	m_GameObjectManager.Draw();
 }

@@ -1,7 +1,6 @@
 #include "GunBoots.h"
 
 //‰¼
-#include <cassert>
 #include "DxLib.h"
 
 void GunBoots::Initialize()
