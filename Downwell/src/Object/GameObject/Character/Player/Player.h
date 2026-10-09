@@ -22,6 +22,10 @@ private:
 	bool m_IsGround = false;
 	float m_DirectionX = 0.0f;
 
+	bool m_JumpKey = false;
+	bool m_OldJumpKey = false;
+	bool m_JumpTrigger = false;
+
 public:
 	Player() = default;
 
@@ -51,5 +55,7 @@ public:
 	void AirDrag() { m_Velocity.x *= AIR_DRAG; }
 	void StopEnemy(class Enemy);
 	void Shoot();
+
+	bool GetJumpTrigger() { return m_JumpTrigger; }
 
 };

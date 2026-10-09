@@ -28,7 +28,7 @@ void PlayerMove::Update(Player& player)
 	}
 
 	//ƒWƒƒƒ“ƒv
-	if (CheckHitKey(KEY_INPUT_SPACE) && player.IsGround())
+	if (CheckHitKey(KEY_INPUT_SPACE) && player.IsGround() && player.GetJumpTrigger())
 	{
 		player.RequestState(std::make_unique<PlayerJump>());
 	}

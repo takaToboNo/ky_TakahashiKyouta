@@ -22,6 +22,10 @@ void Player::Initialize()
 	m_Color = GREEN;
 
 	m_GunBoots->Initialize();
+
+	m_JumpKey = false;
+	m_OldJumpKey = false;
+	m_JumpTrigger = false;
 }
 
 void Player::Finalize()
@@ -34,6 +38,11 @@ void Player::Update(float dt)
 {
 	if (m_State) m_State->Update(*this);
 	if (m_NextState) SetState();
+
+	//ジャンプキー
+	m_OldJumpKey = m_JumpKey;
+	m_JumpKey = (CheckHitKey(KEY_INPUT_SPACE)) ? true : false;
+	m_JumpTrigger = m_JumpKey && !m_OldJumpKey;
 
 	//重力
 	m_Velocity.y += GRAVITY;
