@@ -35,5 +35,7 @@ void TitleScene::Draw()
 	m_ObjectManager.Draw();
 	m_GameObjectManager.Draw();
 
-	DrawBox(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GetColor(30,0,0), TRUE);
+	int x = static_cast<int>(WINDOW_WIDTH * 0.5f);
+	int y = static_cast<int>(WINDOW_HEIGHT * 0.5f);
+	DrawString(x, y, "Title", GetColor(GREEN.r, GREEN.g, GREEN.b));
 }

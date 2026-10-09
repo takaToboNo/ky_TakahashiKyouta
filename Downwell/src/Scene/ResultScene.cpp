@@ -35,5 +35,7 @@ void ResultScene::Draw()
 	m_ObjectManager.Draw();
 	m_GameObjectManager.Draw();
 
-	DrawBox(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GetColor(0, 30, 0), TRUE);
+	int x = static_cast<int>(WINDOW_WIDTH * 0.5f);
+	int y = static_cast<int>(WINDOW_HEIGHT * 0.5f);
+	DrawString(x, y, "Result", GetColor(RED.r, RED.g, RED.b));
 }

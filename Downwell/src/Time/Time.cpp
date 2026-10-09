@@ -49,8 +49,8 @@ void Time::Draw()
 {
 #ifdef _DEBUG
 	//デバッグ表示
-	DrawFormatString(200, 10, GetColor(255,255,255), "UpdateFPS : %.2f", m_UPS);
-	DrawFormatString(200, 30, GetColor(255,255,255), "DrawFPS : %.2f", m_FPS);
+	DrawFormatString(200, 10, GetColor(255,255,255), "UPS : %.2f", m_UPS);
+	DrawFormatString(200, 30, GetColor(255,255,255), "FPS : %.2f", m_FPS);
 #endif
 }
 
