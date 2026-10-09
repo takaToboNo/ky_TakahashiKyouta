@@ -17,5 +17,5 @@ constexpr int WINDOW_HEIGHT = 720;
 
 constexpr float STAGE_TOP = 0;
 constexpr float STAGE_BOTTOM = 700;//‰¼
-constexpr float STAGE_LEFT = 400;
-constexpr float STAGE_RIGHT = 880;
+constexpr float STAGE_LEFT = 0;
+constexpr float STAGE_RIGHT = 1280;

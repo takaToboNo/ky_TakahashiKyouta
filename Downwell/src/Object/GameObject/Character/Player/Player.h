@@ -13,10 +13,14 @@ private:
 
 	std::unique_ptr<GunBoots> m_GunBoots = std::make_unique<GunBoots>();
 
-	static constexpr float MOVE_ACCEL = 10000.0f;
+	static constexpr float MOVE_ACCEL = 5000.0f;
 	static constexpr float MAX_MOVE_SPEED = 500.0f;
 	static constexpr float JUMP_FORCE = 1200.0f;
-	static constexpr float GRAVITY = 50.0f;
+	static constexpr float JUMP_CUT_RESISTANCE = 0.5f;
+	static constexpr float GRAVITY_THRESHOLD_SPEED = 200.0f;
+	static constexpr float JUMP_GRAVITY = 2500.0f;
+	static constexpr float FALL_GRAVITY = 3500.0f;
+
 	static constexpr float AIR_DRAG = 0.9f;
 
 	bool m_IsGround = false;
@@ -25,6 +29,11 @@ private:
 	bool m_JumpKey = false;
 	bool m_OldJumpKey = false;
 	bool m_JumpTrigger = false;
+	bool m_JumpRelease = false;
+
+#ifdef _DEBUG
+	float m_DebugDrawGravity = 0.0f;
+#endif
 
 public:
 	Player() = default;

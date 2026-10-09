@@ -26,6 +26,7 @@ void Player::Initialize()
 	m_JumpKey = false;
 	m_OldJumpKey = false;
 	m_JumpTrigger = false;
+	m_JumpRelease = false;
 }
 
 void Player::Finalize()
@@ -43,9 +44,20 @@ void Player::Update(float dt)
 	m_OldJumpKey = m_JumpKey;
 	m_JumpKey = (CheckHitKey(KEY_INPUT_SPACE)) ? true : false;
 	m_JumpTrigger = m_JumpKey && !m_OldJumpKey;
+	m_JumpRelease = !m_JumpKey && m_OldJumpKey;
 
 	//重力
-	m_Velocity.y += GRAVITY;
+	const float gravity = (m_Velocity.y < GRAVITY_THRESHOLD_SPEED) ? JUMP_GRAVITY : FALL_GRAVITY;
+	m_Velocity.y += gravity * dt;
+#ifdef _DEBUG
+	m_DebugDrawGravity = gravity;
+#endif
+
+	//jumpキーを離したとき
+	if (m_JumpRelease && m_Velocity.y < 0.0f)
+	{
+		m_Velocity *= JUMP_CUT_RESISTANCE;
+	}
 
 	//移動方向
 	m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;
@@ -90,8 +102,11 @@ void Player::Draw()
 	//デバッグ表示
 	DrawFormatString(10, 10, GetColor(WHITE.r, WHITE.g, WHITE.b), "PosX : %.2f", m_Position.x);
 	DrawFormatString(10, 30, GetColor(WHITE.r, WHITE.g, WHITE.b), "PosY : %.2f", m_Position.y);
-	DrawFormatString(10, 50, GetColor(WHITE.r, WHITE.g, WHITE.b), "isGround : %s", m_IsGround ? "true" : "false");
-	DrawFormatString(10, 70, GetColor(WHITE.r, WHITE.g, WHITE.b), "State : %s", m_State->GetStateName());
+	DrawFormatString(10, 50, GetColor(WHITE.r, WHITE.g, WHITE.b), "VelX : %.2f", m_Velocity.x);
+	DrawFormatString(10, 70, GetColor(WHITE.r, WHITE.g, WHITE.b), "VelY : %.2f", m_Velocity.y);
+	DrawFormatString(10, 90, GetColor(WHITE.r, WHITE.g, WHITE.b), "isGround : %s", m_IsGround ? "true" : "false");
+	DrawFormatString(10, 110, GetColor(WHITE.r, WHITE.g, WHITE.b), "State : %s", m_State->GetStateName());
+	DrawFormatString(10, 130, GetColor(WHITE.r, WHITE.g, WHITE.b), "Gravity : %.2f", m_DebugDrawGravity);
 	m_GunBoots->Draw();
 #endif
 }
