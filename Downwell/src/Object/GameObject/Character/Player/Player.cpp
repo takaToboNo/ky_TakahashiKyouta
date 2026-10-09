@@ -27,6 +27,7 @@ void Player::Initialize()
 	m_OldJumpKey = false;
 	m_JumpTrigger = false;
 	m_JumpRelease = false;
+	m_CanAutoShot = false;
 }
 
 void Player::Finalize()
@@ -59,6 +60,8 @@ void Player::Update(float dt)
 		m_Velocity *= JUMP_CUT_RESISTANCE;
 	}
 
+	if (m_JumpRelease) m_CanAutoShot = true;
+
 	//ˆÚ“®•ûŒü
 	m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;
 
@@ -74,6 +77,7 @@ void Player::Update(float dt)
 		m_Position.y = STAGE_BOTTOM;
 		m_Velocity.y = 0.0f;
 		m_IsGround = true;
+		m_CanAutoShot = false;
 	}
 	else
 	{
@@ -107,6 +111,7 @@ void Player::Draw()
 	DrawFormatString(10, 90, GetColor(WHITE.r, WHITE.g, WHITE.b), "isGround : %s", m_IsGround ? "true" : "false");
 	DrawFormatString(10, 110, GetColor(WHITE.r, WHITE.g, WHITE.b), "State : %s", m_State->GetStateName());
 	DrawFormatString(10, 130, GetColor(WHITE.r, WHITE.g, WHITE.b), "Gravity : %.2f", m_DebugDrawGravity);
+	DrawFormatString(10, 150, GetColor(WHITE.r, WHITE.g, WHITE.b), "canAutoShot : %s", m_CanAutoShot ? "true" : "false");
 	m_GunBoots->Draw();
 #endif
 }

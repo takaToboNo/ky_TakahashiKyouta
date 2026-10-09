@@ -1,5 +1,7 @@
 #include "PlayerJump.h"
 #include "PlayerMove.h"
+#include "PlayerShot.h"
+#include "PlayerFall.h"
 #include "Player.h"
 #include "DxLib.h"
 
@@ -7,6 +9,8 @@ void PlayerJump::Enter(Player& player)
 {
 	//ジャンプ
 	player.Jump();
+
+	player.SetCanAutoShot(false);
 }
 
 void PlayerJump::Update(Player& player)
@@ -31,15 +35,20 @@ void PlayerJump::Update(Player& player)
 		player.SetDirectionX(1.0f);
 	}
 
-	//着地
-	if (player.IsGround())
+	//ショット
+	if (player.GetJumpTrigger())
 	{
-		player.RequestState(std::make_unique<PlayerMove>());
+		player.RequestState(std::make_unique<PlayerShot>());
 	}
+
+	//落下
+	if (player.GetVelocity().y >= 0.0f)
+	{
+		player.RequestState(std::make_unique<PlayerFall>());
+	}
+	
 }
 
 void PlayerJump::Exit(Player& player)
 {
-	//着地
-	player.SetGround(true);
 }

@@ -11,6 +11,7 @@ constexpr Color RED{ 255, 0, 0 };
 constexpr Color GREEN{ 0, 255, 0 };
 constexpr Color BLUE{ 0, 0, 255 };
 constexpr Color YELLOW{ 255, 255, 0 };
+constexpr Color PURPLE{ 255, 0, 255 };
 
 constexpr int WINDOW_WIDTH = 1280;
 constexpr int WINDOW_HEIGHT = 720;
