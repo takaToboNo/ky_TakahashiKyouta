@@ -1,9 +1,11 @@
 #pragma once
 #include "SceneManager.h"
+#include "Time.h"
 
 class GameManager
 {
 private:
+	Time m_Time;
 	SceneManager m_SceneManager;
 	bool m_IsRunning = true;
 

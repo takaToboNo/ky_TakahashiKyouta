@@ -27,11 +27,11 @@ void GunBoots::Finalize()
 	Object::Finalize();
 }
 
-void GunBoots::Update()
+void GunBoots::Update(float dt)
 {
 	for (auto& bullet : m_pBullets)
 	{
-		bullet->Update();
+		bullet->Update(dt);
 	}
 
 	for (auto it = m_pBullets.begin(); it != m_pBullets.end();)
@@ -46,8 +46,6 @@ void GunBoots::Update()
 			++it;
 		}
 	}
-
-	//float dt = 1.0f / 60.0f;
 
 	//’e”­ŽË
 	if (CheckHitKey(KEY_INPUT_B))

@@ -21,10 +21,8 @@ void Bullet::Finalize()
 	GameObject::Finalize();
 }
 
-void Bullet::Update()
+void Bullet::Update(float dt)
 {
-	float dt = 1.0f / 60.0f;
-
 	m_Velocity.y = BULLET_SPEED;
 
 	//ç¿ïWçXêV

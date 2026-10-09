@@ -10,6 +10,6 @@ public:
 
 	void Initialize() override;
 	void Finalize() override;
-	void Update() override;
+	void Update(float dt) override;
 	void Draw() override;
 };

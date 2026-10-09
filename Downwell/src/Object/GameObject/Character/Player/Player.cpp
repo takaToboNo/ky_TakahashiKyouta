@@ -30,10 +30,8 @@ void Player::Finalize()
 	Character::Finalize();
 }
 
-void Player::Update()
+void Player::Update(float dt)
 {
-	float dt = 1.0f / 60.0f;
-
 	if (m_State) m_State->Update(*this);
 	if (m_NextState) SetState();
 
@@ -65,7 +63,7 @@ void Player::Update()
 	m_Position.x = std::max(m_Position.x, STAGE_LEFT);
 	m_Position.x = std::min(m_Position.x, STAGE_RIGHT);
 
-	m_GunBoots->Update();
+	m_GunBoots->Update(dt);
 }
 
 void Player::Draw()

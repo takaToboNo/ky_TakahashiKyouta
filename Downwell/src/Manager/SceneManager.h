@@ -16,7 +16,7 @@ public:
 
 	void Initialize();
 	void Finalize();
-	void Update();
+	void Update(float dt);
 	void Draw();
 
 	void ChangeScene();

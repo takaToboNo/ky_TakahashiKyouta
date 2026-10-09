@@ -14,7 +14,7 @@ public:
 	~ObjectManager();
 
 	void Finalize();
-	void Update();
+	void Update(float dt);
 	void Draw();
 
 	Object* AddObject(std::unique_ptr<Object> object);

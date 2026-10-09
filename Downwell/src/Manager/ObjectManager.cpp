@@ -12,11 +12,11 @@ void ObjectManager::Finalize()
 	}
 }
 
-void ObjectManager::Update()
+void ObjectManager::Update(float dt)
 {
 	for (auto& object : m_Objects)
 	{
-		object->Update();
+		object->Update(dt);
 	}
 }
 

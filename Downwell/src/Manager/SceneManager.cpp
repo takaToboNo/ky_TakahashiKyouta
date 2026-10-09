@@ -11,9 +11,9 @@ void SceneManager::Finalize()
 	m_Scene->Finalize();
 }
 
-void SceneManager::Update()
+void SceneManager::Update(float dt)
 {
-	m_Scene->Update();
+	m_Scene->Update(dt);
 
 	ChangeScene();
 }

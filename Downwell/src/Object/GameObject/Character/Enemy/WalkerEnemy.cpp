@@ -15,7 +15,7 @@ void WalkerEnemy::Finalize()
 	Enemy::Finalize();
 }
 
-void WalkerEnemy::Update()
+void WalkerEnemy::Update(float dt)
 {
 }
 

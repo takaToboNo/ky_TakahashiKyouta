@@ -15,7 +15,7 @@ void FloatingEnemy::Finalize()
 	Enemy::Finalize();
 }
 
-void FloatingEnemy::Update()
+void FloatingEnemy::Update(float dt)
 {
 }
 

@@ -17,10 +17,10 @@ void TitleScene::Finalize()
 	Scene::Finalize();
 }
 
-void TitleScene::Update()
+void TitleScene::Update(float dt)
 {
-	m_ObjectManager.Update();
-	m_GameObjectManager.Update();
+	m_ObjectManager.Update(dt);
+	m_GameObjectManager.Update(dt);
 
 	m_KeyInterval--;
 	m_KeyInterval = std::max(m_KeyInterval, 0);

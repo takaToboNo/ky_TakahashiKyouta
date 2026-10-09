@@ -14,7 +14,7 @@ public:
 	~GameObjectManager();
 
 	void Finalize();
-	void Update();
+	void Update(float dt);
 	void Draw();
 
 	GameObject* AddGameObject(std::unique_ptr<GameObject> gameObject);

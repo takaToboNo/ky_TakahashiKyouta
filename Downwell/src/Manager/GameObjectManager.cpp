@@ -13,11 +13,11 @@ void GameObjectManager::Finalize()
 	}
 }
 
-void GameObjectManager::Update()
+void GameObjectManager::Update(float dt)
 {
 	for (auto& gameObject : m_GameObjects)
 	{
-		gameObject->Update();
+		gameObject->Update(dt);
 	}
 }
 
