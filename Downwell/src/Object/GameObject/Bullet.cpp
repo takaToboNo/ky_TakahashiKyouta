@@ -6,6 +6,7 @@
 void Bullet::Initialize()
 {
 	GameObject::Initialize();
+	m_Layer = Layer::Bullet;
 	m_Velocity = { 0.0f,0.0f };
 	m_Life = 0.0f;
 	m_Damage = 0;

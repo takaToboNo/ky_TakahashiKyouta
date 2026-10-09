@@ -3,6 +3,7 @@
 void Enemy::Initialize()
 {
 	Character::Initialize();
+	m_Layer = Layer::Enemy;
 }
 
 void Enemy::Finalize()

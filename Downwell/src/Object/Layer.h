@@ -5,6 +5,7 @@ enum class Layer
 	None = 0,
 	Background,
 	Enemy,
+	Bullet,
 	Player,
 	UI,
 };
