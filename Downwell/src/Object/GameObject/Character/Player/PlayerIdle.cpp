@@ -16,7 +16,8 @@ void PlayerIdle::Update(Player& player)
 	player.SetColor(GREEN);
 
 	//ˆÚ“®
-	if (CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D))
+	bool isMove = ((CheckHitKey(KEY_INPUT_A)) ^ (CheckHitKey(KEY_INPUT_D)));
+	if (isMove)
 	{
 		player.RequestState(std::make_unique<PlayerMove>());
 	}

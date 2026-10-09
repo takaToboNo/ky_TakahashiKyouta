@@ -17,17 +17,18 @@ void PlayerJump::Update(Player& player)
 	player.AirDrag();
 
 	//ˆÚ“®
-	if (CheckHitKey(KEY_INPUT_A))
+	bool isMove = ((CheckHitKey(KEY_INPUT_A)) ^ (CheckHitKey(KEY_INPUT_D)));
+	if (!isMove)
+	{
+		player.SetDirectionX();
+	}
+	else if (CheckHitKey(KEY_INPUT_A))
 	{
 		player.SetDirectionX(-1.0f);
 	}
 	else if (CheckHitKey(KEY_INPUT_D))
 	{
 		player.SetDirectionX(1.0f);
-	}
-	else
-	{	//ADƒL[‚Ç‚¿‚ç‚à‰Ÿ‚µ‚Ä‚¢‚È‚¢
-		player.SetDirectionX();
 	}
 
 	//’…’n
