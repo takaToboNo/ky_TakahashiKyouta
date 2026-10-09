@@ -17,6 +17,13 @@ public:
 		return { 0.0f, 0.0f };
 	}
 
+	void Normalize()
+	{
+		if (Length() == 0.0f) return;
+		x /= Length();
+		y /= Length();
+	}
+
 	float Length() const
 	{
 		return sqrtf(LengthSquared());

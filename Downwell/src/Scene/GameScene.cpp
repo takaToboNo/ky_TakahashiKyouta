@@ -12,9 +12,11 @@ void GameScene::Initialize()
 {
 	Scene::Initialize();
 
-	m_GameObjectManager.AddGameObject(std::make_unique<Player>());
 	m_GameObjectManager.AddGameObject(std::make_unique<WalkerEnemy>());
-	m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
+	
+	auto player = m_GameObjectManager.AddGameObject(std::make_unique<Player>());
+	auto floatingEnemy = m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
+	floatingEnemy->SetPlayer(player);
 }
 
 void GameScene::Finalize()

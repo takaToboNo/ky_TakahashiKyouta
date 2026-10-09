@@ -1,10 +1,13 @@
 #pragma once
 #include "Enemy.h"
 
+class Player;
+
 class FloatingEnemy : public Enemy
 {
 private:
-
+	static constexpr float MAX_MOVE_SPEED = 100.0f;
+	const Player* m_pPlayer = nullptr;
 
 public:
 	FloatingEnemy() = default;
@@ -19,4 +22,6 @@ public:
 	void Damage(int damage) override;
 	void Died() override;
 	bool CheckGround() override;
+
+	void SetPlayer(const Player* player) { m_pPlayer = player; }
 };
