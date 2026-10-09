@@ -9,6 +9,8 @@
 void Player::Initialize()
 {
 	Character::Initialize();
+	m_Layer = Layer::Player;
+
 	m_Position = { 600.0f,200.0f };
 	m_Scale = { 25.0f,25.0f };
 	m_IsGround = false;
@@ -18,10 +20,13 @@ void Player::Initialize()
 	m_NextState = std::make_unique<PlayerIdle>();
 
 	m_Color = GREEN;
+
+	m_GunBoots->Initialize();
 }
 
 void Player::Finalize()
 {
+	m_GunBoots->Finalize();
 	Character::Finalize();
 }
 
@@ -59,6 +64,8 @@ void Player::Update()
 	//•Ç
 	m_Position.x = std::max(m_Position.x, STAGE_LEFT);
 	m_Position.x = std::min(m_Position.x, STAGE_RIGHT);
+
+	m_GunBoots->Update();
 }
 
 void Player::Draw()
@@ -78,6 +85,7 @@ void Player::Draw()
 	DrawFormatString(10, 30, GetColor(WHITE.r, WHITE.g, WHITE.b), "PosY : %.2f", m_Position.y);
 	DrawFormatString(10, 50, GetColor(WHITE.r, WHITE.g, WHITE.b), "isGround : %s", m_IsGround ? "true" : "false");
 	DrawFormatString(10, 70, GetColor(WHITE.r, WHITE.g, WHITE.b), "State : %s", m_State->GetStateName());
+	m_GunBoots->Draw();
 #endif
 }
 

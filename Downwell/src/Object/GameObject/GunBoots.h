@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "Bullet.h"
 
-class GunBoots : public GameObject
+class GunBoots : public Object
 {
 private:
 	static constexpr int MAX_AMMO = 10;
@@ -13,6 +13,9 @@ private:
 
 	std::vector<std::unique_ptr<Bullet>> m_BulletPool;
 	std::vector<std::unique_ptr<Bullet>> m_pBullets;
+
+	Vector2 m_Scale = { 1.0f,1.0f };
+	Color m_Color = WHITE;
 
 public:
 	GunBoots() = default;

@@ -35,6 +35,7 @@
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerState.h" />
     <ClInclude Include="src\Object\GameObject\GameObject.h" />
     <ClInclude Include="src\Object\GameObject\GunBoots.h" />
+    <ClInclude Include="src\Object\Layer.h" />
     <ClInclude Include="src\Object\Object.h" />
     <ClInclude Include="src\Object\Tag.h" />
     <ClInclude Include="src\Manager\SceneManager.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="src\Scene\ResultScene.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\TitleScene.h" />
+    <ClInclude Include="src\Time\Time.h" />
     <ClInclude Include="src\Utility\GameHelper.h" />
     <ClInclude Include="src\Utility\MathHelper.h" />
     <ClInclude Include="src\Utility\Vector2.h" />
@@ -68,6 +70,7 @@
     <ClCompile Include="src\Scene\ResultScene.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\TitleScene.cpp" />
+    <ClCompile Include="src\Time\Time.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -127,7 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Time;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
@@ -145,7 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Time;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
@@ -161,7 +164,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Time;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
@@ -179,7 +182,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Utility;$(ProjectDir)\src\Time;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Manager;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>

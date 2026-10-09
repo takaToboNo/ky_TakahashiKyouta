@@ -1,5 +1,6 @@
 #include "GameObjectManager.h"
 #include "GameObject.h"
+#include <algorithm>
 
 GameObjectManager::GameObjectManager() = default;
 GameObjectManager::~GameObjectManager() = default;
@@ -34,6 +35,10 @@ GameObject* GameObjectManager::AddGameObject(std::unique_ptr<GameObject> gameObj
 
 	m_GameObjects.push_back(std::move(gameObject));
 	m_GameObjects.back()->Initialize();
+
+	std::sort(m_GameObjects.begin(), m_GameObjects.end(),
+		[](const std::unique_ptr<GameObject>& a, const std::unique_ptr<GameObject>& b)
+		{ return a->GetLayer() < b->GetLayer(); });
 
 	return ptr;
 }

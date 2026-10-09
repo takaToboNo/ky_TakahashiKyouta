@@ -5,7 +5,6 @@
 #include "DxLib.h"
 
 #include "Player.h"
-#include "GunBoots.h"
 #include "WalkerEnemy.h"
 #include "FloatingEnemy.h"
 
@@ -14,7 +13,6 @@ void GameScene::Initialize()
 	Scene::Initialize();
 
 	m_GameObjectManager.AddGameObject(std::make_unique<Player>());
-	m_GameObjectManager.AddGameObject(std::make_unique<GunBoots>());
 	m_GameObjectManager.AddGameObject(std::make_unique<WalkerEnemy>());
 	m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
 }

@@ -5,7 +5,7 @@
 
 void GunBoots::Initialize()
 {
-	GameObject::Initialize();
+	Object::Initialize();
 	m_Position = { 200.0f,400.0f };
 	m_Scale = { 25.0f,20.0f };
 	m_Color = YELLOW;
@@ -24,7 +24,7 @@ void GunBoots::Finalize()
 		bullet->Finalize();
 	}
 
-	GameObject::Finalize();
+	Object::Finalize();
 }
 
 void GunBoots::Update()
@@ -77,7 +77,7 @@ void GunBoots::Draw()
 
 void GunBoots::Destroy()
 {
-	GameObject::Destroy();
+	Object::Destroy();
 }
 
 bool GunBoots::CreateBullet()

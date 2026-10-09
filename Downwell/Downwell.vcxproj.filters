@@ -28,6 +28,9 @@
     <Filter Include="src\Manager">
       <UniqueIdentifier>{db4788be-57bd-4f40-920b-e01556a4bde3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Time">
+      <UniqueIdentifier>{a4306079-b8e5-4f1d-89a1-6622362359cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -108,6 +111,12 @@
     <ClInclude Include="src\Manager\ObjectManager.h">
       <Filter>src\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="src\Time\Time.h">
+      <Filter>src\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Layer.h">
+      <Filter>src\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -172,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="src\Manager\ObjectManager.cpp">
       <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time\Time.cpp">
+      <Filter>src\Time</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

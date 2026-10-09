@@ -3,12 +3,15 @@
 #include "Character.h"
 #include "PlayerState.h"
 #include "PlayerIdle.h"
+#include "GunBoots.h"
 
 class Player : public Character
 {
 private:
 	std::unique_ptr<IPlayerState> m_State = std::make_unique<PlayerIdle>();
 	std::unique_ptr<IPlayerState> m_NextState = {};
+
+	std::unique_ptr<GunBoots> m_GunBoots = std::make_unique<GunBoots>();
 
 	static constexpr float MOVE_ACCEL = 10000.0f;
 	static constexpr float MAX_MOVE_SPEED = 500.0f;
