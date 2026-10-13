@@ -9,7 +9,7 @@ void FloatingEnemy::Initialize()
 	Enemy::Initialize();
 	m_MoveSpeed = 50.0f;
 	m_Position = { 500.0f,300.0f };
-	m_Scale = { 30.0f,20.0f };
+	m_Scale = { 30.0f,30.0f };
 	m_Color = { 200, 0, 200 };
 }
 
@@ -25,14 +25,19 @@ void FloatingEnemy::Update(float dt)
 
 	if (m_pPlayer)
 	{
-		Vector2 dir = m_pPlayer->GetPosition() - m_Position;
-		dir.Normalize();
+		Vector2 targetDir = m_pPlayer->GetPosition() - m_Position;
+		targetDir.Normalize();
 
-		m_Velocity += dir * m_MoveSpeed * dt;
+		m_Velocity += targetDir * m_MoveSpeed * dt;
 	}
 
-	m_Velocity.x = math_helper::clamp(m_Velocity.x, -MAX_MOVE_SPEED, MAX_MOVE_SPEED);
-	m_Velocity.y = math_helper::clamp(m_Velocity.y, -MAX_MOVE_SPEED, MAX_MOVE_SPEED);
+	//速度制限
+	float speed = m_Velocity.LengthSquared();
+	if (speed > MAX_MOVE_SPEED * MAX_MOVE_SPEED)
+	{
+		m_Velocity.Normalize();
+		m_Velocity *= MAX_MOVE_SPEED;
+	}
 
 	//座標更新
 	m_Position += m_Velocity * dt;
