@@ -38,14 +38,14 @@ void Player::Finalize()
 
 void Player::Update(float dt)
 {
-	if (m_State) m_State->Update(*this);
-	if (m_NextState) SetState();
-
 	//ジャンプキー
 	m_OldJumpKey = m_JumpKey;
 	m_JumpKey = (CheckHitKey(KEY_INPUT_SPACE)) ? true : false;
 	m_JumpTrigger = m_JumpKey && !m_OldJumpKey;
 	m_JumpRelease = !m_JumpKey && m_OldJumpKey;
+
+	if (m_State) m_State->Update(*this);
+	if (m_NextState) SetState();
 
 	//重力
 	const float gravity = (m_Velocity.y < GRAVITY_THRESHOLD_SPEED) ? JUMP_GRAVITY : FALL_GRAVITY;
@@ -152,4 +152,24 @@ void Player::Died()
 bool Player::CheckGround()
 {
 	return false;
+}
+
+void Player::Shot(const Vector2& position)
+{
+	bool canShot = m_GunBoots->CreateBullet(position);
+
+	if (m_Velocity.y > 0.0f)
+	{
+		if (canShot)
+		{
+			//反動
+			m_Velocity.y = 0.0f;
+		}
+		else
+		{
+			//小反動
+			m_Velocity.y *= EMPTY_RECOIL_DAMPING;
+			m_CanAutoShot = false;
+		}
+	}
 }

@@ -7,12 +7,12 @@ void Bullet::Initialize()
 {
 	GameObject::Initialize();
 	m_Layer = Layer::Bullet;
-	m_Velocity = { 0.0f,0.0f };
+	m_Velocity = { 0.0f,BULLET_SPEED };
 	m_Life = 0.0f;
 	m_Damage = 0;
 
 	m_Position = { 200.0f,200.0f };
-	m_Scale = { 20.0f,20.0f };
+	m_Scale = { 15.0f,15.0f };
 	m_IsActive = true;
 }
 
@@ -23,18 +23,24 @@ void Bullet::Finalize()
 
 void Bullet::Update(float dt)
 {
-	m_Velocity.y = BULLET_SPEED;
+	if (!m_IsActive) return;
+
+	//ë¨ìxå∏êä
+	m_Velocity.y *= AIR_DRAG;
 
 	//ç¿ïWçXêV
 	m_Position += m_Velocity * dt;
 
-	//ï‘ãpó\ñÒ
+	//ï‘ãpó\ñÒ(ë¨ìxÇ™è¨Ç≥Ç¢Ç‡ÇµÇ≠ÇÕâÊñ äO)
+	if(m_Velocity.IsNearlyZero(MIN_SPEED)) m_IsActive = false;
 	if (m_Position.y < STAGE_TOP) m_IsActive = false;
 	if (m_Position.y > STAGE_BOTTOM) m_IsActive = false;
 }
 
 void Bullet::Draw()
 {
+	if (!m_IsActive) return;
+
 	int x1, y1;
 	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
 	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));

@@ -22,6 +22,7 @@ private:
 	static constexpr float FALL_GRAVITY = 3500.0f;
 
 	static constexpr float AIR_DRAG = 0.9f;
+	static constexpr float EMPTY_RECOIL_DAMPING = 0.3f;
 
 	bool m_IsGround = false;
 	float m_DirectionX = 0.0f;
@@ -64,7 +65,7 @@ public:
 	void SetDirectionX(float dir = 0.0f) { m_DirectionX = dir; }
 	void AirDrag() { m_Velocity.x *= AIR_DRAG; }
 	void StopEnemy(class Enemy);
-	void Shoot();
+	void Shot(const Vector2& position);
 
 	bool GetJumpTrigger() { return m_JumpTrigger; }
 	bool GetJumpRelease() { return m_JumpRelease; }
@@ -72,4 +73,6 @@ public:
 	void SetCanAutoShot(bool can) { m_CanAutoShot = can; }
 	bool GetCanAutoShot() { return m_CanAutoShot; }
 
+	const GunBoots* GetGunBoots() const { return m_GunBoots.get(); }
+	void Reload() { m_GunBoots->Reload(); }
 };

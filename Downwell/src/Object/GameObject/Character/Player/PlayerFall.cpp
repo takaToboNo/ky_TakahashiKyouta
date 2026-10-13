@@ -47,10 +47,10 @@ void PlayerFall::Update(Player& player)
 	if (player.IsGround())
 	{
 		player.RequestState(std::make_unique<PlayerMove>());
+		player.Reload();
 	}
 }
 
 void PlayerFall::Exit(Player& player)
 {
-	player.SetVelocity({ player.GetVelocity().x, 0.0f });
 }

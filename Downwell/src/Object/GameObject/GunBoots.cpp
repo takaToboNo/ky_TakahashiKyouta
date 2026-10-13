@@ -6,15 +6,15 @@
 void GunBoots::Initialize()
 {
 	Object::Initialize();
-	m_Position = { 200.0f,400.0f };
-	m_Scale = { 25.0f,20.0f };
-	m_Color = YELLOW;
 
-	for (auto& bullet : m_pBullets)
+	m_Ammo = MAX_AMMO;
+
+	m_BulletPool.clear();
+	m_BulletPool.reserve(MAX_POOL_SIZE);
+	for (int i = 0; i < MAX_POOL_SIZE; i++)
 	{
-		bullet->Initialize();
+		m_BulletPool.push_back(std::make_unique<Bullet>());
 	}
-	
 }
 
 void GunBoots::Finalize()
@@ -46,14 +46,6 @@ void GunBoots::Update(float dt)
 			++it;
 		}
 	}
-
-	//弾発射
-	if (CheckHitKey(KEY_INPUT_B))
-	{
-		auto bullet = Acquire();
-		bullet->Initialize();
-		m_pBullets.push_back(std::move(bullet));
-	}
 }
 
 void GunBoots::Draw()
@@ -63,14 +55,11 @@ void GunBoots::Draw()
 		bullet->Draw();
 	}
 
-	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
-	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
-
-	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+#ifdef _DEBUG
+	//デバッグ表示
+	DrawFormatString(350, 10, GetColor(WHITE.r, WHITE.g, WHITE.b), "BulletPool : %d/%d", static_cast<int>(m_BulletPool.size()), MAX_POOL_SIZE);
+	DrawFormatString(350, 30, GetColor(WHITE.r, WHITE.g, WHITE.b), "Ammo : %d/%d", m_Ammo, MAX_AMMO);
+#endif
 }
 
 void GunBoots::Destroy()
@@ -78,7 +67,14 @@ void GunBoots::Destroy()
 	Object::Destroy();
 }
 
-bool GunBoots::CreateBullet()
+bool GunBoots::CreateBullet(const Vector2& position)
 {
-	return false;
+	auto bullet = Acquire();
+	if (!bullet) return false;
+
+	bullet->Initialize();
+	bullet->SetPosition(position);
+	m_pBullets.push_back(std::move(bullet));
+
+	return true;
 }

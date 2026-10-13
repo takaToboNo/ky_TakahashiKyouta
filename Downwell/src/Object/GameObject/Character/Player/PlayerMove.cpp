@@ -1,6 +1,7 @@
 #include "PlayerMove.h"
 #include "PlayerIdle.h"
 #include "PlayerJump.h"
+#include "PlayerFall.h"
 #include "Player.h"
 #include "DxLib.h"
 
@@ -29,9 +30,15 @@ void PlayerMove::Update(Player& player)
 	}
 
 	//ƒWƒƒƒ“ƒv
-	if (CheckHitKey(KEY_INPUT_SPACE) && player.IsGround() && player.GetJumpTrigger())
+	if (player.GetJumpTrigger())
 	{
 		player.RequestState(std::make_unique<PlayerJump>());
+	}
+
+	//—Ž‰º
+	if (!player.IsGround())
+	{
+		player.RequestState(std::make_unique<PlayerFall>());
 	}
 }
 

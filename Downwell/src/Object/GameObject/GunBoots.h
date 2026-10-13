@@ -1,12 +1,13 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include "GameObject.h"
+#include "Object.h"
 #include "Bullet.h"
 
 class GunBoots : public Object
 {
 private:
+	static constexpr int MAX_POOL_SIZE = 20;
 	static constexpr int MAX_AMMO = 10;
 	int m_Ammo = 0;
 	int m_ShotInterval = 0;
@@ -14,22 +15,20 @@ private:
 	std::vector<std::unique_ptr<Bullet>> m_BulletPool;
 	std::vector<std::unique_ptr<Bullet>> m_pBullets;
 
-	Vector2 m_Scale = { 1.0f,1.0f };
-	Color m_Color = WHITE;
-
 public:
 	GunBoots() = default;
 
 	std::unique_ptr<Bullet> Acquire()
 	{
-		if (m_BulletPool.empty())
+		if (m_BulletPool.empty() || m_Ammo <= 0)
 		{
-			return std::make_unique<Bullet>();
+			return nullptr;
 		}
 		else
 		{
 			auto bullet = std::move(m_BulletPool.back());
 			m_BulletPool.pop_back();
+			m_Ammo--;
 			return bullet;
 		}
 	}
@@ -46,7 +45,7 @@ public:
 	void Draw() override;
 	void Destroy() override;
 
-	bool CreateBullet();
+	bool CreateBullet(const Vector2& position);
 	void Reload() { m_Ammo = MAX_AMMO; }
 	int GetAmmo() { return m_Ammo; }
 };

@@ -6,7 +6,7 @@ class Player;
 class PlayerFall : public IPlayerState
 {
 private:
-	int m_ShotInterval = 5;//‰¼
+	int m_ShotInterval = 6;//‰¼
 
 public:
 	void Enter(Player& player) override;
