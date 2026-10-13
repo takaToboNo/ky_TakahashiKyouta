@@ -30,6 +30,6 @@ public:
 	void Draw();
 
 	bool ConsumeFixedStep();
-	float GetDeltaTime() const { return m_DeltaTime; }
+	float GetFixedDeltaTime() const { return FIXED_DELTA_TIME; }
 
 };

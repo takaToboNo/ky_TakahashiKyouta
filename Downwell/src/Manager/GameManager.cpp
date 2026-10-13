@@ -40,7 +40,7 @@ int GameManager::Run()
 		while (m_Time.ConsumeFixedStep())
 		{
 			m_Time.Update();
-			m_SceneManager.Update(m_Time.GetDeltaTime());
+			m_SceneManager.Update(m_Time.GetFixedDeltaTime());
 		}
 
 		int result;
