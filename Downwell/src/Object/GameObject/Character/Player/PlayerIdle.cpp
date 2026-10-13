@@ -3,7 +3,7 @@
 #include "PlayerJump.h"
 #include "PlayerFall.h"
 #include "Player.h"
-#include "DxLib.h"
+#include "Input.h"
 
 void PlayerIdle::Enter(Player& player)
 {
@@ -17,14 +17,14 @@ void PlayerIdle::Update(Player& player)
 	player.SetColor(GREEN);
 
 	//ˆÚ“®
-	bool isMove = ((CheckHitKey(KEY_INPUT_A)) ^ (CheckHitKey(KEY_INPUT_D)));
+	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));
 	if (isMove)
 	{
 		player.RequestState(std::make_unique<PlayerMove>());
 	}
 
 	//ƒWƒƒƒ“ƒv
-	if (player.GetJumpTrigger())
+	if (Input::IsTrigger(Action::Action))
 	{
 		player.RequestState(std::make_unique<PlayerJump>());
 	}

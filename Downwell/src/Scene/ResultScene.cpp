@@ -1,7 +1,7 @@
 #define NOMINMAX
 #include <algorithm>
 #include "ResultScene.h"
-#include "DxLib.h"
+#include "Input.h"
 #include "GameHelper.h"
 
 void ResultScene::Initialize()
@@ -20,9 +20,7 @@ void ResultScene::Update(float dt)
 {
 	m_GameObjectManager.Update(dt);
 
-	m_KeyInterval--;
-	m_KeyInterval = std::max(m_KeyInterval, 0);
-	if (CheckHitKey(KEY_INPUT_RETURN) && m_KeyInterval == 0)
+	if (Input::IsTrigger(Action::Decide))
 	{
 		m_RequestScene = SceneType::Title;
 	}

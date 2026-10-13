@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <memory>
 #include "GameScene.h"
-#include "DxLib.h"
+#include "Input.h"
 
 #include "Player.h"
 #include "WalkerEnemy.h"
@@ -30,9 +30,7 @@ void GameScene::Update(float dt)
 {
 	m_GameObjectManager.Update(dt);
 
-	m_KeyInterval--;
-	m_KeyInterval = std::max(m_KeyInterval, 0);
-	if (CheckHitKey(KEY_INPUT_RETURN) && m_KeyInterval == 0)
+	if (Input::IsTrigger(Action::Decide))
 	{
 		m_RequestScene = SceneType::Result;
 	}

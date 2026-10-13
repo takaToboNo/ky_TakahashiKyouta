@@ -1,7 +1,8 @@
+#define NOMINMAX
 #include "Player.h"
+#include "input.h"
 
 //仮
-#define NOMINMAX
 #include "DxLib.h"
 #include <algorithm>
 #include "MathHelper.h"
@@ -23,10 +24,6 @@ void Player::Initialize()
 
 	m_GunBoots->Initialize();
 
-	m_JumpKey = false;
-	m_OldJumpKey = false;
-	m_JumpTrigger = false;
-	m_JumpRelease = false;
 	m_CanAutoShot = false;
 }
 
@@ -38,12 +35,6 @@ void Player::Finalize()
 
 void Player::Update(float dt)
 {
-	//ジャンプキー
-	m_OldJumpKey = m_JumpKey;
-	m_JumpKey = (CheckHitKey(KEY_INPUT_SPACE)) ? true : false;
-	m_JumpTrigger = m_JumpKey && !m_OldJumpKey;
-	m_JumpRelease = !m_JumpKey && m_OldJumpKey;
-
 	if (m_State) m_State->Update(*this);
 	if (m_NextState) SetState();
 
@@ -54,13 +45,12 @@ void Player::Update(float dt)
 	m_DebugDrawGravity = gravity;
 #endif
 
-	//jumpキーを離したとき
-	if (m_JumpRelease && m_Velocity.y < 0.0f)
+	bool isReleaseJump = Input::IsRelease(Action::Action);
+	if (isReleaseJump && m_Velocity.y < 0.0f)
 	{
 		m_Velocity *= JUMP_CUT_RESISTANCE;
 	}
-
-	if (m_JumpRelease) m_CanAutoShot = true;
+	if (isReleaseJump) m_CanAutoShot = true;
 
 	//移動方向
 	m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;

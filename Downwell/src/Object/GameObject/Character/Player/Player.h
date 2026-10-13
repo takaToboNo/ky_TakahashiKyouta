@@ -27,10 +27,6 @@ private:
 	bool m_IsGround = false;
 	float m_DirectionX = 0.0f;
 
-	bool m_JumpKey = false;
-	bool m_OldJumpKey = false;
-	bool m_JumpTrigger = false;
-	bool m_JumpRelease = false;
 	bool m_CanAutoShot = false;
 
 #ifdef _DEBUG
@@ -67,9 +63,6 @@ public:
 	void StopEnemy(class Enemy);
 	void Shot(const Vector2& position);
 
-	bool GetJumpTrigger() { return m_JumpTrigger; }
-	bool GetJumpRelease() { return m_JumpRelease; }
-	
 	void SetCanAutoShot(bool can) { m_CanAutoShot = can; }
 	bool GetCanAutoShot() { return m_CanAutoShot; }
 

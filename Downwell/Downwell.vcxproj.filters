@@ -31,6 +31,9 @@
     <Filter Include="src\Time">
       <UniqueIdentifier>{a4306079-b8e5-4f1d-89a1-6622362359cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Input">
+      <UniqueIdentifier>{a02e0b2f-4552-4436-a27c-853154a4ca39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -120,6 +123,9 @@
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerShot.h">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClInclude>
+    <ClInclude Include="src\Input\Input.h">
+      <Filter>src\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -190,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Player\PlayerShot.cpp">
       <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>src\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #include "GameManager.h"
 #include "GameHelper.h"
-#include "DxLib.h"
+#include "Input.h"
 
 bool GameManager::Initialize()
 {
@@ -33,12 +33,13 @@ int GameManager::Run()
 {
 	if (!Initialize()) return -1;
 
-	while (ProcessMessage() == 0 && !CheckHitKey(KEY_INPUT_ESCAPE))
+	while (ProcessMessage() == 0 && !Input::IsTrigger(Action::End))
 	{
 		m_Time.Tick();
 
 		while (m_Time.ConsumeFixedStep())
 		{
+			Input::Update();
 			m_Time.Update();
 			m_SceneManager.Update(m_Time.GetFixedDeltaTime());
 		}

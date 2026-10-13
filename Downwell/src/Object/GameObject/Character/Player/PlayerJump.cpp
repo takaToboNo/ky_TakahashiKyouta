@@ -3,7 +3,7 @@
 #include "PlayerShot.h"
 #include "PlayerFall.h"
 #include "Player.h"
-#include "DxLib.h"
+#include "Input.h"
 
 void PlayerJump::Enter(Player& player)
 {
@@ -21,22 +21,22 @@ void PlayerJump::Update(Player& player)
 	player.AirDrag();
 
 	//ˆÚ“®
-	bool isMove = ((CheckHitKey(KEY_INPUT_A)) ^ (CheckHitKey(KEY_INPUT_D)));
+	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));
 	if (!isMove)
 	{
 		player.SetDirectionX();
 	}
-	else if (CheckHitKey(KEY_INPUT_A))
+	else if (Input::IsPress(Action::Left))
 	{
 		player.SetDirectionX(-1.0f);
 	}
-	else if (CheckHitKey(KEY_INPUT_D))
+	else if (Input::IsPress(Action::Right))
 	{
 		player.SetDirectionX(1.0f);
 	}
 
 	//ƒVƒ‡ƒbƒg
-	if (player.GetJumpTrigger())
+	if (Input::IsTrigger(Action::Action))
 	{
 		player.RequestState(std::make_unique<PlayerShot>());
 	}
