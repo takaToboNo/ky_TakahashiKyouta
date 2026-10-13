@@ -21,7 +21,6 @@ void GameScene::Initialize()
 
 void GameScene::Finalize()
 {
-	m_ObjectManager.Finalize();
 	m_GameObjectManager.Finalize();
 
 	Scene::Finalize();
@@ -29,7 +28,6 @@ void GameScene::Finalize()
 
 void GameScene::Update(float dt)
 {
-	m_ObjectManager.Update(dt);
 	m_GameObjectManager.Update(dt);
 
 	m_KeyInterval--;
@@ -42,6 +40,5 @@ void GameScene::Update(float dt)
 
 void GameScene::Draw()
 {
-	m_ObjectManager.Draw();
 	m_GameObjectManager.Draw();
 }

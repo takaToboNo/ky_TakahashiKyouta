@@ -11,7 +11,6 @@ void ResultScene::Initialize()
 
 void ResultScene::Finalize()
 {
-	m_ObjectManager.Finalize();
 	m_GameObjectManager.Finalize();
 
 	Scene::Finalize();
@@ -19,7 +18,6 @@ void ResultScene::Finalize()
 
 void ResultScene::Update(float dt)
 {
-	m_ObjectManager.Update(dt);
 	m_GameObjectManager.Update(dt);
 
 	m_KeyInterval--;
@@ -32,7 +30,6 @@ void ResultScene::Update(float dt)
 
 void ResultScene::Draw()
 {
-	m_ObjectManager.Draw();
 	m_GameObjectManager.Draw();
 
 	int x = static_cast<int>(WINDOW_WIDTH * 0.5f);
