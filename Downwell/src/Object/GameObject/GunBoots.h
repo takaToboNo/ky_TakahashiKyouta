@@ -20,7 +20,7 @@ public:
 
 	std::unique_ptr<Bullet> Acquire()
 	{
-		if (m_BulletPool.empty() || m_Ammo <= 0)
+		if (m_BulletPool.empty())
 		{
 			return nullptr;
 		}
@@ -28,7 +28,6 @@ public:
 		{
 			auto bullet = std::move(m_BulletPool.back());
 			m_BulletPool.pop_back();
-			m_Ammo--;
 			return bullet;
 		}
 	}

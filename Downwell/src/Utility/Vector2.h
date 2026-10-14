@@ -19,9 +19,10 @@ public:
 
 	void Normalize()
 	{
-		if (Length() == 0.0f) return;
-		x /= Length();
-		y /= Length();
+		const float len = Length();
+		if (len == 0.0f) return;
+		x /= len;
+		y /= len;
 	}
 
 	float Length() const

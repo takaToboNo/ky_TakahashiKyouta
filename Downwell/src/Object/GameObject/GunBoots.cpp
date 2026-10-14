@@ -69,12 +69,16 @@ void GunBoots::Destroy()
 
 bool GunBoots::CreateBullet(const Vector2& position)
 {
+	if (m_Ammo <= 0) return false;
+
 	auto bullet = Acquire();
 	if (!bullet) return false;
 
 	bullet->Initialize();
 	bullet->SetPosition(position);
 	m_pBullets.push_back(std::move(bullet));
+
+	m_Ammo--;
 
 	return true;
 }

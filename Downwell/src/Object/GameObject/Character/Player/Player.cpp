@@ -146,7 +146,8 @@ bool Player::CheckGround()
 
 void Player::Shot(const Vector2& position)
 {
-	bool canShot = m_GunBoots->CreateBullet(position);
+	Vector2 offset = Vector2(0.0f, m_Scale.y * 0.5f);
+	bool canShot = m_GunBoots->CreateBullet(position + offset);
 
 	if (m_Velocity.y > 0.0f)
 	{
