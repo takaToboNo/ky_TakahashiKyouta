@@ -4,6 +4,8 @@
 #include "Object.h"
 #include "Bullet.h"
 
+#include "FloatingEnemy.h"
+
 class GunBoots : public Object
 {
 private:
@@ -14,6 +16,9 @@ private:
 
 	std::vector<std::unique_ptr<Bullet>> m_BulletPool;
 	std::vector<std::unique_ptr<Bullet>> m_pBullets;
+
+	//“–‚½‚è”»’è—p
+	FloatingEnemy* m_FloatingEnemy = nullptr;
 
 public:
 	GunBoots() = default;
@@ -47,4 +52,7 @@ public:
 	bool CreateBullet(const Vector2& position);
 	void Reload() { m_Ammo = MAX_AMMO; }
 	int GetAmmo() { return m_Ammo; }
+
+	//“–‚½‚è”»’è—p
+	void SetFloatingEnemy(FloatingEnemy* floatingEnemy) { m_FloatingEnemy = floatingEnemy; }
 };

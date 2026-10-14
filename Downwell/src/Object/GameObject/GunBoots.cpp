@@ -74,6 +74,9 @@ bool GunBoots::CreateBullet(const Vector2& position)
 	auto bullet = Acquire();
 	if (!bullet) return false;
 
+	//“–‚½‚è”»’è—p
+	bullet->SetFloatingEnemy(m_FloatingEnemy);
+
 	bullet->Initialize();
 	bullet->SetPosition(position);
 	m_pBullets.push_back(std::move(bullet));

@@ -33,6 +33,16 @@ void Bullet::Update(float dt)
 	if(m_Velocity.IsNearlyZero(MIN_SPEED)) m_IsActive = false;
 	if (m_Position.y < STAGE_TOP) m_IsActive = false;
 	if (m_Position.y > STAGE_BOTTOM) m_IsActive = false;
+
+	//“–‚½‚è”»’è
+	if (CheckHit())
+	{
+		Vector2 dir = m_FloatingEnemy->GetPosition() - m_Position;
+		dir.Normalize();
+
+		m_IsActive = false;
+		m_FloatingEnemy->SetVelocity(dir * KNOCK_BACK);
+	}
 }
 
 void Bullet::Draw()
@@ -50,4 +60,24 @@ void Bullet::Draw()
 void Bullet::Destroy()
 {
 	GameObject::Destroy();
+}
+
+bool Bullet::CheckHit()
+{
+	if (!m_FloatingEnemy) return false;
+
+	//enemy
+	float aRight = m_FloatingEnemy->GetPosition().x + m_FloatingEnemy->GetScale().x * 0.5f;
+	float aLeft = m_FloatingEnemy->GetPosition().x - m_FloatingEnemy->GetScale().x * 0.5f;
+	float aTop = m_FloatingEnemy->GetPosition().y - m_FloatingEnemy->GetScale().y * 0.5f;
+	float aBottom = m_FloatingEnemy->GetPosition().y + m_FloatingEnemy->GetScale().y * 0.5f;
+	//bullet
+	float bRight = m_Position.x + m_Scale.x * 0.5f;
+	float bLeft = m_Position.x - m_Scale.x * 0.5f;
+	float bTop = m_Position.y - m_Scale.y * 0.5f;
+	float bBottom = m_Position.y + m_Scale.y * 0.5f;
+	
+	if (aRight < bLeft || aLeft > bRight || aBottom < bTop || aTop > bBottom) return false;
+
+	return true;
 }

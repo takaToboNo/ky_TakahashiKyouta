@@ -66,6 +66,6 @@ public:
 	void SetCanAutoShot(bool can) { m_CanAutoShot = can; }
 	bool GetCanAutoShot() { return m_CanAutoShot; }
 
-	const GunBoots* GetGunBoots() const { return m_GunBoots.get(); }
+	GunBoots* GetGunBoots() { return m_GunBoots.get(); }
 	void Reload() { m_GunBoots->Reload(); }
 };

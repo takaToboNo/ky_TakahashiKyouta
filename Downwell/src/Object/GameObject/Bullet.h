@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+#include "FloatingEnemy.h"
+
 class Bullet : public GameObject
 {
 private:
@@ -12,6 +14,10 @@ private:
 	float m_Life = 0.0f;
 	int m_Damage = 0;
 
+	//“–‚½‚è”»’è—p
+	static constexpr float KNOCK_BACK = 200.0f;
+	FloatingEnemy* m_FloatingEnemy = nullptr;
+
 public:
 	Bullet() = default;
 
@@ -22,4 +28,8 @@ public:
 	void Destroy() override;
 
 	int GetDamage() { return m_Damage; }
+
+	//“–‚½‚è”»’è—p
+	void SetFloatingEnemy(FloatingEnemy* floatingEnemy) { m_FloatingEnemy = floatingEnemy; }
+	bool CheckHit();
 };
