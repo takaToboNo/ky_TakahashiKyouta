@@ -26,7 +26,7 @@ private:
 	static std::array<std::vector<int>, static_cast<int>(Action::Max)> m_KeyBindings;
 
 public:
-	Input() = default;
+	Input() = delete;
 
 	static void Update();
 
