@@ -23,8 +23,6 @@ void Bullet::Finalize()
 
 void Bullet::Update(float dt)
 {
-	if (!m_IsActive) return;
-
 	//ë¨ìxå∏êä
 	m_Velocity.y *= AIR_DRAG;
 
@@ -39,8 +37,6 @@ void Bullet::Update(float dt)
 
 void Bullet::Draw()
 {
-	if (!m_IsActive) return;
-
 	int x1, y1;
 	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
 	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
