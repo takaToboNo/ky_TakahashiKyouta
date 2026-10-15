@@ -39,6 +39,8 @@ void GameObjectManager::CheckHitAll(const std::vector<std::unique_ptr<GameObject
 	{
 		for (size_t j = i + 1; j < objects.size(); j++)
 		{
+			if (!objects[i] || !objects[j]) continue;
+
 			if (!objects[i]->IsActive() || !objects[j]->IsActive()) continue;
 
 			Collider* colliderA = objects[i]->GetCollider();

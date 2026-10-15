@@ -75,12 +75,11 @@ void FloatingEnemy::Destroy()
 
 void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	if (!other) return;
-
 	if (other->GetLayer() == Layer::Bullet)
 	{
 		Bullet* bullet = static_cast<Bullet*>(other);
-		Damage(bullet->GetDamage());
+		if (bullet) Damage(bullet->GetDamage());
+
 		m_Velocity = hitInfo.diff * KNOCK_BACK_FORCE * -1.0f;
 	}
 
@@ -93,7 +92,7 @@ void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		else
 		{
 			Player* player = static_cast<Player*>(other);
-			player->Damage(1);
+			if(player) player->Damage(1);
 		}
 	}
 }

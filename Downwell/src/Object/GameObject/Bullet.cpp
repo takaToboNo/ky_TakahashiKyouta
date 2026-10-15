@@ -54,8 +54,6 @@ void Bullet::Destroy()
 
 void Bullet::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	if (!other) return;
-
 	if (other->GetLayer() == Layer::Enemy)
 	{
 		m_IsActive = false;

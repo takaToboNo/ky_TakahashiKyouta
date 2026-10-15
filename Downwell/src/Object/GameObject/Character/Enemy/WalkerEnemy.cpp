@@ -65,18 +65,16 @@ void WalkerEnemy::Destroy()
 
 void WalkerEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	if (!other) return;
-
 	if (other->GetLayer() == Layer::Bullet)
 	{
 		Bullet* bullet = static_cast<Bullet*>(other);
-		Damage(bullet->GetDamage());
+		if (bullet) Damage(bullet->GetDamage());
 	}
 
 	if (other->GetLayer() == Layer::Player)
 	{
 		Player* player = static_cast<Player*>(other);
-		player->Damage(1);
+		if (player) player->Damage(1);
 	}
 }
 
