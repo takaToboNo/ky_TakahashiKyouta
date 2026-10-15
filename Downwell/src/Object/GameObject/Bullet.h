@@ -1,8 +1,6 @@
 #pragma once
 #include "GameObject.h"
 
-#include "FloatingEnemy.h"
-
 class Bullet : public GameObject
 {
 private:
@@ -12,11 +10,7 @@ private:
 
 	Vector2 m_Velocity = { 0.0f,0.0f };
 	float m_Life = 0.0f;
-	int m_Damage = 0;
-
-	//“–‚½‚è”»’è—p
-	static constexpr float KNOCK_BACK = 200.0f;
-	FloatingEnemy* m_FloatingEnemy = nullptr;
+	int m_Damage = 1;
 
 public:
 	Bullet() = default;
@@ -27,9 +21,7 @@ public:
 	void Draw() override;
 	void Destroy() override;
 
-	int GetDamage() { return m_Damage; }
+	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;
 
-	//“–‚½‚è”»’è—p
-	void SetFloatingEnemy(FloatingEnemy* floatingEnemy) { m_FloatingEnemy = floatingEnemy; }
-	bool CheckHit();
+	int GetDamage() { return m_Damage; }
 };

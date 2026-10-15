@@ -16,10 +16,21 @@ void GameScene::Initialize()
 	
 	auto player = m_GameObjectManager.AddGameObject(std::make_unique<Player>());
 	auto floatingEnemy = m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
-	floatingEnemy->SetPlayer(player);
 
-	//“–‚½‚è”»’è—p
-	player->GetGunBoots()->SetFloatingEnemy(floatingEnemy);
+	if (player)
+	{
+		if (floatingEnemy)
+		{
+			floatingEnemy->SetPlayer(player);
+		}
+
+		GunBoots* gunBoots = player->GetGunBoots();
+		if (gunBoots)
+		{
+			gunBoots->SetOwner(player);
+			gunBoots->SetupBullet(m_GameObjectManager);
+		}
+	}
 }
 
 void GameScene::Finalize()

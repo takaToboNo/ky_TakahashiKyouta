@@ -7,6 +7,7 @@ class FloatingEnemy : public Enemy
 {
 private:
 	static constexpr float MAX_MOVE_SPEED = 100.0f;
+	static constexpr float KNOCK_BACK_FORCE = 200.0f;
 	const Player* m_pPlayer = nullptr;
 
 public:
@@ -18,8 +19,10 @@ public:
 	void Draw() override;
 	void Destroy() override;
 
+	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;
+
 	void Move(Vector2& direction) override;
-	void Damage(int damage) override;
+	void Damage(int damage) override { m_Hp -= damage; }
 	void Died() override;
 	bool CheckGround() override;
 

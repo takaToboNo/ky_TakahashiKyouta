@@ -34,6 +34,9 @@
     <Filter Include="src\Input">
       <UniqueIdentifier>{a02e0b2f-4552-4436-a27c-853154a4ca39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Collision">
+      <UniqueIdentifier>{d2f1136d-cae2-42fa-9c8b-362cc918d181}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -126,6 +129,12 @@
     <ClInclude Include="src\Input\Input.h">
       <Filter>src\Input</Filter>
     </ClInclude>
+    <ClInclude Include="src\Collision\Collider.h">
+      <Filter>src\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collision\Shape.h">
+      <Filter>src\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -199,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="src\Input\Input.cpp">
       <Filter>src\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collision\Collider.cpp">
+      <Filter>src\Collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

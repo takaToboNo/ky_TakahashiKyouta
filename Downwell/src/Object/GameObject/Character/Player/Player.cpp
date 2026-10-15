@@ -16,6 +16,7 @@ void Player::Initialize()
 	m_Scale = { 25.0f,25.0f };
 	m_IsGround = false;
 	m_DirectionX = 0.0f;
+	m_Hp = 4;
 
 	m_State = std::make_unique<PlayerIdle>();
 	m_NextState = std::make_unique<PlayerIdle>();
@@ -35,6 +36,8 @@ void Player::Finalize()
 
 void Player::Update(float dt)
 {
+	Character::Update(dt);
+
 	if (m_State) m_State->Update(*this);
 	if (m_NextState) SetState();
 
@@ -79,6 +82,8 @@ void Player::Update(float dt)
 	m_Position.x = std::min(m_Position.x, STAGE_RIGHT);
 
 	m_GunBoots->Update(dt);
+
+	m_IsHit = false;
 }
 
 void Player::Draw()
@@ -102,6 +107,8 @@ void Player::Draw()
 	DrawFormatString(10, 110, GetColor(WHITE.r, WHITE.g, WHITE.b), "State : %s", m_State->GetStateName());
 	DrawFormatString(10, 130, GetColor(WHITE.r, WHITE.g, WHITE.b), "Gravity : %.2f", m_DebugDrawGravity);
 	DrawFormatString(10, 150, GetColor(WHITE.r, WHITE.g, WHITE.b), "canAutoShot : %s", m_CanAutoShot ? "true" : "false");
+	DrawFormatString(10, 170, GetColor(WHITE.r, WHITE.g, WHITE.b), "isHit : %s", m_IsHit ? "true" : "false");
+	DrawFormatString(10, 190, GetColor(GREEN.r, GREEN.g, GREEN.b), "PlayerHP : %d", m_Hp);
 	m_GunBoots->Draw();
 #endif
 }
@@ -109,6 +116,14 @@ void Player::Draw()
 void Player::Destroy()
 {
 	Character::Destroy();
+}
+
+void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
+{
+	if (other->GetLayer() == Layer::Enemy)
+	{
+		m_Velocity = hitInfo.normal * KNOCK_BACK_FORCE * -1.0f;
+	}
 }
 
 void Player::RequestState(std::unique_ptr<IPlayerState> next)
@@ -132,7 +147,7 @@ void Player::Move(Vector2& direction)
 
 void Player::Damage(int damage)
 {
-	(void)damage;
+	m_Hp -= damage;
 }
 
 void Player::Died()

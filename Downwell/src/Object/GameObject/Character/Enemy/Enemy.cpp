@@ -11,6 +11,11 @@ void Enemy::Finalize()
 	Character::Finalize();
 }
 
+void Enemy::Update(float dt)
+{
+	Character::Update(dt);
+}
+
 void Enemy::Destroy()
 {
 	Character::Destroy();

@@ -4,7 +4,8 @@
 #include "Object.h"
 #include "Bullet.h"
 
-#include "FloatingEnemy.h"
+class GameObjectManager;
+class Player;
 
 class GunBoots : public Object
 {
@@ -14,34 +15,14 @@ private:
 	int m_Ammo = 0;
 	int m_ShotInterval = 0;
 
-	std::vector<std::unique_ptr<Bullet>> m_BulletPool;
-	std::vector<std::unique_ptr<Bullet>> m_pBullets;
+	Player* m_Owner;
 
-	//“–‚½‚è”»’è—p
-	FloatingEnemy* m_FloatingEnemy = nullptr;
+	std::vector<Bullet*> m_BulletPool;
 
 public:
 	GunBoots() = default;
 
-	std::unique_ptr<Bullet> Acquire()
-	{
-		if (m_BulletPool.empty())
-		{
-			return nullptr;
-		}
-		else
-		{
-			auto bullet = std::move(m_BulletPool.back());
-			m_BulletPool.pop_back();
-			return bullet;
-		}
-	}
-
-	void Release(std::unique_ptr<Bullet> bullet)
-	{
-		m_BulletPool.push_back(std::move(bullet));
-	}
-
+	void SetupBullet(GameObjectManager& manager);
 
 	void Initialize() override;
 	void Finalize() override;
@@ -52,7 +33,5 @@ public:
 	bool CreateBullet(const Vector2& position);
 	void Reload() { m_Ammo = MAX_AMMO; }
 	int GetAmmo() { return m_Ammo; }
-
-	//“–‚½‚è”»’è—p
-	void SetFloatingEnemy(FloatingEnemy* floatingEnemy) { m_FloatingEnemy = floatingEnemy; }
+	void SetOwner(Player* owner) { m_Owner = owner; }
 };

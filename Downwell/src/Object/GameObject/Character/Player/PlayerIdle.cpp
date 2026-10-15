@@ -34,6 +34,9 @@ void PlayerIdle::Update(Player& player)
 	{
 		player.RequestState(std::make_unique<PlayerFall>());
 	}
+
+	//’ïR
+	player.AirDrag();
 }
 
 void PlayerIdle::Exit(Player& player)

@@ -20,6 +20,7 @@ private:
 	static constexpr float GRAVITY_THRESHOLD_SPEED = 200.0f;
 	static constexpr float JUMP_GRAVITY = 2500.0f;
 	static constexpr float FALL_GRAVITY = 3500.0f;
+	static constexpr float KNOCK_BACK_FORCE = 200.0f;
 
 	static constexpr float AIR_DRAG = 0.9f;
 	static constexpr float EMPTY_RECOIL_DAMPING = 0.3f;
@@ -31,6 +32,7 @@ private:
 
 #ifdef _DEBUG
 	float m_DebugDrawGravity = 0.0f;
+	bool m_IsHit = false;
 #endif
 
 public:
@@ -41,6 +43,8 @@ public:
 	void Update(float dt) override;
 	void Draw() override;
 	void Destroy() override;
+
+	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;
 
 	void RequestState(std::unique_ptr<IPlayerState> next);
 	void SetState();

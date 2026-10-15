@@ -10,4 +10,5 @@ enum class Tag
 	GunBoots,
 	Camera,
 	UI,
+	Max
 };

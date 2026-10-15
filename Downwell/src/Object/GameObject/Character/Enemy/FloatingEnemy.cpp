@@ -11,6 +11,7 @@ void FloatingEnemy::Initialize()
 	m_Position = { 500.0f,300.0f };
 	m_Scale = { 30.0f,30.0f };
 	m_Color = { 200, 0, 200 };
+	m_Hp = 3;
 }
 
 void FloatingEnemy::Finalize()
@@ -20,6 +21,8 @@ void FloatingEnemy::Finalize()
 
 void FloatingEnemy::Update(float dt)
 {
+	Enemy::Update(dt);
+
 	//抵抗
 	m_Velocity *= 0.98f;
 
@@ -41,6 +44,12 @@ void FloatingEnemy::Update(float dt)
 
 	//座標更新
 	m_Position += m_Velocity * dt;
+
+	//プール状態にする
+	if (m_Hp <= 0)
+	{
+		m_IsActive = false;
+	}
 }
 
 void FloatingEnemy::Draw()
@@ -52,7 +61,11 @@ void FloatingEnemy::Draw()
 	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
 
-	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), FALSE);
+
+#ifdef _DEBUG
+	DrawFormatString(10, 700, GetColor(m_Color.r, m_Color.g, m_Color.b), "FloatingEnemyHP : %d", m_Hp);
+#endif
 }
 
 void FloatingEnemy::Destroy()
@@ -60,14 +73,34 @@ void FloatingEnemy::Destroy()
 	Enemy::Destroy();
 }
 
+void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
+{
+	if (!other) return;
+
+	if (other->GetLayer() == Layer::Bullet)
+	{
+		Bullet* bullet = static_cast<Bullet*>(other);
+		Damage(bullet->GetDamage());
+		m_Velocity = hitInfo.diff * KNOCK_BACK_FORCE * -1.0f;
+	}
+
+	if (other->GetLayer() == Layer::Player)
+	{
+		if (GetHitSide(hitInfo) == HitSide::Top)
+		{
+			m_IsActive = false;
+		}
+		else
+		{
+			Player* player = static_cast<Player*>(other);
+			player->Damage(1);
+		}
+	}
+}
+
 void FloatingEnemy::Move(Vector2& direction)
 {
 	(void)direction;
-}
-
-void FloatingEnemy::Damage(int damage)
-{
-	(void)damage;
 }
 
 void FloatingEnemy::Died()

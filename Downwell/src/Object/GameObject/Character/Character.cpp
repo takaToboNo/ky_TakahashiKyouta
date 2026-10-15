@@ -15,6 +15,11 @@ void Character::Finalize()
 	GameObject::Finalize();
 }
 
+void Character::Update(float dt)
+{
+	GameObject::Update(dt);
+}
+
 void Character::Destroy()
 {
 	GameObject::Destroy();

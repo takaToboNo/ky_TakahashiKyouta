@@ -32,4 +32,14 @@ public:
 		return ptr;
 	}
 
+
+	//当たり判定チェック
+	void CheckHitAll(const std::vector<std::unique_ptr<GameObject>>& objects);
+
+	bool CheckHit(const Collider& a, const Collider& b, HitInfo* out);
+	bool CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* out);
+	bool CheckHit(const Rect& rect, const Circle& circle, HitInfo* out);
+	bool CheckHit(const Circle& circle, const Rect& rect, HitInfo* out);
+	bool CheckHit(const Circle& circle1, const Circle& circle2, HitInfo* out);
+
 };
