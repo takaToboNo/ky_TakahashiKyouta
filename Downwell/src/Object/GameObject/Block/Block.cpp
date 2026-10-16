@@ -1,0 +1,23 @@
+#include "Block.h"
+
+void Block::Initialize()
+{
+	GameObject::Initialize();
+	m_Scale = { 30.0f,30.0f };
+	m_Layer = Layer::Block;
+}
+
+void Block::Finalize()
+{
+	GameObject::Finalize();
+}
+
+void Block::Update(float dt)
+{
+	GameObject::Update(dt);
+}
+
+void Block::Destroy()
+{
+	GameObject::Destroy();
+}

@@ -63,25 +63,7 @@ void GameObjectManager::CheckHitAll(const std::vector<std::unique_ptr<GameObject
 
 bool GameObjectManager::CheckHit(const Collider& a, const Collider& b, HitInfo* out)
 {
-	ShapeType typeA = a.GetShapeType();
-	ShapeType typeB = b.GetShapeType();
-
-	if (typeA == ShapeType::Rect && typeB == ShapeType::Rect)
-	{
-		return CheckHit(a.GetWorldRect(), b.GetWorldRect(), out);
-	}
-	if (typeA == ShapeType::Rect && typeB == ShapeType::Circle)
-	{
-		return CheckHit(a.GetWorldRect(), b.GetWorldCircle(), out);
-	}
-	if (typeA == ShapeType::Circle && typeB == ShapeType::Rect)
-	{
-		return CheckHit(a.GetWorldCircle(), b.GetWorldRect(), out);
-	}
-	if (typeA == ShapeType::Circle && typeB == ShapeType::Circle)
-	{
-		return CheckHit(a.GetWorldCircle(), b.GetWorldCircle(), out);
-	}
+	return CheckHit(a.GetWorldRect(), b.GetWorldRect(), out);
 
 	return false;
 }
@@ -100,16 +82,58 @@ bool GameObjectManager::CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* 
 
 	if (rightA < leftB || leftA > rightB || bottomA < topB || topA > bottomB) return false;
 
-	//当たっていたら衝突情報を計算する
 	if (out)
-	{
-		out->diff = rect2.position - rect1.position;
+	{	//当たっていたら衝突情報を計算する
+		float oldRightA = rect1.oldPosition.x + rect1.width * 0.5f;
+		float oldLeftA = rect1.oldPosition.x - rect1.width * 0.5f;
+		float oldBottomA = rect1.oldPosition.y + rect1.height * 0.5f;
+		float oldTopA = rect1.oldPosition.y - rect1.height * 0.5f;
 
-		float ox, oy;//各軸のめり込み
+		float oldRightB = rect2.oldPosition.x + rect2.width * 0.5f;
+		float oldLeftB = rect2.oldPosition.x - rect2.width * 0.5f;
+		float oldBottomB = rect2.oldPosition.y + rect2.height * 0.5f;
+		float oldTopB = rect2.oldPosition.y - rect2.height * 0.5f;
+
+		//前フレームでの軸ごとの離れ状態
+		const float EPSILON = 0.01f;
+		bool wasSeparateX = oldRightA <= oldLeftB + EPSILON || oldLeftA >= oldRightB - EPSILON;
+		bool wasSeparateY = oldBottomA <= oldTopB + EPSILON || oldTopA >= oldBottomB - EPSILON;
+		bool useX;
+
+		out->diff = rect2.position - rect1.position;
+		//各軸のめり込み
+		float ox, oy;
 		ox = (rect1.width + rect2.width) * 0.5f - std::abs(out->diff.x);
 		oy = (rect1.height + rect2.height) * 0.5f - std::abs(out->diff.y);
 
-		if (ox < oy)
+		if (wasSeparateX && !wasSeparateY)
+		{
+			useX = true;
+		}
+		else if (!wasSeparateX && wasSeparateY)
+		{
+			useX = false;
+		}
+		else
+		{
+			//前フレームからの相対移動量
+			Vector2 relativeMove = (rect1.position - rect1.oldPosition) - (rect2.position - rect2.oldPosition);
+
+			if (std::abs(relativeMove.x) < std::abs(relativeMove.y))
+			{
+				useX = true;
+			}
+			else if (std::abs(relativeMove.y) < std::abs(relativeMove.x))
+			{
+				useX = false;
+			}
+			else
+			{
+				useX = (ox < oy);
+			}
+		}
+
+		if (useX)
 		{
 			out->normal.x = (out->diff.x > 0.0f) ? 1.0f : -1.0f;
 			out->normal.y = 0.0f;
@@ -121,78 +145,6 @@ bool GameObjectManager::CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* 
 			out->normal.y = (out->diff.y > 0.0f) ? 1.0f : -1.0f;
 			out->depth = oy;
 		}
-	}
-
-	return true;
-}
-
-bool GameObjectManager::CheckHit(const Rect& rect, const Circle& circle, HitInfo* out)
-{
-	float right = rect.position.x + rect.width * 0.5f;
-	float left = rect.position.x - rect.width * 0.5f;
-	float bottom = rect.position.y + rect.height * 0.5f;
-	float top = rect.position.y - rect.height * 0.5f;
-
-	float closestX = math_helper::clamp(circle.position.x, left, right);
-	float closestY = math_helper::clamp(circle.position.y, top, bottom);
-
-	Vector2 diff{ circle.position.x - closestX, circle.position.y - closestY };
-	float distSq = diff.LengthSquared();
-
-	if (distSq > circle.radius * circle.radius) return false;
-
-	//当たっていたら衝突情報を計算する
-	if (out)
-	{
-		if (distSq > 0.0f)
-		{	//円の中心が四角の外
-			float dist = std::sqrt(distSq);
-			out->depth = circle.radius - dist;
-		}
-		else
-		{	//円の中心が四角の中
-			float distToLeft = circle.position.x - left;
-			float distToRight = right - circle.position.x;
-			float distToTop = circle.position.y - top;
-			float distToBottom = bottom - circle.position.y;
-
-			float distMin = std::min(std::min(distToLeft, distToRight), std::min(distToTop, distToBottom));
-			out->depth = distMin + circle.radius;
-		}
-
-		out->diff = diff;
-		diff.Normalize();
-		out->normal = diff;
-	}
-
-	return true;
-}
-
-bool GameObjectManager::CheckHit(const Circle& circle, const Rect& rect, HitInfo* out)
-{
-	if (!CheckHit(rect, circle, out)) return false;
-
-	out->diff *= -1.0f;
-	out->normal *= -1.0f;
-
-	return true;
-}
-
-bool GameObjectManager::CheckHit(const Circle& circle1, const Circle& circle2, HitInfo* out)
-{
-	Vector2 diff = circle2.position - circle1.position;
-	float radiusSum = circle1.radius + circle2.radius;
-
-	if (diff.LengthSquared() > radiusSum * radiusSum) return false;
-
-	//当たっていたら衝突情報を計算する
-	if (out)
-	{
-		out->depth = radiusSum - diff.Length();
-
-		out->diff = diff;
-		diff.Normalize();
-		out->normal = diff;
 	}
 
 	return true;

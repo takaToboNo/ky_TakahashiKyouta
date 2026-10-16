@@ -38,8 +38,4 @@ public:
 
 	bool CheckHit(const Collider& a, const Collider& b, HitInfo* out);
 	bool CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* out);
-	bool CheckHit(const Rect& rect, const Circle& circle, HitInfo* out);
-	bool CheckHit(const Circle& circle, const Rect& rect, HitInfo* out);
-	bool CheckHit(const Circle& circle1, const Circle& circle2, HitInfo* out);
-
 };

@@ -22,15 +22,11 @@ class Collider
 {
 private:
 	GameObject* m_Owner = nullptr;
-	ShapeType m_ShapeType = ShapeType::Rect;
 
 public:
 	Collider() = default;
 	~Collider() = default;
 
-	ShapeType GetShapeType() const { return m_ShapeType; }
-
 	Rect GetWorldRect() const;
-	Circle GetWorldCircle() const;
 	void SetOwner(GameObject* owner) { m_Owner = owner; }
 };

@@ -37,6 +37,9 @@
     <Filter Include="src\Collision">
       <UniqueIdentifier>{d2f1136d-cae2-42fa-9c8b-362cc918d181}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Object\GameObject\Block">
+      <UniqueIdentifier>{e8a88c73-fe94-4903-bc3e-e0d64c7c3e53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -135,6 +138,15 @@
     <ClInclude Include="src\Collision\Shape.h">
       <Filter>src\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Block\Block.h">
+      <Filter>src\Object\GameObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Block\BreakableBlock.h">
+      <Filter>src\Object\GameObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Block\SolidBlock.h">
+      <Filter>src\Object\GameObject\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -211,6 +223,15 @@
     </ClCompile>
     <ClCompile Include="src\Collision\Collider.cpp">
       <Filter>src\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Block\Block.cpp">
+      <Filter>src\Object\GameObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Block\BreakableBlock.cpp">
+      <Filter>src\Object\GameObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Block\SolidBlock.cpp">
+      <Filter>src\Object\GameObject\Block</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

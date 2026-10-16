@@ -120,9 +120,35 @@ void Player::Destroy()
 
 void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	if (other->GetLayer() == Layer::Enemy)
+	Layer layer = other->GetLayer();
+	HitSide hitSide = GetHitSide(hitInfo);
+
+	if (layer == Layer::Enemy)
 	{
 		m_Velocity = hitInfo.normal * KNOCK_BACK_FORCE * -1.0f;
+	}
+
+	if (layer == Layer::Block)
+	{
+		if (hitSide == HitSide::Top)
+		{
+			m_Velocity.y = 0.0f;
+		}
+		else if (hitSide == HitSide::Bottom)
+		{
+			m_IsGround = true;
+			m_Velocity.y = 0.0f;
+		}
+		else if (hitSide == HitSide::Left)
+		{
+			m_Velocity.x = 0.0f;
+		}
+		else if (hitSide == HitSide::Right)
+		{
+			m_Velocity.x = 0.0f;
+		}
+
+		m_Position -= hitInfo.normal * hitInfo.depth;
 	}
 }
 
