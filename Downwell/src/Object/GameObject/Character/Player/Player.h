@@ -23,6 +23,7 @@ private:
 	static constexpr float KNOCK_BACK_FORCE = 200.0f;
 
 	static constexpr float AIR_DRAG = 0.9f;
+	static constexpr float GROUND_DRAG = 0.9f;
 	static constexpr float EMPTY_RECOIL_DAMPING = 0.3f;
 
 	bool m_IsGround = false;
@@ -32,7 +33,7 @@ private:
 
 #ifdef _DEBUG
 	float m_DebugDrawGravity = 0.0f;
-	bool m_IsHit = false;
+	bool m_DebugIsHit = false;
 #endif
 
 public:
@@ -64,12 +65,13 @@ public:
 	}
 	void SetDirectionX(float dir = 0.0f) { m_DirectionX = dir; }
 	void AirDrag() { m_Velocity.x *= AIR_DRAG; }
+	void GroundDrag() { m_Velocity.x *= GROUND_DRAG; }
 	void StopEnemy(class Enemy);
 	void Shot(const Vector2& position);
 
 	void SetCanAutoShot(bool can) { m_CanAutoShot = can; }
 	bool GetCanAutoShot() { return m_CanAutoShot; }
 
-	GunBoots* GetGunBoots() { return m_GunBoots.get(); }
+	GunBoots* GetGunBoots() const { return m_GunBoots.get(); }
 	void Reload() { m_GunBoots->Reload(); }
 };

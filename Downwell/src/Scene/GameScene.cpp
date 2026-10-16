@@ -42,7 +42,6 @@ void GameScene::Initialize()
 		GunBoots* gunBoots = player->GetGunBoots();
 		if (gunBoots)
 		{
-			gunBoots->SetOwner(player);
 			gunBoots->SetupBullet(m_GameObjectManager);
 		}
 	}

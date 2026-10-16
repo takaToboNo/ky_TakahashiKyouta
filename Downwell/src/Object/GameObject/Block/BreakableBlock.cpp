@@ -6,6 +6,7 @@
 void BreakableBlock::Initialize()
 {
 	Block::Initialize();
+	m_Tag = Tag::Block;
 }
 
 void BreakableBlock::Finalize()
@@ -37,17 +38,20 @@ void BreakableBlock::Destroy()
 
 void BreakableBlock::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	if (other->GetLayer() == Layer::Player)
+	Tag tag = other->GetTag();
+	HitSide hitSide = GetHitSide(hitInfo);
+
+	if (tag == Tag::Player)
 	{
-		if (GetHitSide(hitInfo) == HitSide::Bottom)
+		if (hitSide == HitSide::Bottom)
 		{
 			m_IsActive = false;
 		}
 	}
 
-	if (other->GetLayer() == Layer::Bullet)
+	if (tag == Tag::Bullet)
 	{
-		if (GetHitSide(hitInfo) == HitSide::Top)
+		if (hitSide == HitSide::Top)
 		{
 			m_IsActive = false;
 		}

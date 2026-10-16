@@ -20,6 +20,8 @@ public:
 	template<class T>
 	T* AddGameObject(std::unique_ptr<T> gameObject)
 	{
+		if (!gameObject) return nullptr;
+
 		T* ptr = gameObject.get();
 
 		m_GameObjects.push_back(std::move(gameObject));

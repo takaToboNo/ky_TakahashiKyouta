@@ -36,7 +36,7 @@ void PlayerIdle::Update(Player& player)
 	}
 
 	//’ïR
-	player.AirDrag();
+	player.GroundDrag();
 }
 
 void PlayerIdle::Exit(Player& player)

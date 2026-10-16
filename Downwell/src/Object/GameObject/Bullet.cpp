@@ -6,6 +6,7 @@
 void Bullet::Initialize()
 {
 	GameObject::Initialize();
+	m_Tag = Tag::Bullet;
 	m_Layer = Layer::Bullet;
 	m_Velocity = { 0.0f,BULLET_SPEED };
 	m_Life = 0.0f;
@@ -54,8 +55,9 @@ void Bullet::Destroy()
 
 void Bullet::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	Layer layer = other->GetLayer();
-	if (layer == Layer::Enemy || layer == Layer::Block)
+	Tag tag = other->GetTag();
+
+	if (tag == Tag::Enemy || tag == Tag::Block)
 	{
 		m_IsActive = false;
 	}

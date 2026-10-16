@@ -1,5 +1,6 @@
 #include "FloatingEnemy.h"
 
+#include <cassert>
 #include "DxLib.h"
 #include "Player.h"
 #include "MathHelper.h"
@@ -7,6 +8,7 @@
 void FloatingEnemy::Initialize()
 {
 	Enemy::Initialize();
+	m_Tag = Tag::Enemy;
 	m_MoveSpeed = 50.0f;
 	m_Position = { 500.0f,300.0f };
 	m_Scale = { 30.0f,30.0f };
@@ -75,24 +77,29 @@ void FloatingEnemy::Destroy()
 
 void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	if (other->GetLayer() == Layer::Bullet)
+	Tag tag = other->GetTag();
+	HitSide hitSide = GetHitSide(hitInfo);
+
+	if (tag == Tag::Bullet)
 	{
+		assert(dynamic_cast<Bullet*>(other));
 		Bullet* bullet = static_cast<Bullet*>(other);
-		if (bullet) Damage(bullet->GetDamage());
+		Damage(bullet->GetDamage());
 
 		m_Velocity = hitInfo.diff * KNOCK_BACK_FORCE * -1.0f;
 	}
 
-	if (other->GetLayer() == Layer::Player)
+	if (tag == Tag::Player)
 	{
-		if (GetHitSide(hitInfo) == HitSide::Top)
+		if (hitSide == HitSide::Top)
 		{
 			m_IsActive = false;
 		}
 		else
 		{
+			assert(dynamic_cast<Player*>(other));
 			Player* player = static_cast<Player*>(other);
-			if(player) player->Damage(1);
+			player->Damage(1);
 		}
 	}
 }

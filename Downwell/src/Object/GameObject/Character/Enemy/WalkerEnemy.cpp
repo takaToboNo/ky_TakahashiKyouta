@@ -2,11 +2,13 @@
 #include "Bullet.h"
 #include "Player.h"
 
+#include <cassert>
 #include "DxLib.h"
 
 void WalkerEnemy::Initialize()
 {
 	Enemy::Initialize();
+	m_Tag = Tag::Enemy;
 	m_Position = { 500.0f,650.0f };
 	m_Scale = { 30.0f,30.0f };
 	m_Color = { 100, 0, 0 };
@@ -65,16 +67,20 @@ void WalkerEnemy::Destroy()
 
 void WalkerEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	if (other->GetLayer() == Layer::Bullet)
+	Tag tag = other->GetTag();
+
+	if (tag == Tag::Bullet)
 	{
+		assert(dynamic_cast<Bullet*>(other));
 		Bullet* bullet = static_cast<Bullet*>(other);
-		if (bullet) Damage(bullet->GetDamage());
+		Damage(bullet->GetDamage());
 	}
 
-	if (other->GetLayer() == Layer::Player)
+	if (tag == Tag::Player)
 	{
+		assert(dynamic_cast<Player*>(other));
 		Player* player = static_cast<Player*>(other);
-		if (player) player->Damage(1);
+		player->Damage(1);
 	}
 }
 

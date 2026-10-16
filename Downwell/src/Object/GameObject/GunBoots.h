@@ -15,9 +15,7 @@ private:
 	int m_Ammo = 0;
 	int m_ShotInterval = 0;
 
-	Player* m_Owner;
-
-	std::vector<Bullet*> m_BulletPool;
+	std::vector<Bullet*> m_BulletPool = {};
 
 public:
 	GunBoots() = default;
@@ -33,5 +31,4 @@ public:
 	bool CreateBullet(const Vector2& position);
 	void Reload() { m_Ammo = MAX_AMMO; }
 	int GetAmmo() { return m_Ammo; }
-	void SetOwner(Player* owner) { m_Owner = owner; }
 };

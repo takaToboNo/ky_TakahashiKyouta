@@ -67,15 +67,9 @@ bool GunBoots::CreateBullet(const Vector2& position)
 		
 		if (bullet->IsActive()) continue;
 		
-		Vector2 offset = Vector2::Zero();
-		if (m_Owner)
-		{
-			offset.y += m_Owner->GetScale().y * 0.5f;
-		}
-
 		bullet->SetActive(true);
 		bullet->Initialize();
-		bullet->SetPosition(position + offset);
+		bullet->SetPosition(position);
 		m_Ammo--;
 		return true;
 	}

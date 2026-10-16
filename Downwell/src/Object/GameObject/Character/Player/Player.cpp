@@ -10,6 +10,7 @@
 void Player::Initialize()
 {
 	Character::Initialize();
+	m_Tag = Tag::Player;
 	m_Layer = Layer::Player;
 
 	m_Position = { 600.0f,200.0f };
@@ -46,6 +47,7 @@ void Player::Update(float dt)
 	m_Velocity.y += gravity * dt;
 #ifdef _DEBUG
 	m_DebugDrawGravity = gravity;
+	m_DebugIsHit = false;
 #endif
 
 	bool isReleaseJump = Input::IsRelease(Action::Action);
@@ -82,8 +84,6 @@ void Player::Update(float dt)
 	m_Position.x = std::min(m_Position.x, STAGE_RIGHT);
 
 	m_GunBoots->Update(dt);
-
-	m_IsHit = false;
 }
 
 void Player::Draw()
@@ -107,7 +107,7 @@ void Player::Draw()
 	DrawFormatString(10, 110, GetColor(WHITE.r, WHITE.g, WHITE.b), "State : %s", m_State->GetStateName());
 	DrawFormatString(10, 130, GetColor(WHITE.r, WHITE.g, WHITE.b), "Gravity : %.2f", m_DebugDrawGravity);
 	DrawFormatString(10, 150, GetColor(WHITE.r, WHITE.g, WHITE.b), "canAutoShot : %s", m_CanAutoShot ? "true" : "false");
-	DrawFormatString(10, 170, GetColor(WHITE.r, WHITE.g, WHITE.b), "isHit : %s", m_IsHit ? "true" : "false");
+	DrawFormatString(10, 170, GetColor(WHITE.r, WHITE.g, WHITE.b), "isHit : %s", m_DebugIsHit ? "true" : "false");
 	DrawFormatString(10, 190, GetColor(GREEN.r, GREEN.g, GREEN.b), "PlayerHP : %d", m_Hp);
 	m_GunBoots->Draw();
 #endif
@@ -120,15 +120,19 @@ void Player::Destroy()
 
 void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-	Layer layer = other->GetLayer();
+#ifdef _DEBUG
+	m_DebugIsHit = true;
+#endif
+
+	Tag tag = other->GetTag();
 	HitSide hitSide = GetHitSide(hitInfo);
 
-	if (layer == Layer::Enemy)
+	if (tag == Tag::Enemy)
 	{
 		m_Velocity = hitInfo.normal * KNOCK_BACK_FORCE * -1.0f;
 	}
 
-	if (layer == Layer::Block)
+	if (tag == Tag::Block)
 	{
 		if (hitSide == HitSide::Top)
 		{
