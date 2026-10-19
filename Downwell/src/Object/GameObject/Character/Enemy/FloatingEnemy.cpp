@@ -9,7 +9,6 @@ void FloatingEnemy::Initialize()
 {
 	Enemy::Initialize();
 	m_MoveSpeed = 50.0f;
-	m_Position = { 500.0f,300.0f };
 	m_Scale = { 30.0f,30.0f };
 	m_Color = { 200, 0, 200 };
 	m_Hp = 3;
@@ -85,7 +84,7 @@ void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		Bullet* bullet = static_cast<Bullet*>(other);
 		Damage(bullet->GetDamage());
 
-		m_Velocity = hitInfo.normal * KNOCK_BACK_FORCE * -1.0f;
+		m_Velocity = hitInfo.normal * DAMAGE_KNOCKBACK * -1.0f;
 	}
 
 	if (tag == Tag::Player)
@@ -94,6 +93,16 @@ void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		{
 			m_IsActive = false;
 		}
+	}
+
+	if (tag == Tag::Block)
+	{
+		m_Velocity = hitInfo.normal * NORMAL_KNOCKBACK * -1.0f;
+	}
+
+	if (tag == Tag::Enemy)
+	{
+		m_Velocity = hitInfo.normal * NORMAL_KNOCKBACK * -1.0f;
 	}
 }
 

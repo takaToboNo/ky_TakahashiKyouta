@@ -19,6 +19,11 @@ void GameScene::Initialize()
 	//‰¼’u‚«
 	m_Player = m_GameObjectManager.AddGameObject(std::make_unique<Player>());
 	auto floatingEnemy = m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
+	floatingEnemy->SetPosition({ 500.0f,300.0f });
+	auto floatingEnemy1 = m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
+	floatingEnemy1->SetPosition({ 700.0f,400.0f });
+	auto floatingEnemy2 = m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
+	floatingEnemy2->SetPosition({ 900.0f,600.0f });
 
 	for (int i = 0; i < 20; i++)
 	{//c‰¼’u‚«
@@ -39,6 +44,8 @@ void GameScene::Initialize()
 		if (floatingEnemy)
 		{
 			floatingEnemy->SetPlayer(m_Player);
+			floatingEnemy1->SetPlayer(m_Player);
+			floatingEnemy2->SetPlayer(m_Player);
 		}
 
 		GunBoots* gunBoots = m_Player->GetGunBoots();

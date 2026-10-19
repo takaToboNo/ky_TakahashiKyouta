@@ -7,7 +7,8 @@ class FloatingEnemy : public Enemy
 {
 private:
 	static constexpr float MAX_MOVE_SPEED = 100.0f;
-	static constexpr float KNOCK_BACK_FORCE = 200.0f;
+	static constexpr float DAMAGE_KNOCKBACK = 200.0f;
+	static constexpr float NORMAL_KNOCKBACK = 70.0f;
 	const Player* m_pPlayer = nullptr;
 
 public:
