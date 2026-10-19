@@ -14,7 +14,7 @@ void Bullet::Initialize()
 	m_Damage = 1;
 
 	m_Position = { 200.0f,200.0f };
-	m_Scale = { 15.0f,15.0f };
+	m_Scale = { BULLET_SIZE_X,BULLET_SIZE_Y };
 	m_IsActive = true;
 }
 

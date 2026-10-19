@@ -6,7 +6,9 @@ class Camera;
 class Bullet : public GameObject
 {
 private:
-	static constexpr float BULLET_SPEED = 1000.0f;
+	static constexpr float BULLET_SIZE_X = 20.0f;
+	static constexpr float BULLET_SIZE_Y = 30.0f;
+	static constexpr float BULLET_SPEED = 1400.0f;
 	static constexpr float AIR_DRAG = 0.95f;
 	static constexpr float MIN_SPEED = 200.0f;
 

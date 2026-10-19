@@ -28,17 +28,14 @@
     <Filter Include="src\Manager">
       <UniqueIdentifier>{db4788be-57bd-4f40-920b-e01556a4bde3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Time">
-      <UniqueIdentifier>{a4306079-b8e5-4f1d-89a1-6622362359cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Input">
-      <UniqueIdentifier>{a02e0b2f-4552-4436-a27c-853154a4ca39}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Collision">
       <UniqueIdentifier>{d2f1136d-cae2-42fa-9c8b-362cc918d181}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Object\GameObject\Block">
       <UniqueIdentifier>{e8a88c73-fe94-4903-bc3e-e0d64c7c3e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\System">
+      <UniqueIdentifier>{e5df9a5c-725a-4f39-8448-1112ad3d7e6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,9 +114,6 @@
     <ClInclude Include="src\Manager\GameObjectManager.h">
       <Filter>src\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="src\Time\Time.h">
-      <Filter>src\Time</Filter>
-    </ClInclude>
     <ClInclude Include="src\Object\Layer.h">
       <Filter>src\Object</Filter>
     </ClInclude>
@@ -128,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerShot.h">
       <Filter>src\Object\GameObject\Character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Input\Input.h">
-      <Filter>src\Input</Filter>
     </ClInclude>
     <ClInclude Include="src\Collision\Collider.h">
       <Filter>src\Collision</Filter>
@@ -147,8 +138,18 @@
     <ClInclude Include="src\Object\GameObject\Block\SolidBlock.h">
       <Filter>src\Object\GameObject\Block</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerDead.h" />
-    <ClInclude Include="src\Object\Camera.h" />
+    <ClInclude Include="src\Object\Camera.h">
+      <Filter>src\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Player\PlayerDead.h">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Time.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\Input.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -211,17 +212,11 @@
     <ClCompile Include="src\Manager\GameObjectManager.cpp">
       <Filter>src\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="src\Time\Time.cpp">
-      <Filter>src\Time</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Player\PlayerFall.cpp">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Player\PlayerShot.cpp">
       <Filter>src\Object\GameObject\Character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Input\Input.cpp">
-      <Filter>src\Input</Filter>
     </ClCompile>
     <ClCompile Include="src\Collision\Collider.cpp">
       <Filter>src\Collision</Filter>
@@ -235,7 +230,17 @@
     <ClCompile Include="src\Object\GameObject\Block\SolidBlock.cpp">
       <Filter>src\Object\GameObject\Block</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerDead.cpp" />
-    <ClCompile Include="src\Object\Camera.cpp" />
+    <ClCompile Include="src\Object\Camera.cpp">
+      <Filter>src\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Player\PlayerDead.cpp">
+      <Filter>src\Object\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Input.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Time.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
