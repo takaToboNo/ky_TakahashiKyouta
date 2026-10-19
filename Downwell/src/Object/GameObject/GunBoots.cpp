@@ -47,8 +47,7 @@ void GunBoots::Draw()
 {
 #ifdef _DEBUG
 	//デバッグ表示
-	DrawFormatString(350, 10, GetColor(WHITE.r, WHITE.g, WHITE.b), "BulletPool : %d/%d", static_cast<int>(m_BulletPool.size()), MAX_POOL_SIZE);
-	DrawFormatString(350, 30, GetColor(WHITE.r, WHITE.g, WHITE.b), "Ammo : %d/%d", m_Ammo, MAX_AMMO);
+	DrawFormatString(350, 10, GetColor(GRAY.r, GRAY.g, GRAY.b), "Ammo : %d/%d", m_Ammo, MAX_AMMO);
 #endif
 }
 

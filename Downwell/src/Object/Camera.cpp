@@ -10,7 +10,10 @@ float Lerp(float start, float end, float t)
 
 void Camera::Initialize()
 {
-	m_Position.y = m_Target->GetPosition().y - WINDOW_HEIGHT * 0.5f + CAMERA_OFFSET_Y;
+	if(m_Target)
+	{
+		m_Position.y = m_Target->GetPosition().y - WINDOW_HEIGHT * 0.5f + CAMERA_OFFSET_Y;
+	}
 }
 
 void Camera::Finalize()

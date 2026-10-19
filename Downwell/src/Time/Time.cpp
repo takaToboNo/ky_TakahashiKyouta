@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "Time.h"
 #include "DxLib.h"
+#include "GameHelper.h"
 
 void Time::Initialize()
 {
@@ -49,8 +50,8 @@ void Time::Draw()
 {
 #ifdef _DEBUG
 	//デバッグ表示
-	DrawFormatString(200, 10, GetColor(255,255,255), "UPS : %.2f", m_UPS);
-	DrawFormatString(200, 30, GetColor(255,255,255), "FPS : %.2f", m_FPS);
+	DrawFormatString(200, 10, GetColor(GRAY.r, GRAY.g, GRAY.b), "UPS : %.2f", m_UPS);
+	DrawFormatString(200, 30, GetColor(GRAY.r, GRAY.g, GRAY.b), "FPS : %.2f", m_FPS);
 #endif
 }
 
