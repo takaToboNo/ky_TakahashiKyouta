@@ -2,6 +2,7 @@
 #include "PlayerMove.h"
 #include "PlayerShot.h"
 #include "PlayerFall.h"
+#include "PlayerDead.h"
 #include "Player.h"
 #include "Input.h"
 
@@ -45,6 +46,12 @@ void PlayerJump::Update(Player& player)
 	if (player.GetVelocity().y >= 0.0f)
 	{
 		player.RequestState(std::make_unique<PlayerFall>());
+	}
+
+	//Ž€–S
+	if (player.IsDead())
+	{
+		player.RequestState(std::make_unique<PlayerDead>());
 	}
 	
 }

@@ -75,13 +75,6 @@ void WalkerEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		Bullet* bullet = static_cast<Bullet*>(other);
 		Damage(bullet->GetDamage());
 	}
-
-	if (tag == Tag::Player)
-	{
-		assert(dynamic_cast<Player*>(other));
-		Player* player = static_cast<Player*>(other);
-		player->Damage(1);
-	}
 }
 
 void WalkerEnemy::Move(Vector2& direction)

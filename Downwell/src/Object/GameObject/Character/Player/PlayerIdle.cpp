@@ -2,13 +2,14 @@
 #include "PlayerMove.h"
 #include "PlayerJump.h"
 #include "PlayerFall.h"
+#include "PlayerDead.h"
 #include "Player.h"
 #include "Input.h"
 
 void PlayerIdle::Enter(Player& player)
 {
 	//í‚é~
-	player.SetVelocity(Vector2::Zero());
+	player.SetVelocity({ 0.0f,player.GetVelocity().y });
 	player.SetDirectionX();
 }
 
@@ -37,6 +38,12 @@ void PlayerIdle::Update(Player& player)
 
 	//íÔçR
 	player.GroundDrag();
+
+	//éÄñS
+	if (player.IsDead())
+	{
+		player.RequestState(std::make_unique<PlayerDead>());
+	}
 }
 
 void PlayerIdle::Exit(Player& player)

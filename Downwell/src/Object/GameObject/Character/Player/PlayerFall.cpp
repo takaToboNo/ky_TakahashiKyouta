@@ -1,6 +1,7 @@
 #include "PlayerFall.h"
 #include "PlayerMove.h"
 #include "PlayerShot.h"
+#include "PlayerDead.h"
 #include "Player.h"
 #include "Input.h"
 
@@ -48,6 +49,12 @@ void PlayerFall::Update(Player& player)
 	{
 		player.RequestState(std::make_unique<PlayerMove>());
 		player.Reload();
+	}
+
+	//Ž€–S
+	if (player.IsDead())
+	{
+		player.RequestState(std::make_unique<PlayerDead>());
 	}
 }
 

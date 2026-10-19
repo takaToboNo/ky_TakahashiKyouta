@@ -1,6 +1,8 @@
 #define NOMINMAX
 #include "Player.h"
 #include "input.h"
+#include "FloatingEnemy.h"
+#include "WalkerEnemy.h"
 
 //仮
 #include "DxLib.h"
@@ -27,6 +29,10 @@ void Player::Initialize()
 	m_GunBoots->Initialize();
 
 	m_CanAutoShot = false;
+
+	m_KnockbackTimer = 0.0f;
+	m_InvincibleTimer = 0.0f;
+	m_DeathTimer = DEATH_TIME;
 }
 
 void Player::Finalize()
@@ -57,11 +63,14 @@ void Player::Update(float dt)
 	}
 	if (isReleaseJump) m_CanAutoShot = true;
 
-	//移動方向
-	m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;
+	if(m_KnockbackTimer <= 0.0f)
+	{
+		//移動方向
+		m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;
 
-	//速度制限
-	m_Velocity.x = math_helper::clamp(m_Velocity.x, -MAX_MOVE_SPEED, MAX_MOVE_SPEED);
+		//速度制限
+		m_Velocity.x = math_helper::clamp(m_Velocity.x, -MAX_MOVE_SPEED, MAX_MOVE_SPEED);
+	}
 
 	//座標更新
 	m_Position += m_Velocity * dt;
@@ -83,20 +92,43 @@ void Player::Update(float dt)
 	m_Position.x = std::max(m_Position.x, STAGE_LEFT);
 	m_Position.x = std::min(m_Position.x, STAGE_RIGHT);
 
+	//ノックバック
+	if (m_KnockbackTimer > 0.0f)
+	{
+		m_KnockbackTimer -= dt;
+	}
+
+	//無敵時間
+	if (m_InvincibleTimer > 0.0f)
+	{
+		m_InvincibleTimer -= dt;
+	}
+	else
+	{
+		m_InvincibleTimer = 0.0f;
+	}
+
+	//死んでいるか
+	if (m_Hp <= 0) m_IsDead = true;
+
+	//リザルト画面へ
+	if (m_IsDead)
+	{
+		if (m_DeathTimer > 0.0f)
+		{
+			m_DeathTimer -= dt;
+		}
+		else
+		{
+			m_Velocity.y = 0.0f;
+		}
+	}
+
 	m_GunBoots->Update(dt);
 }
 
 void Player::Draw()
 {
-	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
-	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
-
-	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
-
 #ifdef _DEBUG
 	//デバッグ表示
 	DrawFormatString(10, 10, GetColor(WHITE.r, WHITE.g, WHITE.b), "PosX : %.2f", m_Position.x);
@@ -109,8 +141,21 @@ void Player::Draw()
 	DrawFormatString(10, 150, GetColor(WHITE.r, WHITE.g, WHITE.b), "canAutoShot : %s", m_CanAutoShot ? "true" : "false");
 	DrawFormatString(10, 170, GetColor(WHITE.r, WHITE.g, WHITE.b), "isHit : %s", m_DebugIsHit ? "true" : "false");
 	DrawFormatString(10, 190, GetColor(GREEN.r, GREEN.g, GREEN.b), "PlayerHP : %d", m_Hp);
+	DrawFormatString(10, 210, GetColor(RED.r, RED.g, RED.b), "DeathTimer : %.1f", m_DeathTimer);
 	m_GunBoots->Draw();
 #endif
+
+	bool blink = (static_cast<int>(m_InvincibleTimer * BLINK_SPEED) % 2) != 0;
+	if (blink) return;
+
+	int x1, y1;
+	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
+	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
+	int x2, y2;
+	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
+	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
+
+	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 }
 
 void Player::Destroy()
@@ -123,14 +168,8 @@ void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 #ifdef _DEBUG
 	m_DebugIsHit = true;
 #endif
-
 	Tag tag = other->GetTag();
 	HitSide hitSide = GetHitSide(hitInfo);
-
-	if (tag == Tag::Enemy)
-	{
-		m_Velocity = hitInfo.normal * KNOCK_BACK_FORCE * -1.0f;
-	}
 
 	if (tag == Tag::Block)
 	{
@@ -153,6 +192,36 @@ void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		}
 
 		m_Position -= hitInfo.normal * hitInfo.depth;
+	}
+
+	if (m_IsDead) return;
+
+	if (tag == Tag::Enemy)
+	{
+		FloatingEnemy* floatingEnemy = dynamic_cast<FloatingEnemy*>(other);
+		if (floatingEnemy)
+		{
+			if (hitSide == HitSide::Bottom)
+			{	//浮遊敵を踏んだ
+				m_Velocity.y = hitInfo.normal.y * STOMP_KNOCKBACK * -1.0f;
+				return;
+			}
+		}
+
+		if (m_InvincibleTimer > 0.0f) return;
+
+		if (hitSide == HitSide::Bottom)
+		{	//縦
+			Damage(1);
+			m_Velocity.y = std::abs(hitInfo.normal.y) * DAMAGE_KNOCKBACK_Y * -1.0f;
+		}
+		else
+		{	//横
+			Damage(1);
+			m_IsGround = false;
+			m_Velocity.x = hitInfo.normal.x * DAMAGE_KNOCKBACK_X * -1.0f;
+			m_Velocity.y = std::abs(hitInfo.normal.y) * DAMAGE_KNOCKBACK_Y * -1.0f;
+		}
 	}
 }
 
@@ -178,6 +247,8 @@ void Player::Move(Vector2& direction)
 void Player::Damage(int damage)
 {
 	m_Hp -= damage;
+	m_KnockbackTimer = KNOCKBACK_TIME;
+	m_InvincibleTimer = INVINCIBLE_TIME;
 }
 
 void Player::Died()

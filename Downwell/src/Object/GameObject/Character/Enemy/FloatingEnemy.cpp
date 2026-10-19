@@ -95,12 +95,6 @@ void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		{
 			m_IsActive = false;
 		}
-		else
-		{
-			assert(dynamic_cast<Player*>(other));
-			Player* player = static_cast<Player*>(other);
-			player->Damage(1);
-		}
 	}
 }
 

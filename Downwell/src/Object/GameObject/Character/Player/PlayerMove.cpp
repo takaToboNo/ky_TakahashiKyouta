@@ -2,6 +2,7 @@
 #include "PlayerIdle.h"
 #include "PlayerJump.h"
 #include "PlayerFall.h"
+#include "PlayerDead.h"
 #include "Player.h"
 #include "Input.h"
 
@@ -39,6 +40,12 @@ void PlayerMove::Update(Player& player)
 	if (!player.IsGround())
 	{
 		player.RequestState(std::make_unique<PlayerFall>());
+	}
+
+	//Ž€–S
+	if (player.IsDead())
+	{
+		player.RequestState(std::make_unique<PlayerDead>());
 	}
 }
 

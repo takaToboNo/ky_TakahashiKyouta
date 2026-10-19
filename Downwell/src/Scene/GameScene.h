@@ -1,9 +1,12 @@
 #pragma once
 #include "Scene.h"
 
+class Player;
+
 class GameScene : public Scene
 {
 private:
+	Player* m_Player;
 
 public:
 	GameScene() = default;
