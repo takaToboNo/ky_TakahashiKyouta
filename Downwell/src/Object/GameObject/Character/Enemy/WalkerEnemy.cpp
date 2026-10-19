@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include "DxLib.h"
+#include "Camera.h"
 
 void WalkerEnemy::Initialize()
 {
@@ -43,14 +44,14 @@ void WalkerEnemy::Update(float dt)
 	}
 }
 
-void WalkerEnemy::Draw()
+void WalkerEnemy::Draw(const Camera& camera)
 {
 	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
+	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - camera.GetPosition().x);
+	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - camera.GetPosition().y);
 	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
+	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - camera.GetPosition().x);
+	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - camera.GetPosition().y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(RED.r, RED.g, RED.b), TRUE);
 

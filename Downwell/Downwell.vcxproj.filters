@@ -148,6 +148,7 @@
       <Filter>src\Object\GameObject\Block</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerDead.h" />
+    <ClInclude Include="src\Object\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -235,5 +236,6 @@
       <Filter>src\Object\GameObject\Block</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Player\PlayerDead.cpp" />
+    <ClCompile Include="src\Object\Camera.cpp" />
   </ItemGroup>
 </Project>

@@ -19,7 +19,6 @@ public:
 	virtual void Initialize();
 	virtual void Finalize();
 	virtual void Update(float dt);
-	virtual void Draw() = 0;
 	virtual void Destroy();
 
 	virtual Tag GetTag() { return m_Tag; }

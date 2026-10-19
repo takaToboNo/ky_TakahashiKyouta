@@ -18,6 +18,11 @@ void GameObject::Update(float dt)
 	Object::Update(dt);
 }
 
+void GameObject::Draw(const Camera& camera)
+{
+
+}
+
 void GameObject::Destroy()
 {
 	Object::Destroy();

@@ -3,6 +3,8 @@
 #include "GameHelper.h"
 #include "Collider.h"
 
+class Camera;
+
 class GameObject : public Object
 {
 protected:
@@ -16,6 +18,7 @@ public:
 	virtual void Initialize() override;
 	virtual void Finalize() override;
 	virtual void Update(float dt) override;
+	virtual void Draw(const Camera& camera);
 	virtual void Destroy() override;
 
 	virtual void SetScale(const Vector2& scale) { m_Scale = scale; }

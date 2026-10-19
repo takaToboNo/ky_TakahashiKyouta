@@ -1,6 +1,8 @@
 #pragma once
 #include "Enemy.h"
 
+class Camera;
+
 class WalkerEnemy : public Enemy
 {
 private:
@@ -12,7 +14,7 @@ public:
 	void Initialize() override;
 	void Finalize() override;
 	void Update(float dt) override;
-	void Draw() override;
+	void Draw(const Camera& camera) override;
 	void Destroy() override;
 
 	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;

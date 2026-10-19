@@ -5,6 +5,8 @@
 #include "PlayerIdle.h"
 #include "GunBoots.h"
 
+class Camera;
+
 class Player : public Character
 {
 private:
@@ -15,6 +17,7 @@ private:
 
 	static constexpr float MOVE_ACCEL = 5000.0f;
 	static constexpr float MAX_MOVE_SPEED = 300.0f;
+	static constexpr float MAX_FALL_SPEED = 2000.0f;
 	static constexpr float JUMP_FORCE = 700.0f;
 	static constexpr float JUMP_CUT_RESISTANCE = 0.5f;
 	static constexpr float GRAVITY_THRESHOLD_SPEED = 200.0f;
@@ -57,7 +60,7 @@ public:
 	void Initialize() override;
 	void Finalize() override;
 	void Update(float dt) override;
-	void Draw() override;
+	void Draw(const Camera& camera) override;
 	void Destroy() override;
 
 	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;

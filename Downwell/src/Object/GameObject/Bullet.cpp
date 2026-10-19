@@ -2,6 +2,7 @@
 
 //âº
 #include "DxLib.h"
+#include "Camera.h"
 
 void Bullet::Initialize()
 {
@@ -34,18 +35,16 @@ void Bullet::Update(float dt)
 
 	//ï‘ãpó\ñÒ(ë¨ìxÇ™è¨Ç≥Ç¢Ç‡ÇµÇ≠ÇÕâÊñ äO)
 	if(m_Velocity.IsNearlyZero(MIN_SPEED)) m_IsActive = false;
-	if (m_Position.y < STAGE_TOP) m_IsActive = false;
-	if (m_Position.y > STAGE_BOTTOM) m_IsActive = false;
 }
 
-void Bullet::Draw()
+void Bullet::Draw(const Camera& camera)
 {
 	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
+	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - camera.GetPosition().x);
+	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - camera.GetPosition().y);
 	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
+	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - camera.GetPosition().x);
+	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - camera.GetPosition().y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 }

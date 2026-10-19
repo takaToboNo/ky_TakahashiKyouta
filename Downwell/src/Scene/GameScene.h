@@ -6,7 +6,7 @@ class Player;
 class GameScene : public Scene
 {
 private:
-	Player* m_Player;
+	Player* m_Player = nullptr;
 
 public:
 	GameScene() = default;

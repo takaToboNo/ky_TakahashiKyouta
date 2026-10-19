@@ -4,6 +4,8 @@
 #include <algorithm>
 #include "GameObject.h"
 
+class Camera;
+
 class GameObjectManager
 {
 private:
@@ -15,7 +17,7 @@ public:
 
 	void Finalize();
 	void Update(float dt);
-	void Draw();
+	void Draw(const Camera& camera);
 
 	template<class T>
 	T* AddGameObject(std::unique_ptr<T> gameObject)

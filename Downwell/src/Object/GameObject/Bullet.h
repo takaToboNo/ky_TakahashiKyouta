@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+class Camera;
+
 class Bullet : public GameObject
 {
 private:
@@ -18,7 +20,7 @@ public:
 	void Initialize() override;
 	void Finalize() override;
 	void Update(float dt) override;
-	void Draw() override;
+	void Draw(const Camera& camera) override;
 	void Destroy() override;
 
 	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;

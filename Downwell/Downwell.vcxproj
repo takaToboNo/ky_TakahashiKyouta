@@ -25,6 +25,7 @@
     <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\Manager\GameManager.h" />
     <ClInclude Include="src\Manager\GameObjectManager.h" />
+    <ClInclude Include="src\Object\Camera.h" />
     <ClInclude Include="src\Object\GameObject\Block\Block.h" />
     <ClInclude Include="src\Object\GameObject\Block\BreakableBlock.h" />
     <ClInclude Include="src\Object\GameObject\Block\SolidBlock.h" />
@@ -62,6 +63,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Manager\GameManager.cpp" />
     <ClCompile Include="src\Manager\GameObjectManager.cpp" />
+    <ClCompile Include="src\Object\Camera.cpp" />
     <ClCompile Include="src\Object\GameObject\Block\Block.cpp" />
     <ClCompile Include="src\Object\GameObject\Block\BreakableBlock.cpp" />
     <ClCompile Include="src\Object\GameObject\Block\SolidBlock.cpp" />

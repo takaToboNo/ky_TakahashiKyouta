@@ -7,10 +7,13 @@
 void TitleScene::Initialize()
 {
 	Scene::Initialize();
+
+	m_Camera.Initialize();
 }
 
 void TitleScene::Finalize()
 {
+	m_Camera.Finalize();
 	m_GameObjectManager.Finalize();
 
 	Scene::Finalize();
@@ -18,6 +21,7 @@ void TitleScene::Finalize()
 
 void TitleScene::Update(float dt)
 {
+	m_Camera.Update(dt);
 	m_GameObjectManager.Update(dt);
 
 	if (Input::IsTrigger(Action::Decide))
@@ -28,7 +32,7 @@ void TitleScene::Update(float dt)
 
 void TitleScene::Draw()
 {
-	m_GameObjectManager.Draw();
+	m_GameObjectManager.Draw(m_Camera);
 
 	int x = static_cast<int>(WINDOW_WIDTH * 0.5f);
 	int y = static_cast<int>(WINDOW_HEIGHT * 0.5f);

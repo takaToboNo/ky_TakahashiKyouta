@@ -25,7 +25,7 @@ public:
 	void Initialize() override;
 	void Finalize() override;
 	void Update(float dt) override;
-	void Draw() override;
+	void Draw();
 	void Destroy() override;
 
 	bool CreateBullet(const Vector2& position);

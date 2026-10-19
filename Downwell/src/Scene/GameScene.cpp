@@ -36,6 +36,15 @@ void GameScene::Initialize()
 		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 1170.0f - i * 30.0f, 700.0f });
 		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 1170.0f - i * 30.0f, 500.0f });
 	}
+	for (int i = 0; i < 20; i++)
+	{//‰¡‰¼’u‚«
+		m_GameObjectManager.AddGameObject(std::make_unique<SolidBlock>())->SetPosition({ 300.0f + i * 30.0f, 800.0f });
+	}
+	for (int i = 0; i < 200; i++)
+	{//c‰¼’u‚«
+		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 10.0f, 150.0f + i * 300.0f });
+	}
+
 	//‰¼’u‚«
 	m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 400.0f, 700.0f });
 
@@ -54,17 +63,23 @@ void GameScene::Initialize()
 			gunBoots->SetupBullet(m_GameObjectManager);
 		}
 	}
+
+	m_Camera.SetTarget(m_Player);
+
+	m_Camera.Initialize();
 }
 
 void GameScene::Finalize()
 {
 	m_GameObjectManager.Finalize();
+	m_Camera.Finalize();
 
 	Scene::Finalize();
 }
 
 void GameScene::Update(float dt)
 {
+	m_Camera.Update(dt);
 	m_GameObjectManager.Update(dt);
 
 	if (m_Player->GetDeathTimer() <= 0.0f)
@@ -75,5 +90,5 @@ void GameScene::Update(float dt)
 
 void GameScene::Draw()
 {
-	m_GameObjectManager.Draw();
+	m_GameObjectManager.Draw(m_Camera);
 }

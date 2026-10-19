@@ -6,6 +6,7 @@
 
 //仮
 #include "DxLib.h"
+#include "Camera.h"
 #include <algorithm>
 #include "MathHelper.h"
 
@@ -68,25 +69,15 @@ void Player::Update(float dt)
 		//移動方向
 		m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;
 
-		//速度制限
+		//速度制限X
 		m_Velocity.x = math_helper::clamp(m_Velocity.x, -MAX_MOVE_SPEED, MAX_MOVE_SPEED);
 	}
 
+	//速度制限Y
+	m_Velocity.y = math_helper::clamp(m_Velocity.y, -MAX_FALL_SPEED, MAX_FALL_SPEED);
+
 	//座標更新
 	m_Position += m_Velocity * dt;
-
-	//床接地
-	if (m_Position.y >= STAGE_BOTTOM)
-	{
-		m_Position.y = STAGE_BOTTOM;
-		m_Velocity.y = 0.0f;
-		m_IsGround = true;
-		m_CanAutoShot = false;
-	}
-	else
-	{
-		m_IsGround = false;
-	}
 
 	//壁
 	m_Position.x = std::max(m_Position.x, STAGE_LEFT);
@@ -124,10 +115,12 @@ void Player::Update(float dt)
 		}
 	}
 
+	m_IsGround = false;
+
 	m_GunBoots->Update(dt);
 }
 
-void Player::Draw()
+void Player::Draw(const Camera& camera)
 {
 #ifdef _DEBUG
 	//デバッグ表示
@@ -149,11 +142,11 @@ void Player::Draw()
 	if (blink) return;
 
 	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
+	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - camera.GetPosition().x);
+	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - camera.GetPosition().y);
 	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
+	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - camera.GetPosition().x);
+	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - camera.GetPosition().y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 }

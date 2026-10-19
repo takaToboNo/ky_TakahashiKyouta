@@ -21,11 +21,11 @@ void GameObjectManager::Update(float dt)
 	CheckHitAll(m_GameObjects);
 }
 
-void GameObjectManager::Draw()
+void GameObjectManager::Draw(const Camera& camera)
 {
 	for (auto& gameObject : m_GameObjects)
 	{
-		if (gameObject->IsActive())gameObject->Draw();
+		if (gameObject->IsActive())gameObject->Draw(camera);
 	}
 }
 
