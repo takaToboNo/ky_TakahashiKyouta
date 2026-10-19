@@ -17,7 +17,7 @@ void Player::Initialize()
 	m_Layer = Layer::Player;
 
 	m_Position = { 600.0f,200.0f };
-	m_Scale = { 25.0f,25.0f };
+	m_Scale = { PLAYER_SIZE_X,PLAYER_SIZE_Y };
 	m_IsGround = false;
 	m_DirectionX = 0.0f;
 	m_Hp = 4;

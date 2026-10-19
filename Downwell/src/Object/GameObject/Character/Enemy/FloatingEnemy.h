@@ -7,6 +7,9 @@ class Camera;
 class FloatingEnemy : public Enemy
 {
 private:
+	static constexpr float FLOATING_ENEMY_SIZE_X = 45.0f;
+	static constexpr float FLOATING_ENEMY_SIZE_Y = 35.0f;
+
 	static constexpr float MAX_MOVE_SPEED = 100.0f;
 	static constexpr float DAMAGE_KNOCKBACK = 200.0f;
 	static constexpr float NORMAL_KNOCKBACK = 70.0f;

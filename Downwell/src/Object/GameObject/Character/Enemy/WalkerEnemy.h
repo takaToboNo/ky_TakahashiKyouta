@@ -6,6 +6,8 @@ class Camera;
 class WalkerEnemy : public Enemy
 {
 private:
+	static constexpr float WALKER_ENEMY_SIZE = 30.0f;
+
 	static constexpr float FALL_GRAVITY = 2000.0f;
 	static constexpr float MAX_FALL_SPEED = 2000.0f;
 

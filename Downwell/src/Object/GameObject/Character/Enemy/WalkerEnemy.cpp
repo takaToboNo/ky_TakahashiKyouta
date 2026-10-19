@@ -11,7 +11,7 @@ void WalkerEnemy::Initialize()
 {
 	Enemy::Initialize();
 	m_Position = { 500.0f,650.0f };
-	m_Scale = { 30.0f,30.0f };
+	m_Scale = { WALKER_ENEMY_SIZE,WALKER_ENEMY_SIZE };
 	m_Color = { 100, 0, 0 };
 	m_Hp = 1;
 	m_IsGround = false;

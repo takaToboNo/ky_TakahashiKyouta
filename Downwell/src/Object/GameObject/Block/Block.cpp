@@ -5,7 +5,7 @@ void Block::Initialize()
 	GameObject::Initialize();
 	m_Tag = Tag::Block;
 	m_Layer = Layer::Block;
-	m_Scale = { 30.0f,30.0f };
+	m_Scale = { BLOCK_SIZE,BLOCK_SIZE };
 }
 
 void Block::Finalize()

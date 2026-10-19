@@ -15,6 +15,9 @@ private:
 
 	std::unique_ptr<GunBoots> m_GunBoots = std::make_unique<GunBoots>();
 
+	static constexpr float PLAYER_SIZE_X = 30.0f;
+	static constexpr float PLAYER_SIZE_Y = 40.0f;
+
 	static constexpr float MOVE_ACCEL = 5000.0f;
 	static constexpr float MAX_MOVE_SPEED = 300.0f;
 	static constexpr float MAX_FALL_SPEED = 2000.0f;

@@ -25,28 +25,26 @@ void GameScene::Initialize()
 	auto floatingEnemy2 = m_GameObjectManager.AddGameObject(std::make_unique<FloatingEnemy>());
 	floatingEnemy2->SetPosition({ 900.0f,600.0f });
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 100; i++)
 	{//縦仮置き
-		m_GameObjectManager.AddGameObject(std::make_unique<SolidBlock>())->SetPosition({ 150.0f, 150.0f + i * 30.0f });
-		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 1200.0f, 150.0f + i * 30.0f });
-	}
-	for (int i = 0; i < 5; i++)
-	{//横仮置き
-		m_GameObjectManager.AddGameObject(std::make_unique<SolidBlock>())->SetPosition({ 180.0f + i * 30.0f, 700.0f });
-		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 1170.0f - i * 30.0f, 700.0f });
-		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 1170.0f - i * 30.0f, 500.0f });
-	}
-	for (int i = 0; i < 20; i++)
-	{//横仮置き
-		m_GameObjectManager.AddGameObject(std::make_unique<SolidBlock>())->SetPosition({ 300.0f + i * 30.0f, 800.0f });
-	}
-	for (int i = 0; i < 200; i++)
-	{//縦仮置き
-		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 10.0f, 150.0f + i * 300.0f });
+		m_GameObjectManager.AddGameObject(std::make_unique<SolidBlock>())->SetPosition({ 400.0f, 0.0f + i * 47.0f });
+		m_GameObjectManager.AddGameObject(std::make_unique<SolidBlock>())->SetPosition({ 400.0f + 47.0f * 10.0f, 0.0f + i * 47.0f });
 	}
 
-	//仮置き
-	m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 400.0f, 700.0f });
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{//横仮置き
+			if (j == 8) continue;
+			m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 447.0f + j * 47.0f, 800.0f + 2000.0f * i });
+		}
+	}
+
+	for (int i = 0; i < 100; i++)
+	{//縦仮置き
+		m_GameObjectManager.AddGameObject(std::make_unique<SolidBlock>())->SetPosition({ 350.0f, 0.0f + i * 47.0f * 10.0f });
+	}
+
 
 	if (m_Player)
 	{

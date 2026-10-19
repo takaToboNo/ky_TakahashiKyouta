@@ -10,7 +10,7 @@ void FloatingEnemy::Initialize()
 {
 	Enemy::Initialize();
 	m_MoveSpeed = 50.0f;
-	m_Scale = { 30.0f,30.0f };
+	m_Scale = { FLOATING_ENEMY_SIZE_X,FLOATING_ENEMY_SIZE_Y };
 	m_Color = { 200, 0, 200 };
 	m_Hp = 3;
 }
