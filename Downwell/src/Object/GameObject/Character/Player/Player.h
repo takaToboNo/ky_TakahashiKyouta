@@ -27,7 +27,7 @@ private:
 	static constexpr float AIR_DRAG = 0.9f;
 	static constexpr float GROUND_DRAG = 0.9f;
 	static constexpr float DEAD_DRAG = 0.9f;
-	static constexpr float EMPTY_RECOIL_DAMPING = 0.3f;
+	static constexpr float EMPTY_RECOIL_DAMPING = 0.7f;
 
 	static constexpr float DAMAGE_KNOCKBACK_X = 600.0f;
 	static constexpr float DAMAGE_KNOCKBACK_Y = 350.0f;
