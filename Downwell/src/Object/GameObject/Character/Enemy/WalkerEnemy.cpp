@@ -8,7 +8,6 @@
 void WalkerEnemy::Initialize()
 {
 	Enemy::Initialize();
-	m_Tag = Tag::Enemy;
 	m_Position = { 500.0f,650.0f };
 	m_Scale = { 30.0f,30.0f };
 	m_Color = { 100, 0, 0 };

@@ -6,7 +6,6 @@
 void SolidBlock::Initialize()
 {
 	Block::Initialize();
-	m_Tag = Tag::Block;
 }
 
 void SolidBlock::Finalize()

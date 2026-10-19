@@ -31,6 +31,8 @@ void GameScene::Initialize()
 		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 1170.0f - i * 30.0f, 700.0f });
 		m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 1170.0f - i * 30.0f, 500.0f });
 	}
+	//‰¼’u‚«
+	m_GameObjectManager.AddGameObject(std::make_unique<BreakableBlock>())->SetPosition({ 400.0f, 700.0f });
 
 	if (m_Player)
 	{

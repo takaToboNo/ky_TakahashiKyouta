@@ -24,6 +24,8 @@ void Bullet::Finalize()
 
 void Bullet::Update(float dt)
 {
+	GameObject::Update(dt);
+
 	//ë¨ìxå∏êä
 	m_Velocity.y *= AIR_DRAG;
 

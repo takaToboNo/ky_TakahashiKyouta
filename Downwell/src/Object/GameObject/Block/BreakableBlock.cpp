@@ -6,7 +6,6 @@
 void BreakableBlock::Initialize()
 {
 	Block::Initialize();
-	m_Tag = Tag::Block;
 }
 
 void BreakableBlock::Finalize()
