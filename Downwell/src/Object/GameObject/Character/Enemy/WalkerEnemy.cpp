@@ -5,6 +5,7 @@
 #include <cassert>
 #include "DxLib.h"
 #include "Camera.h"
+#include "MathHelper.h"
 
 void WalkerEnemy::Initialize()
 {
@@ -13,6 +14,7 @@ void WalkerEnemy::Initialize()
 	m_Scale = { 30.0f,30.0f };
 	m_Color = { 100, 0, 0 };
 	m_Hp = 1;
+	m_IsGround = false;
 }
 
 void WalkerEnemy::Finalize()
@@ -27,15 +29,13 @@ void WalkerEnemy::Update(float dt)
 	//重力
 	m_Velocity.y += FALL_GRAVITY * dt;
 
+	//速度制限Y
+	m_Velocity.y = math_helper::clamp(m_Velocity.y, -MAX_FALL_SPEED, MAX_FALL_SPEED);
+
 	//座標更新
 	m_Position += m_Velocity * dt;
 
-	//床接地
-	if (m_Position.y >= STAGE_BOTTOM)
-	{
-		m_Position.y = STAGE_BOTTOM;
-		m_Velocity.y = 0.0f;
-	}
+	m_IsGround = false;
 
 	//プール状態にする
 	if (m_Hp <= 0)
@@ -68,6 +68,30 @@ void WalkerEnemy::Destroy()
 void WalkerEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
 	Tag tag = other->GetTag();
+	HitSide hitSide = other->GetHitSide(hitInfo);
+
+	if (tag == Tag::Block)
+	{
+		if (hitSide == HitSide::Top)
+		{
+			m_Velocity.y = 0.0f;
+		}
+		else if (hitSide == HitSide::Bottom)
+		{
+			m_Velocity.y = 0.0f;
+		}
+		else if (hitSide == HitSide::Left)
+		{
+			m_Velocity.x = 0.0f;
+		}
+		else if (hitSide == HitSide::Right)
+		{
+			m_Velocity.x = 0.0f;
+		}
+
+		m_IsGround = true;
+		m_Position -= hitInfo.normal * hitInfo.depth;
+	}
 
 	if (tag == Tag::Bullet)
 	{

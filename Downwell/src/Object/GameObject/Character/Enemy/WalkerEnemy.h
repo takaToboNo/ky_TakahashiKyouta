@@ -6,7 +6,10 @@ class Camera;
 class WalkerEnemy : public Enemy
 {
 private:
-	static constexpr float FALL_GRAVITY = 3500.0f;
+	static constexpr float FALL_GRAVITY = 2000.0f;
+	static constexpr float MAX_FALL_SPEED = 2000.0f;
+
+	bool m_IsGround = false;
 
 public:
 	WalkerEnemy() = default;
