@@ -15,7 +15,7 @@ bool GameManager::Initialize()
 	result = SetDrawScreen(DX_SCREEN_BACK);
 	if (result != 0) return false;
 
-	m_Time.Initialize();
+	m_Timer.Initialize();
 	m_SceneManager.Initialize();
 
 	return true;
@@ -24,7 +24,7 @@ bool GameManager::Initialize()
 void GameManager::Finalize()
 {
 	m_SceneManager.Finalize();
-	m_Time.Finalize();
+	m_Timer.Finalize();
 
 	DxLib_End();
 }
@@ -35,19 +35,19 @@ int GameManager::Run()
 
 	while (ProcessMessage() == 0 && !Input::IsTrigger(Action::End))
 	{
-		m_Time.Tick();
+		m_Timer.Tick();
 
-		while (m_Time.ConsumeFixedStep())
+		while (m_Timer.ConsumeFixedStep())
 		{
 			Input::Update();
-			m_Time.Update();
-			m_SceneManager.Update(m_Time.GetFixedDeltaTime());
+			m_Timer.Update();
+			m_SceneManager.Update(m_Timer.GetFixedDeltaTime());
 		}
 
 		int result;
 		result = ClearDrawScreen();
 		if (result != 0) return -1;
-		m_Time.Draw();
+		m_Timer.Draw();
 		m_SceneManager.Draw();
 		result = ScreenFlip();
 		if (result != 0) return -1;

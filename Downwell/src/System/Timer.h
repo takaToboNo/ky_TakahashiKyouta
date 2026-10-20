@@ -1,6 +1,6 @@
 #pragma once
 
-class Time
+class Timer
 {
 private:
 	static constexpr float FRAME_PER_SECOND = 60.0f;
@@ -19,8 +19,8 @@ private:
 	int m_FrameCount = 0;
 
 public:
-	Time() = default;
-	~Time() = default;
+	Timer() = default;
+	~Timer() = default;
 
 	void Initialize();
 	void Finalize();

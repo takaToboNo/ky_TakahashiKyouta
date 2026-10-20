@@ -37,6 +37,9 @@
     <Filter Include="src\System">
       <UniqueIdentifier>{e5df9a5c-725a-4f39-8448-1112ad3d7e6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Map">
+      <UniqueIdentifier>{ed906d20-494d-4d53-b478-4c58b501202e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -144,7 +147,7 @@
     <ClInclude Include="src\Object\GameObject\Character\Player\PlayerDead.h">
       <Filter>src\Object\GameObject\Character\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\System\Time.h">
+    <ClInclude Include="src\System\Timer.h">
       <Filter>src\System</Filter>
     </ClInclude>
     <ClInclude Include="src\System\Input.h">
@@ -152,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="src\System\ObjectPool.h">
       <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Map\Map.h">
+      <Filter>src\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,8 +248,11 @@
     <ClCompile Include="src\System\Input.cpp">
       <Filter>src\System</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\Time.cpp">
+    <ClCompile Include="src\System\Timer.cpp">
       <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map\Map.cpp">
+      <Filter>src\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

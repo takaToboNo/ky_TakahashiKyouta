@@ -17,7 +17,9 @@ constexpr Color GRAY{ 120, 120, 120 };
 constexpr int WINDOW_WIDTH = 1280;
 constexpr int WINDOW_HEIGHT = 720;
 
-constexpr float STAGE_TOP = 0;
-constexpr float STAGE_BOTTOM = 700;//‰¼
-constexpr float STAGE_LEFT = 0;
+constexpr int MAP_SIZE_Y = 40;
+constexpr int MAP_SIZE_X = 11;
+constexpr float TILE_SIZE = 47.0f;
+
+constexpr float STAGE_LEFT = ((static_cast<float>(WINDOW_WIDTH) * 0.5f) - (static_cast<float>(MAP_SIZE_X - 1) * TILE_SIZE * 0.5f));
 constexpr float STAGE_RIGHT = 1280;

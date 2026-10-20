@@ -1,10 +1,10 @@
 #define NOMINMAX
 #include <algorithm>
-#include "Time.h"
+#include "Timer.h"
 #include "DxLib.h"
 #include "GameHelper.h"
 
-void Time::Initialize()
+void Timer::Initialize()
 {
 	m_LastCount = GetNowHiPerformanceCount();
 	m_DeltaTime = 0.0f;
@@ -16,11 +16,11 @@ void Time::Initialize()
 	m_FrameCount = 0;
 }
 
-void Time::Finalize()
+void Timer::Finalize()
 {
 }
 
-void Time::Tick()
+void Timer::Tick()
 {
 	const LONGLONG now = GetNowHiPerformanceCount();
 	const float raw = static_cast<float>(now - m_LastCount) * MICRO_TO_SECOND;
@@ -30,7 +30,7 @@ void Time::Tick()
 	m_Accumulator += m_DeltaTime;
 }
 
-void Time::Update()
+void Timer::Update()
 {
 #ifdef _DEBUG
 	m_FpsTimer += FIXED_DELTA_TIME;
@@ -46,7 +46,7 @@ void Time::Update()
 #endif
 }
 
-void Time::Draw()
+void Timer::Draw()
 {
 #ifdef _DEBUG
 	//デバッグ表示
@@ -55,7 +55,7 @@ void Time::Draw()
 #endif
 }
 
-bool Time::ConsumeFixedStep()
+bool Timer::ConsumeFixedStep()
 {
 	if (m_Accumulator < FIXED_DELTA_TIME) return false;
 

@@ -4,7 +4,6 @@
 class Block : public GameObject
 {
 protected:
-	static constexpr float BLOCK_SIZE = 47.0f;
 
 public:
 	Block() = default;

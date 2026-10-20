@@ -1,11 +1,11 @@
 #pragma once
 #include "SceneManager.h"
-#include "Time.h"
+#include "Timer.h"
 
 class GameManager
 {
 private:
-	Time m_Time;
+	Timer m_Timer;
 	SceneManager m_SceneManager;
 	bool m_IsRunning = true;
 
