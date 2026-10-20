@@ -3,6 +3,7 @@
 #include <memory>
 #include "Object.h"
 #include "Bullet.h"
+#include "ObjectPool.h"
 
 class GameObjectManager;
 class Player;
@@ -10,12 +11,12 @@ class Player;
 class GunBoots : public Object
 {
 private:
-	static constexpr int MAX_POOL_SIZE = 20;
+	static constexpr int BULLET_POOL_SIZE = 20;
 	static constexpr int MAX_AMMO = 10;
 	int m_Ammo = 0;
 	int m_ShotInterval = 0;
 
-	std::vector<Bullet*> m_BulletPool = {};
+	ObjectPool<Bullet> m_BulletPool;
 
 public:
 	GunBoots() = default;

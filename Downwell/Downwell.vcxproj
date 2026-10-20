@@ -52,6 +52,7 @@
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\TitleScene.h" />
     <ClInclude Include="src\System\Input.h" />
+    <ClInclude Include="src\System\ObjectPool.h" />
     <ClInclude Include="src\System\Time.h" />
     <ClInclude Include="src\Utility\GameHelper.h" />
     <ClInclude Include="src\Utility\MathHelper.h" />
