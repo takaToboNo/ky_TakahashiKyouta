@@ -41,6 +41,8 @@ void GameObjectManager::CheckHitAll(const std::vector<std::unique_ptr<GameObject
 		{
 			if (!objects[i] || !objects[j]) continue;
 
+			if (objects[i]->GetTag() == Tag::Block && objects[j]->GetTag() == Tag::Block) continue;
+
 			if (!objects[i]->IsActive() || !objects[j]->IsActive()) continue;
 
 			Collider* colliderA = objects[i]->GetCollider();

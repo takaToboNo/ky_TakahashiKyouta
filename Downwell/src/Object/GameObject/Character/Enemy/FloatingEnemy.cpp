@@ -55,14 +55,20 @@ void FloatingEnemy::Update(float dt)
 
 void FloatingEnemy::Draw(const Camera& camera)
 {
-	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - camera.GetPosition().x);
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - camera.GetPosition().y);
-	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - camera.GetPosition().x);
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - camera.GetPosition().y);
+	const Vector2& pos = camera.GetPosition();
+	const float CAMERA_MARGIN = 100.0f;
 
-	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), FALSE);
+	if (m_Position.y >= pos.y - CAMERA_MARGIN && m_Position.y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
+	{
+		int x1, y1;
+		x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - pos.x);
+		y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - pos.y);
+		int x2, y2;
+		x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - pos.x);
+		y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
+
+		DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), FALSE);
+	}
 
 #ifdef _DEBUG
 	DrawFormatString(10, 700, GetColor(m_Color.r, m_Color.g, m_Color.b), "FloatingEnemyHP : %d", m_Hp);

@@ -10,6 +10,7 @@
 #include "WalkerEnemy.h"
 #include "Player.h"
 #include "GameHelper.h"
+#include "GameObject.h"
 
 bool Map::LoadMapData(const std::string& mapName)
 {
@@ -40,7 +41,7 @@ bool Map::LoadMapData(const std::string& mapName)
 	return true;
 }
 
-void Map::GenerateMap(GameObjectManager& manager, const Vector2& startPosition, Player* player)
+void Map::GenerateMap(GameObjectManager& manager, const Vector2& startPosition, Player* player, std::vector<GameObject*>& gameObject)
 {
 	const Vector2& pos = startPosition;
 
@@ -59,7 +60,8 @@ void Map::GenerateMap(GameObjectManager& manager, const Vector2& startPosition, 
 				if (solidBlock)
 				{
 					solidBlock->SetPosition(offset);
-					solidBlock->SetActive(true);
+					solidBlock->SetActive(false);
+					gameObject.push_back(solidBlock);
 				}
 				break;
 			}
@@ -69,7 +71,8 @@ void Map::GenerateMap(GameObjectManager& manager, const Vector2& startPosition, 
 				if (breakableBlock)
 				{
 					breakableBlock->SetPosition(offset);
-					breakableBlock->SetActive(true);
+					breakableBlock->SetActive(false);
+					gameObject.push_back(breakableBlock);
 				}
 				break;
 			}
@@ -79,8 +82,9 @@ void Map::GenerateMap(GameObjectManager& manager, const Vector2& startPosition, 
 				if (floatingEnemy)
 				{
 					floatingEnemy->SetPosition(offset);
-					floatingEnemy->SetActive(true);
+					floatingEnemy->SetActive(false);
 					floatingEnemy->SetPlayer(player);
+					gameObject.push_back(floatingEnemy);
 				}
 				break;
 			}
@@ -90,7 +94,8 @@ void Map::GenerateMap(GameObjectManager& manager, const Vector2& startPosition, 
 				if (walkerEnemy)
 				{
 					walkerEnemy->SetPosition(offset);
-					walkerEnemy->SetActive(true);
+					walkerEnemy->SetActive(false);
+					gameObject.push_back(walkerEnemy);
 				}
 				break;
 			}

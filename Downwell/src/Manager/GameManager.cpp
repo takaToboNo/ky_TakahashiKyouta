@@ -37,11 +37,15 @@ int GameManager::Run()
 	{
 		m_Timer.Tick();
 
-		while (m_Timer.ConsumeFixedStep())
+		int count = 0;
+
+		while (m_Timer.ConsumeFixedStep() && count < 3)
 		{
 			Input::Update();
 			m_Timer.Update();
 			m_SceneManager.Update(m_Timer.GetFixedDeltaTime());
+
+			count++;
 		}
 
 		int result;

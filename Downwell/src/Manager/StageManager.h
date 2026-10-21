@@ -1,12 +1,17 @@
 #pragma once
 #include <array>
+#include <vector>
 #include "GameHelper.h"
 #include "Map.h"
+
+class GameObject;
 
 struct Section
 {
 	Map* map = nullptr;
 	float offsetY = 0.0f;
+	bool isActive = false;
+	std::vector<GameObject*> gameObjects{};
 };
 
 class StageManager

@@ -2,9 +2,11 @@
 #include <string>
 #include "Vector2.h"
 #include "GameHelper.h"
+#include <vector>
 
 class GameObjectManager;
 class Player;
+class GameObject;
 
 enum class MapObjectType
 {
@@ -26,6 +28,6 @@ public:
 
 	bool LoadMapData(const std::string& mapName);
 
-	void GenerateMap(GameObjectManager& manager, const Vector2& startPosition, Player* player);
+	void GenerateMap(GameObjectManager& manager, const Vector2& startPosition, Player* player, std::vector<GameObject*>& gameObject);
 
 };

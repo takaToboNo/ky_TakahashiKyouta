@@ -3,6 +3,7 @@
 #include "StageManager.h"
 #include "DxLib.h"
 #include "MathHelper.h"
+#include "GameObject.h"
 
 bool StageManager::Initialize()
 {
@@ -34,6 +35,30 @@ void StageManager::Finalize()
 void StageManager::Update(float playerPositionY)
 {
     int currentSection = FindCurrentSection(playerPositionY);
+    if (m_CurrentSection == currentSection) return;
+
+    for (int i = 0; i < STAGE_SECTION_COUNT; i++)
+    {
+        bool isNeighbor = (std::abs(currentSection - i) <= 1);
+        
+        if (isNeighbor && !m_Sections[i].isActive)
+        {
+            for (auto* obj : m_Sections[i].gameObjects)
+            {
+                obj->SetActive(true);
+            }
+            m_Sections[i].isActive = true;
+        }
+
+        if (!isNeighbor && m_Sections[i].isActive)
+        {
+            for (auto* obj : m_Sections[i].gameObjects)
+            {
+                obj->SetActive(false);
+            }
+            m_Sections[i].isActive = false;
+        }
+    }
 
     m_CurrentSection = currentSection;
 }
@@ -53,7 +78,7 @@ void StageManager::GenerateStage(GameObjectManager& manager, const Vector2& star
 
         if (!m_Sections[i].map) return;
 
-        m_Sections[i].map->GenerateMap(manager, offset, player);
+        m_Sections[i].map->GenerateMap(manager, offset, player, m_Sections[i].gameObjects);
     }
 }
 
@@ -100,7 +125,7 @@ int StageManager::FindCurrentSection(float playerPositionY)
     {
         if (playerPositionY > m_Sections[i].offsetY && playerPositionY <= m_Sections[i].offsetY + sectionY)
         {
-            return (i + 1);
+            return i;
         }
     }
 
