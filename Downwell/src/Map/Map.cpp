@@ -14,7 +14,7 @@
 
 void Map::LoadMapData(const std::string& mapName)
 {
-	int fileHandle = FileRead_open(("Data/Map/" + mapName).c_str());
+	int fileHandle = FileRead_open((mapName).c_str());
 	assert(fileHandle != 0);
 
 	int result;
@@ -43,10 +43,14 @@ void Map::LoadMapData(const std::string& mapName)
 
 void Map::SetMap(GameObjectManager& manager, const Vector2& startPosition, Player* player)
 {
+	const Vector2& pos = startPosition;
+
 	for (int i = 0; i < MAP_SIZE_Y; i++)
 	{
 		for (int j = 0; j < MAP_SIZE_X; j++)
 		{
+			Vector2 offset = { pos.x + j * TILE_SIZE,pos.y + i * TILE_SIZE };
+
 			MapObjectType mapObjectType = static_cast<MapObjectType>(m_Map[i][j]);
 			switch (mapObjectType)
 			{
@@ -55,7 +59,7 @@ void Map::SetMap(GameObjectManager& manager, const Vector2& startPosition, Playe
 				SolidBlock* solidBlock = manager.AddGameObject(std::make_unique<SolidBlock>());
 				if (solidBlock)
 				{
-					solidBlock->SetPosition({ startPosition.x + j * TILE_SIZE,startPosition.y + i * TILE_SIZE });
+					solidBlock->SetPosition(offset);
 					solidBlock->SetActive(true);
 				}
 				break;
@@ -65,7 +69,7 @@ void Map::SetMap(GameObjectManager& manager, const Vector2& startPosition, Playe
 				BreakableBlock* breakableBlock = manager.AddGameObject(std::make_unique<BreakableBlock>());
 				if (breakableBlock)
 				{
-					breakableBlock->SetPosition({ startPosition.x + j * TILE_SIZE,startPosition.y + i * TILE_SIZE });
+					breakableBlock->SetPosition(offset);
 					breakableBlock->SetActive(true);
 				}
 				break;
@@ -75,7 +79,7 @@ void Map::SetMap(GameObjectManager& manager, const Vector2& startPosition, Playe
 				FloatingEnemy* floatingEnemy = manager.AddGameObject(std::make_unique<FloatingEnemy>());
 				if (floatingEnemy)
 				{
-					floatingEnemy->SetPosition({ startPosition.x + j * TILE_SIZE,startPosition.y + i * TILE_SIZE });
+					floatingEnemy->SetPosition(offset);
 					floatingEnemy->SetActive(true);
 					floatingEnemy->SetPlayer(player);
 				}
@@ -86,7 +90,7 @@ void Map::SetMap(GameObjectManager& manager, const Vector2& startPosition, Playe
 				WalkerEnemy* walkerEnemy = manager.AddGameObject(std::make_unique<WalkerEnemy>());
 				if (walkerEnemy)
 				{
-					walkerEnemy->SetPosition({ startPosition.x + j * TILE_SIZE,startPosition.y + i * TILE_SIZE });
+					walkerEnemy->SetPosition(offset);
 					walkerEnemy->SetActive(true);
 				}
 				break;

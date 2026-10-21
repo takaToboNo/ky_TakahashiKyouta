@@ -5,7 +5,7 @@ class GameObject;
 
 enum class HitSide
 {	//Ž©•ª‚©‚çŒ©‚Ä‘ŠŽè‚ª‚¢‚éˆÊ’u
-	Left,
+	Left = 0,
 	Right,
 	Top,
 	Bottom,

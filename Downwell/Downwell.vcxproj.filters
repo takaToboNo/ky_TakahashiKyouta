@@ -159,6 +159,9 @@
     <ClInclude Include="src\Map\Map.h">
       <Filter>src\Map</Filter>
     </ClInclude>
+    <ClInclude Include="src\Manager\StageManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -253,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="src\Map\Map.cpp">
       <Filter>src\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\StageManager.cpp">
+      <Filter>src\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

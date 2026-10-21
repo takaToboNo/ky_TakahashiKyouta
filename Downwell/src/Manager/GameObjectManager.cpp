@@ -64,8 +64,6 @@ void GameObjectManager::CheckHitAll(const std::vector<std::unique_ptr<GameObject
 bool GameObjectManager::CheckHit(const Collider& a, const Collider& b, HitInfo* out)
 {
 	return CheckHit(a.GetWorldRect(), b.GetWorldRect(), out);
-
-	return false;
 }
 
 bool GameObjectManager::CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* out)

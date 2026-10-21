@@ -17,12 +17,9 @@ void GameScene::Initialize()
 
 	//‰¼’u‚«
 	m_Player = m_GameObjectManager.AddGameObject(std::make_unique<Player>());
-	m_Map.LoadMapData("Start.csv");
-	m_Map.SetMap(m_GameObjectManager, Vector2(STAGE_LEFT,0.0f), m_Player);
-	m_Map.LoadMapData("Chunk01.csv");
-	m_Map.SetMap(m_GameObjectManager, Vector2(STAGE_LEFT,TILE_SIZE * static_cast<float>(MAP_SIZE_Y) * 1.0f), m_Player);
-	m_Map.LoadMapData("Chunk02.csv");
-	m_Map.SetMap(m_GameObjectManager, Vector2(STAGE_LEFT,TILE_SIZE * static_cast<float>(MAP_SIZE_Y) * 2.0f), m_Player);
+
+	m_StageManager.Initialize();
+	m_StageManager.GenerateStage(m_GameObjectManager, { STAGE_LEFT, 0.0f }, m_Player);
 
 	if (m_Player)
 	{
@@ -42,16 +39,18 @@ void GameScene::Finalize()
 {
 	m_GameObjectManager.Finalize();
 	m_Camera.Finalize();
+	m_StageManager.Finalize();
 
 	Scene::Finalize();
 }
 
 void GameScene::Update(float dt)
 {
+	m_StageManager.Update(m_Player->GetPosition().y);
 	m_Camera.Update(dt);
 	m_GameObjectManager.Update(dt);
 
-	if (m_Player->GetDeathTimer() <= 0.0f)
+	if (m_Player->GetDeathTimer() <= 0.0f || m_StageManager.GetCurrentSection() == -1)
 	{
 		m_RequestScene = SceneType::Result;
 	}
@@ -59,5 +58,6 @@ void GameScene::Update(float dt)
 
 void GameScene::Draw()
 {
+	m_StageManager.Draw();
 	m_GameObjectManager.Draw(m_Camera);
 }
