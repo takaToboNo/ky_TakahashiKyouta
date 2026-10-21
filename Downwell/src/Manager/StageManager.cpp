@@ -1,23 +1,30 @@
 #include <random>
 #include <iostream>
-#include <cassert>
 #include "StageManager.h"
 #include "DxLib.h"
 #include "MathHelper.h"
 
-void StageManager::Initialize()
+bool StageManager::Initialize()
 {
-    m_StartMap.LoadMapData("Data/Map/start.csv");
-    m_GoalMap.LoadMapData("Data/Map/goal.csv");
+    bool result = true;
+
+    result = m_StartMap.LoadMapData("Data/Map/start.csv");
+    if (!result) return false;
+
+    result = m_GoalMap.LoadMapData("Data/Map/goal.csv");
+    if (!result) return false;
 
     for (int i = 0; i < MIDDLE_MAP_ALL; i++)
     {
         std::string fileName = "Data/Map/middle_" + std::to_string(i + 1) + ".csv";
-        m_MiddleMaps[i].LoadMapData(fileName);
+        result = m_MiddleMaps[i].LoadMapData(fileName);
+        if (!result) return false;
     }
 
     SetRandomNumbers();
     SetSections();
+
+    return true;
 }
 
 void StageManager::Finalize()
@@ -44,10 +51,9 @@ void StageManager::GenerateStage(GameObjectManager& manager, const Vector2& star
     {
         Vector2 offset = { startPosition.x, startPosition.y + m_Sections[i].offsetY };
 
-        assert(m_Sections[i].map);
         if (!m_Sections[i].map) return;
 
-        m_Sections[i].map->SetMap(manager, offset, player);
+        m_Sections[i].map->GenerateMap(manager, offset, player);
     }
 }
 

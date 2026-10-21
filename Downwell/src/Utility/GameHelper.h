@@ -26,4 +26,4 @@ constexpr int MIDDLE_SECTION_COUNT = STAGE_SECTION_COUNT - 2;//ÉXÉ^Å[ÉgÇ∆ÉSÅ[ÉãÇ
 constexpr int MIDDLE_MAP_ALL = 10;
 
 constexpr float STAGE_LEFT = ((static_cast<float>(WINDOW_WIDTH) * 0.5f) - (static_cast<float>(MAP_SIZE_X - 1) * TILE_SIZE * 0.5f));
-constexpr float STAGE_RIGHT = 1280;
+constexpr float STAGE_RIGHT = ((static_cast<float>(WINDOW_WIDTH) * 0.5f) + (static_cast<float>(MAP_SIZE_X - 1) * TILE_SIZE * 0.5f));

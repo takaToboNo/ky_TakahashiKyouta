@@ -15,20 +15,16 @@ void GameScene::Initialize()
 {
 	Scene::Initialize();
 
-	//‰¼’u‚«
 	m_Player = m_GameObjectManager.AddGameObject(std::make_unique<Player>());
 
-	m_StageManager.Initialize();
-	m_StageManager.GenerateStage(m_GameObjectManager, { STAGE_LEFT, 0.0f }, m_Player);
-
-	if (m_Player)
+	bool result = true;
+	result = m_StageManager.Initialize();
+	if (!result)
 	{
-		GunBoots* gunBoots = m_Player->GetGunBoots();
-		if (gunBoots)
-		{
-			gunBoots->SetupBullet(m_GameObjectManager);
-		}
+		MessageBoxA(NULL, ".csv‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½", "Fatal Error", MB_OK | MB_ICONERROR);
+		DxLib_End();
 	}
+	m_StageManager.GenerateStage(m_GameObjectManager, { STAGE_LEFT, 0.0f }, m_Player);
 
 	m_Camera.SetTarget(m_Player);
 

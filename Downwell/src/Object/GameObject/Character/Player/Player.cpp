@@ -34,6 +34,8 @@ void Player::Initialize()
 	m_KnockbackTimer = 0.0f;
 	m_InvincibleTimer = 0.0f;
 	m_DeathTimer = DEATH_TIME;
+
+	m_GunBoots->SetupBullet(*m_GameObjectManager);
 }
 
 void Player::Finalize()

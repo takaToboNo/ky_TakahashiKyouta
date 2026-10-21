@@ -4,6 +4,7 @@
 #include "Collider.h"
 
 class Camera;
+class GameObjectManager;
 
 class GameObject : public Object
 {
@@ -11,6 +12,8 @@ protected:
 	Vector2 m_Scale = { 1.0f,1.0f };
 	Color m_Color = WHITE;
 	Collider m_Collider;
+
+	GameObjectManager* m_GameObjectManager = nullptr;
 
 public:
 	GameObject() = default;
@@ -28,5 +31,7 @@ public:
 	virtual void OnCollision(GameObject* other, const HitInfo& hitInfo) {}
 	Collider* GetCollider() { return &m_Collider; }
 	HitSide GetHitSide(const HitInfo& hitInfo);
+
+	void SetGameObjectManager(GameObjectManager* manager) { m_GameObjectManager = manager; }
 
 };

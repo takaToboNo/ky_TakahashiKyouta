@@ -18,15 +18,14 @@ enum class MapObjectType
 class Map
 {
 private:
-	int m_Map[MAP_SIZE_Y][MAP_SIZE_X];
+	int m_Map[MAP_SIZE_Y][MAP_SIZE_X]{};
 
 public:
 	Map() = default;
 	~Map() = default;
 
-	void LoadMapData(const std::string& mapName);
+	bool LoadMapData(const std::string& mapName);
 
-	//StageManager‚ÉˆÚ‚·
-	void SetMap(GameObjectManager& manager, const Vector2& startPosition, Player* player);
+	void GenerateMap(GameObjectManager& manager, const Vector2& startPosition, Player* player);
 
 };

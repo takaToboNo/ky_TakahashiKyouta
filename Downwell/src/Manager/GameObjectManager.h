@@ -27,6 +27,7 @@ public:
 		T* ptr = gameObject.get();
 
 		m_GameObjects.push_back(std::move(gameObject));
+		m_GameObjects.back()->SetGameObjectManager(this);
 		m_GameObjects.back()->Initialize();
 
 		std::sort(m_GameObjects.begin(), m_GameObjects.end(),

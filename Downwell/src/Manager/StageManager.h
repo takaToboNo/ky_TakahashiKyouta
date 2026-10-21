@@ -5,8 +5,8 @@
 
 struct Section
 {
-	Map* map;
-	float offsetY;
+	Map* map = nullptr;
+	float offsetY = 0.0f;
 };
 
 class StageManager
@@ -29,7 +29,7 @@ public:
 	StageManager() = default;
 	~StageManager() = default;
 
-	void Initialize();
+	bool Initialize();
 	void Finalize();
 	void Update(float playerPositionY);
 	void Draw();

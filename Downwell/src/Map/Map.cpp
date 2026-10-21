@@ -10,12 +10,11 @@
 #include "WalkerEnemy.h"
 #include "Player.h"
 #include "GameHelper.h"
-#include <cassert>
 
-void Map::LoadMapData(const std::string& mapName)
+bool Map::LoadMapData(const std::string& mapName)
 {
 	int fileHandle = FileRead_open((mapName).c_str());
-	assert(fileHandle != 0);
+	if (fileHandle == 0) return false;
 
 	int result;
 
@@ -23,7 +22,7 @@ void Map::LoadMapData(const std::string& mapName)
 	{
 		char line[256];
 		result = FileRead_gets(line, sizeof(line), fileHandle);
-		assert(result != -1);
+		if (result == -1) return false;
 
 		std::stringstream ss(line);
 		std::string cell;
@@ -36,12 +35,12 @@ void Map::LoadMapData(const std::string& mapName)
 	}
 
 	result = FileRead_close(fileHandle);
-	assert(result != -1);
+	if (result == -1) return false;
 
-	return;
+	return true;
 }
 
-void Map::SetMap(GameObjectManager& manager, const Vector2& startPosition, Player* player)
+void Map::GenerateMap(GameObjectManager& manager, const Vector2& startPosition, Player* player)
 {
 	const Vector2& pos = startPosition;
 
