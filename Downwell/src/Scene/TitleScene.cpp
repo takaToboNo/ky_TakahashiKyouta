@@ -4,11 +4,15 @@
 #include "Input.h"
 #include "GameHelper.h"
 
-void TitleScene::Initialize()
+bool TitleScene::Initialize()
 {
-	Scene::Initialize();
+	bool result = true;
+	result = Scene::Initialize();
+	if (!result) return false;
 
 	m_Camera.Initialize();
+
+	return true;
 }
 
 void TitleScene::Finalize()

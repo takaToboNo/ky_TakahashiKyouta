@@ -14,7 +14,7 @@ public:
 	SceneManager() = default;
 	~SceneManager() = default;
 
-	void Initialize();
+	bool Initialize();
 	void Finalize();
 	void Update(float dt);
 	void Draw();

@@ -11,6 +11,7 @@ protected:
 	Vector2 m_Position = Vector2::Zero();
 	Vector2 m_OldPosition = Vector2::Zero();
 	bool m_IsActive = false;
+	bool m_IsDead = false;
 
 public:
 	Object() = default;
@@ -28,5 +29,7 @@ public:
 	virtual const Vector2& GetOldPosition() const { return m_OldPosition; }
 	virtual void SetActive(bool isActive) { m_IsActive = isActive; }
 	virtual bool IsActive() const { return m_IsActive; }
+	virtual void SetDead(bool isDead) { m_IsDead = isDead; }
+	virtual bool IsDead() const { return m_IsDead; }
 
 };

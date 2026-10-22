@@ -62,3 +62,13 @@ bool Timer::ConsumeFixedStep()
 	m_Accumulator -= FIXED_DELTA_TIME;
 	return true;
 }
+
+bool Timer::HasRemainingStep()
+{
+	return m_Accumulator >= FIXED_DELTA_TIME;
+}
+
+void Timer::DiscardRemainingSteps()
+{
+	m_Accumulator = 0.0f;
+}

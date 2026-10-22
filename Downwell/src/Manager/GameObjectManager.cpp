@@ -3,6 +3,7 @@
 #define NOMINMAX
 #include "MathHelper.h"
 #include "Collider.h"
+#include "Camera.h"
 
 void GameObjectManager::Finalize()
 {
@@ -19,16 +20,42 @@ void GameObjectManager::Update(float dt)
 		if (gameObject->IsActive()) gameObject->Update(dt);
 	}
 	CheckHitAll(m_GameObjects);
+
+	ApplyPendingGameObjects();
 }
 
 void GameObjectManager::Draw(const Camera& camera)
 {
 	for (auto& gameObject : m_GameObjects)
 	{
-		if (gameObject->IsActive())gameObject->Draw(camera);
+		const Vector2& pos = camera.GetPosition();
+		const float CAMERA_MARGIN = 100.0f;
+
+		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
+		{
+			if (gameObject->IsActive())gameObject->Draw(camera);
+		}
 	}
 }
 
+
+void GameObjectManager::ApplyPendingGameObjects()
+{
+	for (auto& gameObject : m_PendingGameObjects)
+	{
+		m_GameObjects.push_back(std::move(gameObject));
+	}
+
+	SortGameObjectsByLayer();
+	m_PendingGameObjects.clear();
+}
+
+void GameObjectManager::SortGameObjectsByLayer()
+{
+	std::sort(m_GameObjects.begin(), m_GameObjects.end(),
+		[](const std::unique_ptr<GameObject>& a, const std::unique_ptr<GameObject>& b)
+		{ return a->GetLayer() < b->GetLayer(); });
+}
 
 //------------------------------------------------------------------
 // 当たり判定チェック

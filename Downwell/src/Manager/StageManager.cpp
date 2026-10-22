@@ -45,6 +45,8 @@ void StageManager::Update(float playerPositionY)
         {
             for (auto* obj : m_Sections[i].gameObjects)
             {
+                if (obj->IsDead()) continue;
+
                 obj->SetActive(true);
             }
             m_Sections[i].isActive = true;

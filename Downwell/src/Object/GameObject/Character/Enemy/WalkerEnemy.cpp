@@ -37,8 +37,14 @@ void WalkerEnemy::Update(float dt)
 
 	m_IsGround = false;
 
-	//プール状態にする
+	//死亡
 	if (m_Hp <= 0)
+	{
+		m_IsDead = true;
+	}
+
+	//死んでいるならプール状態
+	if (m_IsDead)
 	{
 		m_IsActive = false;
 	}
@@ -47,19 +53,15 @@ void WalkerEnemy::Update(float dt)
 void WalkerEnemy::Draw(const Camera& camera)
 {
 	const Vector2& pos = camera.GetPosition();
-	const float CAMERA_MARGIN = 100.0f;
 
-	if (m_Position.y >= pos.y - CAMERA_MARGIN && m_Position.y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
-	{
-		int x1, y1;
-		x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - pos.x);
-		y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - pos.y);
-		int x2, y2;
-		x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - pos.x);
-		y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
+	int x1, y1;
+	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - pos.x);
+	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - pos.y);
+	int x2, y2;
+	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - pos.x);
+	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
 
-		DrawBox(x1, y1, x2, y2, GetColor(RED.r, RED.g, RED.b), TRUE);
-	}
+	DrawBox(x1, y1, x2, y2, GetColor(RED.r, RED.g, RED.b), TRUE);
 
 #ifdef _DEBUG
 	DrawFormatString(10, 680, GetColor(RED.r, RED.g, RED.b), "WalkerEnemyHP : %d", m_Hp);

@@ -1,8 +1,10 @@
 #include "Scene.h"
 
-void Scene::Initialize()
+bool Scene::Initialize()
 {
 	m_KeyInterval = 30;
+
+	return true;
 }
 
 void Scene::Finalize()

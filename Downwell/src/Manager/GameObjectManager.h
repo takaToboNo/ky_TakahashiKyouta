@@ -10,6 +10,7 @@ class GameObjectManager
 {
 private:
 	std::vector<std::unique_ptr<GameObject>> m_GameObjects = {};
+	std::vector<std::unique_ptr<GameObject>> m_PendingGameObjects = {};
 
 public:
 	GameObjectManager() = default;
@@ -19,6 +20,7 @@ public:
 	void Update(float dt);
 	void Draw(const Camera& camera);
 
+	//Initializeでのみ呼ぶこと
 	template<class T>
 	T* AddGameObject(std::unique_ptr<T> gameObject)
 	{
@@ -30,14 +32,28 @@ public:
 		m_GameObjects.back()->SetGameObjectManager(this);
 		m_GameObjects.back()->Initialize();
 
-		std::sort(m_GameObjects.begin(), m_GameObjects.end(),
-			[](const std::unique_ptr<GameObject>& a, const std::unique_ptr<GameObject>& b)
-			{ return a->GetLayer() < b->GetLayer(); });
+		return ptr;
+	}
+
+	//UpdateでGameObjectを作りたいとき
+	template<class T>
+	T* AddPendingGameObject(std::unique_ptr<T> gameObject)
+	{
+		if (!gameObject) return nullptr;
+
+		T* ptr = gameObject.get();
+
+		m_PendingGameObjects.push_back(std::move(gameObject));
+		m_PendingGameObjects.back()->SetGameObjectManager(this);
+		m_PendingGameObjects.back()->Initialize();
 
 		return ptr;
 	}
 
+	void SortGameObjectsByLayer();
 
+private:
+	void ApplyPendingGameObjects();
 	//当たり判定チェック
 	void CheckHitAll(const std::vector<std::unique_ptr<GameObject>>& objects);
 

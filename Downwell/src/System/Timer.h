@@ -32,4 +32,7 @@ public:
 	bool ConsumeFixedStep();
 	float GetFixedDeltaTime() const { return FIXED_DELTA_TIME; }
 
+	bool HasRemainingStep();
+	void DiscardRemainingSteps();
+
 };

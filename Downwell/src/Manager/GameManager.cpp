@@ -16,7 +16,8 @@ bool GameManager::Initialize()
 	if (result != 0) return false;
 
 	m_Timer.Initialize();
-	m_SceneManager.Initialize();
+	result = m_SceneManager.Initialize();
+	if (result == 0) return false;
 
 	return true;
 }
@@ -39,13 +40,19 @@ int GameManager::Run()
 
 		int count = 0;
 
-		while (m_Timer.ConsumeFixedStep() && count < 3)
+		while (count < MAX_UPDATE && m_Timer.ConsumeFixedStep())
 		{
 			Input::Update();
 			m_Timer.Update();
 			m_SceneManager.Update(m_Timer.GetFixedDeltaTime());
 
 			count++;
+		}
+
+		if (count >= MAX_UPDATE && m_Timer.HasRemainingStep())
+		{
+			//’Ç‚¢‚Â‚¯‚È‚©‚Á‚½•ª‚ðŽÌ‚Ä‚é
+ 			m_Timer.DiscardRemainingSteps();
 		}
 
 		int result;

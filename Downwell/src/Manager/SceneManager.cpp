@@ -1,9 +1,15 @@
 #include "SceneManager.h"
 
-void SceneManager::Initialize()
+bool SceneManager::Initialize()
 {
+	bool result = true;
+
 	m_Scene = std::make_unique<GameScene>();
-	m_Scene->Initialize();
+
+	result = m_Scene->Initialize();
+	if (!result) return false;
+
+	return true;
 }
 
 void SceneManager::Finalize()

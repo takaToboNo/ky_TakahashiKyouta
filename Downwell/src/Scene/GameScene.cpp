@@ -11,24 +11,24 @@
 #include "SolidBlock.h"
 #include "GameHelper.h"
 
-void GameScene::Initialize()
+bool GameScene::Initialize()
 {
-	Scene::Initialize();
+	bool result = true;
+	result = Scene::Initialize();
+	if (!result) return false;
 
 	m_Player = m_GameObjectManager.AddGameObject(std::make_unique<Player>());
 
-	bool result = true;
 	result = m_StageManager.Initialize();
-	if (!result)
-	{
-		MessageBoxA(NULL, ".csvÇÃì«Ç›çûÇ›Ç…é∏îsÇµÇ‹ÇµÇΩ", "Fatal Error", MB_OK | MB_ICONERROR);
-		DxLib_End();
-	}
+	if (!result) return false;
 	m_StageManager.GenerateStage(m_GameObjectManager, { STAGE_LEFT, 0.0f }, m_Player);
 
 	m_Camera.SetTarget(m_Player);
-
 	m_Camera.Initialize();
+
+	m_GameObjectManager.SortGameObjectsByLayer();
+
+	return true;
 }
 
 void GameScene::Finalize()

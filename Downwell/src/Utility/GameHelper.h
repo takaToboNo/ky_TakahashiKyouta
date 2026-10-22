@@ -14,6 +14,8 @@ constexpr Color YELLOW{ 255, 255, 0 };
 constexpr Color PURPLE{ 255, 0, 255 };
 constexpr Color GRAY{ 120, 120, 120 };
 
+constexpr int MAX_UPDATE = 3;
+
 constexpr int WINDOW_WIDTH = 1280;
 constexpr int WINDOW_HEIGHT = 720;
 

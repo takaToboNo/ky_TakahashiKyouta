@@ -8,7 +8,7 @@ private:
 public:
 	TitleScene() = default;
 
-	void Initialize() override;
+	bool Initialize() override;
 	void Finalize() override;
 	void Update(float dt) override;
 	void Draw() override;
