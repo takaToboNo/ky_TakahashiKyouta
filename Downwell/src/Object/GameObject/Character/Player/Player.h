@@ -88,7 +88,6 @@ public:
 	void AirDrag() { m_Velocity.x *= AIR_DRAG; }
 	void GroundDrag() { m_Velocity.x *= GROUND_DRAG; }
 	void DeadDrag() { m_Velocity.x *= DEAD_DRAG; }
-	void StopEnemy(class Enemy);
 	void Shot(const Vector2& position);
 
 	void SetCanAutoShot(bool can) { m_CanAutoShot = can; }
