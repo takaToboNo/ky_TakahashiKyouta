@@ -31,14 +31,9 @@ void GameObject::Destroy()
 
 HitSide GameObject::GetHitSide(const HitInfo& hitInfo)
 {
-	HitSide hitSide;
 	if (std::abs(hitInfo.normal.x) > std::abs(hitInfo.normal.y))
 	{
-		hitSide = (hitInfo.normal.x > 0.0f) ? HitSide::Right : HitSide::Left;
+		return (hitInfo.normal.x > 0.0f) ? HitSide::Right : HitSide::Left;
 	}
-	else
-	{
-		hitSide = (hitInfo.normal.y > 0.0f) ? HitSide::Bottom : HitSide::Top;
-	}
-	return hitSide;
+	return (hitInfo.normal.y > 0.0f) ? HitSide::Bottom : HitSide::Top;
 }

@@ -29,7 +29,7 @@ void GameObjectManager::Draw(const Camera& camera)
 	for (auto& gameObject : m_GameObjects)
 	{
 		const Vector2& pos = camera.GetPosition();
-		const float CAMERA_MARGIN = 100.0f;
+		const float CAMERA_MARGIN = 100.0f;	//ƒJƒƒ‰”ÍˆÍ‚æ‚è­‚µL‚¢—Ìˆæ‚ð•`‰æ‚·‚é‚½‚ß
 
 		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
 		{
