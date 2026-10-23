@@ -2,6 +2,7 @@
 #include "GameObjectManager.h"
 #include "Player.h"
 #include "ObjectPool.h"
+#include "GameHelper.h"
 
 //‰¼
 #include "DxLib.h"

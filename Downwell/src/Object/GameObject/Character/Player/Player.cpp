@@ -20,7 +20,8 @@ void Player::Initialize()
 	m_Scale = { PLAYER_SIZE_X,PLAYER_SIZE_Y };
 	m_IsGround = false;
 	m_DirectionX = 0.0f;
-	m_Hp = 4;
+	m_MaxHp = 4;
+	m_Hp = m_MaxHp;
 
 	m_State = std::make_unique<PlayerIdle>();
 	m_NextState = std::make_unique<PlayerIdle>();

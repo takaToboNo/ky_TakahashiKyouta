@@ -12,7 +12,7 @@ class GunBoots : public Object
 {
 private:
 	static constexpr int BULLET_POOL_SIZE = 20;
-	static constexpr int MAX_AMMO = 10;
+
 	int m_Ammo = 0;
 	int m_ShotInterval = 0;
 

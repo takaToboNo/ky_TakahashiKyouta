@@ -27,11 +27,21 @@ bool GameScene::Initialize()
 
 	m_GameObjectManager.SortGameObjectsByLayer();
 
+	//UI
+	m_AmmoGauge.Initialize();
+	m_AmmoGauge.SetGunBoots(m_Player->GetGunBoots());
+	m_LifeGauge.Initialize();
+	m_LifeGauge.SetPlayer(m_Player);
+
 	return true;
 }
 
 void GameScene::Finalize()
 {
+	//UI
+	m_LifeGauge.Finalize();
+	m_AmmoGauge.Finalize();
+
 	m_GameObjectManager.Finalize();
 	m_Camera.Finalize();
 	m_StageManager.Finalize();
@@ -45,6 +55,10 @@ void GameScene::Update(float dt)
 	m_Camera.Update(dt);
 	m_GameObjectManager.Update(dt);
 
+	//UI
+	m_AmmoGauge.Update(dt);
+	m_LifeGauge.Update(dt);
+
 	if (m_Player->GetDeathTimer() <= 0.0f || m_StageManager.GetCurrentSection() == -1)
 	{
 		m_RequestScene = SceneType::Result;
@@ -55,4 +69,8 @@ void GameScene::Draw()
 {
 	m_GameObjectManager.Draw(m_Camera);
 	m_StageManager.Draw(m_Camera);
+
+	//UI
+	m_AmmoGauge.Draw();
+	m_LifeGauge.Draw();
 }

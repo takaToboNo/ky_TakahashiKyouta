@@ -40,6 +40,9 @@
     <Filter Include="src\Map">
       <UniqueIdentifier>{ed906d20-494d-4d53-b478-4c58b501202e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Object\UI">
+      <UniqueIdentifier>{94313d5e-6c0e-4137-8d08-7b8a623d9256}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -162,6 +165,15 @@
     <ClInclude Include="src\Manager\StageManager.h">
       <Filter>src\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object\UI\UI.h">
+      <Filter>src\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\UI\AmmoGauge.h">
+      <Filter>src\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\UI\LifeGauge.h">
+      <Filter>src\Object\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -259,6 +271,15 @@
     </ClCompile>
     <ClCompile Include="src\Manager\StageManager.cpp">
       <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\UI\UI.cpp">
+      <Filter>src\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\UI\AmmoGauge.cpp">
+      <Filter>src\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\UI\LifeGauge.cpp">
+      <Filter>src\Object\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

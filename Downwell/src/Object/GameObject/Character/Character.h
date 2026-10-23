@@ -25,4 +25,7 @@ public:
 	virtual void Died() = 0;
 	virtual bool CheckGround() = 0;
 
+	int GetMaxHp() { return m_MaxHp; }
+	int GetHp() { return m_Hp; }
+
 };
