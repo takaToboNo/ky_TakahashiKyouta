@@ -34,4 +34,7 @@ public:
 
 	void SetGameObjectManager(GameObjectManager* manager) { m_GameObjectManager = manager; }
 
+	virtual void Activate();
+	virtual void Deactivate();
+
 };

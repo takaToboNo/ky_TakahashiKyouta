@@ -5,6 +5,8 @@
 #include "Collider.h"
 #include "Camera.h"
 
+#include "DxLib.h"
+
 void GameObjectManager::Finalize()
 {
 	for (auto& gameObject : m_GameObjects)
@@ -22,6 +24,25 @@ void GameObjectManager::Update(float dt)
 	CheckHitAll(m_GameObjects);
 
 	ApplyPendingGameObjects();
+
+#ifdef _DEBUG
+	m_ActiveObjects = 0;
+	m_DeadObjects = 0;
+	for (auto& obj : m_GameObjects)
+	{
+		if (obj->IsActive())
+		{
+			m_ActiveObjects++;
+		}
+	}
+	for (auto& obj : m_GameObjects)
+	{
+		if (obj->IsDead())
+		{
+			m_DeadObjects++;
+		}
+	}
+#endif
 }
 
 void GameObjectManager::Draw(const Camera& camera)
@@ -29,13 +50,18 @@ void GameObjectManager::Draw(const Camera& camera)
 	for (auto& gameObject : m_GameObjects)
 	{
 		const Vector2& pos = camera.GetPosition();
-		const float CAMERA_MARGIN = 100.0f;	//ƒJƒƒ‰”ÍˆÍ‚æ‚è­‚µL‚¢—Ìˆæ‚ð•`‰æ‚·‚é‚½‚ß
+		const float CAMERA_MARGIN = 100.0f;	//ƒJƒƒ‰”ÍˆÍ‚æ‚è­‚µL‚¢—Ìˆæ‚ð•`‰æ‚·‚é‚½‚ß‚Ì’l
 
 		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
 		{
 			if (gameObject->IsActive())gameObject->Draw(camera);
 		}
 	}
+
+#ifdef _DEBUG
+	DrawFormatString(1000, 200, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveObject : %d/%d", m_ActiveObjects, m_GameObjects.size());
+	DrawFormatString(1000, 220, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "DeadObject : %d/%d", m_DeadObjects, m_GameObjects.size());
+#endif
 }
 
 

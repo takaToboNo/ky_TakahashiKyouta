@@ -37,3 +37,18 @@ HitSide GameObject::GetHitSide(const HitInfo& hitInfo)
 	}
 	return (hitInfo.normal.y > 0.0f) ? HitSide::Bottom : HitSide::Top;
 }
+
+void GameObject::Activate()
+{
+	m_IsActive = true;
+	m_IsDead = false;
+}
+
+void GameObject::Deactivate()
+{
+	m_Position = Vector2(-1000.0f, -1000.0f);
+	m_OldPosition = m_Position;
+
+	m_IsActive = false;
+	m_IsDead = false;
+}

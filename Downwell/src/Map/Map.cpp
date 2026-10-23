@@ -1,16 +1,7 @@
 #include "Map.h"
-#include "GameObjectManager.h"
 
 #include "DxLib.h"
 #include <sstream>
-
-#include "SolidBlock.h"
-#include "BreakableBlock.h"
-#include "FloatingEnemy.h"
-#include "WalkerEnemy.h"
-#include "Player.h"
-#include "GameHelper.h"
-#include "GameObject.h"
 
 bool Map::LoadMapData(const std::string& mapName)
 {
@@ -74,69 +65,4 @@ bool Map::LoadMapData(const std::string& mapName)
 	}
 
 	return true;
-}
-
-void Map::GenerateMap(GameObjectManager& manager, const Vector2& startPosition, Player* player, std::vector<GameObject*>& gameObject)
-{
-	const Vector2& pos = startPosition;
-
-	for (int i = 0; i < MAP_SIZE_Y; i++)
-	{
-		for (int j = 0; j < MAP_SIZE_X; j++)
-		{
-			Vector2 offset = { pos.x + j * TILE_SIZE,pos.y + i * TILE_SIZE };
-
-			MapObjectType mapObjectType = static_cast<MapObjectType>(m_Map[i][j]);
-			switch (mapObjectType)
-			{
-			case MapObjectType::SolidBlock://壊れるブロック------------------------------------
-			{
-				SolidBlock* solidBlock = manager.AddGameObject(std::make_unique<SolidBlock>());
-				if (solidBlock)
-				{
-					solidBlock->SetPosition(offset);
-					solidBlock->SetActive(false);
-					gameObject.push_back(solidBlock);
-				}
-				break;
-			}
-			case MapObjectType::BreakableBlock://壊れるブロック-------------------------------------------
-			{
-				BreakableBlock* breakableBlock = manager.AddGameObject(std::make_unique<BreakableBlock>());
-				if (breakableBlock)
-				{
-					breakableBlock->SetPosition(offset);
-					breakableBlock->SetActive(false);
-					gameObject.push_back(breakableBlock);
-				}
-				break;
-			}
-			case MapObjectType::FloatingEnemy://浮遊敵-------------------------------------------------
-			{
-				FloatingEnemy* floatingEnemy = manager.AddGameObject(std::make_unique<FloatingEnemy>());
-				if (floatingEnemy)
-				{
-					floatingEnemy->SetPosition(offset);
-					floatingEnemy->SetActive(false);
-					floatingEnemy->SetPlayer(player);
-					gameObject.push_back(floatingEnemy);
-				}
-				break;
-			}
-			case MapObjectType::WalkerEnemy://歩行敵---------------------------------------------
-			{
-				WalkerEnemy* walkerEnemy = manager.AddGameObject(std::make_unique<WalkerEnemy>());
-				if (walkerEnemy)
-				{
-					walkerEnemy->SetPosition(offset);
-					walkerEnemy->SetActive(false);
-					gameObject.push_back(walkerEnemy);
-				}
-				break;
-			}
-			default://なにもなし-----------------------------------------------------------------
-				break;
-			}
-		}
-	}
 }

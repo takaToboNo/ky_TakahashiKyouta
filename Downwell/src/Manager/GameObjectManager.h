@@ -12,6 +12,9 @@ private:
 	std::vector<std::unique_ptr<GameObject>> m_GameObjects = {};
 	std::vector<std::unique_ptr<GameObject>> m_PendingGameObjects = {};
 
+	int m_ActiveObjects = 0;
+	int m_DeadObjects = 0;
+
 public:
 	GameObjectManager() = default;
 	~GameObjectManager() = default;

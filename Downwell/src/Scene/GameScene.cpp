@@ -19,9 +19,8 @@ bool GameScene::Initialize()
 
 	m_Player = m_GameObjectManager.AddGameObject(std::make_unique<Player>());
 
-	result = m_StageManager.Initialize();
+	result = m_StageManager.Initialize(m_GameObjectManager);
 	if (!result) return false;
-	m_StageManager.GenerateStage(m_GameObjectManager, { STAGE_LEFT, 0.0f }, m_Player);
 
 	m_Camera.SetTarget(m_Player);
 	m_Camera.Initialize();
@@ -42,7 +41,7 @@ void GameScene::Finalize()
 
 void GameScene::Update(float dt)
 {
-	m_StageManager.Update(m_Player->GetPosition().y);
+	m_StageManager.Update(m_GameObjectManager, m_Player);
 	m_Camera.Update(dt);
 	m_GameObjectManager.Update(dt);
 
@@ -54,6 +53,6 @@ void GameScene::Update(float dt)
 
 void GameScene::Draw()
 {
-	m_StageManager.Draw();
 	m_GameObjectManager.Draw(m_Camera);
+	m_StageManager.Draw(m_Camera);
 }

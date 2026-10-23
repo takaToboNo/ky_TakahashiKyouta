@@ -14,6 +14,7 @@ public:
 	void Setup(GameObjectManager& manager, int poolSize);
 	T* Get();
 
+	std::vector<T*> GetObjectPool() { return m_ObjectPool; }
 };
 
 template<typename T>
@@ -44,7 +45,7 @@ inline T* ObjectPool<T>::Get()
 {
 	for (T* object : m_ObjectPool)
 	{
-		if (!object->IsActive())
+		if (!object->IsActive() && !object->IsDead())
 		{
 			object->SetActive(true);
 			return object;
