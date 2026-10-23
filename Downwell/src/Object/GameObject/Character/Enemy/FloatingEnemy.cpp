@@ -12,7 +12,7 @@ void FloatingEnemy::Initialize()
 	m_MoveSpeed = 50.0f;
 	m_Scale = { FLOATING_ENEMY_SIZE_X,FLOATING_ENEMY_SIZE_Y };
 	m_Color = { 200, 0, 200 };
-	m_Hp = 3;
+	m_Hp = FLOATING_ENEMY_MAX_HP;
 }
 
 void FloatingEnemy::Finalize()
@@ -129,4 +129,10 @@ void FloatingEnemy::Died()
 bool FloatingEnemy::CheckGround()
 {
 	return false;
+}
+
+void FloatingEnemy::Activate()
+{
+	GameObject::Activate();
+	m_Hp = FLOATING_ENEMY_MAX_HP;
 }

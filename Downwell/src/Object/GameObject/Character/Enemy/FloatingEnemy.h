@@ -7,6 +7,8 @@ class Camera;
 class FloatingEnemy : public Enemy
 {
 private:
+	static constexpr int FLOATING_ENEMY_MAX_HP = 3;
+
 	static constexpr float FLOATING_ENEMY_SIZE_X = 45.0f;
 	static constexpr float FLOATING_ENEMY_SIZE_Y = 35.0f;
 
@@ -32,4 +34,6 @@ public:
 	bool CheckGround() override;
 
 	void SetPlayer(const Player* player) { m_pPlayer = player; }
+
+	void Activate() override;
 };

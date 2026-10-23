@@ -6,6 +6,7 @@ class Camera;
 class WalkerEnemy : public Enemy
 {
 private:
+	static constexpr int WALKER_ENEMY_MAX_HP = 1;
 	static constexpr float WALKER_ENEMY_SIZE = 30.0f;
 
 	static constexpr float FALL_GRAVITY = 2000.0f;
@@ -28,4 +29,6 @@ public:
 	void Damage(int damage) override { m_Hp -= damage; }
 	void Died() override;
 	bool CheckGround() override;
+
+	void Activate() override;
 };

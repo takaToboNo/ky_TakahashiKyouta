@@ -124,3 +124,10 @@ bool WalkerEnemy::CheckGround()
 {
 	return false;
 }
+
+void WalkerEnemy::Activate()
+{
+	GameObject::Activate();
+	m_Hp = WALKER_ENEMY_MAX_HP;
+}
+

@@ -51,15 +51,15 @@ void GameScene::Finalize()
 
 void GameScene::Update(float dt)
 {
-	m_StageManager.Update(m_GameObjectManager, m_Player);
 	m_Camera.Update(dt);
 	m_GameObjectManager.Update(dt);
+	m_StageManager.Update(m_GameObjectManager, m_Player);
 
 	//UI
 	m_AmmoGauge.Update(dt);
 	m_LifeGauge.Update(dt);
 
-	if (m_Player->GetDeathTimer() <= 0.0f || m_StageManager.GetCurrentSection() == -1)
+	if (m_Player->GetDeathTimer() <= 0.0f)
 	{
 		m_RequestScene = SceneType::Result;
 	}

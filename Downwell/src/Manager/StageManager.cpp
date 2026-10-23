@@ -15,20 +15,7 @@
 
 bool StageManager::Initialize(GameObjectManager& manager)
 {
-	bool result = true;
-
-	result = m_StartMap.LoadMapData("Data/Map/start.csv");
-	if (!result) return false;
-
-	result = m_GoalMap.LoadMapData("Data/Map/goal.csv");
-	if (!result) return false;
-
-	for (int i = 0; i < MIDDLE_MAP_ALL; i++)
-	{
-		std::string fileName = "Data/Map/middle_" + std::to_string(i + 1) + ".csv";
-		result = m_MiddleMaps[i].LoadMapData(fileName);
-		if (!result) return false;
-	}
+	LoadMapsDate();
 
 	SetRandomNumbers();
 	SetSections();
@@ -82,9 +69,11 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 	}
 #endif
 
+	//プレイヤーの現在いる区間を探す
 	int currentSection = FindCurrentSection(player->GetPosition().y);
 	if (m_CurrentSection == currentSection) return;
 
+	//プレイヤーの現在いる区間とその区間に隣接した区間のみ有効にする
 	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
 	{
 		bool isNeighbor = (std::abs(currentSection - i) <= 1);
@@ -100,6 +89,18 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 		{
 			ActivateSection(i, player);
 		}
+	}
+
+	//プレイヤーが全区間を通り抜けたら最初に戻す
+	if (currentSection == -1)
+	{
+		ResetStageObjectPools();
+
+		SetRandomNumbers();
+		SetSections();
+
+		player->SetPosition({ WINDOW_WIDTH * 0.5f,WINDOW_HEIGHT * 0.5f });
+		player->SetVelocity(Vector2::Zero());
 	}
 
 	m_CurrentSection = currentSection;
@@ -156,6 +157,8 @@ void StageManager::SetSections()
 	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
 	{
 		m_Sections[i].startPosition.x = STAGE_LEFT;
+		m_Sections[i].gameObjects.clear();
+		m_Sections[i].isActive = false;
 	}
 
 	//スタート
@@ -261,4 +264,42 @@ void StageManager::DeactivateSection(int index)
 		obj->Deactivate();
 	}
 	m_Sections[index].isActive = false;
+}
+
+bool StageManager::LoadMapsDate()
+{
+	bool result = true;
+
+	result = m_StartMap.LoadMapData("Data/Map/start.csv");
+	if (!result) return false;
+
+	result = m_GoalMap.LoadMapData("Data/Map/goal.csv");
+	if (!result) return false;
+
+	for (int i = 0; i < MIDDLE_MAP_ALL; i++)
+	{
+		std::string fileName = "Data/Map/middle_" + std::to_string(i + 1) + ".csv";
+		result = m_MiddleMaps[i].LoadMapData(fileName);
+		if (!result) return false;
+	}
+}
+
+void StageManager::ResetStageObjectPools()
+{
+	for (SolidBlock* obj : m_StageObjectPools.solidBlockPool.GetObjectPool())
+	{
+		obj->Deactivate();
+	}
+	for (BreakableBlock* obj : m_StageObjectPools.breakableBlockPool.GetObjectPool())
+	{
+		obj->Deactivate();
+	}
+	for (FloatingEnemy* obj : m_StageObjectPools.floatingEnemyPool.GetObjectPool())
+	{
+		obj->Deactivate();
+	}
+	for (WalkerEnemy* obj : m_StageObjectPools.walkerEnemyPool.GetObjectPool())
+	{
+		obj->Deactivate();
+	}
 }
