@@ -4,6 +4,7 @@
 
 #include "AmmoGauge.h"
 #include "LifeGauge.h"
+#include "StageCount.h"
 
 class Player;
 
@@ -16,6 +17,7 @@ private:
 	//UI
 	AmmoGauge m_AmmoGauge;
 	LifeGauge m_LifeGauge;
+	StageCount m_StageCount;
 
 public:
 	GameScene() = default;

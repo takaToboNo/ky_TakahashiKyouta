@@ -15,7 +15,7 @@
 
 bool StageManager::Initialize(GameObjectManager& manager)
 {
-	LoadMapsDate();
+	if (!LoadMapsDate()) return false;
 
 	SetRandomNumbers();
 	SetSections();
@@ -94,6 +94,8 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 	//プレイヤーが全区間を通り抜けたら最初に戻す
 	if (currentSection == -1)
 	{
+		m_StageLoopCount++;
+
 		ResetStageObjectPools();
 
 		SetRandomNumbers();
@@ -282,6 +284,8 @@ bool StageManager::LoadMapsDate()
 		result = m_MiddleMaps[i].LoadMapData(fileName);
 		if (!result) return false;
 	}
+
+	return true;
 }
 
 void StageManager::ResetStageObjectPools()

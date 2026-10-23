@@ -32,6 +32,8 @@ bool GameScene::Initialize()
 	m_AmmoGauge.SetGunBoots(m_Player->GetGunBoots());
 	m_LifeGauge.Initialize();
 	m_LifeGauge.SetPlayer(m_Player);
+	m_StageCount.Initialize();
+	m_StageCount.SetStageManager(&m_StageManager);
 
 	return true;
 }
@@ -39,6 +41,7 @@ bool GameScene::Initialize()
 void GameScene::Finalize()
 {
 	//UI
+	m_StageCount.Finalize();
 	m_LifeGauge.Finalize();
 	m_AmmoGauge.Finalize();
 
@@ -58,6 +61,7 @@ void GameScene::Update(float dt)
 	//UI
 	m_AmmoGauge.Update(dt);
 	m_LifeGauge.Update(dt);
+	m_StageCount.Update(dt);
 
 	if (m_Player->GetDeathTimer() <= 0.0f)
 	{
@@ -73,4 +77,5 @@ void GameScene::Draw()
 	//UI
 	m_AmmoGauge.Draw();
 	m_LifeGauge.Draw();
+	m_StageCount.Draw();
 }

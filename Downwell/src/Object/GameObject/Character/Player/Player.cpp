@@ -199,6 +199,7 @@ void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		{
 			if (hitSide == HitSide::Bottom)
 			{	//•‚—V“G‚ð“¥‚ñ‚¾
+				Reload();
 				m_Velocity.y = hitInfo.normal.y * STOMP_KNOCKBACK * -1.0f;
 				return;
 			}

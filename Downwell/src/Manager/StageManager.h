@@ -50,8 +50,9 @@ private:
 
 	int m_CurrentSection = -1;
 
-
 	std::array<Map, STAGE_SECTION_COUNT> m_Maps{};
+
+	int m_StageLoopCount = 0;
 
 	int m_ActiveSolidBlockCount = 0;
 	int m_ActiveBreakableBlockCount = 0;
@@ -69,6 +70,7 @@ public:
 	void Draw(Camera& camera);
 
 	int GetCurrentSection() { return m_CurrentSection; }
+	int GetStageLoopCount() { return m_StageLoopCount; }
 
 private:
 	void SetRandomNumbers();
