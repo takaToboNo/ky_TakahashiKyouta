@@ -7,9 +7,7 @@ struct Color
 	int b;
 };
 constexpr Color WHITE{ 255, 255, 255 };
-constexpr Color RED{ 255, 0, 0 };
-constexpr Color YELLOW{ 255, 255, 0 };
-constexpr Color GRAY{ 120, 120, 120 };
+constexpr Color RED{ 255, 50, 50 };
 
 //ÉQÅ[ÉÄêF
 constexpr Color PLAYER_IDLE_COLOR{ 255, 255, 255 };
