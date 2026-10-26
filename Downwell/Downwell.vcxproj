@@ -22,6 +22,7 @@
     <ClInclude Include="src\Collision\Collider.h" />
     <ClInclude Include="src\Collision\Shape.h" />
     <ClInclude Include="src\Main.h" />
+    <ClInclude Include="src\Manager\AudioManager.h" />
     <ClInclude Include="src\Manager\GameManager.h" />
     <ClInclude Include="src\Manager\GameObjectManager.h" />
     <ClInclude Include="src\Manager\StageManager.h" />
@@ -67,6 +68,7 @@
   <ItemGroup>
     <ClCompile Include="src\Collision\Collider.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Manager\AudioManager.cpp" />
     <ClCompile Include="src\Manager\GameManager.cpp" />
     <ClCompile Include="src\Manager\GameObjectManager.cpp" />
     <ClCompile Include="src\Manager\StageManager.cpp" />

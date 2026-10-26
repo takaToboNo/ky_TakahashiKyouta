@@ -52,6 +52,8 @@ private:
 	float m_DeathTimer = DEATH_TIME;
 	bool m_IsDead = false;
 
+	bool m_StartGameBGM = false;
+
 #ifdef _DEBUG
 	float m_DebugDrawGravity = 0.0f;
 	bool m_DebugIsHit = false;
@@ -94,7 +96,7 @@ public:
 	bool GetCanAutoShot() { return m_CanAutoShot; }
 
 	GunBoots* GetGunBoots() const { return m_GunBoots.get(); }
-	void Reload() { m_GunBoots->Reload(); }
+	void Reload();
 
 	float GetKnockbackTimer() { return m_KnockbackTimer; }
 	bool IsDead() { return m_IsDead; }

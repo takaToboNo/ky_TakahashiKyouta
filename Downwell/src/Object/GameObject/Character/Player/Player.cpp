@@ -3,6 +3,7 @@
 #include "input.h"
 #include "FloatingEnemy.h"
 #include "WalkerEnemy.h"
+#include "AudioManager.h"
 
 //‰¼
 #include "DxLib.h"
@@ -103,7 +104,12 @@ void Player::Update(float dt)
 	}
 
 	//Ž€‚ñ‚Å‚¢‚é‚©
-	if (m_Hp <= 0) m_IsDead = true;
+	if (m_Hp <= 0 && !m_IsDead)
+	{
+		AudioManager::GetInstance().StopBGM("Game");
+		AudioManager::GetInstance().PlaySE("Dead");
+		m_IsDead = true;
+	}
 
 	//ƒŠƒUƒ‹ƒg‰æ–Ê‚Ö
 	if (m_IsDead)
@@ -175,6 +181,12 @@ void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		}
 		else if (hitSide == HitSide::Bottom)
 		{
+			if (!m_StartGameBGM)
+			{
+				AudioManager::GetInstance().PlayBGM("Game");
+				m_StartGameBGM = true;
+			}
+
 			m_IsGround = true;
 			m_Velocity.y = 0.0f;
 		}
@@ -199,6 +211,7 @@ void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		{
 			if (hitSide == HitSide::Bottom)
 			{	//•‚—V“G‚ð“¥‚ñ‚¾
+				AudioManager::GetInstance().PlaySE("Stomp");
 				Reload();
 				m_Velocity.y = hitInfo.normal.y * STOMP_KNOCKBACK * -1.0f;
 				return;
@@ -243,6 +256,8 @@ void Player::Move(Vector2& direction)
 
 void Player::Damage(int damage)
 {
+	AudioManager::GetInstance().PlaySE("Damage");
+
 	m_Hp -= damage;
 	m_KnockbackTimer = KNOCKBACK_TIME;
 	m_InvincibleTimer = INVINCIBLE_TIME;
@@ -267,13 +282,21 @@ void Player::Shot(const Vector2& position)
 		if (canShot)
 		{
 			//”½“®
+			AudioManager::GetInstance().PlaySE("Shot");
 			m_Velocity.y = 0.0f;
 		}
 		else
 		{
 			//¬”½“®
+			AudioManager::GetInstance().PlaySE("ShotEmpty");
 			m_Velocity.y *= EMPTY_RECOIL_DAMPING;
 			m_CanAutoShot = false;
 		}
 	}
+}
+
+void Player::Reload()
+{
+	AudioManager::GetInstance().PlaySE("Reload");
+	m_GunBoots->Reload();
 }

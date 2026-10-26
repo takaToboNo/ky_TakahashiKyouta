@@ -1,4 +1,5 @@
 #include "BreakableBlock.h"
+#include "AudioManager.h"
 
 //‰¼
 #include "DxLib.h"
@@ -52,6 +53,7 @@ void BreakableBlock::OnCollision(GameObject* other, const HitInfo& hitInfo)
 	{
 		if (hitSide == HitSide::Bottom)
 		{
+			AudioManager::GetInstance().PlaySE("BlockBreak");
 			m_IsDead = true;
 		}
 	}
@@ -60,6 +62,7 @@ void BreakableBlock::OnCollision(GameObject* other, const HitInfo& hitInfo)
 	{
 		if (hitSide == HitSide::Top)
 		{
+			AudioManager::GetInstance().PlaySE("BlockBreak");
 			m_IsDead = true;
 		}
 	}

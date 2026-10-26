@@ -4,7 +4,7 @@ bool SceneManager::Initialize()
 {
 	bool result = true;
 
-	m_Scene = std::make_unique<GameScene>();
+	m_Scene = std::make_unique<TitleScene>();
 
 	result = m_Scene->Initialize();
 	if (!result) return false;

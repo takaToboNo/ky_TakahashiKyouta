@@ -1,6 +1,7 @@
 #include "WalkerEnemy.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "AudioManager.h"
 
 #include <cassert>
 #include "DxLib.h"
@@ -38,8 +39,9 @@ void WalkerEnemy::Update(float dt)
 	m_IsGround = false;
 
 	//Ž€–S
-	if (m_Hp <= 0)
+	if (m_Hp <= 0 && !m_IsDead)
 	{
+		AudioManager::GetInstance().PlaySE("EnemyDead");
 		m_IsDead = true;
 	}
 
@@ -114,6 +116,12 @@ void WalkerEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 void WalkerEnemy::Move(Vector2& direction)
 {
 	(void)direction;
+}
+
+void WalkerEnemy::Damage(int damage)
+{
+	AudioManager::GetInstance().PlaySE("EnemyHit");
+	m_Hp -= damage;
 }
 
 void WalkerEnemy::Died()

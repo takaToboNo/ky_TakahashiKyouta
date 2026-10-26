@@ -1,4 +1,5 @@
 #include "SolidBlock.h"
+#include "AudioManager.h"
 
 //‰¼
 #include "DxLib.h"
@@ -40,4 +41,11 @@ void SolidBlock::Destroy()
 
 void SolidBlock::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
+	Tag tag = other->GetTag();
+	HitSide hitSide = GetHitSide(hitInfo);
+
+	if (tag == Tag::Bullet)
+	{
+		AudioManager::GetInstance().PlaySE("BlockHit");
+	}
 }

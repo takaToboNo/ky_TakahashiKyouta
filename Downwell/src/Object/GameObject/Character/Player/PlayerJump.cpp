@@ -6,8 +6,12 @@
 #include "Player.h"
 #include "Input.h"
 
+#include "AudioManager.h"
+
 void PlayerJump::Enter(Player& player)
 {
+	AudioManager::GetInstance().PlaySE("Jump");
+
 	//ƒWƒƒƒ“ƒv
 	player.Jump();
 

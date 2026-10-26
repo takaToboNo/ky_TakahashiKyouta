@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "GameHelper.h"
 #include "Input.h"
+#include "AudioManager.h"
 
 bool GameManager::Initialize()
 {
@@ -15,6 +16,8 @@ bool GameManager::Initialize()
 	result = SetDrawScreen(DX_SCREEN_BACK);
 	if (result != 0) return false;
 
+	AudioManager::GetInstance().Initialize();
+
 	m_Timer.Initialize();
 	result = m_SceneManager.Initialize();
 	if (result == 0) return false;
@@ -24,6 +27,8 @@ bool GameManager::Initialize()
 
 void GameManager::Finalize()
 {
+	AudioManager::GetInstance().Finalize();
+
 	m_SceneManager.Finalize();
 	m_Timer.Finalize();
 

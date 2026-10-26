@@ -177,6 +177,7 @@
     <ClInclude Include="src\Object\UI\StageCount.h">
       <Filter>src\Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\Manager\AudioManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -287,5 +288,6 @@
     <ClCompile Include="src\Object\UI\StageCount.cpp">
       <Filter>src\Object\UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Manager\AudioManager.cpp" />
   </ItemGroup>
 </Project>

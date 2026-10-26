@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "Input.h"
 
+#include "AudioManager.h"
+
 void PlayerFall::Enter(Player& player)
 {
 }
@@ -47,6 +49,8 @@ void PlayerFall::Update(Player& player)
 	//’…’n
 	if (player.IsGround())
 	{
+		AudioManager::GetInstance().PlaySE("Land");
+
 		player.RequestState(std::make_unique<PlayerMove>());
 		player.Reload();
 	}
