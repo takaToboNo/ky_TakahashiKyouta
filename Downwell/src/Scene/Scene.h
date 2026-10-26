@@ -7,7 +7,6 @@ enum class SceneType
 	None = 0,
 	Title,
 	Game,
-	Result,
 };
 
 class Scene

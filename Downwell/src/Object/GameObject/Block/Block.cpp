@@ -7,6 +7,7 @@ void Block::Initialize()
 	m_Tag = Tag::Block;
 	m_Layer = Layer::Block;
 	m_Scale = { TILE_SIZE,TILE_SIZE };
+	m_Color = BLOCK_COLOR;
 }
 
 void Block::Finalize()

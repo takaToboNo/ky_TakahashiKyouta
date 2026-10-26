@@ -13,7 +13,7 @@ void PlayerFall::Enter(Player& player)
 
 void PlayerFall::Update(Player& player)
 {
-	player.SetColor(YELLOW);
+	player.SetColor(PLAYER_FALL_COLOR);
 
 	//íÔçR
 	player.AirDrag();

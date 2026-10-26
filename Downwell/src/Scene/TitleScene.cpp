@@ -28,7 +28,7 @@ void TitleScene::Update(float dt)
 	m_Camera.Update(dt);
 	m_GameObjectManager.Update(dt);
 
-	if (Input::IsTrigger(Action::Decide))
+	if (Input::IsTrigger(Action::Action))
 	{
 		m_RequestScene = SceneType::Game;
 	}
@@ -40,5 +40,5 @@ void TitleScene::Draw()
 
 	int x = static_cast<int>(WINDOW_WIDTH * 0.5f);
 	int y = static_cast<int>(WINDOW_HEIGHT * 0.5f);
-	DrawString(x, y, "Title", GetColor(GREEN.r, GREEN.g, GREEN.b));
+	DrawString(x, y, "Downwell", GetColor(RED.r, RED.g, RED.b));
 }

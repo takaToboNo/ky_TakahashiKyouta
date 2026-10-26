@@ -21,6 +21,7 @@ bool GameScene::Initialize()
 
 	result = m_StageManager.Initialize(m_GameObjectManager);
 	if (!result) return false;
+	m_StageManager.SetCamera(&m_Camera);
 
 	m_Camera.SetTarget(m_Player);
 	m_Camera.Initialize();
@@ -34,6 +35,9 @@ bool GameScene::Initialize()
 	m_LifeGauge.SetPlayer(m_Player);
 	m_StageCount.Initialize();
 	m_StageCount.SetStageManager(&m_StageManager);
+	m_ResultUI.Initialize();
+	m_ResultUI.SetPlayer(m_Player);
+	m_ResultUI.SetStageManager(&m_StageManager);
 
 	return true;
 }
@@ -41,6 +45,7 @@ bool GameScene::Initialize()
 void GameScene::Finalize()
 {
 	//UI
+	m_ResultUI.Finalize();
 	m_StageCount.Finalize();
 	m_LifeGauge.Finalize();
 	m_AmmoGauge.Finalize();
@@ -62,20 +67,25 @@ void GameScene::Update(float dt)
 	m_AmmoGauge.Update(dt);
 	m_LifeGauge.Update(dt);
 	m_StageCount.Update(dt);
+	m_ResultUI.Update(dt);
 
 	if (m_Player->GetDeathTimer() <= 0.0f)
 	{
-		m_RequestScene = SceneType::Result;
+		if (Input::IsTrigger(Action::Action))
+		{
+			m_RequestScene = SceneType::Title;
+		}
 	}
 }
 
 void GameScene::Draw()
 {
 	m_GameObjectManager.Draw(m_Camera);
-	m_StageManager.Draw(m_Camera);
+	m_StageManager.Draw();
 
 	//UI
 	m_AmmoGauge.Draw();
 	m_LifeGauge.Draw();
 	m_StageCount.Draw();
+	m_ResultUI.Draw();
 }

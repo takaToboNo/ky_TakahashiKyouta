@@ -92,7 +92,7 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 	}
 
 	//プレイヤーが全区間を通り抜けたら最初に戻す
-	if (currentSection == -1)
+	if (currentSection == STAGE_SECTION_COUNT)
 	{
 		m_StageLoopCount++;
 
@@ -103,15 +103,26 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 
 		player->SetPosition({ WINDOW_WIDTH * 0.5f,WINDOW_HEIGHT * 0.5f });
 		player->SetVelocity(Vector2::Zero());
+		if (m_Camera)
+		{
+			m_Camera->SnapToTarget();
+		}
 	}
 
 	m_CurrentSection = currentSection;
 }
 
-void StageManager::Draw(Camera& camera)
+void StageManager::Draw()
 {
 #ifdef _DEBUG
 	DrawFormatString(1000, 10, GetColor(RED.r, RED.g, RED.b), "CurrentSection : %d", m_CurrentSection);
+
+	DrawFormatString(1000, 70, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveSolidBlock : %d/%d", m_ActiveSolidBlockCount, SOLID_BLOCK_POOL_SIZE);
+	DrawFormatString(1000, 90, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveBreakableBlock : %d/%d", m_ActiveBreakableBlockCount, BREAKABLE_BLOCK_POOL_SIZE);
+	DrawFormatString(1000, 110, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveFloatingEnemy : %d/%d", m_ActiveFloatingEnemyCount, FLOATING_ENEMY_POOL_SIZE);
+	DrawFormatString(1000, 130, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveWalkerEnemy : %d/%d", m_ActiveWalkerEnemyCount, WALKER_ENEMY_POOL_SIZE);
+
+	if (!m_Camera) return;
 
 	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
 	{
@@ -119,20 +130,15 @@ void StageManager::Draw(Camera& camera)
 		{
 			Vector2 pos = m_Sections[i].startPosition;
 			int x1, y1;
-			x1 = static_cast<int>((pos.x - TILE_SIZE * 0.5f) - camera.GetPosition().x);
-			y1 = static_cast<int>((pos.y - TILE_SIZE * 0.5f) - camera.GetPosition().y);
+			x1 = static_cast<int>((pos.x - TILE_SIZE * 0.5f) - m_Camera->GetPosition().x);
+			y1 = static_cast<int>((pos.y - TILE_SIZE * 0.5f) - m_Camera->GetPosition().y);
 			int x2, y2;
-			x2 = static_cast<int>(pos.x + (MAP_SIZE_X * TILE_SIZE) - camera.GetPosition().x - TILE_SIZE * 0.5f);
-			y2 = static_cast<int>(pos.y + (MAP_SIZE_Y * TILE_SIZE) - camera.GetPosition().y - TILE_SIZE * 0.5f);
+			x2 = static_cast<int>(pos.x + (MAP_SIZE_X * TILE_SIZE) - m_Camera->GetPosition().x - TILE_SIZE * 0.5f);
+			y2 = static_cast<int>(pos.y + (MAP_SIZE_Y * TILE_SIZE) - m_Camera->GetPosition().y - TILE_SIZE * 0.5f);
 
 			DrawBox(x1, y1, x2, y2, GetColor(RED.r, RED.g, RED.b), FALSE);
 		}
 	}
-
-	DrawFormatString(1000, 70, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveSolidBlock : %d/%d", m_ActiveSolidBlockCount, SOLID_BLOCK_POOL_SIZE);
-	DrawFormatString(1000, 90, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveBreakableBlock : %d/%d", m_ActiveBreakableBlockCount, BREAKABLE_BLOCK_POOL_SIZE);
-	DrawFormatString(1000, 110, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveFloatingEnemy : %d/%d", m_ActiveFloatingEnemyCount, FLOATING_ENEMY_POOL_SIZE);
-	DrawFormatString(1000, 130, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveWalkerEnemy : %d/%d", m_ActiveWalkerEnemyCount, WALKER_ENEMY_POOL_SIZE);
 #endif
 }
 
@@ -188,6 +194,11 @@ int StageManager::FindCurrentSection(float playerPositionY)
 		{
 			return i;
 		}
+	}
+
+	if (playerPositionY > m_Sections[STAGE_SECTION_COUNT - 1].startPosition.y + sectionY)
+	{	//最後の区間より下にいる
+		return STAGE_SECTION_COUNT;
 	}
 
 	return -1;
@@ -266,6 +277,7 @@ void StageManager::DeactivateSection(int index)
 		obj->Deactivate();
 	}
 	m_Sections[index].isActive = false;
+	m_Sections[index].gameObjects.clear();
 }
 
 bool StageManager::LoadMapsDate()

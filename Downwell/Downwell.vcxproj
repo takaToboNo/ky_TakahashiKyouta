@@ -52,10 +52,10 @@
     <ClInclude Include="src\Manager\SceneManager.h" />
     <ClInclude Include="src\Object\UI\AmmoGauge.h" />
     <ClInclude Include="src\Object\UI\LifeGauge.h" />
+    <ClInclude Include="src\Object\UI\ResultUI.h" />
     <ClInclude Include="src\Object\UI\StageCount.h" />
     <ClInclude Include="src\Object\UI\UI.h" />
     <ClInclude Include="src\Scene\GameScene.h" />
-    <ClInclude Include="src\Scene\ResultScene.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\TitleScene.h" />
     <ClInclude Include="src\System\Input.h" />
@@ -95,10 +95,10 @@
     <ClCompile Include="src\Manager\SceneManager.cpp" />
     <ClCompile Include="src\Object\UI\AmmoGauge.cpp" />
     <ClCompile Include="src\Object\UI\LifeGauge.cpp" />
+    <ClCompile Include="src\Object\UI\ResultUI.cpp" />
     <ClCompile Include="src\Object\UI\StageCount.cpp" />
     <ClCompile Include="src\Object\UI\UI.cpp" />
     <ClCompile Include="src\Scene\GameScene.cpp" />
-    <ClCompile Include="src\Scene\ResultScene.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\TitleScene.cpp" />
     <ClCompile Include="src\System\Input.cpp" />

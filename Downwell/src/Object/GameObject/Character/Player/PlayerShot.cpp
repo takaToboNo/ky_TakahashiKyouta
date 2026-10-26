@@ -8,7 +8,7 @@ void PlayerShot::Enter(Player& player)
 
 void PlayerShot::Update(Player& player)
 {
-	player.SetColor(PURPLE);
+	player.SetColor(PLAYER_SHOT_COLOR);
 
 	player.Shot(player.GetPosition());
 

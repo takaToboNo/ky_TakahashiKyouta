@@ -15,7 +15,7 @@ void PlayerIdle::Enter(Player& player)
 
 void PlayerIdle::Update(Player& player)
 {
-	player.SetColor(GREEN);
+	player.SetColor(PLAYER_IDLE_COLOR);
 
 	//ˆÚ“®
 	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));

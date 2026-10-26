@@ -13,7 +13,7 @@ void WalkerEnemy::Initialize()
 	Enemy::Initialize();
 	m_Position = { 500.0f,650.0f };
 	m_Scale = { WALKER_ENEMY_SIZE,WALKER_ENEMY_SIZE };
-	m_Color = { 100, 0, 0 };
+	m_Color = ENEMY_COLOR;
 	m_Hp = 1;
 	m_IsGround = false;
 }
@@ -63,7 +63,7 @@ void WalkerEnemy::Draw(const Camera& camera)
 	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - pos.x);
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
 
-	DrawBox(x1, y1, x2, y2, GetColor(RED.r, RED.g, RED.b), TRUE);
+	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 
 #ifdef _DEBUG
 	DrawFormatString(10, 680, GetColor(RED.r, RED.g, RED.b), "WalkerEnemyHP : %d", m_Hp);

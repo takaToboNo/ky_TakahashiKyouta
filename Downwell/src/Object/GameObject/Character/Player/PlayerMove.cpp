@@ -13,7 +13,7 @@ void PlayerMove::Enter(Player& player)
 
 void PlayerMove::Update(Player& player)
 {
-	player.SetColor(RED);
+	player.SetColor(PLAYER_MOVE_COLOR);
 
 	//ˆÚ“®
 	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));

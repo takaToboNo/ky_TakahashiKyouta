@@ -18,4 +18,6 @@ public:
 	void Update(float dt) override;
 
 	void SetTarget(GameObject* target) { m_Target = target; }
+
+	void SnapToTarget();
 };

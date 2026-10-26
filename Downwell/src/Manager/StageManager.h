@@ -52,6 +52,8 @@ private:
 
 	std::array<Map, STAGE_SECTION_COUNT> m_Maps{};
 
+	Camera* m_Camera;
+
 	int m_StageLoopCount = 0;
 
 	int m_ActiveSolidBlockCount = 0;
@@ -67,10 +69,12 @@ public:
 	bool Initialize(GameObjectManager& manager);
 	void Finalize();
 	void Update(GameObjectManager& manager, Player* player);
-	void Draw(Camera& camera);
+	void Draw();
 
 	int GetCurrentSection() { return m_CurrentSection; }
 	int GetStageLoopCount() { return m_StageLoopCount; }
+
+	void SetCamera(Camera* camera) { m_Camera = camera; }
 
 private:
 	void SetRandomNumbers();

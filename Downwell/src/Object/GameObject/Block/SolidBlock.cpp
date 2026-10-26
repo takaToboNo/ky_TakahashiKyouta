@@ -31,7 +31,7 @@ void SolidBlock::Draw(const Camera& camera)
 	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - pos.x);
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
 
-	DrawBox(x1, y1, x2, y2, GetColor(WHITE.r, WHITE.g, WHITE.b), TRUE);
+	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
 }
 
 void SolidBlock::Destroy()

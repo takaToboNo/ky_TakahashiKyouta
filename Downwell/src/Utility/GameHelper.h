@@ -8,11 +8,17 @@ struct Color
 };
 constexpr Color WHITE{ 255, 255, 255 };
 constexpr Color RED{ 255, 0, 0 };
-constexpr Color GREEN{ 0, 255, 0 };
-constexpr Color BLUE{ 0, 0, 255 };
 constexpr Color YELLOW{ 255, 255, 0 };
-constexpr Color PURPLE{ 255, 0, 255 };
 constexpr Color GRAY{ 120, 120, 120 };
+
+constexpr Color PLAYER_IDLE_COLOR{ 255, 255, 255 };
+constexpr Color PLAYER_MOVE_COLOR{ 100, 220, 200 };
+constexpr Color PLAYER_JUMP_COLOR{ 140, 200, 255 };
+constexpr Color PLAYER_FALL_COLOR{ 170, 160, 255 };
+constexpr Color PLAYER_SHOT_COLOR{ 255, 220, 140 };
+constexpr Color PLAYER_DEAD_COLOR{ 150, 150, 150 };
+constexpr Color BLOCK_COLOR{ 220, 220, 220 };
+constexpr Color ENEMY_COLOR{ 255, 50, 50 };
 
 constexpr int MAX_UPDATE = 3;
 

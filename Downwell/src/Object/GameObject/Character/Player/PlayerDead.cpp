@@ -9,7 +9,7 @@ void PlayerDead::Enter(Player& player)
 
 void PlayerDead::Update(Player& player)
 {
-	player.SetColor(WHITE);
+	player.SetColor(PLAYER_DEAD_COLOR);
 
 	player.DeadDrag();
 }

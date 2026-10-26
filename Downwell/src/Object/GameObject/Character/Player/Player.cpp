@@ -27,7 +27,7 @@ void Player::Initialize()
 	m_State = std::make_unique<PlayerIdle>();
 	m_NextState = std::make_unique<PlayerIdle>();
 
-	m_Color = GREEN;
+	m_Color = PLAYER_IDLE_COLOR;
 
 	m_GunBoots->Initialize();
 
@@ -142,8 +142,7 @@ void Player::Draw(const Camera& camera)
 	DrawFormatString(10, 130, GetColor(GRAY.r, GRAY.g, GRAY.b), "isGround : %s", m_IsGround ? "true" : "false");
 	DrawFormatString(10, 150, GetColor(GRAY.r, GRAY.g, GRAY.b), "isHit : %s", m_DebugIsHit ? "true" : "false");
 	DrawFormatString(10, 170, GetColor(GRAY.r, GRAY.g, GRAY.b), "State : %s", m_State->GetStateName());
-	DrawFormatString(10, 190, GetColor(GREEN.r, GREEN.g, GREEN.b), "PlayerHP : %d", m_Hp);
-	DrawFormatString(10, 210, GetColor(RED.r, RED.g, RED.b), "DeathTimer : %.1f", m_DeathTimer);
+	DrawFormatString(10, 190, GetColor(RED.r, RED.g, RED.b), "DeathTimer : %.1f", m_DeathTimer);
 	m_GunBoots->Draw();
 #endif
 

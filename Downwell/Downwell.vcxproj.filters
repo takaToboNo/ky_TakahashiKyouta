@@ -111,9 +111,6 @@
     <ClInclude Include="src\Scene\GameScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\ResultScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="src\Utility\MathHelper.h">
       <Filter>src\Utility</Filter>
     </ClInclude>
@@ -177,7 +174,12 @@
     <ClInclude Include="src\Object\UI\StageCount.h">
       <Filter>src\Object\UI</Filter>
     </ClInclude>
-    <ClInclude Include="src\Manager\AudioManager.h" />
+    <ClInclude Include="src\Object\UI\ResultUI.h">
+      <Filter>src\Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\AudioManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -234,9 +236,6 @@
     <ClCompile Include="src\Scene\GameScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\ResultScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="src\Manager\GameObjectManager.cpp">
       <Filter>src\Manager</Filter>
     </ClCompile>
@@ -288,6 +287,11 @@
     <ClCompile Include="src\Object\UI\StageCount.cpp">
       <Filter>src\Object\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\Manager\AudioManager.cpp" />
+    <ClCompile Include="src\Object\UI\ResultUI.cpp">
+      <Filter>src\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\AudioManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

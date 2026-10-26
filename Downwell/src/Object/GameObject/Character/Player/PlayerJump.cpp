@@ -20,7 +20,7 @@ void PlayerJump::Enter(Player& player)
 
 void PlayerJump::Update(Player& player)
 {
-	player.SetColor(BLUE);
+	player.SetColor(PLAYER_JUMP_COLOR);
 
 	//íÔçR
 	player.AirDrag();

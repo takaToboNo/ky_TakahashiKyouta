@@ -47,10 +47,6 @@ void SceneManager::ChangeScene()
 		m_Scene = std::make_unique<GameScene>();
 		break;
 
-	case SceneType::Result:
-		m_Scene = std::make_unique<ResultScene>();
-		break;
-
 	default:
 		return;
 	}
