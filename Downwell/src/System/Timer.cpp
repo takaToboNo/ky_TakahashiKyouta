@@ -50,8 +50,10 @@ void Timer::Draw()
 {
 #ifdef _DEBUG
 	//デバッグ表示
-	DrawFormatString(200, 10, GetColor(GRAY.r, GRAY.g, GRAY.b), "UPS : %.2f", m_UPS);
-	DrawFormatString(200, 30, GetColor(GRAY.r, GRAY.g, GRAY.b), "FPS : %.2f", m_FPS);
+	const int startPosX = 10;
+	const int startPosY = 100;
+	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "UPS : %.2f", m_UPS);
+	DrawFormatString(startPosX, startPosY + 20, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "FPS : %.2f", m_FPS);
 #endif
 }
 

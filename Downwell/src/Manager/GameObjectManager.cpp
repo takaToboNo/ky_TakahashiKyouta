@@ -59,8 +59,10 @@ void GameObjectManager::Draw(const Camera& camera)
 	}
 
 #ifdef _DEBUG
-	DrawFormatString(1000, 200, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveObject : %d/%d", m_ActiveObjects, m_GameObjects.size());
-	DrawFormatString(1000, 220, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "DeadObject : %d/%d", m_DeadObjects, m_GameObjects.size());
+	const int startPosX = 1000;
+	const int startPosY = 200;
+	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveObject : %d/%d", m_ActiveObjects, m_GameObjects.size());
+	DrawFormatString(startPosX, startPosY + 20, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "DeadObject : %d/%d", m_DeadObjects, m_GameObjects.size());
 #endif
 }
 

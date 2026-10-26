@@ -115,12 +115,14 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 void StageManager::Draw()
 {
 #ifdef _DEBUG
-	DrawFormatString(1000, 10, GetColor(RED.r, RED.g, RED.b), "CurrentSection : %d", m_CurrentSection);
+	const int startPosX = 1000;
+	const int startPosY = 30;
+	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "CurrentSection : %d", m_CurrentSection);
 
-	DrawFormatString(1000, 70, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveSolidBlock : %d/%d", m_ActiveSolidBlockCount, SOLID_BLOCK_POOL_SIZE);
-	DrawFormatString(1000, 90, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveBreakableBlock : %d/%d", m_ActiveBreakableBlockCount, BREAKABLE_BLOCK_POOL_SIZE);
-	DrawFormatString(1000, 110, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveFloatingEnemy : %d/%d", m_ActiveFloatingEnemyCount, FLOATING_ENEMY_POOL_SIZE);
-	DrawFormatString(1000, 130, GetColor(YELLOW.r, YELLOW.g, YELLOW.b), "ActiveWalkerEnemy : %d/%d", m_ActiveWalkerEnemyCount, WALKER_ENEMY_POOL_SIZE);
+	DrawFormatString(startPosX, startPosY + 60, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveSolidBlock : %d/%d", m_ActiveSolidBlockCount, SOLID_BLOCK_POOL_SIZE);
+	DrawFormatString(startPosX, startPosY + 80, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveFloatingEnemy : %d/%d", m_ActiveFloatingEnemyCount, FLOATING_ENEMY_POOL_SIZE);
+	DrawFormatString(startPosX, startPosY + 100, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveWalkerEnemy : %d/%d", m_ActiveWalkerEnemyCount, WALKER_ENEMY_POOL_SIZE);
+	DrawFormatString(startPosX, startPosY + 120, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveBreakableBlock : %d/%d", m_ActiveBreakableBlockCount, BREAKABLE_BLOCK_POOL_SIZE);
 
 	if (!m_Camera) return;
 

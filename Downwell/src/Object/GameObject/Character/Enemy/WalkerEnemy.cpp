@@ -64,10 +64,6 @@ void WalkerEnemy::Draw(const Camera& camera)
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
-
-#ifdef _DEBUG
-	DrawFormatString(10, 680, GetColor(RED.r, RED.g, RED.b), "WalkerEnemyHP : %d", m_Hp);
-#endif
 }
 
 void WalkerEnemy::Destroy()

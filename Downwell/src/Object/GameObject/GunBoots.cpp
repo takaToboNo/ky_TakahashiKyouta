@@ -30,10 +30,6 @@ void GunBoots::Update(float dt)
 
 void GunBoots::Draw()
 {
-#ifdef _DEBUG
-	//デバッグ表示
-	DrawFormatString(350, 10, GetColor(GRAY.r, GRAY.g, GRAY.b), "Ammo : %d/%d", m_Ammo, MAX_AMMO);
-#endif
 }
 
 void GunBoots::Destroy()

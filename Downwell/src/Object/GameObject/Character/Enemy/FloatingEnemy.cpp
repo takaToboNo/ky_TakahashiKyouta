@@ -73,10 +73,6 @@ void FloatingEnemy::Draw(const Camera& camera)
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), FALSE);
-
-#ifdef _DEBUG
-	DrawFormatString(10, 700, GetColor(m_Color.r, m_Color.g, m_Color.b), "FloatingEnemyHP : %d", m_Hp);
-#endif
 }
 
 void FloatingEnemy::Destroy()

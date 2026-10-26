@@ -133,16 +133,18 @@ void Player::Draw(const Camera& camera)
 {
 #ifdef _DEBUG
 	//デバッグ表示
-	DrawFormatString(10, 10, GetColor(GRAY.r, GRAY.g, GRAY.b), "PosX : %.2f", m_Position.x);
-	DrawFormatString(10, 30, GetColor(GRAY.r, GRAY.g, GRAY.b), "PosY : %.2f", m_Position.y);
-	DrawFormatString(10, 50, GetColor(GRAY.r, GRAY.g, GRAY.b), "VelX : %.2f", m_Velocity.x);
-	DrawFormatString(10, 70, GetColor(GRAY.r, GRAY.g, GRAY.b), "VelY : %.2f", m_Velocity.y);
-	DrawFormatString(10, 90, GetColor(GRAY.r, GRAY.g, GRAY.b), "Gravity : %.2f", m_DebugDrawGravity);
-	DrawFormatString(10, 110, GetColor(GRAY.r, GRAY.g, GRAY.b), "canAutoShot : %s", m_CanAutoShot ? "true" : "false");
-	DrawFormatString(10, 130, GetColor(GRAY.r, GRAY.g, GRAY.b), "isGround : %s", m_IsGround ? "true" : "false");
-	DrawFormatString(10, 150, GetColor(GRAY.r, GRAY.g, GRAY.b), "isHit : %s", m_DebugIsHit ? "true" : "false");
-	DrawFormatString(10, 170, GetColor(GRAY.r, GRAY.g, GRAY.b), "State : %s", m_State->GetStateName());
-	DrawFormatString(10, 190, GetColor(RED.r, RED.g, RED.b), "DeathTimer : %.1f", m_DeathTimer);
+	const int startPosX = 10;
+	const int startPosY = 200;
+	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "PosX : %.2f", m_Position.x);
+	DrawFormatString(startPosX, startPosY + 20, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "PosY : %.2f", m_Position.y);
+	DrawFormatString(startPosX, startPosY + 40, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "VelX : %.2f", m_Velocity.x);
+	DrawFormatString(startPosX, startPosY + 60, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "VelY : %.2f", m_Velocity.y);
+	DrawFormatString(startPosX, startPosY + 80, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "Gravity : %.2f", m_DebugDrawGravity);
+	DrawFormatString(startPosX, startPosY + 100, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "canAutoShot : %s", m_CanAutoShot ? "true" : "false");
+	DrawFormatString(startPosX, startPosY + 120, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "isGround : %s", m_IsGround ? "true" : "false");
+	DrawFormatString(startPosX, startPosY + 140, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "isHit : %s", m_DebugIsHit ? "true" : "false");
+	DrawFormatString(startPosX, startPosY + 160, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "State : %s", m_State->GetStateName());
+	DrawFormatString(startPosX, startPosY + 180, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "DeathTimer : %.1f", m_DeathTimer);
 	m_GunBoots->Draw();
 #endif
 

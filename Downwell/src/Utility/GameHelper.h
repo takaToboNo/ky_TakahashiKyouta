@@ -11,6 +11,7 @@ constexpr Color RED{ 255, 0, 0 };
 constexpr Color YELLOW{ 255, 255, 0 };
 constexpr Color GRAY{ 120, 120, 120 };
 
+//ゲーム色
 constexpr Color PLAYER_IDLE_COLOR{ 255, 255, 255 };
 constexpr Color PLAYER_MOVE_COLOR{ 100, 220, 200 };
 constexpr Color PLAYER_JUMP_COLOR{ 140, 200, 255 };
@@ -19,6 +20,10 @@ constexpr Color PLAYER_SHOT_COLOR{ 255, 220, 140 };
 constexpr Color PLAYER_DEAD_COLOR{ 150, 150, 150 };
 constexpr Color BLOCK_COLOR{ 220, 220, 220 };
 constexpr Color ENEMY_COLOR{ 255, 50, 50 };
+//デバッグ色
+constexpr Color DEBUG_COUNT_COLOR{ 255,230,150 };
+constexpr Color DEBUG_STATUS_COLOR{ 120,200,255 };
+constexpr Color DEBUG_NORMAL_COLOR{ 120,120,120 };
 
 constexpr int MAX_UPDATE = 3;
 
