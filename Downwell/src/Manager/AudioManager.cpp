@@ -20,26 +20,27 @@ bool AudioManager::LoadSE(std::string name, std::string fileName)
 
 void AudioManager::Initialize()
 {
-	LoadBGM("Game", "未定.mp3");
-
+	LoadBGM("Game", "Zero_Defects.mp3");
 
 	//プレイヤー
-	LoadSE("Jump", "未定.mp3");
-	LoadSE("Shot", "未定.mp3");
-	LoadSE("ShotEmpty", "未定.mp3");
-	LoadSE("Reload", "未定.mp3");
-	LoadSE("Land", "未定.mp3");
-	LoadSE("Damage", "未定.mp3");
-	LoadSE("Stomp", "未定.mp3");//敵踏みつけ
-	LoadSE("Dead", "未定.mp3");
+	LoadSE("Jump", "Jump.mp3");
+ 	LoadSE("Shot", "Shot.mp3");
+	LoadSE("ShotEmpty", "ShotEmpty.mp3");
+	LoadSE("Reload", "Reload.mp3");
+	LoadSE("Land", "Land.mp3");
+	LoadSE("Damage", "Damage.mp3");
+	LoadSE("Stomp", "Stomp.mp3");//敵踏みつけ
+	LoadSE("Dead", "Dead.mp3");
 	//ブロック
-	LoadSE("BlockHit", "未定.mp3");
-	LoadSE("BlockBreak", "未定.mp3");
+	LoadSE("BlockHit", "BlockHit.mp3");
+	LoadSE("BlockBreak", "BlockBreak.mp3");
 	//エネミー
-	LoadSE("EnemyHit", "未定.mp3");
-	LoadSE("EnemyDead", "未定.mp3");
+	LoadSE("EnemyHit", "EnemyHit.mp3");
+	LoadSE("EnemyDead", "EnemyDead.mp3");
 	//操作
-	LoadSE("Decide", "未定.mp3");
+	LoadSE("Decide", "Decide.mp3");
+
+	SetVolumeMaster(m_VolumeMaster);
 }
 
 void AudioManager::Finalize()
@@ -101,19 +102,19 @@ void AudioManager::SetVolumeMaster(int volume)
 
 void AudioManager::SetVolumeBGM(int volume)
 {
-	m_VolumeBGM = m_VolumeMaster * volume / MAX_VOLUME;
-	m_VolumeBGM = math_helper::clamp(m_VolumeBGM, 0, MAX_VOLUME);
+	volume = math_helper::clamp(m_VolumeBGM, 0, MAX_VOLUME);
+	volume = m_VolumeMaster * m_VolumeBGM / MAX_VOLUME;
 
 	for (const std::pair<const std::string, int>& pair : m_BGMs)
 	{
-		ChangeVolumeSoundMem(m_VolumeBGM, pair.second);
+		ChangeVolumeSoundMem(volume, pair.second);
 	}
 }
 
 void AudioManager::SetVolumeSE(int volume)
 {
-	m_VolumeSE = m_VolumeMaster * volume / MAX_VOLUME;
-	m_VolumeSE = math_helper::clamp(m_VolumeSE, 0, MAX_VOLUME);
+	volume = math_helper::clamp(m_VolumeSE, 0, MAX_VOLUME);
+	volume = m_VolumeMaster * m_VolumeSE / MAX_VOLUME;
 
 	for (const std::pair<const std::string, int>& pair : m_SEs)
 	{

@@ -257,11 +257,14 @@ void Player::Move(Vector2& direction)
 
 void Player::Damage(int damage)
 {
-	AudioManager::GetInstance().PlaySE("Damage");
-
 	m_Hp -= damage;
 	m_KnockbackTimer = KNOCKBACK_TIME;
 	m_InvincibleTimer = INVINCIBLE_TIME;
+
+	if (m_Hp > 0)
+	{
+		AudioManager::GetInstance().PlaySE("Damage");
+	}
 }
 
 void Player::Died()
@@ -296,6 +299,5 @@ void Player::Shot(const Vector2& position)
 
 void Player::Reload()
 {
-	AudioManager::GetInstance().PlaySE("Reload");
 	m_GunBoots->Reload();
 }

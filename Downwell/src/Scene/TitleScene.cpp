@@ -3,6 +3,7 @@
 #include "TitleScene.h"
 #include "Input.h"
 #include "GameHelper.h"
+#include "AudioManager.h"
 
 bool TitleScene::Initialize()
 {
@@ -30,6 +31,7 @@ void TitleScene::Update(float dt)
 
 	if (Input::IsTrigger(Action::Action))
 	{
+		AudioManager::GetInstance().PlaySE("Decide");
 		m_RequestScene = SceneType::Game;
 	}
 }

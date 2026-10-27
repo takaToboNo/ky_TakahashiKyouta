@@ -30,6 +30,6 @@ public:
 	void Destroy() override;
 
 	bool CreateBullet(const Vector2& position);
-	void Reload() { m_Ammo = MAX_AMMO; }
+	void Reload();
 	int GetAmmo() { return m_Ammo; }
 };

@@ -12,9 +12,9 @@ private:
 
 	int m_CurrentBGM = 0;
 
-	int m_VolumeMaster = 100;		// 0 - 255
-	int m_VolumeBGM = MAX_VOLUME;	// 0 - 255
-	int m_VolumeSE = MAX_VOLUME;	// 0 - 255
+	int m_VolumeMaster = MAX_VOLUME;	// 0 - 255
+	int m_VolumeBGM = 150;				// 0 - 255
+	int m_VolumeSE = 140;				// 0 - 255
 
 private:
 	AudioManager() {}

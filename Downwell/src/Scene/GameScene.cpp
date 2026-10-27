@@ -3,6 +3,7 @@
 #include <memory>
 #include "GameScene.h"
 #include "Input.h"
+#include "AudioManager.h"
 
 #include "Player.h"
 #include "WalkerEnemy.h"
@@ -73,6 +74,7 @@ void GameScene::Update(float dt)
 	{
 		if (Input::IsTrigger(Action::Action))
 		{
+			AudioManager::GetInstance().PlaySE("Decide");
 			m_RequestScene = SceneType::Title;
 		}
 	}

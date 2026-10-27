@@ -59,3 +59,11 @@ bool GunBoots::CreateBullet(const Vector2& position)
 
 	return false;
 }
+
+void GunBoots::Reload()
+{
+	if (m_Ammo >= MAX_AMMO) return;
+
+	AudioManager::GetInstance().PlaySE("Reload");
+	m_Ammo = MAX_AMMO;
+}

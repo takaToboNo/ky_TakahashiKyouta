@@ -100,7 +100,7 @@ void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 	{
 		if (hitSide == HitSide::Top)
 		{
-			m_IsDead = true;
+			m_Hp = 0;
 		}
 	}
 
