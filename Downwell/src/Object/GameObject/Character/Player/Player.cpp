@@ -283,13 +283,11 @@ void Player::Shot(const Vector2& position)
 		if (canShot)
 		{
 			//îΩìÆ
-			AudioManager::GetInstance().PlaySE("Shot");
 			m_Velocity.y = 0.0f;
 		}
 		else
 		{
 			//è¨îΩìÆ
-			AudioManager::GetInstance().PlaySE("ShotEmpty");
 			m_Velocity.y *= EMPTY_RECOIL_DAMPING;
 			m_CanAutoShot = false;
 		}

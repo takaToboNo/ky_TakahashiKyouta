@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "ObjectPool.h"
 #include "GameHelper.h"
+#include "AudioManager.h"
 
 //‰¼
 #include "DxLib.h"
@@ -39,7 +40,11 @@ void GunBoots::Destroy()
 
 bool GunBoots::CreateBullet(const Vector2& position)
 {
-	if (m_Ammo <= 0) return false;
+	if (m_Ammo <= 0)
+	{
+		AudioManager::GetInstance().PlaySE("ShotEmpty");
+		return false;
+	}
 
 	Bullet* bullet = m_BulletPool.Get();
 	if(bullet)
@@ -48,6 +53,7 @@ bool GunBoots::CreateBullet(const Vector2& position)
 		bullet->Initialize();
 		bullet->SetPosition(position);
 		m_Ammo--;
+		AudioManager::GetInstance().PlaySE("Shot");
 		return true;
 	}
 

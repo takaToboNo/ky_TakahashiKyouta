@@ -101,7 +101,7 @@ void AudioManager::SetVolumeMaster(int volume)
 
 void AudioManager::SetVolumeBGM(int volume)
 {
-	m_VolumeBGM = m_VolumeMaster * (volume / MAX_VOLUME);
+	m_VolumeBGM = m_VolumeMaster * volume / MAX_VOLUME;
 	m_VolumeBGM = math_helper::clamp(m_VolumeBGM, 0, MAX_VOLUME);
 
 	for (const std::pair<const std::string, int>& pair : m_BGMs)
@@ -112,10 +112,10 @@ void AudioManager::SetVolumeBGM(int volume)
 
 void AudioManager::SetVolumeSE(int volume)
 {
-	m_VolumeSE = m_VolumeMaster * (volume / MAX_VOLUME);
+	m_VolumeSE = m_VolumeMaster * volume / MAX_VOLUME;
 	m_VolumeSE = math_helper::clamp(m_VolumeSE, 0, MAX_VOLUME);
 
-	for (const std::pair<const std::string, int>& pair : m_BGMs)
+	for (const std::pair<const std::string, int>& pair : m_SEs)
 	{
 		ChangeVolumeSoundMem(m_VolumeSE, pair.second);
 	}

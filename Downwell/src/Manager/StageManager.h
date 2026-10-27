@@ -52,7 +52,7 @@ private:
 
 	std::array<Map, STAGE_SECTION_COUNT> m_Maps{};
 
-	Camera* m_Camera;
+	Camera* m_Camera = nullptr;
 
 	int m_StageLoopCount = 0;
 
