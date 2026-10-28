@@ -5,6 +5,7 @@
 *.suo
 *.json
 *.obj
+*.enc
 *.recipe
 *.ilk
 *.log

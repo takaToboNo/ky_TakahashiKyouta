@@ -43,6 +43,9 @@
     <Filter Include="src\Object\UI">
       <UniqueIdentifier>{94313d5e-6c0e-4137-8d08-7b8a623d9256}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Object\GameObject\Character\Enemy\WalkerEnemy">
+      <UniqueIdentifier>{22b73e5a-4e6b-4fa2-a5da-1788000a786f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -88,9 +91,6 @@
       <Filter>src\Object\GameObject\Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\GameObject\Character\Enemy\FloatingEnemy.h">
-      <Filter>src\Object\GameObject\Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\GameObject\Character\Enemy\WalkerEnemy.h">
       <Filter>src\Object\GameObject\Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\Utility\GameHelper.h">
@@ -180,6 +180,18 @@
     <ClInclude Include="src\Manager\AudioManager.h">
       <Filter>src\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemy.h">
+      <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemyFall.h">
+      <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemyMove.h">
+      <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemyState.h">
+      <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -216,9 +228,6 @@
       <Filter>src\Object\GameObject\Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Enemy\FloatingEnemy.cpp">
-      <Filter>src\Object\GameObject\Character\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\GameObject\Character\Enemy\WalkerEnemy.cpp">
       <Filter>src\Object\GameObject\Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="src\Manager\GameManager.cpp">
@@ -292,6 +301,15 @@
     </ClCompile>
     <ClCompile Include="src\Manager\AudioManager.cpp">
       <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemy.cpp">
+      <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemyFall.cpp">
+      <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemyMove.cpp">
+      <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

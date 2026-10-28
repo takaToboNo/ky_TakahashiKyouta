@@ -137,6 +137,6 @@ bool FloatingEnemy::CheckGround()
 
 void FloatingEnemy::Activate()
 {
-	GameObject::Activate();
+	Character::Activate();
 	m_Hp = FLOATING_ENEMY_MAX_HP;
 }

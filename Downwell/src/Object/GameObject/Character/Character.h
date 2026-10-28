@@ -25,6 +25,8 @@ public:
 	virtual void Died() = 0;
 	virtual bool CheckGround() = 0;
 
+	virtual void Activate() override;
+
 	int GetMaxHp() { return m_MaxHp; }
 	int GetHp() { return m_Hp; }
 

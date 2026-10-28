@@ -24,3 +24,9 @@ void Character::Destroy()
 {
 	GameObject::Destroy();
 }
+
+void Character::Activate()
+{
+	GameObject::Activate();
+	m_Velocity = Vector2::Zero();
+}

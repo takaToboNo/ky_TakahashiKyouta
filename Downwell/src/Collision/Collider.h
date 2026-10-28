@@ -9,6 +9,7 @@ enum class HitSide
 	Right,
 	Top,
 	Bottom,
+	Max
 };
 
 struct HitInfo

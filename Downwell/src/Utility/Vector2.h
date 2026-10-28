@@ -25,6 +25,22 @@ public:
 		y /= len;
 	}
 
+	void RotateClockwise90()
+	{
+		const float nx = x;
+		const float ny = y;
+		x = -ny;
+		y = nx;
+	}
+
+	void RotateCounterClockwise90()
+	{
+		const float nx = x;
+		const float ny = y;
+		x = ny;
+		y = -nx;
+	}
+
 	float Length() const
 	{
 		return sqrtf(LengthSquared());
