@@ -115,24 +115,10 @@ void FloatingEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 	}
 }
 
-void FloatingEnemy::Move(Vector2& direction)
-{
-	(void)direction;
-}
-
 void FloatingEnemy::Damage(int damage)
 {
 	AudioManager::GetInstance().PlaySE("EnemyHit");
 	m_Hp -= damage;
-}
-
-void FloatingEnemy::Died()
-{
-}
-
-bool FloatingEnemy::CheckGround()
-{
-	return false;
 }
 
 void FloatingEnemy::Activate()

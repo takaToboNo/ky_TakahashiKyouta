@@ -22,5 +22,5 @@ public:
 
 	bool LoadMapData(const std::string& mapName);
 
-	int GetMapObjectType(int y, int x) { return m_Map[y][x]; }
+	int GetMapObjectType(int y, int x) const { return m_Map[y][x]; }
 };

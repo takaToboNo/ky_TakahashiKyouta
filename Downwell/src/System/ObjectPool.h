@@ -12,9 +12,9 @@ public:
 	~ObjectPool() = default;
 
 	void Setup(GameObjectManager& manager, int poolSize);
-	T* Get();
+	T* Get() const;
 
-	std::vector<T*> GetObjectPool() { return m_ObjectPool; }
+	std::vector<T*> GetObjectPool() const { return m_ObjectPool; }
 };
 
 template<typename T>
@@ -41,7 +41,7 @@ inline void ObjectPool<T>::Setup(GameObjectManager& manager, int poolSize)
 }
 
 template<typename T>
-inline T* ObjectPool<T>::Get()
+inline T* ObjectPool<T>::Get() const
 {
 	for (T* object : m_ObjectPool)
 	{

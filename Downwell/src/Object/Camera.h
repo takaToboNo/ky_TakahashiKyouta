@@ -7,7 +7,7 @@ class Camera : public Object
 {
 private:
 	static constexpr float CAMERA_OFFSET_Y = 100.0f;
-	GameObject* m_Target = nullptr;
+	const GameObject* m_Target = nullptr;
 
 public:
 	Camera() = default;
@@ -17,7 +17,7 @@ public:
 	void Finalize() override;
 	void Update(float dt) override;
 
-	void SetTarget(GameObject* target) { m_Target = target; }
+	void SetTarget(const GameObject* target) { m_Target = target; }
 
 	void SnapToTarget();
 };

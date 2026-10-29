@@ -24,17 +24,17 @@ public:
 	virtual void Draw(const Camera& camera);
 	virtual void Destroy() override;
 
-	virtual void SetScale(const Vector2& scale) { m_Scale = scale; }
-	void SetColor(Color color) { m_Color = color; }
-	virtual const Vector2& GetScale() const { return m_Scale; }
-
 	virtual void OnCollision(GameObject* other, const HitInfo& hitInfo) {}
+
+	void SetScale(const Vector2& scale) { m_Scale = scale; }
+	void SetColor(Color color) { m_Color = color; }
+	const Vector2& GetScale() const { return m_Scale; }
+
 	Collider* GetCollider() { return &m_Collider; }
-	HitSide GetHitSide(const HitInfo& hitInfo);
+	HitSide GetHitSide(const HitInfo& hitInfo) const;
 
 	void SetGameObjectManager(GameObjectManager* manager) { m_GameObjectManager = manager; }
 
 	virtual void Activate();
 	virtual void Deactivate();
-
 };

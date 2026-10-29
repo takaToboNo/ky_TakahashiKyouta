@@ -186,7 +186,7 @@ void StageManager::SetSections()
 	}
 }
 
-int StageManager::FindCurrentSection(float playerPositionY)
+int StageManager::FindCurrentSection(float playerPositionY) const
 {
 	float sectionY = TILE_SIZE * static_cast<float>(MAP_SIZE_Y);
 
@@ -246,7 +246,7 @@ void StageManager::ActivateSection(int index, Player* player)
 				FloatingEnemy* floatingEnemy = m_StageObjectPools.floatingEnemyPool.Get();
 				if (floatingEnemy)
 				{
-					floatingEnemy->SetPosition(offset);
+					floatingEnemy->SetSpawnPosition(offset);
 					floatingEnemy->Activate();
 					floatingEnemy->SetPlayer(player);
 					m_Sections[index].gameObjects.push_back(floatingEnemy);
@@ -258,7 +258,7 @@ void StageManager::ActivateSection(int index, Player* player)
 				WalkerEnemy* walkerEnemy = m_StageObjectPools.walkerEnemyPool.Get();
 				if (walkerEnemy)
 				{
-					walkerEnemy->SetPosition(offset);
+					walkerEnemy->SetSpawnPosition(offset);
 					walkerEnemy->Activate();
 					m_Sections[index].gameObjects.push_back(walkerEnemy);
 				}
@@ -302,7 +302,7 @@ bool StageManager::LoadMapsDate()
 	return true;
 }
 
-void StageManager::ResetStageObjectPools()
+void StageManager::ResetStageObjectPools() const
 {
 	for (SolidBlock* obj : m_StageObjectPools.solidBlockPool.GetObjectPool())
 	{

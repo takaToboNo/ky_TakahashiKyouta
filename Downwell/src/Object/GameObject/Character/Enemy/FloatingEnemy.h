@@ -28,11 +28,8 @@ public:
 
 	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;
 
-	void Move(Vector2& direction) override;
 	void Damage(int damage) override;
-	void Died() override;
-	bool CheckGround() override;
-
+	
 	void SetPlayer(const Player* player) { m_pPlayer = player; }
 
 	void Activate() override;

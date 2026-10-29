@@ -1,6 +1,5 @@
 #include "WalkerEnemy.h"
 #include "Bullet.h"
-#include "Player.h"
 #include "AudioManager.h"
 
 #include "WalkerEnemyMove.h"
@@ -18,14 +17,14 @@ void WalkerEnemy::Initialize()
 	m_Position = { 500.0f,650.0f };
 	m_Scale = { WALKER_ENEMY_SIZE,WALKER_ENEMY_SIZE };
 	m_Color = ENEMY_COLOR;
-	m_Hp = 1;
+	m_Hp = WALKER_ENEMY_MAX_HP;
 	m_IsClockwise = rand() % 2 == 0;
 	m_IsAttached = false;
 
 	m_WalkerEnemyStateMachine[static_cast<size_t>(EWalkerEnemyState::Move)] = std::make_unique<WalkerEnemyMove>();
 	m_WalkerEnemyStateMachine[static_cast<size_t>(EWalkerEnemyState::Fall)] = std::make_unique<WalkerEnemyFall>();
 
-	m_CurrentState = m_WalkerEnemyStateMachine[static_cast<size_t>(EWalkerEnemyState::Fall)].get();
+	m_CurrentState = nullptr;
 	m_NextState = m_WalkerEnemyStateMachine[static_cast<size_t>(EWalkerEnemyState::Fall)].get();
 }
 
@@ -38,8 +37,7 @@ void WalkerEnemy::Update(float dt)
 {
 	Enemy::Update(dt);
 
-	if (m_CurrentState) m_CurrentState->Update(*this);
-	if (m_NextState) SetState();
+	UpdateState();
 
 	if (!m_IsAttached)
 	{
@@ -119,7 +117,7 @@ void WalkerEnemy::Update(float dt)
 		m_Velocity = m_MoveDirection * MOVE_SPEED;
 	}
 
-	if (m_CameraErea)
+	if (m_CameraArea)
 	{
 		//座標更新
 		m_Position += m_Velocity * dt;
@@ -142,10 +140,17 @@ void WalkerEnemy::Update(float dt)
 		m_IsDead = true;
 	}
 
+	//一定距離離れているならプール状態
+	float diff = m_Position.y - m_SpawnPosition.y;
+	if (diff * diff > DESPAWN_DISTANCE * DESPAWN_DISTANCE)
+	{
+		Deactivate();
+	}
+
 	//死んでいるならプール状態
 	if (m_IsDead)
 	{
-		m_IsActive = false;
+		Deactivate();
 	}
 
 	if (m_Position.x < STAGE_LEFT || m_Position.x > STAGE_RIGHT)
@@ -161,11 +166,11 @@ void WalkerEnemy::Draw(const Camera& camera)
 
 	if (m_Position.y >= pos.y - CAMERA_MARGIN && m_Position.y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
 	{
-		m_CameraErea = true;
+		m_CameraArea = true;
 	}
 	else
 	{
-		m_CameraErea = false;
+		m_CameraArea = false;
 	}
 
 	int x1, y1;
@@ -247,24 +252,10 @@ void WalkerEnemy::OnCollision(GameObject* other, const HitInfo& hitInfo)
 	}
 }
 
-void WalkerEnemy::Move(Vector2& direction)
-{
-	(void)direction;
-}
-
 void WalkerEnemy::Damage(int damage)
 {
 	AudioManager::GetInstance().PlaySE("EnemyHit");
 	m_Hp -= damage;
-}
-
-void WalkerEnemy::Died()
-{
-}
-
-bool WalkerEnemy::CheckGround()
-{
-	return false;
 }
 
 void WalkerEnemy::Activate()
@@ -286,4 +277,10 @@ void WalkerEnemy::SetState()
 	m_CurrentState = m_NextState;
 	m_NextState = nullptr;
 	if (m_CurrentState) m_CurrentState->Enter(*this);
+}
+
+void WalkerEnemy::UpdateState()
+{
+	if (m_CurrentState) m_CurrentState->Update(*this);
+	if (m_NextState) SetState();
 }

@@ -71,19 +71,19 @@ public:
 	void Update(GameObjectManager& manager, Player* player);
 	void Draw();
 
-	int GetCurrentSection() { return m_CurrentSection; }
-	int GetStageLoopCount() { return m_StageLoopCount; }
+	int GetCurrentSection() const { return m_CurrentSection; }
+	int GetStageLoopCount() const { return m_StageLoopCount; }
 
 	void SetCamera(Camera* camera) { m_Camera = camera; }
 
 private:
 	void SetRandomNumbers();
 	void SetSections();
-	int FindCurrentSection(float playerPositionY);
+	int FindCurrentSection(float playerPositionY) const;
 
 	void ActivateSection(int index, Player* player);
 	void DeactivateSection(int index);
 
 	bool LoadMapsDate();
-	void ResetStageObjectPools();
+	void ResetStageObjectPools() const;
 };

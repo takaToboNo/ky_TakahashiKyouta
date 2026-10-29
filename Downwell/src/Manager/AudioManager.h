@@ -43,4 +43,7 @@ public:
 	void SetVolumeBGM(int volume);		// 0 - 255
 	void SetVolumeSE(int volume);		// 0 - 255
 
+	void ApplyVolumeBGM();
+	void ApplyVolumeSE();
+
 };

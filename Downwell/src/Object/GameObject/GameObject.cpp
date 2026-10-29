@@ -21,7 +21,6 @@ void GameObject::Update(float dt)
 
 void GameObject::Draw(const Camera& camera)
 {
-
 }
 
 void GameObject::Destroy()
@@ -29,7 +28,7 @@ void GameObject::Destroy()
 	Object::Destroy();
 }
 
-HitSide GameObject::GetHitSide(const HitInfo& hitInfo)
+HitSide GameObject::GetHitSide(const HitInfo& hitInfo) const
 {
 	if (std::abs(hitInfo.normal.x) > std::abs(hitInfo.normal.y))
 	{

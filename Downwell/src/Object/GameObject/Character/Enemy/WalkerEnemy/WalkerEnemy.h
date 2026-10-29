@@ -28,6 +28,8 @@ private:
 
 	static constexpr float FOOT_SENSOR_WIDTH = WALKER_ENEMY_SIZE - 10.0f;
 	static constexpr float FOOT_SENSOR_HEIGHT = 20.0f;
+
+	static constexpr float DESPAWN_DISTANCE = 1200.0f;
 	
 	std::array<std::unique_ptr<IWalkerEnemyState>, static_cast<size_t>(EWalkerEnemyState::Max)> m_WalkerEnemyStateMachine{};
 	IWalkerEnemyState* m_CurrentState = nullptr;
@@ -42,7 +44,7 @@ private:
 
 	std::array<bool, static_cast<size_t>(HitSide::Max)> m_HitSides = { false };
 
-	bool m_CameraErea = false;
+	bool m_CameraArea = false;
 
 public:
 	WalkerEnemy() = default;
@@ -55,18 +57,17 @@ public:
 
 	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;
 
-	void Move(Vector2& direction) override;
 	void Damage(int damage) override;
-	void Died() override;
-	bool CheckGround() override;
-
+	
 	void Activate() override;
 
 	void RequestState(EWalkerEnemyState nextState);
 	void SetState();
 
-	bool IsAttached() { return m_IsAttached; }
-	bool IsClockwise() { return m_IsClockwise; }
-	const Vector2& GetAttachDirection() { return m_AttachDirection; }
+	bool IsAttached() const { return m_IsAttached; }
+	bool IsClockwise() const { return m_IsClockwise; }
+	const Vector2& GetAttachDirection() const { return m_AttachDirection; }
 	void SetMoveDirection(const Vector2& moveDirection) { m_MoveDirection = moveDirection; }
+
+	void UpdateState();
 };

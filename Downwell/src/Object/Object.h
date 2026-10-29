@@ -22,14 +22,14 @@ public:
 	virtual void Update(float dt);
 	virtual void Destroy();
 
-	virtual Tag GetTag() { return m_Tag; }
-	virtual Layer GetLayer() { return m_Layer; }
-	virtual void SetPosition(const Vector2& position) { m_Position = position; }
-	virtual const Vector2& GetPosition() const { return m_Position; }
-	virtual const Vector2& GetOldPosition() const { return m_OldPosition; }
-	virtual void SetActive(bool isActive) { m_IsActive = isActive; }
-	virtual bool IsActive() const { return m_IsActive; }
-	virtual void SetDead(bool isDead) { m_IsDead = isDead; }
-	virtual bool IsDead() const { return m_IsDead; }
+	Tag GetTag() const { return m_Tag; }
+	Layer GetLayer() const { return m_Layer; }
+	void SetPosition(const Vector2& position) { m_Position = position; }
+	const Vector2& GetPosition() const { return m_Position; }
+	const Vector2& GetOldPosition() const { return m_OldPosition; }
+	void SetActive(bool isActive) { m_IsActive = isActive; }
+	bool IsActive() const { return m_IsActive; }
+	void SetDead(bool isDead) { m_IsDead = isDead; }
+	bool IsDead() const { return m_IsDead; }
 
 };

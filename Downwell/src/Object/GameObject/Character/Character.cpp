@@ -25,6 +25,12 @@ void Character::Destroy()
 	GameObject::Destroy();
 }
 
+void Character::SetSpawnPosition(const Vector2& spawnPosition)
+{
+	m_Position = spawnPosition;
+	m_SpawnPosition = spawnPosition;
+}
+
 void Character::Activate()
 {
 	GameObject::Activate();

@@ -7,7 +7,8 @@ protected:
 	int m_Hp = 1;
 	int m_MaxHp = 1;
 	float m_MoveSpeed = 1.0f;
-	Vector2 m_Velocity = { 0.0f,0.0f };
+	Vector2 m_Velocity = Vector2::Zero();
+	Vector2 m_SpawnPosition = Vector2::Zero();
 	bool m_IsFacingRight = true;
 
 public:
@@ -18,13 +19,12 @@ public:
 	virtual void Update(float dt) override;
 	virtual void Destroy() override;
 
-	virtual void SetVelocity(const Vector2& velocity) { m_Velocity = velocity; }
-	virtual const Vector2& GetVelocity() const { return m_Velocity; }
-	virtual void Move(Vector2& direction) = 0;
-	virtual void Damage(int damage) = 0;
-	virtual void Died() = 0;
-	virtual bool CheckGround() = 0;
+	void SetVelocity(const Vector2& velocity) { m_Velocity = velocity; }
+	const Vector2& GetVelocity() const { return m_Velocity; }
+	void SetSpawnPosition(const Vector2& spawnPosition);
 
+	virtual void Damage(int damage) = 0;
+	
 	virtual void Activate() override;
 
 	int GetMaxHp() { return m_MaxHp; }

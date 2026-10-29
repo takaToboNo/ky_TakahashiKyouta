@@ -31,5 +31,5 @@ public:
 
 	bool CreateBullet(const Vector2& position);
 	void Reload();
-	int GetAmmo() { return m_Ammo; }
+	int GetAmmo() const { return m_Ammo; }
 };

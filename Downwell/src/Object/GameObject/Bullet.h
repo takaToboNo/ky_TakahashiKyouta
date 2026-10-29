@@ -27,5 +27,5 @@ public:
 
 	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;
 
-	int GetDamage() { return m_Damage; }
+	int GetDamage() const { return m_Damage; }
 };

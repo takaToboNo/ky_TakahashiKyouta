@@ -74,18 +74,11 @@ public:
 	void SetState();
 
 	void SetGround(bool isGround) { m_IsGround = isGround; }
-	bool IsGround() { return m_IsGround; }
+	bool IsGround() const { return m_IsGround; }
 
-	void Move(Vector2& direction) override;
 	void Damage(int damage) override;
-	void Died() override;
-	bool CheckGround() override;
 
-	void Jump()
-	{
-		m_Velocity.y = -JUMP_FORCE;
-		m_IsGround = false;
-	}
+	void Jump();
 	void SetDirectionX(float dir = 0.0f) { m_DirectionX = dir; }
 	void AirDrag() { m_Velocity.x *= AIR_DRAG; }
 	void GroundDrag() { m_Velocity.x *= GROUND_DRAG; }
@@ -93,12 +86,12 @@ public:
 	void Shot(const Vector2& position);
 
 	void SetCanAutoShot(bool can) { m_CanAutoShot = can; }
-	bool GetCanAutoShot() { return m_CanAutoShot; }
+	bool GetCanAutoShot() const { return m_CanAutoShot; }
 
 	GunBoots* GetGunBoots() const { return m_GunBoots.get(); }
 	void Reload();
 
-	float GetKnockbackTimer() { return m_KnockbackTimer; }
-	bool IsDead() { return m_IsDead; }
-	float GetDeathTimer() { return m_DeathTimer; }
+	float GetKnockbackTimer() const { return m_KnockbackTimer; }
+	float GetDeathTimer() const { return m_DeathTimer; }
+	bool IsDead() const { return m_IsDead; }
 };

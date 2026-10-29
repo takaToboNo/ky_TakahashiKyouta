@@ -250,11 +250,6 @@ void Player::SetState()
 	if (m_State) m_State->Enter(*this);
 }
 
-void Player::Move(Vector2& direction)
-{
-	(void)direction;
-}
-
 void Player::Damage(int damage)
 {
 	m_Hp -= damage;
@@ -267,13 +262,10 @@ void Player::Damage(int damage)
 	}
 }
 
-void Player::Died()
+void Player::Jump()
 {
-}
-
-bool Player::CheckGround()
-{
-	return false;
+	m_Velocity.y = -JUMP_FORCE;
+	m_IsGround = false;
 }
 
 void Player::Shot(const Vector2& position)
