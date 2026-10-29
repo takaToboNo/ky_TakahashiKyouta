@@ -15,6 +15,8 @@ private:
 	int m_ActiveObjects = 0;
 	int m_DeadObjects = 0;
 
+	bool m_IsDirtyGameObjects = false;
+
 public:
 	GameObjectManager() = default;
 	~GameObjectManager() = default;
@@ -35,6 +37,8 @@ public:
 		m_GameObjects.back()->SetGameObjectManager(this);
 		m_GameObjects.back()->Initialize();
 
+		m_IsDirtyGameObjects = true;
+
 		return ptr;
 	}
 
@@ -49,6 +53,8 @@ public:
 		m_PendingGameObjects.push_back(std::move(gameObject));
 		m_PendingGameObjects.back()->SetGameObjectManager(this);
 		m_PendingGameObjects.back()->Initialize();
+
+		m_IsDirtyGameObjects = true;
 
 		return ptr;
 	}

@@ -69,13 +69,20 @@ void GameObjectManager::Draw(const Camera& camera)
 
 void GameObjectManager::ApplyPendingGameObjects()
 {
+	if (!m_IsDirtyGameObjects)
+	{
+		return;
+	}
+
 	for (auto& gameObject : m_PendingGameObjects)
 	{
 		m_GameObjects.push_back(std::move(gameObject));
 	}
 
-	SortGameObjectsByLayer();
+ 	SortGameObjectsByLayer();
 	m_PendingGameObjects.clear();
+
+	m_IsDirtyGameObjects = false;
 }
 
 void GameObjectManager::SortGameObjectsByLayer()
