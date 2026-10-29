@@ -84,6 +84,6 @@ private:
 	void ActivateSection(int index, Player* player);
 	void DeactivateSection(int index);
 
-	bool LoadMapsDate();
+	bool LoadMapsData();
 	void ResetStageObjectPools() const;
 };

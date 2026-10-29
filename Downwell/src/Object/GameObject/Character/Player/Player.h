@@ -1,17 +1,29 @@
 #pragma once
+#include <array>
 #include <memory>
 #include "Character.h"
-#include "PlayerState.h"
-#include "PlayerIdle.h"
 #include "GunBoots.h"
+#include "PlayerState.h"
 
 class Camera;
+
+enum class EPlayerState : int
+{
+	Idle = 0,
+	Move,
+	Jump,
+	Fall,
+	Shot,
+	Dead,
+	Max
+};
 
 class Player : public Character
 {
 private:
-	std::unique_ptr<IPlayerState> m_State = std::make_unique<PlayerIdle>();
-	std::unique_ptr<IPlayerState> m_NextState = {};
+	std::array<std::unique_ptr<IPlayerState>, static_cast<size_t>(EPlayerState::Max)> m_PlayerStateMachine{};
+	IPlayerState* m_CurrentState = nullptr;
+	IPlayerState* m_NextState = nullptr;
 
 	std::unique_ptr<GunBoots> m_GunBoots = std::make_unique<GunBoots>();
 
@@ -70,7 +82,7 @@ public:
 
 	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;
 
-	void RequestState(std::unique_ptr<IPlayerState> next);
+	void RequestState(EPlayerState nextState);
 	void SetState();
 
 	void SetGround(bool isGround) { m_IsGround = isGround; }
@@ -94,4 +106,6 @@ public:
 	float GetKnockbackTimer() const { return m_KnockbackTimer; }
 	float GetDeathTimer() const { return m_DeathTimer; }
 	bool IsDead() const { return m_IsDead; }
+
+	void UpdateState();
 };

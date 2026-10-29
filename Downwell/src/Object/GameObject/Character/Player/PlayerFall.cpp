@@ -9,6 +9,7 @@
 
 void PlayerFall::Enter(Player& player)
 {
+	m_ShotInterval = SHOT_INTERVAL;
 }
 
 void PlayerFall::Update(Player& player)
@@ -36,14 +37,14 @@ void PlayerFall::Update(Player& player)
 	//ショット
 	if (Input::IsTrigger(Action::Action))
 	{
-		player.RequestState(std::make_unique<PlayerShot>());
+		player.RequestState(EPlayerState::Shot);
 	}
 
 	//自動ショット
 	m_ShotInterval--;
 	if (Input::IsPress(Action::Action) && m_ShotInterval < 0 && player.GetCanAutoShot())
 	{
-		player.RequestState(std::make_unique<PlayerShot>());
+		player.RequestState(EPlayerState::Shot);
 	}
 
 	//着地
@@ -51,14 +52,14 @@ void PlayerFall::Update(Player& player)
 	{
 		AudioManager::GetInstance().PlaySE("Land");
 
-		player.RequestState(std::make_unique<PlayerMove>());
+		player.RequestState(EPlayerState::Move);
 		player.Reload();
 	}
 
 	//死亡
 	if (player.IsDead())
 	{
-		player.RequestState(std::make_unique<PlayerDead>());
+		player.RequestState(EPlayerState::Dead);
 	}
 }
 

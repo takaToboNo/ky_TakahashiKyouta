@@ -15,7 +15,7 @@
 
 bool StageManager::Initialize(GameObjectManager& manager)
 {
-	if (!LoadMapsDate()) return false;
+	if (!LoadMapsData()) return false;
 
 	SetRandomNumbers();
 	SetSections();
@@ -282,7 +282,7 @@ void StageManager::DeactivateSection(int index)
 	m_Sections[index].gameObjects.clear();
 }
 
-bool StageManager::LoadMapsDate()
+bool StageManager::LoadMapsData()
 {
 	bool result = true;
 

@@ -19,7 +19,7 @@ void PlayerMove::Update(Player& player)
 	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));
 	if (!isMove)
 	{
-		player.RequestState(std::make_unique<PlayerIdle>());
+		player.RequestState(EPlayerState::Idle);
 	}
 	else if (Input::IsPress(Action::Left))
 	{
@@ -33,19 +33,19 @@ void PlayerMove::Update(Player& player)
 	//ƒWƒƒƒ“ƒv
 	if (Input::IsTrigger(Action::Action))
 	{
-		player.RequestState(std::make_unique<PlayerJump>());
+		player.RequestState(EPlayerState::Jump);
 	}
 
 	//—Ž‰º
 	if (!player.IsGround())
 	{
-		player.RequestState(std::make_unique<PlayerFall>());
+		player.RequestState(EPlayerState::Fall);
 	}
 
 	//Ž€–S
 	if (player.IsDead())
 	{
-		player.RequestState(std::make_unique<PlayerDead>());
+		player.RequestState(EPlayerState::Dead);
 	}
 }
 

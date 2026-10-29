@@ -5,6 +5,13 @@
 #include "WalkerEnemy.h"
 #include "AudioManager.h"
 
+#include "PlayerIdle.h"
+#include "PlayerMove.h"
+#include "PlayerJump.h"
+#include "PlayerFall.h"
+#include "PlayerShot.h"
+#include "PlayerDead.h"
+
 //âº
 #include "DxLib.h"
 #include "Camera.h"
@@ -24,8 +31,15 @@ void Player::Initialize()
 	m_MaxHp = 4;
 	m_Hp = m_MaxHp;
 
-	m_State = std::make_unique<PlayerIdle>();
-	m_NextState = std::make_unique<PlayerIdle>();
+	m_PlayerStateMachine[static_cast<size_t>(EPlayerState::Idle)] = std::make_unique<PlayerIdle>();
+	m_PlayerStateMachine[static_cast<size_t>(EPlayerState::Move)] = std::make_unique<PlayerMove>();
+	m_PlayerStateMachine[static_cast<size_t>(EPlayerState::Jump)] = std::make_unique<PlayerJump>();
+	m_PlayerStateMachine[static_cast<size_t>(EPlayerState::Fall)] = std::make_unique<PlayerFall>();
+	m_PlayerStateMachine[static_cast<size_t>(EPlayerState::Shot)] = std::make_unique<PlayerShot>();
+	m_PlayerStateMachine[static_cast<size_t>(EPlayerState::Dead)] = std::make_unique<PlayerDead>();
+
+	m_CurrentState = nullptr;
+	m_NextState = m_PlayerStateMachine[static_cast<size_t>(EPlayerState::Idle)].get();
 
 	m_Color = PLAYER_IDLE_COLOR;
 
@@ -50,8 +64,7 @@ void Player::Update(float dt)
 {
 	Character::Update(dt);
 
-	if (m_State) m_State->Update(*this);
-	if (m_NextState) SetState();
+	UpdateState();
 
 	//èdóÕ
 	const float gravity = (m_Velocity.y < GRAVITY_THRESHOLD_SPEED) ? JUMP_GRAVITY : FALL_GRAVITY;
@@ -68,7 +81,7 @@ void Player::Update(float dt)
 	}
 	if (isReleaseJump) m_CanAutoShot = true;
 
-	if(m_KnockbackTimer <= 0.0f)
+	if (m_KnockbackTimer <= 0.0f)
 	{
 		//à⁄ìÆï˚å¸
 		m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;
@@ -143,7 +156,7 @@ void Player::Draw(const Camera& camera)
 	DrawFormatString(startPosX, startPosY + 100, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "canAutoShot : %s", m_CanAutoShot ? "true" : "false");
 	DrawFormatString(startPosX, startPosY + 120, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "isGround : %s", m_IsGround ? "true" : "false");
 	DrawFormatString(startPosX, startPosY + 140, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "isHit : %s", m_DebugIsHit ? "true" : "false");
-	DrawFormatString(startPosX, startPosY + 160, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "State : %s", m_State->GetStateName());
+	if (m_CurrentState) DrawFormatString(startPosX, startPosY + 160, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "State : %s", m_CurrentState->GetStateName());
 	DrawFormatString(startPosX, startPosY + 180, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "DeathTimer : %.1f", m_DeathTimer);
 	m_GunBoots->Draw();
 #endif
@@ -236,18 +249,19 @@ void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 	}
 }
 
-void Player::RequestState(std::unique_ptr<IPlayerState> next)
+void Player::RequestState(EPlayerState nextState)
 {
-	m_NextState = std::move(next);
+	m_NextState = m_PlayerStateMachine.at(static_cast<size_t>(nextState)).get();
 }
 
 void Player::SetState()
 {
-	if (m_State == m_NextState) return;
+	if (m_CurrentState == m_NextState) return;
 
-	if (m_State) m_State->Exit(*this);
-	m_State = std::move(m_NextState);
-	if (m_State) m_State->Enter(*this);
+	if (m_CurrentState) m_CurrentState->Exit(*this);
+	m_CurrentState = m_NextState;
+	m_NextState = nullptr;
+	if (m_CurrentState) m_CurrentState->Enter(*this);
 }
 
 void Player::Damage(int damage)
@@ -292,4 +306,10 @@ void Player::Shot(const Vector2& position)
 void Player::Reload()
 {
 	m_GunBoots->Reload();
+}
+
+void Player::UpdateState()
+{
+	if (m_CurrentState) m_CurrentState->Update(*this);
+	if (m_NextState) SetState();
 }

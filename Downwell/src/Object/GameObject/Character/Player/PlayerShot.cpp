@@ -12,7 +12,7 @@ void PlayerShot::Update(Player& player)
 
 	player.Shot(player.GetPosition());
 
-	player.RequestState(std::make_unique<PlayerFall>());
+	player.RequestState(EPlayerState::Fall);
 }
 
 void PlayerShot::Exit(Player& player)

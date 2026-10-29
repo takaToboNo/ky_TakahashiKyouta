@@ -43,19 +43,19 @@ void PlayerJump::Update(Player& player)
 	//ƒVƒ‡ƒbƒg
 	if (Input::IsTrigger(Action::Action))
 	{
-		player.RequestState(std::make_unique<PlayerShot>());
+		player.RequestState(EPlayerState::Shot);
 	}
 
 	//—Ž‰º
 	if (player.GetVelocity().y >= 0.0f)
 	{
-		player.RequestState(std::make_unique<PlayerFall>());
+		player.RequestState(EPlayerState::Fall);
 	}
 
 	//Ž€–S
 	if (player.IsDead())
 	{
-		player.RequestState(std::make_unique<PlayerDead>());
+		player.RequestState(EPlayerState::Dead);
 	}
 	
 }
