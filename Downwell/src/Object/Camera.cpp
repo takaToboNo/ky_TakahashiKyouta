@@ -3,11 +3,6 @@
 #include "GameHelper.h"
 #include "MathHelper.h"
 
-float Lerp(float start, float end, float t)
-{
-	return (end - start) * t + start;
-}
-
 void Camera::Initialize()
 {
 	SnapToTarget();
@@ -21,8 +16,8 @@ void Camera::Update(float dt)
 {
 	if (m_Target)
 	{
-		const float endY = m_Target->GetPosition().y - WINDOW_HEIGHT * 0.5f + CAMERA_OFFSET_Y;
-		m_Position.y = Lerp(m_Position.y, endY, 0.3f);
+		const float endY = m_Target->GetPosition().y - WINDOW_HEIGHT * 0.5f + CAMERA_TARGET_OFFSET_Y;
+		m_Position.y = math_helper::Lerp(m_Position.y, endY, CAMERA_FRROW_RATE);
 	}
 }
 
@@ -30,6 +25,6 @@ void Camera::SnapToTarget()
 {
 	if (m_Target)
 	{
-		m_Position.y = m_Target->GetPosition().y - WINDOW_HEIGHT * 0.5f + CAMERA_OFFSET_Y;
+		m_Position.y = m_Target->GetPosition().y - WINDOW_HEIGHT * 0.5f + CAMERA_TARGET_OFFSET_Y;
 	}
 }

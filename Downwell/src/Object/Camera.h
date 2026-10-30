@@ -6,7 +6,9 @@ class GameObject;
 class Camera : public Object
 {
 private:
-	static constexpr float CAMERA_OFFSET_Y = 100.0f;
+	static constexpr float CAMERA_FRROW_RATE = 0.3f;
+	static constexpr float CAMERA_TARGET_OFFSET_Y = 100.0f;
+
 	const GameObject* m_Target = nullptr;
 
 public:

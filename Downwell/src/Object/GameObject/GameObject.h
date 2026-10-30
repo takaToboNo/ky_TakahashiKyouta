@@ -9,13 +9,14 @@ class GameObjectManager;
 class GameObject : public Object
 {
 protected:
+	Collider m_Collider;
 	Vector2 m_Scale = { 1.0f,1.0f };
 	Color m_Color = WHITE;
-	Collider m_Collider;
+	bool m_IsActive = false;
+	bool m_IsDead = false;
+	bool m_IsInCameraArea = false;
 
 	GameObjectManager* m_GameObjectManager = nullptr;
-
-	bool m_IsInCameraArea = false;
 
 public:
 	GameObject() = default;
@@ -32,6 +33,10 @@ public:
 	void SetColor(Color color) { m_Color = color; }
 	const Vector2& GetScale() const { return m_Scale; }
 	void SetIsInCameraArea(bool isInCameraArea) { m_IsInCameraArea = isInCameraArea; }
+	void SetActive(bool isActive) { m_IsActive = isActive; }
+	bool IsActive() const { return m_IsActive; }
+	void SetDead(bool isDead) { m_IsDead = isDead; }
+	bool IsDead() const { return m_IsDead; }
 
 	Collider* GetCollider() { return &m_Collider; }
 	HitSide GetHitSide(const HitInfo& hitInfo) const;

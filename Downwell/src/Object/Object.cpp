@@ -6,7 +6,6 @@ void Object::Initialize()
 	m_Layer = Layer::None;
 	m_Position = Vector2::Zero();
 	m_OldPosition = Vector2::Zero();
-	m_IsActive = true;
 }
 
 void Object::Finalize()

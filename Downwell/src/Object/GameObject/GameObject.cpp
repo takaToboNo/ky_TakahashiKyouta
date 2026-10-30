@@ -7,6 +7,7 @@ void GameObject::Initialize()
 	m_Scale = { 1.0f,1.0f };
 	m_Color = WHITE;
 	m_Collider.SetOwner(this);
+	m_IsActive = true;
 }
 
 void GameObject::Finalize()

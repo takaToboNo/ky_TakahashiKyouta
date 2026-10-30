@@ -10,4 +10,10 @@ namespace math_helper
 		return value;
 	}
 
+	template<typename T>
+	T Lerp(T start, T end, T t)
+	{
+		return (end - start) * t + start;
+	}
+
 }
