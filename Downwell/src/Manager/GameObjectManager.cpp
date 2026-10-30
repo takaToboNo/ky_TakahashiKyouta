@@ -9,7 +9,7 @@
 
 void GameObjectManager::Finalize()
 {
-	for (auto& gameObject : m_GameObjects)
+	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
 		gameObject->Finalize();
 	}
@@ -17,7 +17,7 @@ void GameObjectManager::Finalize()
 
 void GameObjectManager::Update(float dt)
 {
-	for (auto& gameObject : m_GameObjects)
+	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
 		if (gameObject->IsActive()) gameObject->Update(dt);
 	}
@@ -28,14 +28,14 @@ void GameObjectManager::Update(float dt)
 #ifdef _DEBUG
 	m_ActiveObjects = 0;
 	m_DeadObjects = 0;
-	for (auto& obj : m_GameObjects)
+	for (std::unique_ptr<GameObject>& obj : m_GameObjects)
 	{
 		if (obj->IsActive())
 		{
 			m_ActiveObjects++;
 		}
 	}
-	for (auto& obj : m_GameObjects)
+	for (std::unique_ptr<GameObject>& obj : m_GameObjects)
 	{
 		if (obj->IsDead())
 		{
@@ -47,7 +47,7 @@ void GameObjectManager::Update(float dt)
 
 void GameObjectManager::Draw(const Camera& camera)
 {
-	for (auto& gameObject : m_GameObjects)
+	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
 		const Vector2& pos = camera.GetPosition();
 		const float CAMERA_MARGIN = 100.0f;	//ÉJÉÅÉâîÕàÕÇÊÇËè≠ÇµçLÇ¢óÃàÊÇï`âÊÇ∑ÇÈÇΩÇﬂÇÃíl
@@ -74,7 +74,7 @@ void GameObjectManager::ApplyPendingGameObjects()
 		return;
 	}
 
-	for (auto& gameObject : m_PendingGameObjects)
+	for (std::unique_ptr<GameObject>& gameObject : m_PendingGameObjects)
 	{
 		m_GameObjects.push_back(std::move(gameObject));
 	}

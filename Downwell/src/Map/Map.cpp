@@ -2,10 +2,11 @@
 
 #include "DxLib.h"
 #include <sstream>
+#include <functional>
 
 bool Map::LoadMapData(const std::string& mapName)
 {
-	auto Error = [&](const std::string& message)
+	std::function<bool(const std::string&)> Error = [&](const std::string& message)
 	{
 		MessageBoxA(NULL, message.c_str(), "Fatal Error", MB_OK | MB_ICONERROR);
 		return false;

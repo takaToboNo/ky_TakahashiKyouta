@@ -39,30 +39,30 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 	m_ActiveBreakableBlockCount = 0;
 	m_ActiveFloatingEnemyCount = 0;
 	m_ActiveWalkerEnemyCount = 0;
-	for (auto& solidobj : m_StageObjectPools.solidBlockPool.GetObjectPool())
+	for (SolidBlock* solidBlock : m_StageObjectPools.solidBlockPool.GetObjectPool())
 	{
-		if (solidobj->IsActive())
+		if (solidBlock->IsActive())
 		{
 			m_ActiveSolidBlockCount++;
 		}
 	}
-	for (auto& solidobj : m_StageObjectPools.breakableBlockPool.GetObjectPool())
+	for (BreakableBlock* breakableBlock : m_StageObjectPools.breakableBlockPool.GetObjectPool())
 	{
-		if (solidobj->IsActive())
+		if (breakableBlock->IsActive())
 		{
 			m_ActiveBreakableBlockCount++;
 		}
 	}
-	for (auto& solidobj : m_StageObjectPools.floatingEnemyPool.GetObjectPool())
+	for (FloatingEnemy* floatingEnemy : m_StageObjectPools.floatingEnemyPool.GetObjectPool())
 	{
-		if (solidobj->IsActive())
+		if (floatingEnemy->IsActive())
 		{
 			m_ActiveFloatingEnemyCount++;
 		}
 	}
-	for (auto& solidobj : m_StageObjectPools.walkerEnemyPool.GetObjectPool())
+	for (WalkerEnemy* walkerEnemy : m_StageObjectPools.walkerEnemyPool.GetObjectPool())
 	{
-		if (solidobj->IsActive())
+		if (walkerEnemy->IsActive())
 		{
 			m_ActiveWalkerEnemyCount++;
 		}
