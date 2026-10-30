@@ -17,13 +17,15 @@ private:
 
 	bool m_IsDirtyGameObjects = false;
 
+	Camera* m_Camera = nullptr;
+
 public:
 	GameObjectManager() = default;
 	~GameObjectManager() = default;
 
 	void Finalize();
 	void Update(float dt);
-	void Draw(const Camera& camera);
+	void Draw();
 
 	//Initialize‚Å‚Ì‚ÝŒÄ‚Ô‚±‚Æ
 	template<class T>
@@ -60,6 +62,8 @@ public:
 	}
 
 	void SortGameObjectsByLayer();
+
+	void SetCamera(Camera* camera) { m_Camera = camera; }
 
 private:
 	void ApplyPendingGameObjects();

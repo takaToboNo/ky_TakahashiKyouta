@@ -27,6 +27,7 @@ bool GameScene::Initialize()
 	m_Camera.SetTarget(m_Player);
 	m_Camera.Initialize();
 
+	m_GameObjectManager.SetCamera(&m_Camera);
 	m_GameObjectManager.SortGameObjectsByLayer();
 
 	//UI
@@ -82,7 +83,7 @@ void GameScene::Update(float dt)
 
 void GameScene::Draw()
 {
-	m_GameObjectManager.Draw(m_Camera);
+	m_GameObjectManager.Draw();
 	m_StageManager.Draw();
 
 	//UI

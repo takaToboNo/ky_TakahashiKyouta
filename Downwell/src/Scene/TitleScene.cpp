@@ -13,6 +13,8 @@ bool TitleScene::Initialize()
 
 	m_Camera.Initialize();
 
+	m_GameObjectManager.SetCamera(&m_Camera);
+
 	return true;
 }
 
@@ -38,7 +40,7 @@ void TitleScene::Update(float dt)
 
 void TitleScene::Draw()
 {
-	m_GameObjectManager.Draw(m_Camera);
+	m_GameObjectManager.Draw();
 
 	int x = static_cast<int>(WINDOW_WIDTH * 0.5f);
 	int y = static_cast<int>(WINDOW_HEIGHT * 0.5f);

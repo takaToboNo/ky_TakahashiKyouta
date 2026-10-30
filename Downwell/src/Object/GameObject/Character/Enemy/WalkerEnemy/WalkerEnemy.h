@@ -43,8 +43,6 @@ private:
 
 	std::array<bool, static_cast<size_t>(HitSide::Max)> m_HitSides = { false };
 
-	bool m_CameraArea = false;
-
 public:
 	WalkerEnemy() = default;
 

@@ -5,6 +5,7 @@ void Enemy::Initialize()
 	Character::Initialize();
 	m_Tag = Tag::Enemy;
 	m_Layer = Layer::Enemy;
+	m_Color = ENEMY_COLOR;
 }
 
 void Enemy::Finalize()

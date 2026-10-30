@@ -15,6 +15,8 @@ protected:
 
 	GameObjectManager* m_GameObjectManager = nullptr;
 
+	bool m_IsInCameraArea = false;
+
 public:
 	GameObject() = default;
 
@@ -29,6 +31,7 @@ public:
 	void SetScale(const Vector2& scale) { m_Scale = scale; }
 	void SetColor(Color color) { m_Color = color; }
 	const Vector2& GetScale() const { return m_Scale; }
+	void SetIsInCameraArea(bool isInCameraArea) { m_IsInCameraArea = isInCameraArea; }
 
 	Collider* GetCollider() { return &m_Collider; }
 	HitSide GetHitSide(const HitInfo& hitInfo) const;

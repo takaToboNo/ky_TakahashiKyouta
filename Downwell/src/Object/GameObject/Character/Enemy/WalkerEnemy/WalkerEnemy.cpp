@@ -16,7 +16,6 @@ void WalkerEnemy::Initialize()
 	Enemy::Initialize();
 	m_Position = { 500.0f,650.0f };
 	m_Scale = { WALKER_ENEMY_SIZE,WALKER_ENEMY_SIZE };
-	m_Color = ENEMY_COLOR;
 	m_Hp = WALKER_ENEMY_MAX_HP;
 	m_IsClockwise = rand() % 2 == 0;
 	m_IsAttached = false;
@@ -117,15 +116,8 @@ void WalkerEnemy::Update(float dt)
 		m_Velocity = m_MoveDirection * MOVE_SPEED;
 	}
 
-	if (m_CameraArea)
-	{
-		//座標更新
-		m_Position += m_Velocity * dt;
-	}
-	else
-	{
-		m_Velocity = Vector2::Zero();
-	}
+	//座標更新
+	m_Position += m_Velocity * dt;
 
 	m_IsAttached = false;
 
@@ -140,38 +132,30 @@ void WalkerEnemy::Update(float dt)
 		m_IsDead = true;
 	}
 
-	//一定距離離れているならプール状態
-	float diff = m_Position.y - m_SpawnPosition.y;
-	if (diff * diff > DESPAWN_DISTANCE * DESPAWN_DISTANCE)
-	{
-		Deactivate();
-	}
-
 	//死んでいるならプール状態
 	if (m_IsDead)
 	{
-		Deactivate();
+		m_IsActive = false;
+	}
+
+	// 一定距離離れているならプール状態
+	float diff = m_Position.y - m_SpawnPosition.y;
+	if (diff * diff > DESPAWN_DISTANCE * DESPAWN_DISTANCE)
+	{
+		m_IsActive = false;
+		m_IsDead = true;
 	}
 
 	if (m_Position.x < STAGE_LEFT || m_Position.x > STAGE_RIGHT)
 	{
-		Deactivate();
+		m_IsActive = false;
+		m_IsDead = true;
 	}
 }
 
 void WalkerEnemy::Draw(const Camera& camera)
 {
 	const Vector2& pos = camera.GetPosition();
-	const float CAMERA_MARGIN = 100.0f;	//カメラ範囲より少し広い領域にいるとき、動かない
-
-	if (m_Position.y >= pos.y - CAMERA_MARGIN && m_Position.y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
-	{
-		m_CameraArea = true;
-	}
-	else
-	{
-		m_CameraArea = false;
-	}
 
 	int x1, y1;
 	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - pos.x);
@@ -191,12 +175,12 @@ void WalkerEnemy::Draw(const Camera& camera)
 	int moveDirX = static_cast<int>(m_MoveDirection.x) * 40;
 	int moveDirY = static_cast<int>(m_MoveDirection.y) * 40;
 	DrawLine(centerX, centerY, centerX + moveDirX, centerY + moveDirY, GetColor(WHITE.r, WHITE.g, WHITE.b));
-	for (int i = 0; i < static_cast<size_t>(HitSide::Max); i++)
+	/*for (int i = 0; i < static_cast<size_t>(HitSide::Max); i++)
 	{
 		const int startPosX = 1000;
 		const int startPosY = 500;
 		DrawFormatString(startPosX, startPosY + i * 20, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "HitSides : %s", m_HitSides[i] ? "true" : "false");
-	}
+	}*/
 #endif
 }
 

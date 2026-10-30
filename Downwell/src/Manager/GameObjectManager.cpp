@@ -17,9 +17,17 @@ void GameObjectManager::Finalize()
 
 void GameObjectManager::Update(float dt)
 {
+	if (!m_Camera) return;
+
 	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
-		if (gameObject->IsActive()) gameObject->Update(dt);
+		const Vector2& pos = m_Camera->GetPosition();
+		const float CAMERA_MARGIN = 500.0f;	//ƒJƒƒ‰”ÍˆÍ‚æ‚è­‚µL‚¢—Ìˆæ‚ðXV‚·‚é‚½‚ß‚Ì’l
+
+		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
+		{
+			if (gameObject->IsActive()) gameObject->Update(dt);
+		}
 	}
 	CheckHitAll(m_GameObjects);
 
@@ -28,15 +36,17 @@ void GameObjectManager::Update(float dt)
 #ifdef _DEBUG
 	m_ActiveObjects = 0;
 	m_DeadObjects = 0;
-	for (std::unique_ptr<GameObject>& obj : m_GameObjects)
+	for (const std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
+		const GameObject* obj = gameObject.get();
 		if (obj->IsActive())
 		{
 			m_ActiveObjects++;
 		}
 	}
-	for (std::unique_ptr<GameObject>& obj : m_GameObjects)
+	for (const std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
+		const GameObject* obj = gameObject.get();
 		if (obj->IsDead())
 		{
 			m_DeadObjects++;
@@ -45,24 +55,26 @@ void GameObjectManager::Update(float dt)
 #endif
 }
 
-void GameObjectManager::Draw(const Camera& camera)
+void GameObjectManager::Draw()
 {
+	if (!m_Camera) return;
+
 	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
-		const Vector2& pos = camera.GetPosition();
+		const Vector2& pos = m_Camera->GetPosition();
 		const float CAMERA_MARGIN = 100.0f;	//ƒJƒƒ‰”ÍˆÍ‚æ‚è­‚µL‚¢—Ìˆæ‚ð•`‰æ‚·‚é‚½‚ß‚Ì’l
 
 		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
 		{
-			if (gameObject->IsActive())gameObject->Draw(camera);
+			if (gameObject->IsActive())gameObject->Draw(*m_Camera);
 		}
 	}
 
 #ifdef _DEBUG
-	const int startPosX = 1000;
-	const int startPosY = 200;
-	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveObject : %d/%d", m_ActiveObjects, m_GameObjects.size());
-	DrawFormatString(startPosX, startPosY + 20, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "DeadObject : %d/%d", m_DeadObjects, m_GameObjects.size());
+	//const int startPosX = 1000;
+	//const int startPosY = 200;
+	//DrawFormatString(startPosX, startPosY, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveObject : %d/%d", m_ActiveObjects, m_GameObjects.size());
+	//DrawFormatString(startPosX, startPosY + 20, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "DeadObject : %d/%d", m_DeadObjects, m_GameObjects.size());
 #endif
 }
 
