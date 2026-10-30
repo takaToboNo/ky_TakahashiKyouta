@@ -1,4 +1,4 @@
-#include "PlayerDead.h"
+﻿#include "PlayerDead.h"
 #include "Player.h"
 
 void PlayerDead::Enter(Player& player)

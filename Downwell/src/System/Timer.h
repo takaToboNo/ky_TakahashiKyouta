@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class Timer
 {
@@ -12,7 +12,7 @@ private:
 	float m_DeltaTime = 0.0f;
 	float m_Accumulator = 0.0f;
 
-	//ƒfƒoƒbƒO•\¦—p
+	//ãƒ‡ãƒãƒƒã‚°è¡¨ç¤ºç”¨
 	float m_UPS = 0.0f;
 	float m_FPS = 0.0f;
 	float m_FpsTimer = 0.0f;

@@ -1,4 +1,4 @@
-#include "PlayerIdle.h"
+ï»¿#include "PlayerIdle.h"
 #include "PlayerMove.h"
 #include "PlayerJump.h"
 #include "PlayerFall.h"
@@ -8,7 +8,7 @@
 
 void PlayerIdle::Enter(Player& player)
 {
-	//’â~
+	//åœæ­¢
 	player.SetVelocity({ 0.0f,player.GetVelocity().y });
 	player.SetDirectionX();
 }
@@ -17,29 +17,29 @@ void PlayerIdle::Update(Player& player)
 {
 	player.SetColor(PLAYER_IDLE_COLOR);
 
-	//ˆÚ“®
+	//ç§»å‹•
 	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));
 	if (isMove)
 	{
 		player.RequestState(EPlayerState::Move);
 	}
 
-	//ƒWƒƒƒ“ƒv
+	//ã‚¸ãƒ£ãƒ³ãƒ—
 	if (Input::IsTrigger(Action::Action))
 	{
 		player.RequestState(EPlayerState::Jump);
 	}
 
-	//—‰º
+	//è½ä¸‹
 	if (!player.IsGround())
 	{
 		player.RequestState(EPlayerState::Fall);
 	}
 
-	//’ïR
+	//æŠµæŠ—
 	player.GroundDrag();
 
-	//€–S
+	//æ­»äº¡
 	if (player.IsDead())
 	{
 		player.RequestState(EPlayerState::Dead);

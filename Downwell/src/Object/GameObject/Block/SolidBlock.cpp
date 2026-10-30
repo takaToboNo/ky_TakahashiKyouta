@@ -1,7 +1,7 @@
-#include "SolidBlock.h"
+ï»¿#include "SolidBlock.h"
 #include "AudioManager.h"
 
-//‰¼
+//ä»®
 #include "DxLib.h"
 #include "Camera.h"
 

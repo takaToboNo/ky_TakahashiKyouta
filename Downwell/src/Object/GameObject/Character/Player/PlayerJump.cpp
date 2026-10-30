@@ -1,4 +1,4 @@
-#include "PlayerJump.h"
+ï»¿#include "PlayerJump.h"
 #include "PlayerMove.h"
 #include "PlayerShot.h"
 #include "PlayerFall.h"
@@ -12,7 +12,7 @@ void PlayerJump::Enter(Player& player)
 {
 	AudioManager::GetInstance().PlaySE("Jump");
 
-	//ƒWƒƒƒ“ƒv
+	//ã‚¸ãƒ£ãƒ³ãƒ—
 	player.Jump();
 
 	player.SetCanAutoShot(false);
@@ -22,10 +22,10 @@ void PlayerJump::Update(Player& player)
 {
 	player.SetColor(PLAYER_JUMP_COLOR);
 
-	//’ïR
+	//æŠµæŠ—
 	player.AirDrag();
 
-	//ˆÚ“®
+	//ç§»å‹•
 	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));
 	if (!isMove)
 	{
@@ -40,19 +40,19 @@ void PlayerJump::Update(Player& player)
 		player.SetDirectionX(1.0f);
 	}
 
-	//ƒVƒ‡ƒbƒg
+	//ã‚·ãƒ§ãƒƒãƒˆ
 	if (Input::IsTrigger(Action::Action))
 	{
 		player.RequestState(EPlayerState::Shot);
 	}
 
-	//—Ž‰º
+	//è½ä¸‹
 	if (player.GetVelocity().y >= 0.0f)
 	{
 		player.RequestState(EPlayerState::Fall);
 	}
 
-	//Ž€–S
+	//æ­»äº¡
 	if (player.IsDead())
 	{
 		player.RequestState(EPlayerState::Dead);

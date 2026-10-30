@@ -1,4 +1,4 @@
-#include "Map.h"
+ï»¿#include "Map.h"
 
 #include "DxLib.h"
 #include <sstream>
@@ -18,7 +18,7 @@ bool Map::LoadMapData(const std::string& mapName)
 	int fileHandle = FileRead_open((mapName).c_str());
 	if (fileHandle == 0)
 	{
-		return Error(mapName + "ƒtƒ@ƒCƒ‹‚ğŠJ‚­‚±‚Æ‚É¸”s‚µ‚Ü‚µ‚½B");
+		return Error(mapName + "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãã“ã¨ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 	}
 
 	int result;
@@ -32,9 +32,9 @@ bool Map::LoadMapData(const std::string& mapName)
 			result = FileRead_close(fileHandle);
 			if (result == -1)
 			{
-				return Error(mapName + "ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é‚±‚Æ‚É¸”s‚µ‚Ü‚µ‚½B");
+				return Error(mapName + "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹ã“ã¨ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 			}
-			return Error(mapName + "ƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş‚±‚Æ‚É¸”s‚µ‚Ü‚µ‚½B");
+			return Error(mapName + "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€ã“ã¨ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 		}
 
 		std::stringstream ss(line);
@@ -50,11 +50,11 @@ bool Map::LoadMapData(const std::string& mapName)
 			}
 			catch (const std::invalid_argument&)
 			{
-				return Error(mapName + "‚É”’lˆÈŠO‚Ì’l‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·B" + cell);
+				return Error(mapName + "ã«æ•°å€¤ä»¥å¤–ã®å€¤ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ã€‚" + cell);
 			}
 			catch (const std::out_of_range&)
 			{
-				return Error(mapName + "‚É”ÍˆÍŠO‚Ì’l‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·B" + cell);
+				return Error(mapName + "ã«ç¯„å›²å¤–ã®å€¤ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ã€‚" + cell);
 			}
 		}
 	}
@@ -62,7 +62,7 @@ bool Map::LoadMapData(const std::string& mapName)
 	result = FileRead_close(fileHandle);
 	if (result == -1)
 	{
-		return Error(mapName + "ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é‚±‚Æ‚É¸”s‚µ‚Ü‚µ‚½B");
+		return Error(mapName + "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹ã“ã¨ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 	}
 
 	return true;

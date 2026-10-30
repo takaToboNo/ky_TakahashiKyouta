@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "GameObjectManager.h"
 
 template <typename T>
@@ -20,9 +20,9 @@ public:
 template<typename T>
 inline void ObjectPool<T>::Setup(GameObjectManager& manager, int poolSize)
 {
-	//’†g‚ğ‹ó‚É‚·‚é
+	//ä¸­èº«ã‚’ç©ºã«ã™ã‚‹
 	m_ObjectPool.clear();
-	//—v‘f”‚ğæ‚ÉŠm•Û
+	//è¦ç´ æ•°ã‚’å…ˆã«ç¢ºä¿
 	m_ObjectPool.reserve(poolSize);
 
 	for (int i = 0; i < poolSize; i++)
@@ -34,7 +34,7 @@ inline void ObjectPool<T>::Setup(GameObjectManager& manager, int poolSize)
 			continue;
 		}
 
-		//ƒv[ƒ‹ó‘Ô‚É‚µ‚Ä‚¨‚­
+		//ãƒ—ãƒ¼ãƒ«çŠ¶æ…‹ã«ã—ã¦ãŠã
 		gameObject->SetActive(false);
 		m_ObjectPool.push_back(gameObject);
 	}

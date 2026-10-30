@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <array>
 #include <vector>
 #include "Vector2.h"
@@ -46,7 +46,7 @@ private:
 
 	std::array<Map, MIDDLE_MAP_ALL> m_MiddleMaps{};
 	std::array<Section, STAGE_SECTION_COUNT> m_Sections{};
-	std::array<int, MIDDLE_SECTION_COUNT> m_Numbers{};//“Ç‚İ‚Şcsvƒtƒ@ƒCƒ‹‚Ì”Ô†
+	std::array<int, MIDDLE_SECTION_COUNT> m_Numbers{};//èª­ã¿è¾¼ã‚€csvãƒ•ã‚¡ã‚¤ãƒ«ã®ç•ªå·
 
 	int m_CurrentSection = -1;
 

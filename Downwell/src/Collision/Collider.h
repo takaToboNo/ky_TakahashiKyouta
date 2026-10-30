@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "Shape.h"
 
 class GameObject;
 
 enum class HitSide
-{	//©•ª‚©‚çŒ©‚Ä‘Šè‚ª‚¢‚éˆÊ’u
+{	//è‡ªåˆ†ã‹ã‚‰è¦‹ã¦ç›¸æ‰‹ãŒã„ã‚‹ä½ç½®
 	Left = 0,
 	Right,
 	Top,

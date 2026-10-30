@@ -1,4 +1,4 @@
-#include "GameObjectManager.h"
+ï»¿#include "GameObjectManager.h"
 
 #define NOMINMAX
 #include "MathHelper.h"
@@ -22,7 +22,7 @@ void GameObjectManager::Update(float dt)
 	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
 		const Vector2& pos = m_Camera->GetPosition();
-		const float CAMERA_MARGIN = 500.0f;	//ƒJƒƒ‰”ÍˆÍ‚æ‚è­‚µL‚¢—Ìˆæ‚ğXV‚·‚é‚½‚ß‚Ì’l
+		const float CAMERA_MARGIN = 500.0f;	//ã‚«ãƒ¡ãƒ©ç¯„å›²ã‚ˆã‚Šå°‘ã—åºƒã„é ˜åŸŸã‚’æ›´æ–°ã™ã‚‹ãŸã‚ã®å€¤
 
 		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
 		{
@@ -62,7 +62,7 @@ void GameObjectManager::Draw()
 	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
 		const Vector2& pos = m_Camera->GetPosition();
-		const float CAMERA_MARGIN = 100.0f;	//ƒJƒƒ‰”ÍˆÍ‚æ‚è­‚µL‚¢—Ìˆæ‚ğ•`‰æ‚·‚é‚½‚ß‚Ì’l
+		const float CAMERA_MARGIN = 100.0f;	//ã‚«ãƒ¡ãƒ©ç¯„å›²ã‚ˆã‚Šå°‘ã—åºƒã„é ˜åŸŸã‚’æç”»ã™ã‚‹ãŸã‚ã®å€¤
 
 		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
 		{
@@ -105,7 +105,7 @@ void GameObjectManager::SortGameObjectsByLayer()
 }
 
 //------------------------------------------------------------------
-// “–‚½‚è”»’èƒ`ƒFƒbƒN
+// å½“ãŸã‚Šåˆ¤å®šãƒã‚§ãƒƒã‚¯
 //------------------------------------------------------------------
 void GameObjectManager::CheckHitAll(const std::vector<std::unique_ptr<GameObject>>& objects)
 {
@@ -157,7 +157,7 @@ bool GameObjectManager::CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* 
 	if (rightA < leftB || leftA > rightB || bottomA < topB || topA > bottomB) return false;
 
 	if (out)
-	{	//“–‚½‚Á‚Ä‚¢‚½‚çÕ“Ëî•ñ‚ğŒvZ‚·‚é
+	{	//å½“ãŸã£ã¦ã„ãŸã‚‰è¡çªæƒ…å ±ã‚’è¨ˆç®—ã™ã‚‹
 		float oldRightA = rect1.oldPosition.x + rect1.width * 0.5f;
 		float oldLeftA = rect1.oldPosition.x - rect1.width * 0.5f;
 		float oldBottomA = rect1.oldPosition.y + rect1.height * 0.5f;
@@ -168,14 +168,14 @@ bool GameObjectManager::CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* 
 		float oldBottomB = rect2.oldPosition.y + rect2.height * 0.5f;
 		float oldTopB = rect2.oldPosition.y - rect2.height * 0.5f;
 
-		//‘OƒtƒŒ[ƒ€‚Å‚Ì²‚²‚Æ‚Ì—£‚êó‘Ô
+		//å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã§ã®è»¸ã”ã¨ã®é›¢ã‚ŒçŠ¶æ…‹
 		const float EPSILON = 0.01f;
 		bool wasSeparateX = oldRightA <= oldLeftB + EPSILON || oldLeftA >= oldRightB - EPSILON;
 		bool wasSeparateY = oldBottomA <= oldTopB + EPSILON || oldTopA >= oldBottomB - EPSILON;
 		bool useX;
 
 		out->diff = rect2.position - rect1.position;
-		//Še²‚Ì‚ß‚è‚İ
+		//å„è»¸ã®ã‚ã‚Šè¾¼ã¿
 		float ox, oy;
 		ox = (rect1.width + rect2.width) * 0.5f - std::abs(out->diff.x);
 		oy = (rect1.height + rect2.height) * 0.5f - std::abs(out->diff.y);
@@ -190,7 +190,7 @@ bool GameObjectManager::CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* 
 		}
 		else
 		{
-			//‘OƒtƒŒ[ƒ€‚©‚ç‚Ì‘Š‘ÎˆÚ“®—Ê
+			//å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®ç›¸å¯¾ç§»å‹•é‡
 			Vector2 relativeMove = (rect1.position - rect1.oldPosition) - (rect2.position - rect2.oldPosition);
 
 			if (std::abs(relativeMove.x) < std::abs(relativeMove.y))

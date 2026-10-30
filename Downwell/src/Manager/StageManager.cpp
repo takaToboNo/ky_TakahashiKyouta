@@ -1,4 +1,4 @@
-#include <random>
+ï»¿#include <random>
 #include <iostream>
 #include "StageManager.h"
 #include "DxLib.h"
@@ -69,11 +69,11 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 	}
 #endif
 
-	//ƒvƒŒƒCƒ„[‚ÌŒ»İ‚¢‚é‹æŠÔ‚ğ’T‚·
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç¾åœ¨ã„ã‚‹åŒºé–“ã‚’æ¢ã™
 	int currentSection = FindCurrentSection(player->GetPosition().y);
 	if (m_CurrentSection == currentSection) return;
 
-	//ƒvƒŒƒCƒ„[‚ÌŒ»İ‚¢‚é‹æŠÔ‚Æ‚»‚Ì‹æŠÔ‚É—×Ú‚µ‚½‹æŠÔ‚Ì‚İ—LŒø‚É‚·‚é
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç¾åœ¨ã„ã‚‹åŒºé–“ã¨ãã®åŒºé–“ã«éš£æ¥ã—ãŸåŒºé–“ã®ã¿æœ‰åŠ¹ã«ã™ã‚‹
 	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
 	{
 		bool isNeighbor = (std::abs(currentSection - i) <= 1);
@@ -91,7 +91,7 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 		}
 	}
 
-	//ƒvƒŒƒCƒ„[‚ª‘S‹æŠÔ‚ğ’Ê‚è”²‚¯‚½‚çÅ‰‚É–ß‚·
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¨åŒºé–“ã‚’é€šã‚ŠæŠœã‘ãŸã‚‰æœ€åˆã«æˆ»ã™
 	if (currentSection == STAGE_SECTION_COUNT)
 	{
 		m_StageLoopCount++;
@@ -113,7 +113,7 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 
 
 #ifdef _DEBUG
-	//“¯‚¶ƒ|ƒCƒ“ƒ^‚ğ•ÊX‚Ì‹æŠÔ‚Å‹¤—L‚µ‚Ä‚¢‚È‚¢‚©
+	//åŒã˜ãƒã‚¤ãƒ³ã‚¿ã‚’åˆ¥ã€…ã®åŒºé–“ã§å…±æœ‰ã—ã¦ã„ãªã„ã‹
 	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
 	{
 		for (int j = 1; j < STAGE_SECTION_COUNT; j++)
@@ -165,7 +165,7 @@ void StageManager::Draw()
 		}
 	}
 
-	//WalkerEnemy—pƒfƒoƒbƒO•\¦
+	//WalkerEnemyç”¨ãƒ‡ãƒãƒƒã‚°è¡¨ç¤º
 	/*DrawString(startPosX, startPosY + 40, "Active", GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b));
 	DrawString(startPosX + 80, startPosY + 40, "Dead", GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b));
 	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
@@ -213,8 +213,8 @@ void StageManager::SetRandomNumbers()
 	std::array<int, MIDDLE_MAP_ALL> numbers{ 0,1,2,3,4,5,6,7,8,9 };
 	std::shuffle(numbers.begin(), numbers.end(), gen);
 
-	//d•¡‚È‚µ‚Å”’l‚ğæ“¾
-	//ƒXƒ^[ƒg‚ÆƒS[ƒ‹‚ğœ‚¢‚½’†ŠÔ‹æ‰æ”
+	//é‡è¤‡ãªã—ã§æ•°å€¤ã‚’å–å¾—
+	//ã‚¹ã‚¿ãƒ¼ãƒˆã¨ã‚´ãƒ¼ãƒ«ã‚’é™¤ã„ãŸä¸­é–“åŒºç”»æ•°
 	for (int i = 0; i < MIDDLE_SECTION_COUNT; i++)
 	{
 		m_Numbers[i] = numbers[i];
@@ -232,14 +232,14 @@ void StageManager::SetSections()
 		m_Sections[i].isActive = false;
 	}
 
-	//ƒXƒ^[ƒg
+	//ã‚¹ã‚¿ãƒ¼ãƒˆ
 	m_Sections[0].map = &m_StartMap;
 	m_Sections[0].startPosition.y = 0.0f;
-	//ƒS[ƒ‹
+	//ã‚´ãƒ¼ãƒ«
 	m_Sections[STAGE_SECTION_COUNT - 1].map = &m_GoalMap;
 	m_Sections[STAGE_SECTION_COUNT - 1].startPosition.y = sectionY * (STAGE_SECTION_COUNT - 1);
 
-	//’†ŠÔ‹æ‰æ
+	//ä¸­é–“åŒºç”»
 	for (int i = 1; i < MIDDLE_SECTION_COUNT + 1; i++)
 	{
 		m_Sections[i].map = &m_MiddleMaps[m_Numbers[i - 1]];
@@ -260,7 +260,7 @@ int StageManager::FindCurrentSection(float playerPositionY) const
 	}
 
 	if (playerPositionY > m_Sections[STAGE_SECTION_COUNT - 1].startPosition.y + sectionY)
-	{	//ÅŒã‚Ì‹æŠÔ‚æ‚è‰º‚É‚¢‚é
+	{	//æœ€å¾Œã®åŒºé–“ã‚ˆã‚Šä¸‹ã«ã„ã‚‹
 		return STAGE_SECTION_COUNT;
 	}
 
@@ -280,7 +280,7 @@ void StageManager::ActivateSection(int index, Player* player)
 			MapObjectType mapObjectType = static_cast<MapObjectType>(m_Sections[index].map->GetMapObjectType(i, j));
 			switch (mapObjectType)
 			{
-			case MapObjectType::SolidBlock://‰ó‚ê‚éƒuƒƒbƒN------------------------------------
+			case MapObjectType::SolidBlock://å£Šã‚Œã‚‹ãƒ–ãƒ­ãƒƒã‚¯------------------------------------
 			{
 				SolidBlock* solidBlock = m_StageObjectPools.solidBlockPool.Get();
 				if (solidBlock)
@@ -291,7 +291,7 @@ void StageManager::ActivateSection(int index, Player* player)
 				}
 				break;
 			}
-			case MapObjectType::BreakableBlock://‰ó‚ê‚éƒuƒƒbƒN-------------------------------------------
+			case MapObjectType::BreakableBlock://å£Šã‚Œã‚‹ãƒ–ãƒ­ãƒƒã‚¯-------------------------------------------
 			{
 				BreakableBlock* breakableBlock = m_StageObjectPools.breakableBlockPool.Get();
 				if (breakableBlock)
@@ -302,7 +302,7 @@ void StageManager::ActivateSection(int index, Player* player)
 				}
 				break;
 			}
-			case MapObjectType::FloatingEnemy://•‚—V“G-------------------------------------------------
+			case MapObjectType::FloatingEnemy://æµ®éŠæ•µ-------------------------------------------------
 			{
 				FloatingEnemy* floatingEnemy = m_StageObjectPools.floatingEnemyPool.Get();
 				if (floatingEnemy)
@@ -314,7 +314,7 @@ void StageManager::ActivateSection(int index, Player* player)
 				}
 				break;
 			}
-			case MapObjectType::WalkerEnemy://•às“G---------------------------------------------
+			case MapObjectType::WalkerEnemy://æ­©è¡Œæ•µ---------------------------------------------
 			{
 				WalkerEnemy* walkerEnemy = m_StageObjectPools.walkerEnemyPool.Get();
 				if (walkerEnemy)
@@ -325,7 +325,7 @@ void StageManager::ActivateSection(int index, Player* player)
 				}
 				break;
 			}
-			default://‚È‚É‚à‚È‚µ-----------------------------------------------------------------
+			default://ãªã«ã‚‚ãªã—-----------------------------------------------------------------
 				break;
 			}
 		}

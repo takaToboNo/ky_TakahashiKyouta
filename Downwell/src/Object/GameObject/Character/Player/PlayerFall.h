@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "PlayerState.h"
 
 class Player;
@@ -7,7 +7,7 @@ class PlayerFall : public IPlayerState
 {
 private:
 	static constexpr int SHOT_INTERVAL = 6;
-	int m_ShotInterval = SHOT_INTERVAL;//‰¼
+	int m_ShotInterval = SHOT_INTERVAL;//ä»®
 
 public:
 	void Enter(Player& player) override;

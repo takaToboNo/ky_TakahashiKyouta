@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -27,7 +27,7 @@ public:
 	void Update(float dt);
 	void Draw();
 
-	//Initialize‚Å‚Ì‚İŒÄ‚Ô‚±‚Æ
+	//Initializeã§ã®ã¿å‘¼ã¶ã“ã¨
 	template<class T>
 	T* AddGameObject(std::unique_ptr<T> gameObject)
 	{
@@ -44,7 +44,7 @@ public:
 		return ptr;
 	}
 
-	//Update‚ÅGameObject‚ğì‚è‚½‚¢‚Æ‚«
+	//Updateã§GameObjectã‚’ä½œã‚ŠãŸã„ã¨ã
 	template<class T>
 	T* AddPendingGameObject(std::unique_ptr<T> gameObject)
 	{
@@ -67,7 +67,7 @@ public:
 
 private:
 	void ApplyPendingGameObjects();
-	//“–‚½‚è”»’èƒ`ƒFƒbƒN
+	//å½“ãŸã‚Šåˆ¤å®šãƒã‚§ãƒƒã‚¯
 	void CheckHitAll(const std::vector<std::unique_ptr<GameObject>>& objects);
 
 	bool CheckHit(const Collider& a, const Collider& b, HitInfo* out);

@@ -1,4 +1,4 @@
-#include "GameManager.h"
+ï»¿#include "GameManager.h"
 #include "GameHelper.h"
 #include "Input.h"
 #include "AudioManager.h"
@@ -56,7 +56,7 @@ int GameManager::Run()
 
 		if (count >= MAX_UPDATE && m_Timer.HasRemainingStep())
 		{
-			//’Ç‚¢‚Â‚¯‚È‚©‚Á‚½•ª‚ğÌ‚Ä‚é
+			//è¿½ã„ã¤ã‘ãªã‹ã£ãŸåˆ†ã‚’æ¨ã¦ã‚‹
  			m_Timer.DiscardRemainingSteps();
 		}
 

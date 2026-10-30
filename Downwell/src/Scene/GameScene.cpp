@@ -1,4 +1,4 @@
-#define NOMINMAX
+﻿#define NOMINMAX
 #include <algorithm>
 #include <memory>
 #include "GameScene.h"

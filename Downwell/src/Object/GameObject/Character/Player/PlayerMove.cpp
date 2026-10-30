@@ -1,4 +1,4 @@
-#include "PlayerMove.h"
+ï»¿#include "PlayerMove.h"
 #include "PlayerIdle.h"
 #include "PlayerJump.h"
 #include "PlayerFall.h"
@@ -15,7 +15,7 @@ void PlayerMove::Update(Player& player)
 {
 	player.SetColor(PLAYER_MOVE_COLOR);
 
-	//ˆÚ“®
+	//ç§»å‹•
 	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));
 	if (!isMove)
 	{
@@ -30,19 +30,19 @@ void PlayerMove::Update(Player& player)
 		player.SetDirectionX(1.0f);
 	}
 
-	//ƒWƒƒƒ“ƒv
+	//ã‚¸ãƒ£ãƒ³ãƒ—
 	if (Input::IsTrigger(Action::Action))
 	{
 		player.RequestState(EPlayerState::Jump);
 	}
 
-	//—‰º
+	//è½ä¸‹
 	if (!player.IsGround())
 	{
 		player.RequestState(EPlayerState::Fall);
 	}
 
-	//€–S
+	//æ­»äº¡
 	if (player.IsDead())
 	{
 		player.RequestState(EPlayerState::Dead);

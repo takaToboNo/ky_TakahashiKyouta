@@ -1,6 +1,6 @@
-#include "Bullet.h"
+ï»¿#include "Bullet.h"
 
-//‰¼
+//ä»®
 #include "DxLib.h"
 #include "Camera.h"
 
@@ -27,13 +27,13 @@ void Bullet::Update(float dt)
 {
 	GameObject::Update(dt);
 
-	//‘¬“xŒ¸Š
+	//é€Ÿåº¦æ¸›è¡°
 	m_Velocity.y *= AIR_DRAG;
 
-	//À•WXV
+	//åº§æ¨™æ›´æ–°
 	m_Position += m_Velocity * dt;
 
-	//•Ô‹p—\–ñ(‘¬“x‚ª¬‚³‚¢‚à‚µ‚­‚Í‰æ–ÊŠO)
+	//è¿”å´äºˆç´„(é€Ÿåº¦ãŒå°ã•ã„ã‚‚ã—ãã¯ç”»é¢å¤–)
 	if(m_Velocity.IsNearlyZero(MIN_SPEED)) m_IsActive = false;
 }
 

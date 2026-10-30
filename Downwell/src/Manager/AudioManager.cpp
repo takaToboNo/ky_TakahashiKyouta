@@ -1,4 +1,4 @@
-#include "AudioManager.h"
+ï»¿#include "AudioManager.h"
 #include "DxLib.h"
 #include "MathHelper.h"
 
@@ -22,22 +22,22 @@ void AudioManager::Initialize()
 {
 	LoadBGM("Game", "Zero_Defects.mp3");
 
-	//ƒvƒŒƒCƒ„[
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	LoadSE("Jump", "Jump.mp3");
  	LoadSE("Shot", "Shot.mp3");
 	LoadSE("ShotEmpty", "ShotEmpty.mp3");
 	LoadSE("Reload", "Reload.mp3");
 	LoadSE("Land", "Land.mp3");
 	LoadSE("Damage", "Damage.mp3");
-	LoadSE("Stomp", "Stomp.mp3");//“G“¥‚İ‚Â‚¯
+	LoadSE("Stomp", "Stomp.mp3");//æ•µè¸ã¿ã¤ã‘
 	LoadSE("Dead", "Dead.mp3");
-	//ƒuƒƒbƒN
+	//ãƒ–ãƒ­ãƒƒã‚¯
 	LoadSE("BlockHit", "BlockHit.mp3");
 	LoadSE("BlockBreak", "BlockBreak.mp3");
-	//ƒGƒlƒ~[
+	//ã‚¨ãƒãƒŸãƒ¼
 	LoadSE("EnemyHit", "EnemyHit.mp3");
 	LoadSE("EnemyDead", "EnemyDead.mp3");
-	//‘€ì
+	//æ“ä½œ
 	LoadSE("Decide", "Decide.mp3");
 
 	SetVolumeMaster(m_VolumeMaster);
@@ -60,13 +60,13 @@ void AudioManager::Finalize()
 bool AudioManager::PlayBGM(const std::string& name)
 {
 	if (m_CurrentBGM != 0 && m_CurrentBGM != -1)
-	{	//Ä¶’†
+	{	//å†ç”Ÿä¸­
 		m_CurrentBGM = StopSoundMem(m_CurrentBGM);
 
 		if (m_CurrentBGM == -1) return false;
 	}
 	
-	// 0:¬Œ÷/ -1:ƒGƒ‰[”­¶
+	// 0:æˆåŠŸ/ -1:ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ
 	m_CurrentBGM = PlaySoundMem(m_BGMs[name], DX_PLAYTYPE_LOOP);
 
 	if (m_CurrentBGM == -1) return false;
@@ -77,7 +77,7 @@ bool AudioManager::PlayBGM(const std::string& name)
 
 bool AudioManager::PlaySE(const std::string& name)
 {
-	// 0:¬Œ÷/ -1:ƒGƒ‰[”­¶
+	// 0:æˆåŠŸ/ -1:ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ
 	int result = PlaySoundMem(m_SEs[name], DX_PLAYTYPE_BACK);
 
 	return (result != -1) ? true : false;
@@ -85,7 +85,7 @@ bool AudioManager::PlaySE(const std::string& name)
 
 bool AudioManager::StopBGM(const std::string& name)
 {
-	// 0:¬Œ÷/ -1:ƒGƒ‰[”­¶
+	// 0:æˆåŠŸ/ -1:ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ
 	m_CurrentBGM = StopSoundMem(m_BGMs[name]);
 
 	return (m_CurrentBGM != -1) ? true : false;

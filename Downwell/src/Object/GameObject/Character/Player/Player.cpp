@@ -1,4 +1,4 @@
-#define NOMINMAX
+Ôªø#define NOMINMAX
 #include "Player.h"
 #include "input.h"
 #include "FloatingEnemy.h"
@@ -12,7 +12,7 @@
 #include "PlayerShot.h"
 #include "PlayerDead.h"
 
-//âº
+//‰ªÆ
 #include "DxLib.h"
 #include "Camera.h"
 #include <algorithm>
@@ -66,7 +66,7 @@ void Player::Update(float dt)
 
 	UpdateState();
 
-	//èdóÕ
+	//ÈáçÂäõ
 	const float gravity = (m_Velocity.y < GRAVITY_THRESHOLD_SPEED) ? JUMP_GRAVITY : FALL_GRAVITY;
 	m_Velocity.y += gravity * dt;
 #ifdef _DEBUG
@@ -83,30 +83,30 @@ void Player::Update(float dt)
 
 	if (m_KnockbackTimer <= 0.0f)
 	{
-		//à⁄ìÆï˚å¸
+		//ÁßªÂãïÊñπÂêë
 		m_Velocity.x += MOVE_ACCEL * m_DirectionX * dt;
 
-		//ë¨ìxêßå¿X
+		//ÈÄüÂ∫¶Âà∂ÈôêX
 		m_Velocity.x = math_helper::clamp(m_Velocity.x, -MAX_MOVE_SPEED, MAX_MOVE_SPEED);
 	}
 
-	//ë¨ìxêßå¿Y
+	//ÈÄüÂ∫¶Âà∂ÈôêY
 	m_Velocity.y = math_helper::clamp(m_Velocity.y, -MAX_FALL_SPEED, MAX_FALL_SPEED);
 
-	//ç¿ïWçXêV
+	//Â∫ßÊ®ôÊõ¥Êñ∞
 	m_Position += m_Velocity * dt;
 
-	//ï«
+	//Â£Å
 	m_Position.x = std::max(m_Position.x, STAGE_LEFT);
 	m_Position.x = std::min(m_Position.x, STAGE_RIGHT);
 
-	//ÉmÉbÉNÉoÉbÉN
+	//„Éé„ÉÉ„ÇØ„Éê„ÉÉ„ÇØ
 	if (m_KnockbackTimer > 0.0f)
 	{
 		m_KnockbackTimer -= dt;
 	}
 
-	//ñ≥ìGéûä‘
+	//ÁÑ°ÊïµÊôÇÈñì
 	if (m_InvincibleTimer > 0.0f)
 	{
 		m_InvincibleTimer -= dt;
@@ -116,7 +116,7 @@ void Player::Update(float dt)
 		m_InvincibleTimer = 0.0f;
 	}
 
-	//éÄÇÒÇ≈Ç¢ÇÈÇ©
+	//Ê≠ª„Çì„Åß„ÅÑ„Çã„Åã
 	if (m_Hp <= 0 && !m_IsDead)
 	{
 		AudioManager::GetInstance().StopBGM("Game");
@@ -124,7 +124,7 @@ void Player::Update(float dt)
 		m_IsDead = true;
 	}
 
-	//ÉäÉUÉãÉgâÊñ Ç÷
+	//„É™„Ç∂„É´„ÉàÁîªÈù¢„Å∏
 	if (m_IsDead)
 	{
 		if (m_DeathTimer > 0.0f)
@@ -145,7 +145,7 @@ void Player::Update(float dt)
 void Player::Draw(const Camera& camera)
 {
 #ifdef _DEBUG
-	//ÉfÉoÉbÉOï\é¶
+	//„Éá„Éê„ÉÉ„Ç∞Ë°®Á§∫
 	const int startPosX = 10;
 	const int startPosY = 200;
 	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "PosX : %.2f", m_Position.x);
@@ -224,7 +224,7 @@ void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		if (floatingEnemy)
 		{
 			if (hitSide == HitSide::Bottom)
-			{	//ïÇóVìGÇì•ÇÒÇæ
+			{	//ÊµÆÈÅäÊïµ„ÇíË∏è„Çì„Å†
 				AudioManager::GetInstance().PlaySE("Stomp");
 				Reload();
 				m_Velocity.y = hitInfo.normal.y * STOMP_KNOCKBACK * -1.0f;
@@ -235,12 +235,12 @@ void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 		if (m_InvincibleTimer > 0.0f) return;
 
 		if (hitSide == HitSide::Bottom)
-		{	//èc
+		{	//Á∏¶
 			Damage(1);
 			m_Velocity.y = std::abs(hitInfo.normal.y) * DAMAGE_KNOCKBACK_Y * -1.0f;
 		}
 		else
-		{	//â°
+		{	//Ê®™
 			Damage(1);
 			m_IsGround = false;
 			m_Velocity.x = hitInfo.normal.x * DAMAGE_KNOCKBACK_X * -1.0f;
@@ -291,12 +291,12 @@ void Player::Shot(const Vector2& position)
 	{
 		if (canShot)
 		{
-			//îΩìÆ
+			//ÂèçÂãï
 			m_Velocity.y = 0.0f;
 		}
 		else
 		{
-			//è¨îΩìÆ
+			//Â∞èÂèçÂãï
 			m_Velocity.y *= EMPTY_RECOIL_DAMPING;
 			m_CanAutoShot = false;
 		}

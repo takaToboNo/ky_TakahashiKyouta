@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Tag.h"
 #include "Layer.h"
 #include "Vector2.h"

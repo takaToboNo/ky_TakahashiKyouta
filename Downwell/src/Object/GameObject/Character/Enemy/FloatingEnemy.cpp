@@ -1,4 +1,4 @@
-#include "FloatingEnemy.h"
+ï»¿#include "FloatingEnemy.h"
 #include "AudioManager.h"
 
 #include <cassert>
@@ -24,7 +24,7 @@ void FloatingEnemy::Update(float dt)
 {
 	Enemy::Update(dt);
 
-	//’ïR
+	//æŠµæŠ—
 	m_Velocity *= 0.98f;
 
 	if (m_pPlayer)
@@ -35,7 +35,7 @@ void FloatingEnemy::Update(float dt)
 		m_Velocity += targetDir * m_MoveSpeed * dt;
 	}
 
-	//‘¬“x§ŒÀ
+	//é€Ÿåº¦åˆ¶é™
 	float speed = m_Velocity.LengthSquared();
 	if (speed > MAX_MOVE_SPEED * MAX_MOVE_SPEED)
 	{
@@ -43,17 +43,17 @@ void FloatingEnemy::Update(float dt)
 		m_Velocity *= MAX_MOVE_SPEED;
 	}
 
-	//À•WXV
+	//åº§æ¨™æ›´æ–°
 	m_Position += m_Velocity * dt;
 
-	//€–S
+	//æ­»äº¡
 	if (m_Hp <= 0 && !m_IsDead)
 	{
 		AudioManager::GetInstance().PlaySE("EnemyDead");
 		m_IsDead = true;
 	}
 
-	//€‚ñ‚Å‚¢‚é‚È‚çƒv[ƒ‹ó‘Ô
+	//æ­»ã‚“ã§ã„ã‚‹ãªã‚‰ãƒ—ãƒ¼ãƒ«çŠ¶æ…‹
 	if (m_IsDead)
 	{
 		m_IsActive = false;

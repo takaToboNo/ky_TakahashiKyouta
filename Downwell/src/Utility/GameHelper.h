@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 
 struct Color
 {
@@ -9,7 +9,7 @@ struct Color
 constexpr Color WHITE{ 255, 255, 255 };
 constexpr Color RED{ 255, 50, 50 };
 
-//ÉQÅ[ÉÄêF
+//„Ç≤„Éº„É†Ëâ≤
 constexpr Color PLAYER_IDLE_COLOR{ 255, 255, 255 };
 constexpr Color PLAYER_MOVE_COLOR{ 100, 220, 200 };
 constexpr Color PLAYER_JUMP_COLOR{ 140, 200, 255 };
@@ -18,7 +18,7 @@ constexpr Color PLAYER_SHOT_COLOR{ 255, 220, 140 };
 constexpr Color PLAYER_DEAD_COLOR{ 150, 150, 150 };
 constexpr Color BLOCK_COLOR{ 220, 220, 220 };
 constexpr Color ENEMY_COLOR{ 255, 50, 50 };
-//ÉfÉoÉbÉOêF
+//„Éá„Éê„ÉÉ„Ç∞Ëâ≤
 constexpr Color DEBUG_COUNT_COLOR{ 255,230,150 };
 constexpr Color DEBUG_STATUS_COLOR{ 120,200,255 };
 constexpr Color DEBUG_NORMAL_COLOR{ 120,120,120 };
@@ -33,7 +33,7 @@ constexpr int MAP_SIZE_X = 11;
 constexpr float TILE_SIZE = 47.0f;
 
 constexpr int STAGE_SECTION_COUNT = 7;
-constexpr int MIDDLE_SECTION_COUNT = STAGE_SECTION_COUNT - 2;//ÉXÉ^Å[ÉgÇ∆ÉSÅ[ÉãÇèúÇ¢ÇΩêî
+constexpr int MIDDLE_SECTION_COUNT = STAGE_SECTION_COUNT - 2;//„Çπ„Çø„Éº„Éà„Å®„Ç¥„Éº„É´„ÇíÈô§„ÅÑ„ÅüÊï∞
 constexpr int MIDDLE_MAP_ALL = 10;
 
 constexpr float STAGE_LEFT = ((static_cast<float>(WINDOW_WIDTH) * 0.5f) - (static_cast<float>(MAP_SIZE_X - 1) * TILE_SIZE * 0.5f));

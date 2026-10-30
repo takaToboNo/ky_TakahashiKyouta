@@ -1,4 +1,4 @@
-#define NOMINMAX
+Ôªø#define NOMINMAX
 #include <algorithm>
 #include "Timer.h"
 #include "DxLib.h"
@@ -49,7 +49,7 @@ void Timer::Update()
 void Timer::Draw()
 {
 #ifdef _DEBUG
-	//ÉfÉoÉbÉOï\é¶
+	//„Éá„Éê„ÉÉ„Ç∞Ë°®Á§∫
 	const int startPosX = 10;
 	const int startPosY = 100;
 	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "UPS : %.2f", m_UPS);

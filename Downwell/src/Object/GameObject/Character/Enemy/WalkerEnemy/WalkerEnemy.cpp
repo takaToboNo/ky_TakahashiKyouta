@@ -1,4 +1,4 @@
-#include "WalkerEnemy.h"
+ï»¿#include "WalkerEnemy.h"
 #include "Bullet.h"
 #include "AudioManager.h"
 
@@ -41,48 +41,48 @@ void WalkerEnemy::Update(float dt)
 	if (!m_IsAttached)
 	{
 		if (!m_Block && m_OldBlock)
-		{	//ŠOüˆÚ“®•âŠÔ
+		{	//å¤–å‘¨ç§»å‹•è£œé–“
 
 			if (m_AttachDirection.x != 0.0f && m_OldBlock->IsActive())
-			{	//‰¡–Ê‚©‚ç°–Ê
+			{	//æ¨ªé¢ã‹ã‚‰åºŠé¢
 				const float combineHalfHeight = (m_OldBlock->GetScale().y + m_Scale.y) * 0.5f;
 				const float directionY = m_AttachDirection.x * (m_IsClockwise ? 1.0f : -1.0f);
-				//’Ê‚è‰ß‚¬‚½•ª‚ğ•âŠÔ
+				//é€šã‚ŠéããŸåˆ†ã‚’è£œé–“
 				m_Position.y = m_OldBlock->GetPosition().y + combineHalfHeight * directionY;
 
 				m_Position.x -= m_AttachDirection.x;
 			}
 			else if (m_AttachDirection.y != 0.0f && m_OldBlock->IsActive())
-			{	//°–Ê‚©‚ç‰¡–Ê
+			{	//åºŠé¢ã‹ã‚‰æ¨ªé¢
 				const float combineHalfWidth = (m_OldBlock->GetScale().x + m_Scale.x) * 0.5f;
 				const float directionX = m_AttachDirection.y * (m_IsClockwise ? -1.0f : 1.0f);
-				//’Ê‚è‰ß‚¬‚½•ª‚ğ•âŠÔ
+				//é€šã‚ŠéããŸåˆ†ã‚’è£œé–“
 				m_Position.x = m_OldBlock->GetPosition().x + combineHalfWidth * directionX;
 
 				m_Position.y -= m_AttachDirection.y;
 			}
 			else
 			{
-				//ƒuƒƒbƒN‚ª”j‰ó‚³‚ê‚½
+				//ãƒ–ãƒ­ãƒƒã‚¯ãŒç ´å£Šã•ã‚ŒãŸ
 			}
 
 			m_IsClockwise ? m_AttachDirection.RotateClockwise90() : m_AttachDirection.RotateCounterClockwise90();
 		}
 		else
 		{
-			//d—Í
+			//é‡åŠ›
 			const float gravity = (m_IsAttached) ? 0.0f : FALL_GRAVITY;
 			m_Velocity.x = 0.0f;
 			m_Velocity.y += gravity * dt;
 
-			//‘¬“x§ŒÀY
+			//é€Ÿåº¦åˆ¶é™Y
 			m_Velocity.y = math_helper::clamp(m_Velocity.y, -MAX_FALL_SPEED, MAX_FALL_SPEED);
 		}
 	}
 	else
 	{
 		if (m_IsClockwise)
-		{	//‚±‚ÌğŒ‚Ì‚¾‚¯~‚Ü‚Á‚Ä‚µ‚Ü‚¤‚½‚ß–³—‚â‚èˆÊ’u‚ğ•â³‚·‚é
+		{	//ã“ã®æ¡ä»¶ã®æ™‚ã ã‘æ­¢ã¾ã£ã¦ã—ã¾ã†ãŸã‚ç„¡ç†ã‚„ã‚Šä½ç½®ã‚’è£œæ­£ã™ã‚‹
 			if (m_HitSides[static_cast<size_t>(HitSide::Bottom)] && m_HitSides[static_cast<size_t>(HitSide::Right)])
 			{
 				m_Position.y -= 1.0f;
@@ -97,7 +97,7 @@ void WalkerEnemy::Update(float dt)
 			}
 		}
 		else
-		{	//‚±‚ÌğŒ‚Ì‚¾‚¯~‚Ü‚Á‚Ä‚µ‚Ü‚¤‚½‚ß–³—‚â‚èˆÊ’u‚ğ•â³‚·‚é
+		{	//ã“ã®æ¡ä»¶ã®æ™‚ã ã‘æ­¢ã¾ã£ã¦ã—ã¾ã†ãŸã‚ç„¡ç†ã‚„ã‚Šä½ç½®ã‚’è£œæ­£ã™ã‚‹
 			if (m_HitSides[static_cast<size_t>(HitSide::Bottom)] && m_HitSides[static_cast<size_t>(HitSide::Left)])
 			{
 				m_Position.y -= 1.0f;
@@ -112,11 +112,11 @@ void WalkerEnemy::Update(float dt)
 			}
 		}
 
-		//ˆÚ“®
+		//ç§»å‹•
 		m_Velocity = m_MoveDirection * MOVE_SPEED;
 	}
 
-	//À•WXV
+	//åº§æ¨™æ›´æ–°
 	m_Position += m_Velocity * dt;
 
 	m_IsAttached = false;
@@ -125,20 +125,20 @@ void WalkerEnemy::Update(float dt)
 	m_Block = nullptr;
 	m_HitSides.fill(false);
 
-	//€–S
+	//æ­»äº¡
 	if (m_Hp <= 0 && !m_IsDead)
 	{
 		AudioManager::GetInstance().PlaySE("EnemyDead");
 		m_IsDead = true;
 	}
 
-	//€‚ñ‚Å‚¢‚é‚È‚çƒv[ƒ‹ó‘Ô
+	//æ­»ã‚“ã§ã„ã‚‹ãªã‚‰ãƒ—ãƒ¼ãƒ«çŠ¶æ…‹
 	if (m_IsDead)
 	{
 		m_IsActive = false;
 	}
 
-	// ˆê’è‹——£—£‚ê‚Ä‚¢‚é‚È‚çƒv[ƒ‹ó‘Ô
+	// ä¸€å®šè·é›¢é›¢ã‚Œã¦ã„ã‚‹ãªã‚‰ãƒ—ãƒ¼ãƒ«çŠ¶æ…‹
 	float diff = m_Position.y - m_SpawnPosition.y;
 	if (diff * diff > DESPAWN_DISTANCE * DESPAWN_DISTANCE)
 	{

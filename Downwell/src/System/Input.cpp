@@ -1,4 +1,4 @@
-#include "input.h"
+﻿#include "input.h"
 
 char Input::m_NowKey[Input::MAX_KEY] = {};
 char Input::m_PreKey[Input::MAX_KEY] = {};

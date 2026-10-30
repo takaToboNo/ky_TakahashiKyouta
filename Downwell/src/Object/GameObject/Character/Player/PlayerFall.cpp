@@ -1,4 +1,4 @@
-#include "PlayerFall.h"
+ï»¿#include "PlayerFall.h"
 #include "PlayerMove.h"
 #include "PlayerShot.h"
 #include "PlayerDead.h"
@@ -16,10 +16,10 @@ void PlayerFall::Update(Player& player)
 {
 	player.SetColor(PLAYER_FALL_COLOR);
 
-	//’ïR
+	//æŠµæŠ—
 	player.AirDrag();
 
-	//ˆÚ“®
+	//ç§»å‹•
 	bool isMove = (Input::IsPress(Action::Left)) ^ (Input::IsPress(Action::Right));
 	if (!isMove)
 	{
@@ -34,20 +34,20 @@ void PlayerFall::Update(Player& player)
 		player.SetDirectionX(1.0f);
 	}
 
-	//ƒVƒ‡ƒbƒg
+	//ã‚·ãƒ§ãƒƒãƒˆ
 	if (Input::IsTrigger(Action::Action))
 	{
 		player.RequestState(EPlayerState::Shot);
 	}
 
-	//©“®ƒVƒ‡ƒbƒg
+	//è‡ªå‹•ã‚·ãƒ§ãƒƒãƒˆ
 	m_ShotInterval--;
 	if (Input::IsPress(Action::Action) && m_ShotInterval < 0 && player.GetCanAutoShot())
 	{
 		player.RequestState(EPlayerState::Shot);
 	}
 
-	//’…’n
+	//ç€åœ°
 	if (player.IsGround())
 	{
 		AudioManager::GetInstance().PlaySE("Land");
@@ -56,7 +56,7 @@ void PlayerFall::Update(Player& player)
 		player.Reload();
 	}
 
-	//€–S
+	//æ­»äº¡
 	if (player.IsDead())
 	{
 		player.RequestState(EPlayerState::Dead);
