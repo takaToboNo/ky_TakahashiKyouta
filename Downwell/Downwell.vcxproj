@@ -21,6 +21,15 @@
   <ItemGroup>
     <ClInclude Include="src\Collision\Collider.h" />
     <ClInclude Include="src\Collision\Shape.h" />
+    <ClInclude Include="src\Imgui\imconfig.h" />
+    <ClInclude Include="src\Imgui\imgui.h" />
+    <ClInclude Include="src\Imgui\ImGuiManager.h" />
+    <ClInclude Include="src\Imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="src\Imgui\imgui_impl_win32.h" />
+    <ClInclude Include="src\Imgui\imgui_internal.h" />
+    <ClInclude Include="src\Imgui\imstb_rectpack.h" />
+    <ClInclude Include="src\Imgui\imstb_textedit.h" />
+    <ClInclude Include="src\Imgui\imstb_truetype.h" />
     <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\Manager\AudioManager.h" />
     <ClInclude Include="src\Manager\GameManager.h" />
@@ -70,6 +79,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Collision\Collider.cpp" />
+    <ClCompile Include="src\Imgui\imgui.cpp" />
+    <ClCompile Include="src\Imgui\ImGuiManager.cpp" />
+    <ClCompile Include="src\Imgui\imgui_demo.cpp" />
+    <ClCompile Include="src\Imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\Imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="src\Imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="src\Imgui\imgui_tables.cpp" />
+    <ClCompile Include="src\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Manager\AudioManager.cpp" />
     <ClCompile Include="src\Manager\GameManager.cpp" />
@@ -167,7 +184,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy\WalkerEnemy;$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject\Block;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Object\UI;$(ProjectDir)\src\Utility;$(ProjectDir)\src\System;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Map;$(ProjectDir)\src\Manager;$(ProjectDir)\src\Collision;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy\WalkerEnemy;$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject\Block;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Object\UI;$(ProjectDir)\src\Utility;$(ProjectDir)\src\System;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Map;$(ProjectDir)\src\Manager;$(ProjectDir)\src\Imgui;$(ProjectDir)\src\Collision;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
@@ -185,7 +202,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy\WalkerEnemy;$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject\Block;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Object\UI;$(ProjectDir)\src\Utility;$(ProjectDir)\src\System;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Map;$(ProjectDir)\src\Manager;$(ProjectDir)\src\Collision;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy\WalkerEnemy;$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject\Block;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Object\UI;$(ProjectDir)\src\Utility;$(ProjectDir)\src\System;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Map;$(ProjectDir)\src\Manager;$(ProjectDir)\src\Imgui;$(ProjectDir)\src\Collision;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
@@ -201,9 +218,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy\WalkerEnemy;$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject\Block;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Object\UI;$(ProjectDir)\src\Utility;$(ProjectDir)\src\System;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Map;$(ProjectDir)\src\Manager;$(ProjectDir)\src\Collision;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy\WalkerEnemy;$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject\Block;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Object\UI;$(ProjectDir)\src\Utility;$(ProjectDir)\src\System;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Map;$(ProjectDir)\src\Manager;$(ProjectDir)\src\Imgui;$(ProjectDir)\src\Collision;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>Default</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -219,9 +237,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy\WalkerEnemy;$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject\Block;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Object\UI;$(ProjectDir)\src\Utility;$(ProjectDir)\src\System;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Map;$(ProjectDir)\src\Manager;$(ProjectDir)\src\Collision;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Object\GameObject\Character\Enemy\WalkerEnemy;$(ProjectDir)\src\Object\GameObject\Character\Enemy;$(ProjectDir)\src\Object\GameObject\Character\Player;$(ProjectDir)\src\Object\GameObject\Character;$(ProjectDir)\src\Object\GameObject\Block;$(ProjectDir)\src\Object\GameObject;$(ProjectDir)\src\Object\UI;$(ProjectDir)\src\Utility;$(ProjectDir)\src\System;$(ProjectDir)\src\Scene;$(ProjectDir)\src\Object;$(ProjectDir)\src\Map;$(ProjectDir)\src\Manager;$(ProjectDir)\src\Imgui;$(ProjectDir)\src\Collision;$(ProjectDir)\src;DxLib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>Default</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

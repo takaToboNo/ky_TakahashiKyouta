@@ -46,6 +46,9 @@
     <Filter Include="src\Object\GameObject\Character\Enemy\WalkerEnemy">
       <UniqueIdentifier>{22b73e5a-4e6b-4fa2-a5da-1788000a786f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Imgui">
+      <UniqueIdentifier>{9ee98387-3b67-477b-9de3-4ada54895cb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\Object.h">
@@ -192,6 +195,33 @@
     <ClInclude Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemyState.h">
       <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
     </ClInclude>
+    <ClInclude Include="src\Imgui\imconfig.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Imgui\imgui.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Imgui\imgui_impl_dx11.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Imgui\imgui_impl_win32.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Imgui\imgui_internal.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Imgui\ImGuiManager.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Imgui\imstb_rectpack.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Imgui\imstb_textedit.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Imgui\imstb_truetype.h">
+      <Filter>src\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -310,6 +340,30 @@
     </ClCompile>
     <ClCompile Include="src\Object\GameObject\Character\Enemy\WalkerEnemy\WalkerEnemyMove.cpp">
       <Filter>src\Object\GameObject\Character\Enemy\WalkerEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Imgui\imgui.cpp">
+      <Filter>src\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Imgui\imgui_impl_dx11.cpp">
+      <Filter>src\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Imgui\imgui_impl_win32.cpp">
+      <Filter>src\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Imgui\ImGuiManager.cpp">
+      <Filter>src\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Imgui\imgui_demo.cpp">
+      <Filter>src\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Imgui\imgui_draw.cpp">
+      <Filter>src\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Imgui\imgui_tables.cpp">
+      <Filter>src\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Imgui\imgui_widgets.cpp">
+      <Filter>src\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

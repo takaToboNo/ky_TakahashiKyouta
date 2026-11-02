@@ -84,6 +84,7 @@ void GameScene::Update(float dt)
 void GameScene::Draw()
 {
 	m_GameObjectManager.Draw();
+	m_GameObjectManager.DrawDebug();
 	m_StageManager.Draw();
 
 	//UI

@@ -8,6 +8,7 @@
 void SolidBlock::Initialize()
 {
 	Block::Initialize();
+	m_Name = "SolidBlock";
 }
 
 void SolidBlock::Finalize()
@@ -32,6 +33,10 @@ void SolidBlock::Draw(const Camera& camera)
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+}
+
+void SolidBlock::DrawDebug()
+{
 }
 
 void SolidBlock::Destroy()

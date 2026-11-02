@@ -24,6 +24,10 @@ void GameObject::Draw(const Camera& camera)
 {
 }
 
+void GameObject::DrawDebug()
+{
+}
+
 void GameObject::Destroy()
 {
 	Object::Destroy();

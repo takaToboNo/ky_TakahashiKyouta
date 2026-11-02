@@ -3,6 +3,7 @@
 #include <memory>
 #include <algorithm>
 #include "GameObject.h"
+#include "Tag.h"
 
 class Camera;
 
@@ -26,6 +27,7 @@ public:
 	void Finalize();
 	void Update(float dt);
 	void Draw();
+	void DrawDebug();
 
 	//Initializeでのみ呼ぶこと
 	template<class T>
@@ -66,6 +68,8 @@ public:
 	void SetCamera(Camera* camera) { m_Camera = camera; }
 
 private:
+	std::string ToStringTag(Tag tag) const;
+
 	void ApplyPendingGameObjects();
 	//当たり判定チェック
 	void CheckHitAll(const std::vector<std::unique_ptr<GameObject>>& objects);

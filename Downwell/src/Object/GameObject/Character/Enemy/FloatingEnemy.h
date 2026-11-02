@@ -24,6 +24,7 @@ public:
 	void Finalize() override;
 	void Update(float dt) override;
 	void Draw(const Camera& camera) override;
+	void DrawDebug() override;
 	void Destroy() override;
 
 	void OnCollision(GameObject* other, const HitInfo& hitInfo) override;

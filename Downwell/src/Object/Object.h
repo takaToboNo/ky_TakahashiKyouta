@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <string>
 #include "Tag.h"
 #include "Layer.h"
 #include "Vector2.h"
@@ -10,6 +11,7 @@ protected:
 	Layer m_Layer = Layer::None;
 	Vector2 m_Position = Vector2::Zero();
 	Vector2 m_OldPosition = Vector2::Zero();
+	std::string m_Name = "Unnamed";
 
 public:
 	Object() = default;
@@ -25,5 +27,5 @@ public:
 	void SetPosition(const Vector2& position) { m_Position = position; }
 	const Vector2& GetPosition() const { return m_Position; }
 	const Vector2& GetOldPosition() const { return m_OldPosition; }
-
+	const std::string& GetName() const { return m_Name; }
 };

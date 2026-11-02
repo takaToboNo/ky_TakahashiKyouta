@@ -1,6 +1,7 @@
 ﻿#include "WalkerEnemy.h"
 #include "Bullet.h"
 #include "AudioManager.h"
+#include "imgui.h"
 
 #include "WalkerEnemyMove.h"
 #include "WalkerEnemyFall.h"
@@ -14,6 +15,7 @@
 void WalkerEnemy::Initialize()
 {
 	Enemy::Initialize();
+	m_Name = "WalkerEnemy";
 	m_Position = { 500.0f,650.0f };
 	m_Scale = { WALKER_ENEMY_SIZE,WALKER_ENEMY_SIZE };
 	m_Hp = WALKER_ENEMY_MAX_HP;
@@ -175,13 +177,16 @@ void WalkerEnemy::Draw(const Camera& camera)
 	int moveDirX = static_cast<int>(m_MoveDirection.x) * 40;
 	int moveDirY = static_cast<int>(m_MoveDirection.y) * 40;
 	DrawLine(centerX, centerY, centerX + moveDirX, centerY + moveDirY, GetColor(WHITE.r, WHITE.g, WHITE.b));
-	/*for (int i = 0; i < static_cast<size_t>(HitSide::Max); i++)
-	{
-		const int startPosX = 1000;
-		const int startPosY = 500;
-		DrawFormatString(startPosX, startPosY + i * 20, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "HitSides : %s", m_HitSides[i] ? "true" : "false");
-	}*/
 #endif
+}
+
+void WalkerEnemy::DrawDebug()
+{
+	ImGui::Text("Position : (%.2f, %.2f)", m_Position.x, m_Position.y);
+	ImGui::Text("Velocity : (%.2f, %.2f)", m_Velocity.x, m_Velocity.y);
+
+	ImGui::Text("IsActive : %s", m_IsActive ? "true" : "false");
+	ImGui::Text("IsDead : %s", m_IsDead ? "true" : "false");
 }
 
 void WalkerEnemy::Destroy()

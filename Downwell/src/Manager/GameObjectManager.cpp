@@ -6,6 +6,7 @@
 #include "Camera.h"
 
 #include "DxLib.h"
+#include "imgui.h"
 
 void GameObjectManager::Finalize()
 {
@@ -78,6 +79,50 @@ void GameObjectManager::Draw()
 #endif
 }
 
+void GameObjectManager::DrawDebug()
+{
+#ifdef _DEBUG
+	if (ImGui::Begin("GameObjects"))
+	{
+		for (int tagIndex = 0; tagIndex < static_cast<int>(Tag::Max); tagIndex++)
+		{
+			Tag tag = static_cast<Tag>(tagIndex);
+
+			if (ImGui::TreeNode(ToStringTag(tag).c_str()))
+			{
+				int objectIndex = 0;
+
+				for (auto& gameObject : m_GameObjects)
+				{
+					if (gameObject->GetTag() != tag)
+					{
+						continue;
+					}
+
+					ImGui::PushID(gameObject.get());
+
+					std::string label = gameObject->GetName() + " " + std::to_string(objectIndex);
+
+					if (ImGui::TreeNode(label.c_str()))
+					{
+						gameObject->DrawDebug();
+
+						ImGui::TreePop();
+					}
+
+					ImGui::PopID();
+
+					objectIndex++;
+				}
+
+				ImGui::TreePop();
+			}
+		}
+	}
+
+	ImGui::End();
+#endif
+}
 
 void GameObjectManager::ApplyPendingGameObjects()
 {
@@ -91,7 +136,7 @@ void GameObjectManager::ApplyPendingGameObjects()
 		m_GameObjects.push_back(std::move(gameObject));
 	}
 
- 	SortGameObjectsByLayer();
+	SortGameObjectsByLayer();
 	m_PendingGameObjects.clear();
 
 	m_IsDirtyGameObjects = false;
@@ -103,6 +148,32 @@ void GameObjectManager::SortGameObjectsByLayer()
 		[](const std::unique_ptr<GameObject>& a, const std::unique_ptr<GameObject>& b)
 		{ return a->GetLayer() < b->GetLayer(); });
 }
+
+std::string GameObjectManager::ToStringTag(Tag tag) const
+{
+	switch (tag)
+	{
+	case Tag::None:
+		return "None";
+	case Tag::Player:
+		return "Player";
+	case Tag::Enemy:
+		return "Enemy";
+	case Tag::Block:
+		return "Block";
+	case Tag::Bullet:
+		return "Bullet";
+	case Tag::GunBoots:
+		return "GunBoots";
+	case Tag::Camera:
+		return "Camera";
+	case Tag::UI:
+		return "UI";
+	default:
+		return "Unnamed";
+	}
+}
+
 
 //------------------------------------------------------------------
 // 当たり判定チェック

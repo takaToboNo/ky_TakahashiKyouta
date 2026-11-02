@@ -10,6 +10,8 @@ bool GameManager::Initialize()
 	if (result != 0) return false;
 	result = SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
 	if (result != 0) return false;
+
+	SetAlwaysRunFlag(TRUE);
 	
 	result = DxLib_Init();
 	if (result != 0) return false;
@@ -18,6 +20,7 @@ bool GameManager::Initialize()
 
 	AudioManager::GetInstance().Initialize();
 
+	m_ImGuiManager.Initialize();
 	m_Timer.Initialize();
 	result = m_SceneManager.Initialize();
 	if (result == 0) return false;
@@ -31,6 +34,7 @@ void GameManager::Finalize()
 
 	m_SceneManager.Finalize();
 	m_Timer.Finalize();
+	m_ImGuiManager.Finalize();
 
 	DxLib_End();
 }
@@ -60,11 +64,17 @@ int GameManager::Run()
  			m_Timer.DiscardRemainingSteps();
 		}
 
+		m_ImGuiManager.BeginFrame();
+
 		int result;
 		result = ClearDrawScreen();
 		if (result != 0) return -1;
+
 		m_Timer.Draw();
 		m_SceneManager.Draw();
+
+		m_ImGuiManager.EndFrame();
+
 		result = ScreenFlip();
 		if (result != 0) return -1;
 	}

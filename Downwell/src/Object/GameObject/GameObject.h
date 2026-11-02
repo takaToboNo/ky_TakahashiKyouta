@@ -25,6 +25,7 @@ public:
 	virtual void Finalize() override;
 	virtual void Update(float dt) override;
 	virtual void Draw(const Camera& camera);
+	virtual void DrawDebug();
 	virtual void Destroy() override;
 
 	virtual void OnCollision(GameObject* other, const HitInfo& hitInfo) {}

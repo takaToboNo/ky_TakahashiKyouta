@@ -1,5 +1,6 @@
 ﻿#include "FloatingEnemy.h"
 #include "AudioManager.h"
+#include "imgui.h"
 
 #include <cassert>
 #include "DxLib.h"
@@ -10,6 +11,7 @@
 void FloatingEnemy::Initialize()
 {
 	Enemy::Initialize();
+	m_Name = "FloatingEnemy";
 	m_MoveSpeed = 50.0f;
 	m_Scale = { FLOATING_ENEMY_SIZE_X,FLOATING_ENEMY_SIZE_Y };
 	m_Hp = FLOATING_ENEMY_MAX_HP;
@@ -72,6 +74,15 @@ void FloatingEnemy::Draw(const Camera& camera)
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), FALSE);
+}
+
+void FloatingEnemy::DrawDebug()
+{
+	ImGui::Text("Position : (%.2f, %.2f)", m_Position.x, m_Position.y);
+	ImGui::Text("Velocity : (%.2f, %.2f)", m_Velocity.x, m_Velocity.y);
+
+	ImGui::Text("IsActive : %s", m_IsActive ? "true" : "false");
+	ImGui::Text("IsDead : %s", m_IsDead ? "true" : "false");
 }
 
 void FloatingEnemy::Destroy()

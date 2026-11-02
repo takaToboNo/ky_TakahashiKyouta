@@ -41,6 +41,7 @@ void TitleScene::Update(float dt)
 void TitleScene::Draw()
 {
 	m_GameObjectManager.Draw();
+	m_GameObjectManager.DrawDebug();
 
 	int x = static_cast<int>(WINDOW_WIDTH * 0.5f);
 	int y = static_cast<int>(WINDOW_HEIGHT * 0.5f);

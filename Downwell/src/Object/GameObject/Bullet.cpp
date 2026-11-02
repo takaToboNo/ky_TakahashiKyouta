@@ -7,6 +7,7 @@
 void Bullet::Initialize()
 {
 	GameObject::Initialize();
+	m_Name = "Bullet";
 	m_Tag = Tag::Bullet;
 	m_Layer = Layer::Bullet;
 	m_Velocity = { 0.0f,BULLET_SPEED };
@@ -47,6 +48,10 @@ void Bullet::Draw(const Camera& camera)
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - camera.GetPosition().y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+}
+
+void Bullet::DrawDebug()
+{
 }
 
 void Bullet::Destroy()

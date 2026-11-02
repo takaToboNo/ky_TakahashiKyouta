@@ -4,6 +4,7 @@
 #include "FloatingEnemy.h"
 #include "WalkerEnemy.h"
 #include "AudioManager.h"
+#include "imgui.h"
 
 #include "PlayerIdle.h"
 #include "PlayerMove.h"
@@ -21,6 +22,7 @@
 void Player::Initialize()
 {
 	Character::Initialize();
+	m_Name = "Player";
 	m_Tag = Tag::Player;
 	m_Layer = Layer::Player;
 
@@ -144,23 +146,6 @@ void Player::Update(float dt)
 
 void Player::Draw(const Camera& camera)
 {
-#ifdef _DEBUG
-	//デバッグ表示
-	const int startPosX = 10;
-	const int startPosY = 200;
-	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "PosX : %.2f", m_Position.x);
-	DrawFormatString(startPosX, startPosY + 20, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "PosY : %.2f", m_Position.y);
-	DrawFormatString(startPosX, startPosY + 40, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "VelX : %.2f", m_Velocity.x);
-	DrawFormatString(startPosX, startPosY + 60, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "VelY : %.2f", m_Velocity.y);
-	DrawFormatString(startPosX, startPosY + 80, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "Gravity : %.2f", m_DebugDrawGravity);
-	DrawFormatString(startPosX, startPosY + 100, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "canAutoShot : %s", m_CanAutoShot ? "true" : "false");
-	DrawFormatString(startPosX, startPosY + 120, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "isGround : %s", m_IsGround ? "true" : "false");
-	DrawFormatString(startPosX, startPosY + 140, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "isHit : %s", m_DebugIsHit ? "true" : "false");
-	if (m_CurrentState) DrawFormatString(startPosX, startPosY + 160, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "State : %s", m_CurrentState->GetStateName());
-	DrawFormatString(startPosX, startPosY + 180, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "DeathTimer : %.1f", m_DeathTimer);
-	m_GunBoots->Draw();
-#endif
-
 	bool blink = (static_cast<int>(m_InvincibleTimer * BLINK_SPEED) % 2) != 0;
 	if (blink) return;
 
@@ -172,6 +157,19 @@ void Player::Draw(const Camera& camera)
 	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - camera.GetPosition().y);
 
 	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+}
+
+void Player::DrawDebug()
+{
+	ImGui::Text("Position : (%.2f, %.2f)", m_Position.x, m_Position.y);
+	ImGui::Text("Velocity : (%.2f, %.2f)", m_Velocity.x, m_Velocity.y);
+	ImGui::Text("Gravity : %.2f", m_DebugDrawGravity);
+
+	ImGui::Text("CanAutoShot : %s", m_CanAutoShot ? "true" : "false");
+	ImGui::Text("IsGround : %s", m_IsGround ? "true" : "false");
+
+	if (m_CurrentState) ImGui::Text("State : %s", m_CurrentState->GetStateName());
+	ImGui::Text("DeathTimer : %.2f", m_DeathTimer);
 }
 
 void Player::Destroy()
