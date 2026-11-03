@@ -3,6 +3,7 @@
 #include "Timer.h"
 #include "DxLib.h"
 #include "GameHelper.h"
+#include "imgui.h"
 
 void Timer::Initialize()
 {
@@ -49,11 +50,18 @@ void Timer::Update()
 void Timer::Draw()
 {
 #ifdef _DEBUG
-	//デバッグ表示
-	const int startPosX = 10;
-	const int startPosY = 100;
-	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "UPS : %.2f", m_UPS);
-	DrawFormatString(startPosX, startPosY + 20, GetColor(DEBUG_NORMAL_COLOR.r, DEBUG_NORMAL_COLOR.g, DEBUG_NORMAL_COLOR.b), "FPS : %.2f", m_FPS);
+	if (ImGui::Begin("Performance"))
+	{
+		ImGui::Text("FPS");
+		ImGui::SameLine(100.0f);
+		ImGui::Text("%.1f", m_FPS);
+
+		ImGui::Text("UPS");
+		ImGui::SameLine(100.0f);
+		ImGui::Text("%.1f", m_UPS);
+	}
+
+	ImGui::End();
 #endif
 }
 
@@ -63,14 +71,4 @@ bool Timer::ConsumeFixedStep()
 
 	m_Accumulator -= FIXED_DELTA_TIME;
 	return true;
-}
-
-bool Timer::HasRemainingStep()
-{
-	return m_Accumulator >= FIXED_DELTA_TIME;
-}
-
-void Timer::DiscardRemainingSteps()
-{
-	m_Accumulator = 0.0f;
 }

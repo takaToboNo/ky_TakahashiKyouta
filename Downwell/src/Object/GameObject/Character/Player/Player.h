@@ -66,10 +66,8 @@ private:
 
 	bool m_StartGameBGM = false;
 
-#ifdef _DEBUG
 	float m_DebugDrawGravity = 0.0f;
 	bool m_DebugIsHit = false;
-#endif
 
 public:
 	Player() = default;

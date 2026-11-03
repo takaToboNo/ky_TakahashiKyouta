@@ -31,8 +31,9 @@ public:
 
 	bool ConsumeFixedStep();
 	float GetFixedDeltaTime() const { return FIXED_DELTA_TIME; }
+	float GetDeltaTime() const { return m_DeltaTime; }
 
-	bool HasRemainingStep();
-	void DiscardRemainingSteps();
+	bool HasRemainingStep() { return m_Accumulator >= FIXED_DELTA_TIME; }
+	void DiscardRemainingSteps() { m_Accumulator = 0.0f; }
 
 };
