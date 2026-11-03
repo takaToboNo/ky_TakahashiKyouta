@@ -5,6 +5,7 @@
 #include "MathHelper.h"
 #include "GameObject.h"
 #include "GameObjectManager.h"
+#include "imgui.h"
 
 #include "SolidBlock.h"
 #include "BreakableBlock.h"
@@ -84,9 +85,9 @@ void StageManager::Draw()
 void StageManager::DrawDebug()
 {
 #ifdef _DEBUG
-	const int startPosX = 1040;
-	const int startPosY = 30;
-	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "CurrentSection : %d", m_CurrentSection);
+	ImGui::Begin("CurrentSection");
+	ImGui::Text(" : %d", m_CurrentSection);
+	ImGui::End();
 
 	if (!m_Camera) return;
 
