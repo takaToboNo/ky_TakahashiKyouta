@@ -56,12 +56,6 @@ private:
 
 	int m_StageLoopCount = 0;
 
-	int m_ActiveSolidBlockCount = 0;
-	int m_ActiveBreakableBlockCount = 0;
-	int m_ActiveFloatingEnemyCount = 0;
-	int m_ActiveWalkerEnemyCount = 0;
-	
-
 public:
 	StageManager() = default;
 	~StageManager() = default;
@@ -70,6 +64,7 @@ public:
 	void Finalize();
 	void Update(GameObjectManager& manager, Player* player);
 	void Draw();
+	void DrawDebug();
 
 	int GetCurrentSection() const { return m_CurrentSection; }
 	int GetStageLoopCount() const { return m_StageLoopCount; }

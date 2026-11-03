@@ -71,10 +71,9 @@ void Player::Update(float dt)
 	//重力
 	const float gravity = (m_Velocity.y < GRAVITY_THRESHOLD_SPEED) ? JUMP_GRAVITY : FALL_GRAVITY;
 	m_Velocity.y += gravity * dt;
-#ifdef _DEBUG
+
 	m_DebugDrawGravity = gravity;
 	m_DebugIsHit = false;
-#endif
 
 	bool isReleaseJump = Input::IsRelease(Action::Action);
 	if (isReleaseJump && m_Velocity.y < 0.0f)
@@ -179,9 +178,8 @@ void Player::Destroy()
 
 void Player::OnCollision(GameObject* other, const HitInfo& hitInfo)
 {
-#ifdef _DEBUG
 	m_DebugIsHit = true;
-#endif
+
 	Tag tag = other->GetTag();
 	HitSide hitSide = GetHitSide(hitInfo);
 

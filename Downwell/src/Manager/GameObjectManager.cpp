@@ -34,7 +34,6 @@ void GameObjectManager::Update(float dt)
 
 	ApplyPendingGameObjects();
 
-#ifdef _DEBUG
 	m_ActiveObjects = 0;
 	m_DeadObjects = 0;
 	for (const std::unique_ptr<GameObject>& gameObject : m_GameObjects)
@@ -53,7 +52,6 @@ void GameObjectManager::Update(float dt)
 			m_DeadObjects++;
 		}
 	}
-#endif
 }
 
 void GameObjectManager::Draw()
@@ -70,24 +68,15 @@ void GameObjectManager::Draw()
 			if (gameObject->IsActive())gameObject->Draw(*m_Camera);
 		}
 	}
-
-#ifdef _DEBUG
-	//const int startPosX = 1000;
-	//const int startPosY = 200;
-	//DrawFormatString(startPosX, startPosY, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveObject : %d/%d", m_ActiveObjects, m_GameObjects.size());
-	//DrawFormatString(startPosX, startPosY + 20, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "DeadObject : %d/%d", m_DeadObjects, m_GameObjects.size());
-#endif
 }
 
 void GameObjectManager::DrawDebug()
 {
-	if (ImGui::Begin("HitCheck"))
+#ifdef _DEBUG
+	if (ImGui::Begin("GameObjects : Active / Dead"))
 	{
-		ImGui::Checkbox("Use Legacy (Before)", &m_UseLegacyHitCheck);
-		ImGui::Text("Average : %.1f us", m_HitCheckAverageUs);
-		ImGui::Text("Max     : %lld us", m_HitCheckPeakUs);
-		ImGui::Text("Movable : %d / Block : %d",
-			static_cast<int>(m_MovableObjects.size()), static_cast<int>(m_StaticObjects.size()));
+		ImGui::Text("Active : %d", m_ActiveObjects);
+		ImGui::Text("Dead   : %d", m_DeadObjects);
 	}
 	ImGui::End();
 
@@ -130,6 +119,7 @@ void GameObjectManager::DrawDebug()
 	}
 
 	ImGui::End();
+#endif
 }
 
 void GameObjectManager::ApplyPendingGameObjects()
@@ -188,89 +178,40 @@ std::string GameObjectManager::ToStringTag(Tag tag) const
 //------------------------------------------------------------------
 void GameObjectManager::CheckHitAll(const std::vector<std::unique_ptr<GameObject>>& objects)
 {
-	const LONGLONG startTime = GetNowHiPerformanceCount();
-	if (m_UseLegacyHitCheck)
+	//有効な物だけを集める（確保済みの領域を使いまわす）
+	m_MovableObjects.clear();
+	m_StaticObjects.clear();
+
+	for (const std::unique_ptr<GameObject>& object : objects)
 	{
-		CheckHitAllLegacy(objects);
-	}
-	else
-	{
-		//有効な物だけを集める（確保済みの領域を使いまわす）
-		m_MovableObjects.clear();
-		m_StaticObjects.clear();
+		if (!object || !object->IsActive()) continue;
 
-		for (const std::unique_ptr<GameObject>& object : objects)
+		if (object->GetTag() == Tag::Block)
 		{
-			if (!object || !object->IsActive()) continue;
-
-			if (object->GetTag() == Tag::Block)
-			{
-				m_StaticObjects.push_back(object.get());
-			}
-			else
-			{
-				m_MovableObjects.push_back(object.get());
-			}
+			m_StaticObjects.push_back(object.get());
 		}
-
-		//ブロックと動くもの
-		for (GameObject* block : m_StaticObjects)
+		else
 		{
-			for (GameObject* movable : m_MovableObjects)
-			{
-				CheckHitPair(block, movable);
-			}
+			m_MovableObjects.push_back(object.get());
 		}
-
-		//動く者同士
-		for (size_t i = 0; i < m_MovableObjects.size(); i++)
-		{
-			for (size_t j = i + 1; j < m_MovableObjects.size(); j++)
-			{
-				CheckHitPair(m_MovableObjects[i], m_MovableObjects[j]);
-			}
-		}
-
-		/*for (size_t i = 0; i < objects.size(); i++)
-		{
-			for (size_t j = i + 1; j < objects.size(); j++)
-			{
-				if (!objects[i] || !objects[j]) continue;
-
-				if (objects[i]->GetTag() == Tag::Block && objects[j]->GetTag() == Tag::Block) continue;
-
-				if (!objects[i]->IsActive() || !objects[j]->IsActive()) continue;
-
-				Collider* colliderA = objects[i]->GetCollider();
-				Collider* colliderB = objects[j]->GetCollider();
-
-				HitInfo hitA;
-				if (!colliderA || !colliderB) continue;
-
-				if (!CheckHit(*colliderA, *colliderB, &hitA)) continue;
-
-				HitInfo hitB = hitA;
-				hitB.diff *= -1.0f;
-				hitB.normal *= -1.0f;
-
-				objects[i]->OnCollision(objects[j].get(), hitA);
-				objects[j]->OnCollision(objects[i].get(), hitB);
-			}
-		}*/
 	}
 
-	const LONGLONG elapsed = GetNowHiPerformanceCount() - startTime;
-	m_HitCheckTimeSum += elapsed;
-	m_HitCheckTimeMax = (std::max)(m_HitCheckTimeMax, elapsed);
-	m_HitCheckSampleCount++;
-
-	if (m_HitCheckSampleCount >= HIT_CHECK_SAMPLE_COUNT)
+	//ブロックと動くもの
+	for (GameObject* block : m_StaticObjects)
 	{
-		m_HitCheckAverageUs = static_cast<float>(m_HitCheckTimeSum) / m_HitCheckSampleCount;
-		m_HitCheckPeakUs = m_HitCheckTimeMax;
-		m_HitCheckTimeSum = 0;
-		m_HitCheckTimeMax = 0;
-		m_HitCheckSampleCount = 0;
+		for (GameObject* movable : m_MovableObjects)
+		{
+			CheckHitPair(block, movable);
+		}
+	}
+
+	//動く者同士
+	for (size_t i = 0; i < m_MovableObjects.size(); i++)
+	{
+		for (size_t j = i + 1; j < m_MovableObjects.size(); j++)
+		{
+			CheckHitPair(m_MovableObjects[i], m_MovableObjects[j]);
+		}
 	}
 }
 
@@ -375,34 +316,4 @@ bool GameObjectManager::CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* 
 	}
 
 	return true;
-}
-
-void GameObjectManager::CheckHitAllLegacy(const std::vector<std::unique_ptr<GameObject>>& objects)
-{
-	for (size_t i = 0; i < objects.size(); i++)
-	{
-		for (size_t j = i + 1; j < objects.size(); j++)
-		{
-			if (!objects[i] || !objects[j]) continue;
-
-			if (objects[i]->GetTag() == Tag::Block && objects[j]->GetTag() == Tag::Block) continue;
-
-			if (!objects[i]->IsActive() || !objects[j]->IsActive()) continue;
-
-			Collider* colliderA = objects[i]->GetCollider();
-			Collider* colliderB = objects[j]->GetCollider();
-
-			HitInfo hitA;
-			if (!colliderA || !colliderB) continue;
-
-			if (!CheckHit(*colliderA, *colliderB, &hitA)) continue;
-
-			HitInfo hitB = hitA;
-			hitB.diff *= -1.0f;
-			hitB.normal *= -1.0f;
-
-			objects[i]->OnCollision(objects[j].get(), hitA);
-			objects[j]->OnCollision(objects[i].get(), hitB);
-		}
-	}
 }

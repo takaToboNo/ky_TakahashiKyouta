@@ -21,17 +21,8 @@ private:
 
 	Camera* m_Camera = nullptr;
 
-
 	std::vector<GameObject*> m_MovableObjects = {};
 	std::vector<GameObject*> m_StaticObjects = {};
-
-	static constexpr int HIT_CHECK_SAMPLE_COUNT = 60;
-	bool m_UseLegacyHitCheck = false;
-	LONGLONG m_HitCheckTimeSum = 0;
-	LONGLONG m_HitCheckTimeMax = 0;
-	int m_HitCheckSampleCount = 0;
-	float m_HitCheckAverageUs = 0.0f;
-	LONGLONG m_HitCheckPeakUs = 0;
 
 public:
 	GameObjectManager() = default;
@@ -90,7 +81,4 @@ private:
 
 	bool CheckHit(const Collider& a, const Collider& b, HitInfo* out);
 	bool CheckHit(const Rect& rect1, const Rect& rect2, HitInfo* out);
-
-	//比較用
-	void CheckHitAllLegacy(const std::vector<std::unique_ptr<GameObject>>& objects);
 };

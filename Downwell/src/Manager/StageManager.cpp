@@ -34,41 +34,6 @@ void StageManager::Finalize()
 
 void StageManager::Update(GameObjectManager& manager, Player* player)
 {
-#ifdef _DEBUG
-	m_ActiveSolidBlockCount = 0;
-	m_ActiveBreakableBlockCount = 0;
-	m_ActiveFloatingEnemyCount = 0;
-	m_ActiveWalkerEnemyCount = 0;
-	for (SolidBlock* solidBlock : m_StageObjectPools.solidBlockPool.GetObjectPool())
-	{
-		if (solidBlock->IsActive())
-		{
-			m_ActiveSolidBlockCount++;
-		}
-	}
-	for (BreakableBlock* breakableBlock : m_StageObjectPools.breakableBlockPool.GetObjectPool())
-	{
-		if (breakableBlock->IsActive())
-		{
-			m_ActiveBreakableBlockCount++;
-		}
-	}
-	for (FloatingEnemy* floatingEnemy : m_StageObjectPools.floatingEnemyPool.GetObjectPool())
-	{
-		if (floatingEnemy->IsActive())
-		{
-			m_ActiveFloatingEnemyCount++;
-		}
-	}
-	for (WalkerEnemy* walkerEnemy : m_StageObjectPools.walkerEnemyPool.GetObjectPool())
-	{
-		if (walkerEnemy->IsActive())
-		{
-			m_ActiveWalkerEnemyCount++;
-		}
-	}
-#endif
-
 	//プレイヤーの現在いる区間を探す
 	int currentSection = FindCurrentSection(player->GetPosition().y);
 	if (m_CurrentSection == currentSection) return;
@@ -110,42 +75,18 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 	}
 
 	m_CurrentSection = currentSection;
-
-
-#ifdef _DEBUG
-	//同じポインタを別々の区間で共有していないか
-	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
-	{
-		for (int j = 1; j < STAGE_SECTION_COUNT; j++)
-		{
-			for (GameObject* objI : m_Sections[i].gameObjects)
-			{
-				for (GameObject* objJ : m_Sections[j].gameObjects)
-				{
-					if (i == j) continue;
-
-					if (objI == objJ)
-					{
-						__debugbreak();
-					}
-				}
-			}
-		}
-	}
-#endif
 }
 
 void StageManager::Draw()
+{
+}
+
+void StageManager::DrawDebug()
 {
 #ifdef _DEBUG
 	const int startPosX = 1040;
 	const int startPosY = 30;
 	DrawFormatString(startPosX, startPosY, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "CurrentSection : %d", m_CurrentSection);
-
-	/*DrawFormatString(startPosX, startPosY + 60, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveSolidBlock : %d/%d", m_ActiveSolidBlockCount, SOLID_BLOCK_POOL_SIZE);
-	DrawFormatString(startPosX, startPosY + 80, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveFloatingEnemy : %d/%d", m_ActiveFloatingEnemyCount, FLOATING_ENEMY_POOL_SIZE);
-	DrawFormatString(startPosX, startPosY + 100, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveWalkerEnemy : %d/%d", m_ActiveWalkerEnemyCount, WALKER_ENEMY_POOL_SIZE);
-	DrawFormatString(startPosX, startPosY + 120, GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b), "ActiveBreakableBlock : %d/%d", m_ActiveBreakableBlockCount, BREAKABLE_BLOCK_POOL_SIZE);*/
 
 	if (!m_Camera) return;
 
@@ -164,44 +105,6 @@ void StageManager::Draw()
 			DrawBox(x1, y1, x2, y2, GetColor(RED.r, RED.g, RED.b), FALSE);
 		}
 	}
-
-	//WalkerEnemy用デバッグ表示
-	/*DrawString(startPosX, startPosY + 40, "Active", GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b));
-	DrawString(startPosX + 80, startPosY + 40, "Dead", GetColor(DEBUG_COUNT_COLOR.r, DEBUG_COUNT_COLOR.g, DEBUG_COUNT_COLOR.b));
-	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
-	{
-		int walkerEnemyCount = 0;
-		for (WalkerEnemy* poolObj : m_StageObjectPools.walkerEnemyPool.GetObjectPool())
-		{
-			int offsetY = 60 + walkerEnemyCount * 20;
-			walkerEnemyCount++;
-
-			if (poolObj->IsActive())
-			{
-				DrawFormatString(startPosX, startPosY + offsetY, GetColor(RED.r, RED.g, RED.b), "true");
-			}
-			else
-			{
-				DrawFormatString(startPosX, startPosY + offsetY, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "false");
-			}
-			if (poolObj->IsDead())
-			{
-				DrawFormatString(startPosX + 80, startPosY + offsetY, GetColor(RED.r, RED.g, RED.b), "true");
-			}
-			else
-			{
-				DrawFormatString(startPosX + 80, startPosY + offsetY, GetColor(DEBUG_STATUS_COLOR.r, DEBUG_STATUS_COLOR.g, DEBUG_STATUS_COLOR.b), "false");
-			}
-
-			for (GameObject* obj : m_Sections[i].gameObjects)
-			{
-				if (obj == poolObj)
-				{
-					DrawFormatString(startPosX - 20, startPosY + offsetY, GetColor(RED.r, RED.g, RED.b), "%d", i);
-				}
-			}
-		}
-	}*/
 #endif
 }
 
