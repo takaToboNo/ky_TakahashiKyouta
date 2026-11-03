@@ -6,7 +6,6 @@
 #include "DxLib.h"
 #include "Camera.h"
 #include "Player.h"
-#include "MathHelper.h"
 
 void FloatingEnemy::Initialize()
 {

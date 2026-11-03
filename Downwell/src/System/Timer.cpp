@@ -1,8 +1,6 @@
-﻿#define NOMINMAX
-#include <algorithm>
+﻿#include <algorithm>
 #include "Timer.h"
 #include "DxLib.h"
-#include "GameHelper.h"
 #include "imgui.h"
 
 void Timer::Initialize()
@@ -27,7 +25,7 @@ void Timer::Tick()
 	const float raw = static_cast<float>(now - m_LastCount) * MICRO_TO_SECOND;
 
 	m_LastCount = now;
-	m_DeltaTime = std::min(raw, MAX_DELTA_TIME);
+	m_DeltaTime = (std::min)(raw, MAX_DELTA_TIME);
 	m_Accumulator += m_DeltaTime;
 }
 

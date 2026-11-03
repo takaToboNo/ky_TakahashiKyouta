@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "input.h"
 #include "FloatingEnemy.h"
-#include "WalkerEnemy.h"
 #include "AudioManager.h"
 #include "imgui.h"
 
@@ -13,7 +12,6 @@
 #include "PlayerShot.h"
 #include "PlayerDead.h"
 
-//仮
 #include "DxLib.h"
 #include "Camera.h"
 #include <algorithm>

@@ -1,11 +1,7 @@
-﻿#include "GameObjectManager.h"
-
-#define NOMINMAX
-#include "MathHelper.h"
+﻿#include <algorithm>
+#include "GameObjectManager.h"
 #include "Collider.h"
 #include "Camera.h"
-
-//#include "DxLib.h"
 #include "imgui.h"
 
 void GameObjectManager::Finalize()

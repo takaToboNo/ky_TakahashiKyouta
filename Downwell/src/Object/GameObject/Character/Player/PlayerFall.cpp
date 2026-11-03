@@ -1,7 +1,4 @@
 ﻿#include "PlayerFall.h"
-#include "PlayerMove.h"
-#include "PlayerShot.h"
-#include "PlayerDead.h"
 #include "Player.h"
 #include "Input.h"
 

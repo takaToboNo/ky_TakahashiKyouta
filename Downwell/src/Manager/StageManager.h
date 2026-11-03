@@ -8,10 +8,12 @@
 
 class GameObjectManager;
 class GameObject;
+
 class SolidBlock;
 class BreakableBlock;
 class WalkerEnemy;
 class FloatingEnemy;
+
 class Player;
 class Camera;
 

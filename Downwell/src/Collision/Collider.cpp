@@ -1,5 +1,4 @@
 ﻿#include "Collider.h"
-#include "MathHelper.h"
 #include "GameObject.h"
 
 Rect Collider::GetWorldRect() const

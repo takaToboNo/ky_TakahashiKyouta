@@ -1,8 +1,4 @@
 ﻿#include "PlayerIdle.h"
-#include "PlayerMove.h"
-#include "PlayerJump.h"
-#include "PlayerFall.h"
-#include "PlayerDead.h"
 #include "Player.h"
 #include "Input.h"
 

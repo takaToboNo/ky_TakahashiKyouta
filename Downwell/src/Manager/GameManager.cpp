@@ -2,6 +2,7 @@
 #include "GameHelper.h"
 #include "Input.h"
 #include "AudioManager.h"
+#include "DxLib.h"
 
 bool GameManager::Initialize()
 {

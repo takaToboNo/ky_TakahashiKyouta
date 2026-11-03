@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <array>
 #include <vector>
-#include "DxLib.h"
 
 enum class Action
 {

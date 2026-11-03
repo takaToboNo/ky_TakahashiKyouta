@@ -1,8 +1,6 @@
 ﻿#include <random>
-#include <iostream>
 #include "StageManager.h"
 #include "DxLib.h"
-#include "MathHelper.h"
 #include "GameObject.h"
 #include "GameObjectManager.h"
 #include "imgui.h"

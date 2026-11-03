@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <vector>
-#include <memory>
 #include "Object.h"
 #include "Bullet.h"
 #include "ObjectPool.h"

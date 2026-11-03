@@ -1,11 +1,8 @@
 ﻿#include "GunBoots.h"
 #include "GameObjectManager.h"
-#include "Player.h"
 #include "ObjectPool.h"
 #include "GameHelper.h"
 #include "AudioManager.h"
-
-//仮
 #include "DxLib.h"
 
 void GunBoots::SetupBullet(GameObjectManager& manager)

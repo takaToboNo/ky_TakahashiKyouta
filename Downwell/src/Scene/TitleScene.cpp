@@ -1,9 +1,8 @@
-﻿#define NOMINMAX
-#include <algorithm>
-#include "TitleScene.h"
+﻿#include "TitleScene.h"
 #include "Input.h"
 #include "GameHelper.h"
 #include "AudioManager.h"
+#include "DxLib.h"
 
 bool TitleScene::Initialize()
 {

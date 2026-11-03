@@ -1,16 +1,9 @@
-﻿#define NOMINMAX
-#include <algorithm>
-#include <memory>
+﻿#include <memory>
 #include "GameScene.h"
 #include "Input.h"
 #include "AudioManager.h"
-
 #include "Player.h"
-#include "WalkerEnemy.h"
-#include "FloatingEnemy.h"
-#include "BreakableBlock.h"
-#include "SolidBlock.h"
-#include "GameHelper.h"
+#include "DxLib.h"
 
 bool GameScene::Initialize()
 {
