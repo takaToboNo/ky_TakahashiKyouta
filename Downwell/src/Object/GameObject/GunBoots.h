@@ -4,7 +4,6 @@
 #include "ObjectPool.h"
 
 class GameObjectManager;
-class Player;
 
 class GunBoots : public Object
 {

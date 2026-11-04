@@ -5,10 +5,14 @@
 #include "Tag.h"
 
 class Camera;
+class Renderer;
 
 class GameObjectManager
 {
 private:
+	static constexpr float UPDATE_MARGIN = 500.0f;  // カメラ範囲より広い領域を更新するための値
+	static constexpr float DRAW_MARGIN = 50.0f;  // カメラ範囲より少し広い領域を描画するための値
+
 	std::vector<std::unique_ptr<GameObject>> m_GameObjects = {};
 	std::vector<std::unique_ptr<GameObject>> m_PendingGameObjects = {};
 
@@ -28,7 +32,7 @@ public:
 
 	void Finalize();
 	void Update(float dt);
-	void Draw();
+	void Draw(Renderer& renderer);
 	void DrawDebug();
 
 	//Initializeでのみ呼ぶこと

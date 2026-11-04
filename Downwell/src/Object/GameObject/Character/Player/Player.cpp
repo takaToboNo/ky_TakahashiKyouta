@@ -1,6 +1,5 @@
-﻿#define NOMINMAX
-#include "Player.h"
-#include "input.h"
+﻿#include "Player.h"
+#include "Input.h"
 #include "FloatingEnemy.h"
 #include "AudioManager.h"
 #include "imgui.h"
@@ -12,8 +11,6 @@
 #include "PlayerShot.h"
 #include "PlayerDead.h"
 
-#include "DxLib.h"
-#include "Camera.h"
 #include <algorithm>
 #include "MathHelper.h"
 
@@ -96,8 +93,8 @@ void Player::Update(float dt)
 	m_Position += m_Velocity * dt;
 
 	//壁
-	m_Position.x = std::max(m_Position.x, STAGE_LEFT);
-	m_Position.x = std::min(m_Position.x, STAGE_RIGHT);
+	m_Position.x = (std::max)(m_Position.x, STAGE_LEFT);
+	m_Position.x = (std::min)(m_Position.x, STAGE_RIGHT);
 
 	//ノックバック
 	if (m_KnockbackTimer > 0.0f)
@@ -141,19 +138,12 @@ void Player::Update(float dt)
 	m_GunBoots->Update(dt);
 }
 
-void Player::Draw(const Camera& camera)
+void Player::Draw(Renderer& renderer)
 {
 	bool blink = (static_cast<int>(m_InvincibleTimer * BLINK_SPEED) % 2) != 0;
 	if (blink) return;
 
-	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - camera.GetPosition().x);
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - camera.GetPosition().y);
-	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - camera.GetPosition().x);
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - camera.GetPosition().y);
-
-	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+	GameObject::Draw(renderer);
 }
 
 void Player::DrawDebug()

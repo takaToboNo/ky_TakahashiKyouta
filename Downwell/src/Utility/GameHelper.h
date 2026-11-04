@@ -8,6 +8,7 @@ struct Color
 };
 constexpr Color WHITE{ 255, 255, 255 };
 constexpr Color RED{ 255, 50, 50 };
+constexpr Color BLACK{ 0, 0, 0 };
 
 //ゲーム色
 constexpr Color PLAYER_IDLE_COLOR{ 255, 255, 255 };

@@ -22,4 +22,7 @@ public:
 	void SetTarget(const GameObject* target) { m_Target = target; }
 
 	void SnapToTarget();
+
+	//カメラ範囲外の判定
+	bool IsVisible(const Vector2& center, const Vector2& size, float margin = 0.0f) const;
 };

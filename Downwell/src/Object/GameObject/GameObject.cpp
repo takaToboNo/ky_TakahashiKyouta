@@ -1,5 +1,5 @@
 ﻿#include "GameObject.h"
-#include "GameObjectManager.h"
+#include "Renderer.h"
 
 void GameObject::Initialize()
 {
@@ -20,8 +20,9 @@ void GameObject::Update(float dt)
 	Object::Update(dt);
 }
 
-void GameObject::Draw(const Camera& camera)
+void GameObject::Draw(Renderer& renderer)
 {
+	renderer.DrawRect(m_Position, m_Scale, m_Color, m_IsFill);
 }
 
 void GameObject::DrawDebug()

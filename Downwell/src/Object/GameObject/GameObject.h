@@ -3,7 +3,7 @@
 #include "GameHelper.h"
 #include "Collider.h"
 
-class Camera;
+class Renderer;
 class GameObjectManager;
 
 class GameObject : public Object
@@ -15,6 +15,7 @@ protected:
 	bool m_IsActive = false;
 	bool m_IsDead = false;
 	bool m_IsInCameraArea = false;
+	bool m_IsFill = true;
 
 	GameObjectManager* m_GameObjectManager = nullptr;
 
@@ -24,7 +25,7 @@ public:
 	virtual void Initialize() override;
 	virtual void Finalize() override;
 	virtual void Update(float dt) override;
-	virtual void Draw(const Camera& camera);
+	virtual void Draw(Renderer& renderer);
 	virtual void DrawDebug();
 	virtual void Destroy() override;
 

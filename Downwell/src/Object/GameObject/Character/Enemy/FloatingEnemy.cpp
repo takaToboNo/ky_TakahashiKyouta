@@ -3,8 +3,6 @@
 #include "imgui.h"
 
 #include <cassert>
-#include "DxLib.h"
-#include "Camera.h"
 #include "Player.h"
 
 void FloatingEnemy::Initialize()
@@ -14,6 +12,7 @@ void FloatingEnemy::Initialize()
 	m_MoveSpeed = 50.0f;
 	m_Scale = { FLOATING_ENEMY_SIZE_X,FLOATING_ENEMY_SIZE_Y };
 	m_Hp = FLOATING_ENEMY_MAX_HP;
+	m_IsFill = false;
 }
 
 void FloatingEnemy::Finalize()
@@ -61,18 +60,9 @@ void FloatingEnemy::Update(float dt)
 	}
 }
 
-void FloatingEnemy::Draw(const Camera& camera)
+void FloatingEnemy::Draw(Renderer& renderer)
 {
-	const Vector2& pos = camera.GetPosition();
-
-	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - pos.x);
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - pos.y);
-	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - pos.x);
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
-
-	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), FALSE);
+	GameObject::Draw(renderer);
 }
 
 void FloatingEnemy::DrawDebug()

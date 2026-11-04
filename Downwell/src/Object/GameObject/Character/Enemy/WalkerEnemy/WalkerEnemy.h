@@ -4,7 +4,6 @@
 #include "Enemy.h"
 #include "WalkerEnemyState.h"
 
-class Camera;
 class Block;
 
 enum class EWalkerEnemyState : int
@@ -49,7 +48,7 @@ public:
 	void Initialize() override;
 	void Finalize() override;
 	void Update(float dt) override;
-	void Draw(const Camera& camera) override;
+	void Draw(Renderer& renderer) override;
 	void DrawDebug() override;
 	void Destroy() override;
 

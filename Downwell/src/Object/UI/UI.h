@@ -2,6 +2,8 @@
 #include "Object.h"
 #include "GameHelper.h"
 
+class Renderer;
+
 class UI : public Object
 {
 protected:
@@ -14,7 +16,7 @@ public:
 	virtual void Initialize() override;
 	virtual void Finalize() override;
 	virtual void Update(float dt) override;
-	virtual void Draw() = 0;
+	virtual void Draw(Renderer& renderer) = 0;
 	virtual void Destroy() override;
 
 	void SetScale(const Vector2& scale) { m_Scale = scale; }

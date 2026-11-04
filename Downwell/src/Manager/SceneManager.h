@@ -2,7 +2,8 @@
 #include <memory>
 #include "Scene.h"
 #include "TitleScene.h"
-#include "GameScene.h"
+
+class Renderer;
 
 class SceneManager
 {
@@ -16,7 +17,7 @@ public:
 	bool Initialize();
 	void Finalize();
 	void Update(float dt);
-	void Draw();
+	void Draw(Renderer& renderer);
 
 	void ChangeScene();
 };

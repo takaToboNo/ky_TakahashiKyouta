@@ -19,6 +19,8 @@ bool GameManager::Initialize()
 	result = SetDrawScreen(DX_SCREEN_BACK);
 	if (result != 0) return false;
 
+	if (!m_Renderer.Initialize()) return false;
+
 	AudioManager::GetInstance().Initialize();
 
 	m_ImGuiManager.Initialize();
@@ -36,6 +38,7 @@ void GameManager::Finalize()
 	m_SceneManager.Finalize();
 	m_Timer.Finalize();
 	m_ImGuiManager.Finalize();
+	m_Renderer.Finalize();
 
 	DxLib_End();
 }
@@ -67,17 +70,17 @@ int GameManager::Run()
 
 		m_ImGuiManager.BeginFrame();
 
-		int result;
-		result = ClearDrawScreen();
-		if (result != 0) return -1;
+		bool result;
+		result = m_Renderer.BeginFrame();
+		if (!result) return -1;
 
 		m_Timer.Draw();
-		m_SceneManager.Draw();
+		m_SceneManager.Draw(m_Renderer);
 
 		m_ImGuiManager.EndFrame();
 
-		result = ScreenFlip();
-		if (result != 0) return -1;
+		result = m_Renderer.EndFrame();
+		if (!result) return -1;
 	}
 
 	Finalize();

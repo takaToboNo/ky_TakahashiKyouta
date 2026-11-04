@@ -18,13 +18,10 @@ void GameObjectManager::Update(float dt)
 
 	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
-		const Vector2& pos = m_Camera->GetPosition();
-		const float CAMERA_MARGIN = 500.0f;	//カメラ範囲より少し広い領域を更新するための値
+		if (!gameObject->IsActive()) continue;
+		if (!m_Camera->IsVisible(gameObject->GetPosition(), gameObject->GetScale(), UPDATE_MARGIN)) continue;
 
-		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
-		{
-			if (gameObject->IsActive()) gameObject->Update(dt);
-		}
+		gameObject->Update(dt);
 	}
 	CheckHitAll(m_GameObjects);
 
@@ -50,19 +47,16 @@ void GameObjectManager::Update(float dt)
 	}
 }
 
-void GameObjectManager::Draw()
+void GameObjectManager::Draw(Renderer& renderer)
 {
 	if (!m_Camera) return;
 
 	for (std::unique_ptr<GameObject>& gameObject : m_GameObjects)
 	{
-		const Vector2& pos = m_Camera->GetPosition();
-		const float CAMERA_MARGIN = 100.0f;	//カメラ範囲より少し広い領域を描画するための値
+		if (!gameObject->IsActive()) continue;
+		if (!m_Camera->IsVisible(gameObject->GetPosition(), gameObject->GetScale(), DRAW_MARGIN)) continue;
 
-		if (gameObject->GetPosition().y >= pos.y - CAMERA_MARGIN && gameObject->GetPosition().y <= pos.y + WINDOW_HEIGHT + CAMERA_MARGIN)
-		{
-			if (gameObject->IsActive())gameObject->Draw(*m_Camera);
-		}
+		gameObject->Draw(renderer);
 	}
 }
 

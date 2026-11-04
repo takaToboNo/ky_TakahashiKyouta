@@ -16,6 +16,7 @@ class FloatingEnemy;
 
 class Player;
 class Camera;
+class Renderer;
 
 struct StageObjectPools
 {
@@ -65,7 +66,7 @@ public:
 	bool Initialize(GameObjectManager& manager);
 	void Finalize();
 	void Update(GameObjectManager& manager, Player* player);
-	void Draw();
+	void Draw(Renderer& renderer);
 	void DrawDebug();
 
 	int GetCurrentSection() const { return m_CurrentSection; }

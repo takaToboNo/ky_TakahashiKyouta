@@ -1,6 +1,5 @@
 ﻿#include <random>
 #include "StageManager.h"
-#include "DxLib.h"
 #include "GameObject.h"
 #include "GameObjectManager.h"
 #include "imgui.h"
@@ -11,6 +10,7 @@
 #include "FloatingEnemy.h"
 #include "Player.h"
 #include "Camera.h"
+#include "Renderer.h"
 
 bool StageManager::Initialize(GameObjectManager& manager)
 {
@@ -28,8 +28,7 @@ bool StageManager::Initialize(GameObjectManager& manager)
 }
 
 void StageManager::Finalize()
-{
-}
+{}
 
 void StageManager::Update(GameObjectManager& manager, Player* player)
 {
@@ -76,8 +75,24 @@ void StageManager::Update(GameObjectManager& manager, Player* player)
 	m_CurrentSection = currentSection;
 }
 
-void StageManager::Draw()
+void StageManager::Draw(Renderer& renderer)
 {
+#ifdef _DEBUG
+	const Vector2 sectionSize{ MAP_SIZE_X * TILE_SIZE, MAP_SIZE_Y * TILE_SIZE };
+	const Vector2 halfTile{ TILE_SIZE * 0.5f, TILE_SIZE * 0.5f };
+
+	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
+	{
+		if (m_Sections[i].isActive)
+		{
+			//startPositionは左上タイルの中心 → 半タイル戻すと区画の左上の角
+			const Vector2 sectionLeftTop = m_Sections[i].startPosition - halfTile;
+			const Vector2 sectionCenter = sectionLeftTop + sectionSize * 0.5f;
+
+			renderer.DrawRect(sectionCenter, sectionSize, RED, false);
+		}
+	}
+#endif
 }
 
 void StageManager::DrawDebug()
@@ -86,24 +101,6 @@ void StageManager::DrawDebug()
 	ImGui::Begin("CurrentSection");
 	ImGui::Text(" : %d", m_CurrentSection);
 	ImGui::End();
-
-	if (!m_Camera) return;
-
-	for (int i = 0; i < STAGE_SECTION_COUNT; i++)
-	{
-		if (m_Sections[i].isActive)
-		{
-			Vector2 pos = m_Sections[i].startPosition;
-			int x1, y1;
-			x1 = static_cast<int>((pos.x - TILE_SIZE * 0.5f) - m_Camera->GetPosition().x);
-			y1 = static_cast<int>((pos.y - TILE_SIZE * 0.5f) - m_Camera->GetPosition().y);
-			int x2, y2;
-			x2 = static_cast<int>(pos.x + (MAP_SIZE_X * TILE_SIZE) - m_Camera->GetPosition().x - TILE_SIZE * 0.5f);
-			y2 = static_cast<int>(pos.y + (MAP_SIZE_Y * TILE_SIZE) - m_Camera->GetPosition().y - TILE_SIZE * 0.5f);
-
-			DrawBox(x1, y1, x2, y2, GetColor(RED.r, RED.g, RED.b), FALSE);
-		}
-	}
 #endif
 }
 

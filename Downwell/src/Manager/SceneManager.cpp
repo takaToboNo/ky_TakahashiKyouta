@@ -1,4 +1,5 @@
 ﻿#include "SceneManager.h"
+#include "GameScene.h"
 
 bool SceneManager::Initialize()
 {
@@ -24,9 +25,9 @@ void SceneManager::Update(float dt)
 	ChangeScene();
 }
 
-void SceneManager::Draw()
+void SceneManager::Draw(Renderer& renderer)
 {
-	m_Scene->Draw();
+	m_Scene->Draw(renderer);
 }
 
 void SceneManager::ChangeScene()

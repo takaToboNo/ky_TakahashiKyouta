@@ -1,51 +1,47 @@
 #include "AmmoGauge.h"
 #include "GameHelper.h"
 #include "GunBoots.h"
-#include "DxLib.h"
+#include "Renderer.h"
 
 void AmmoGauge::Initialize()
 {
-	m_Scale = { 30.0f,40.0f };
+	m_Scale = { CELL_WIDTH, CELL_HEIGHT };
 	m_Color = WHITE;
 
-	m_Position = { STAGE_RIGHT + 100.0f, MAX_AMMO * m_Scale.y + 100.0f };
+	//m_Positionは一番下の弾セルの中心
+	m_Position = { STAGE_RIGHT + OFFSET_FROM_STAGE, MAX_AMMO * m_Scale.y + TOP_MARGIN };
 }
 
 void AmmoGauge::Finalize()
-{
-}
+{}
 
 void AmmoGauge::Update(float dt)
-{
-}
+{}
 
-void AmmoGauge::Draw()
+void AmmoGauge::Draw(Renderer& renderer)
 {
-	for (int i = 0; i < m_GunBoots->GetAmmo(); i++)
+	if (!m_GunBoots) return;
+
+	const int   ammo = m_GunBoots->GetAmmo();
+	const float cellPitch = m_Scale.y + CELL_GAP;   //セル1つ分の縦の間隔（高さ＋隙間）
+
+	//弾セル（一番下から上へ積む）
+	for (int i = 0; i < ammo; i++)
 	{
-		int x1, y1;
-		x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f));
-		y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - (i * (m_Scale.y + 1.0f)));
-		int x2, y2;
-		x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f));
-		y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - (i * (m_Scale.y + 1.0f)));
-
-		DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+		const Vector2 cellCenter{ m_Position.x, m_Position.y - i * cellPitch };
+		renderer.DrawRect(cellCenter, m_Scale, m_Color, true, Space::Screen);
 	}
 
-	const int HP_GAUGE_MARGIN = 3;	//枠描画を少し大きめにするための値
-	int x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f)) - HP_GAUGE_MARGIN;
-	int y1 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - (MAX_AMMO * (m_Scale.y + 1.0f))) - HP_GAUGE_MARGIN;
-	int x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f)) + HP_GAUGE_MARGIN;
-	int y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f)) + HP_GAUGE_MARGIN;
-	DrawBox(x1, y1, x2, y2, GetColor(RED.r, RED.g, RED.b), FALSE);
+	//枠（最大弾数分の領域を囲む）
+	const float   gaugeBottom = m_Position.y + m_Scale.y * 0.5f;
+	const float   gaugeHeight = MAX_AMMO * cellPitch;
+	const Vector2 frameCenter{ m_Position.x, gaugeBottom - gaugeHeight * 0.5f };
+	renderer.DrawRectOutline(frameCenter, { m_Scale.x, gaugeHeight }, RED, FRAME_PADDING, Space::Screen);
 
-	//値描画
-	int x = static_cast<int>(m_Position.x) - 5;
-	int y = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f)) + 10;
-	DrawFormatString(x, y, GetColor(WHITE.r, WHITE.g, WHITE.b), "%d", m_GunBoots->GetAmmo());
+	//残弾数（ゲージの下に中央揃え）
+	const Vector2 labelPos{ m_Position.x, gaugeBottom + LABEL_OFFSET_Y };
+	renderer.DrawLabelFormat(Space::Screen, labelPos, WHITE, TextAlign::Center, "%d", ammo);
 }
 
 void AmmoGauge::Destroy()
-{
-}
+{}

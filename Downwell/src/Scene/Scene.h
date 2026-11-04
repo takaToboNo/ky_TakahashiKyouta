@@ -2,6 +2,8 @@
 #include "GameObjectManager.h"
 #include "Camera.h"
 
+class Renderer;
+
 enum class SceneType
 {
 	None = 0,
@@ -25,7 +27,7 @@ public:
 	virtual bool Initialize();
 	virtual void Finalize();
 	virtual void Update(float dt) = 0;
-	virtual void Draw() = 0;
+	virtual void Draw(Renderer& renderer) = 0;
 
 	SceneType GetSceneRequest() const { return m_RequestScene; }
 };

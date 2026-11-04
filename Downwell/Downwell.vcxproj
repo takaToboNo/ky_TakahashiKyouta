@@ -72,6 +72,7 @@
     <ClInclude Include="src\Scene\TitleScene.h" />
     <ClInclude Include="src\System\Input.h" />
     <ClInclude Include="src\System\ObjectPool.h" />
+    <ClInclude Include="src\System\Renderer.h" />
     <ClInclude Include="src\System\Timer.h" />
     <ClInclude Include="src\Utility\GameHelper.h" />
     <ClInclude Include="src\Utility\MathHelper.h" />
@@ -124,6 +125,7 @@
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\TitleScene.cpp" />
     <ClCompile Include="src\System\Input.cpp" />
+    <ClCompile Include="src\System\Renderer.cpp" />
     <ClCompile Include="src\System\Timer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

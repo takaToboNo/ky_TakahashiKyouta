@@ -2,7 +2,7 @@
 #include "Input.h"
 #include "GameHelper.h"
 #include "AudioManager.h"
-#include "DxLib.h"
+#include "Renderer.h"
 
 bool TitleScene::Initialize()
 {
@@ -37,12 +37,13 @@ void TitleScene::Update(float dt)
 	}
 }
 
-void TitleScene::Draw()
+void TitleScene::Draw(Renderer& renderer)
 {
-	m_GameObjectManager.Draw();
+	renderer.SetCamera(&m_Camera);
+
+	m_GameObjectManager.Draw(renderer);
 	m_GameObjectManager.DrawDebug();
 
-	int x = static_cast<int>(WINDOW_WIDTH * 0.5f);
-	int y = static_cast<int>(WINDOW_HEIGHT * 0.5f);
-	DrawString(x, y, "Downwell", GetColor(RED.r, RED.g, RED.b));
+	const Vector2 screenCenter{ WINDOW_WIDTH * 0.5f, WINDOW_HEIGHT * 0.5f };
+	renderer.DrawLabel(screenCenter, RED, "Downwell", TextAlign::Center, Space::Screen);
 }

@@ -1,14 +1,11 @@
 ﻿#include "BreakableBlock.h"
 #include "AudioManager.h"
 
-//仮
-#include "DxLib.h"
-#include "Camera.h"
-
 void BreakableBlock::Initialize()
 {
 	Block::Initialize();
 	m_Name = "BreakableBlock";
+	m_IsFill = false;
 }
 
 void BreakableBlock::Finalize()
@@ -26,18 +23,9 @@ void BreakableBlock::Update(float dt)
 	}
 }
 
-void BreakableBlock::Draw(const Camera& camera)
+void BreakableBlock::Draw(Renderer& renderer)
 {
-	const Vector2& pos = camera.GetPosition();
-
-	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - pos.x);
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - pos.y);
-	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - pos.x);
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - pos.y);
-
-	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), FALSE);
+	GameObject::Draw(renderer);
 }
 
 void BreakableBlock::DrawDebug()

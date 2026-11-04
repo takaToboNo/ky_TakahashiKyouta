@@ -1,25 +1,24 @@
 #include "LifeGauge.h"
 #include "GameHelper.h"
 #include "Player.h"
-#include "DxLib.h"
+#include "Renderer.h"
 
 void LifeGauge::Initialize()
 {
-	m_Scale = { 230.0f,20.0f };
+	m_Scale = { GAUGE_WIDTH, GAUGE_HEIGHT };
 	m_Color = RED;
 
-	m_Position = { STAGE_LEFT - (m_Scale.x + 100.0f), m_Scale.y + 30.0f };
+	//m_Positionはゲージの左端・縦中央
+	m_Position = { STAGE_LEFT - (m_Scale.x + OFFSET_FROM_STAGE), TOP_MARGIN + m_Scale.y * 0.5f };
 }
 
 void LifeGauge::Finalize()
-{
-}
+{}
 
 void LifeGauge::Update(float dt)
-{
-}
+{}
 
-void LifeGauge::Draw()
+void LifeGauge::Draw(Renderer& renderer)
 {
 	int maxHp = 0;
 	int hp = 0;
@@ -31,29 +30,20 @@ void LifeGauge::Draw()
 		propotionHp = static_cast<float>(hp) / static_cast<float>(maxHp);
 	}
 
-	{//HPバー描画
-		int x1, y1;
-		x1 = static_cast<int>(m_Position.x);
-		y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f));
-		int x2, y2;
-		x2 = static_cast<int>(m_Position.x + (m_Scale.x * propotionHp));
-		y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f));
-		DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+	const Vector2 gaugeCenter{ m_Position.x + m_Scale.x * 0.5f, m_Position.y };
 
-		const int HP_GAUGE_MARGIN = 3;	//枠描画を少し大きめにするための値
-		x1 -= HP_GAUGE_MARGIN;
-		y1 -= HP_GAUGE_MARGIN * 2;	//上だけ少し余白大きめにする
-		x2 = static_cast<int>(m_Position.x + m_Scale.x) + HP_GAUGE_MARGIN;
-		y2 += HP_GAUGE_MARGIN;
-		DrawBox(x1, y1, x2, y2, GetColor(WHITE.r, WHITE.g, WHITE.b), FALSE);
-	}
+	//HPバー（左端を固定して、割合で幅を変える）
+	const float barWidth = m_Scale.x * propotionHp;
+	renderer.DrawRect({ m_Position.x + barWidth * 0.5f, m_Position.y }, { barWidth, m_Scale.y }, m_Color, true, Space::Screen);
 
-	//値描画
-	int x = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f)) - 10;
-	int y = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f)) + 2;
-	DrawFormatString(x, y, GetColor(WHITE.r, WHITE.g, WHITE.b), "%d/%d", hp, maxHp);
+	//枠上だけ余白を FRAME_PADDING 分増やす
+	const float extraTop = static_cast<float>(FRAME_PADDING);
+	renderer.DrawRectOutline({ gaugeCenter.x, gaugeCenter.y - extraTop * 0.5f }, { m_Scale.x, m_Scale.y + extraTop }, WHITE, FRAME_PADDING, Space::Screen);
+
+	//HPの数値
+	const float labelTop = m_Position.y - m_Scale.y * 0.5f + LABEL_OFFSET_Y;
+	renderer.DrawLabelFormat(Space::Screen, { gaugeCenter.x, labelTop }, WHITE, TextAlign::Center, "%d/%d", hp, maxHp);
 }
 
 void LifeGauge::Destroy()
-{
-}
+{}

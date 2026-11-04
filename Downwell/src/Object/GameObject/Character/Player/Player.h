@@ -5,8 +5,6 @@
 #include "GunBoots.h"
 #include "PlayerState.h"
 
-class Camera;
-
 enum class EPlayerState : int
 {
 	Idle = 0,
@@ -75,7 +73,7 @@ public:
 	void Initialize() override;
 	void Finalize() override;
 	void Update(float dt) override;
-	void Draw(const Camera& camera) override;
+	void Draw(Renderer& renderer) override;
 	void DrawDebug() override;
 	void Destroy() override;
 

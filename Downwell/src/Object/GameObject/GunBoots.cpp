@@ -3,7 +3,6 @@
 #include "ObjectPool.h"
 #include "GameHelper.h"
 #include "AudioManager.h"
-#include "DxLib.h"
 
 void GunBoots::SetupBullet(GameObjectManager& manager)
 {
@@ -23,12 +22,10 @@ void GunBoots::Finalize()
 }
 
 void GunBoots::Update(float dt)
-{
-}
+{}
 
 void GunBoots::Draw()
-{
-}
+{}
 
 void GunBoots::Destroy()
 {
@@ -44,7 +41,7 @@ bool GunBoots::CreateBullet(const Vector2& position)
 	}
 
 	Bullet* bullet = m_BulletPool.Get();
-	if(bullet)
+	if (bullet)
 	{
 		bullet->SetActive(true);
 		bullet->Initialize();

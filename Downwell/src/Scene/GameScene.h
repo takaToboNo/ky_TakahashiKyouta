@@ -27,5 +27,5 @@ public:
 	bool Initialize() override;
 	void Finalize() override;
 	void Update(float dt) override;
-	void Draw() override;
+	void Draw(Renderer& renderer) override;
 };

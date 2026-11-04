@@ -222,6 +222,9 @@
     <ClInclude Include="src\Imgui\imstb_truetype.h">
       <Filter>src\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="src\System\Renderer.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Object\Object.cpp">
@@ -364,6 +367,9 @@
     </ClCompile>
     <ClCompile Include="src\Imgui\imgui_widgets.cpp">
       <Filter>src\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Renderer.cpp">
+      <Filter>src\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

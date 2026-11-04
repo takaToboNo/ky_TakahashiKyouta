@@ -3,7 +3,7 @@
 #include "Input.h"
 #include "AudioManager.h"
 #include "Player.h"
-#include "DxLib.h"
+#include "Renderer.h"
 
 bool GameScene::Initialize()
 {
@@ -74,17 +74,19 @@ void GameScene::Update(float dt)
 	}
 }
 
-void GameScene::Draw()
+void GameScene::Draw(Renderer& renderer)
 {
-	m_GameObjectManager.Draw();
-	m_StageManager.Draw();
+	renderer.SetCamera(&m_Camera);
+
+	m_GameObjectManager.Draw(renderer);
+	m_StageManager.Draw(renderer);
 
 	m_GameObjectManager.DrawDebug();
 	m_StageManager.DrawDebug();
 
 	//UI
-	m_AmmoGauge.Draw();
-	m_LifeGauge.Draw();
-	m_StageCount.Draw();
-	m_ResultUI.Draw();
+	m_AmmoGauge.Draw(renderer);
+	m_LifeGauge.Draw(renderer);
+	m_StageCount.Draw(renderer);
+	m_ResultUI.Draw(renderer);
 }

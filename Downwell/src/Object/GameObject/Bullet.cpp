@@ -1,9 +1,5 @@
 ﻿#include "Bullet.h"
 
-//仮
-#include "DxLib.h"
-#include "Camera.h"
-
 void Bullet::Initialize()
 {
 	GameObject::Initialize();
@@ -38,16 +34,9 @@ void Bullet::Update(float dt)
 	if(m_Velocity.IsNearlyZero(MIN_SPEED)) m_IsActive = false;
 }
 
-void Bullet::Draw(const Camera& camera)
+void Bullet::Draw(Renderer& renderer)
 {
-	int x1, y1;
-	x1 = static_cast<int>(m_Position.x - (m_Scale.x * 0.5f) - camera.GetPosition().x);
-	y1 = static_cast<int>(m_Position.y - (m_Scale.y * 0.5f) - camera.GetPosition().y);
-	int x2, y2;
-	x2 = static_cast<int>(m_Position.x + (m_Scale.x * 0.5f) - camera.GetPosition().x);
-	y2 = static_cast<int>(m_Position.y + (m_Scale.y * 0.5f) - camera.GetPosition().y);
-
-	DrawBox(x1, y1, x2, y2, GetColor(m_Color.r, m_Color.g, m_Color.b), TRUE);
+	GameObject::Draw(renderer);
 }
 
 void Bullet::DrawDebug()
